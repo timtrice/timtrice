@@ -24,8 +24,14 @@ library(xtable)
 ```
 
 ```{r, include = FALSE}
-draft_qb <- readRDS("../../data/sports/football/draft_qb.rds")
-sbqb <- readRDS("../../data/sports/football/sbqb.rds")
+# Get column classes
+colClasses = sapply(read.csv("./data/sports/football/draft_qb.csv", 
+                             nrows = 250), class)
+
+draft_qb <- fread("./data/sports/football/draft_qb.csv", 
+                  colClasses = colClasses)
+
+sbqb <- fread("./data/sports/football/csv")
 ```
 
 ## Super Bowl Quarterbacks
