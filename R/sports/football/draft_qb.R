@@ -100,4 +100,4 @@ if(!dir.exists(football_dir)) {
     dir.create(football_dir, recursive = TRUE)
 }
 
-saveRDS(draft, paste(football_dir, "draft.rds", sep = "/"))
+saveRDS(draft, paste(football_dir, "draft_qb.rds", sep = "/"))
