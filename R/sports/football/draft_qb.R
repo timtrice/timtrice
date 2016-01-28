@@ -103,4 +103,4 @@ if(!dir.exists(football_dir)) {
 }
 
 write.csv(draft_qb, paste(football_dir, "draft_qb.csv", sep = "/"), 
-          row.names = FALSE)
+          quote = FALSE, row.names = FALSE)
