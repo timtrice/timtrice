@@ -8,8 +8,12 @@ wp_slug: drafted-super-bowl-quarterbacks
 wp_author_display_name: timtrice
 ---
 
-```{r}
-
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+    fig.align = "center",
+    fig.height=5, 
+    fig.width=10
+)
 ```
 
 
@@ -20,25 +24,28 @@ library(xtable)
 ```
 
 ```{r, include = FALSE}
-dqb <- readRDS("../../../data/draft_qb.rds")
-sbqb <- readRDS("../../../data/sbqb.rds")
+draft_qb <- readRDS("../../data/sports/football/draft_qb.rds")
+sbqb <- readRDS("../../data/sports/football/sbqb.rds")
 ```
 
 ## Super Bowl Quarterbacks
 
 I have two datasets that I parsed from [Pro-Football-Reference.com](http://www.pro-football-reference.com/). The first is of starting quarterbacks in a Super Bowl. The second is of all quarterback drafts since 1937. 
 
+Here is a quick look at the data structures of both.
+
+```{r}
+str(draft_qb)
+
+str(sbqb)
+```
+
+
 Here is a list of Super Bowl starting quarterbacks:
 
 ```{r, echo = FALSE, results = "asis"}
-print(xtable(sbqb[, .(Name, 
-                      Record = paste(AdjWins, "-", AdjLosses))][]), 
-      type = "html", 
-      include.rownames = FALSE)
+#print(xtable(sbqb[, .(Name, 
+#                      Record = paste(AdjWins, "-", AdjLosses))][]), 
+#      type = "html", 
+#      include.rownames = FALSE)
 ```
-
-
-```{r}
-sbqb <- merge(dqb, sbqb, by="Name")
-```
-
