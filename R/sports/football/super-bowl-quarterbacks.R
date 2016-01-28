@@ -37,9 +37,6 @@ for(i in tr[2:length(tr)]) { # Skip the header row
     
 }
 
-# Drop Rk
-sbqb <- sbqb[, Rk := NULL]
-
 football_dir <- "./data/sports/football"
 
 if(!dir.exists(football_dir)) {

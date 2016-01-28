@@ -4,7 +4,7 @@ library(data.table)
 
 url <- "http://www.pro-football-reference.com/play-index/draft-finder.cgi"
 
-draft <- data.frame()
+draft_qb <- data.frame()
 
 offset <- 0
 while(TRUE) {
@@ -54,33 +54,33 @@ while(TRUE) {
     
         if(length(td) > 0) {
             row <- data.frame(Rk = td[1], 
-                              Year = td[2], 
-                              Rnd = td[3], 
-                              Pick = td[4], 
-                              Name = td[5], 
+                              Year = I(trimws(td[2])),  
+                              Rnd = as.integer(trimws(td[3])), 
+                              Pick = as.integer(trimws(td[4])), 
+                              Name = I(td[5]), 
                               Pos = td[6], 
-                              DrAge = td[7], 
+                              DrAge = as.integer(trimws(td[7])), 
                               Tm = td[8], 
-                              From = td[9], 
-                              To = td[10], 
-                              AP1 = td[11], 
-                              PB = td[12], 
-                              St = td[13], 
-                              CarAV = td[14], 
-                              G = td[15], 
-                              GS = td[16], 
-                              QBrec = td[17], 
-                              Cmp = td[18], 
-                              PAtt = td[19], 
-                              PYds = td[20], 
-                              PTD = td[21], 
-                              Int = td[22], 
-                              RAtt = td[23], 
-                              RYds = td[24], 
-                              RTD = td[25], 
+                              From = I(trimws(td[9])), 
+                              To = I(trimws(td[10])), 
+                              AP1 = as.integer(trimws(td[11])), 
+                              PB = as.integer(trimws(td[12])), 
+                              St = as.integer(trimws(td[13])), 
+                              CarAV = as.integer(trimws(td[14])), 
+                              G = as.integer(trimws(td[15])), 
+                              GS = as.integer(trimws(td[16])), 
+                              QBrec = I(td[17]), 
+                              Cmp = as.integer(trimws(td[18])), 
+                              PAtt = as.integer(trimws(td[19])), 
+                              PYds = as.integer(trimws(td[20])), 
+                              PTD = as.integer(trimws(td[21])), 
+                              Int = as.integer(trimws(td[22])), 
+                              RAtt = as.integer(trimws(td[23])), 
+                              RYds = as.integer(trimws(td[24])), 
+                              RTD = as.integer(trimws(td[25])), 
                               College = td[26])
-            l <- list(draft, row)
-            draft <- rbindlist(l, use.names = TRUE, fill = TRUE)
+            l <- list(draft_qb, row)
+            draft_qb <- rbindlist(l, use.names = TRUE, fill = TRUE)
         }
     
     }
@@ -100,4 +100,4 @@ if(!dir.exists(football_dir)) {
     dir.create(football_dir, recursive = TRUE)
 }
 
-saveRDS(draft, paste(football_dir, "draft_qb.rds", sep = "/"))
+saveRDS(draft_qb, paste(football_dir, "draft_qb.rds", sep = "/"))
