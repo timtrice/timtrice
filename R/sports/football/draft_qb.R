@@ -53,33 +53,35 @@ while(TRUE) {
         td <- xpathSApply(parsedHtml, "//td", xmlValue)
     
         if(length(td) > 0) {
-            row <- data.frame(Rk = td[1], 
-                              Year = I(trimws(td[2])),  
-                              Rnd = as.integer(trimws(td[3])), 
-                              Pick = as.integer(trimws(td[4])), 
-                              Name = I(td[5]), 
-                              Pos = td[6], 
-                              DrAge = as.integer(trimws(td[7])), 
-                              Tm = td[8], 
-                              From = I(trimws(td[9])), 
-                              To = I(trimws(td[10])), 
-                              AP1 = as.integer(trimws(td[11])), 
-                              PB = as.integer(trimws(td[12])), 
-                              St = as.integer(trimws(td[13])), 
-                              CarAV = as.integer(trimws(td[14])), 
-                              G = as.integer(trimws(td[15])), 
-                              GS = as.integer(trimws(td[16])), 
-                              QBrec = I(td[17]), 
-                              Cmp = as.integer(trimws(td[18])), 
-                              PAtt = as.integer(trimws(td[19])), 
-                              PYds = as.integer(trimws(td[20])), 
-                              PTD = as.integer(trimws(td[21])), 
-                              Int = as.integer(trimws(td[22])), 
-                              RAtt = as.integer(trimws(td[23])), 
-                              RYds = as.integer(trimws(td[24])), 
-                              RTD = as.integer(trimws(td[25])), 
-                              College = td[26])
+            row <- data.frame(Rk = trimws(td[1]), 
+                              Year = trimws(td[2]),  
+                              Rnd = trimws(td[3]), 
+                              Pick = trimws(td[4]), 
+                              Name = trimws(td[5]), 
+                              Pos = trimws(td[6]), 
+                              DrAge = trimws(td[7]), 
+                              Tm = trimws(td[8]), 
+                              From = trimws(td[9]), 
+                              To = trimws(td[10]), 
+                              AP1 = trimws(td[11]), 
+                              PB = trimws(td[12]), 
+                              St = trimws(td[13]), 
+                              CarAV = trimws(td[14]), 
+                              G = trimws(td[15]), 
+                              GS = trimws(td[16]), 
+                              QBrec = trimws(td[17]), 
+                              Cmp = trimws(td[18]), 
+                              PAtt = trimws(td[19]), 
+                              PYds = trimws(td[20]), 
+                              PTD = trimws(td[21]), 
+                              Int = trimws(td[22]), 
+                              RAtt = trimws(td[23]), 
+                              RYds = trimws(td[24]), 
+                              RTD = trimws(td[25]), 
+                              College = trimws(td[26]))
+
             l <- list(draft_qb, row)
+
             draft_qb <- rbindlist(l, use.names = TRUE, fill = TRUE)
         }
     
@@ -100,4 +102,5 @@ if(!dir.exists(football_dir)) {
     dir.create(football_dir, recursive = TRUE)
 }
 
-saveRDS(draft_qb, paste(football_dir, "draft_qb.rds", sep = "/"))
+write.csv(draft_qb, paste(football_dir, "draft_qb.csv", sep = "/"), 
+          row.names = FALSE)

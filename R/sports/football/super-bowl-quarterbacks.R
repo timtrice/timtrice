@@ -21,16 +21,16 @@ for(i in tr[2:length(tr)]) { # Skip the header row
     
     values <- strsplit(i, "\n")
     
-    this_td <- data.frame(Rk = as.integer(trimws(values[[1]][1])), 
-                          Tm = as.factor(trimws(values[[1]][2])), 
-                          G = as.integer(trimws(values[[1]][3])), 
-                          W = as.integer(trimws(values[[1]][4])), 
-                          L = as.integer(trimws(values[[1]][5])), 
-                          WLP = as.numeric(trimws(values[[1]][6])), #W-L% 
-                          PF = as.integer(trimws(values[[1]][7])), 
-                          PA = as.integer(trimws(values[[1]][8])), 
-                          PD = I(trimws(trimws(values[[1]][9]))), 
-                          StartingQB = I(trimws(values[[1]][10])))
+    this_td <- data.frame(Rk = trimws(values[[1]][1]), 
+                          Tm = trimws(values[[1]][2]), 
+                          G = trimws(values[[1]][3]), 
+                          W = trimws(values[[1]][4]), 
+                          L = trimws(values[[1]][5]), 
+                          WLP = trimws(values[[1]][6]), #W-L% 
+                          PF = trimws(values[[1]][7]), 
+                          PA = trimws(values[[1]][8]), 
+                          PD = trimws(trimws(values[[1]][9])), 
+                          StartingQB = trimws(values[[1]][10]))
     clist <- list(sbqb, this_td)
     
     sbqb <- rbindlist(clist, use.names = TRUE, fill = TRUE)
@@ -43,4 +43,5 @@ if(!dir.exists(football_dir)) {
     dir.create(football_dir, recursive = TRUE)
 }
 
-saveRDS(sbqb, paste(football_dir, "sbqb.rds", sep = "/"))
+write.csv(sbqb, paste(football_dir, "sbqb.csv", sep = "/"), quote = c(10), 
+          row.names = FALSE)
