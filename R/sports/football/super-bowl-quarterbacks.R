@@ -1,20 +1,9 @@
-library(ggplot2)
 library(data.table)
 library(dplyr)
 library(tidyr)
-library(xtable)
 
 # Import datasets
-dqb_csv <- "./data/sports/football/draft_qb.csv"
-
 sb_standings_csv <- "./data/sports/football/sb_standings.csv"
-
-# Get column classes for draft_qb
-column_class = sapply(read.csv(dqb_csv, nrows = 250), class)
-
-dqb <- fread(dqb_csv, colClasses = column_class)
-
-rm(column_class)
 
 # Get column classes for sb_standings
 column_class = sapply(read.csv(sb_standings_csv, nrows = 100), class)
@@ -22,10 +11,6 @@ column_class = sapply(read.csv(sb_standings_csv, nrows = 100), class)
 sb_standings <- fread(sb_standings_csv, colClasses = column_class)
 
 rm(column_class)
-
-str(dqb)
-
-str(sb_standings)
 
 # First, I want to extract StartingQB from sb_standings
 qb_list <- sb_standings[, StartingQB]
