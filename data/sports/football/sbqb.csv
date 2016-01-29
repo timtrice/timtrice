@@ -1,29 +1,61 @@
-"Rk","Tm","G","W","L","WLP","PF","PA","PD","StartingQB"
-1,Pittsburgh Steelers,8,6,2,.750,193,164,+29,"Terry Bradshaw (4-0), Neil O'Donnell (0-1), Ben Roethlisberger (2-1)"
-2,San Francisco 49ers,6,5,1,.833,219,123,+96,"Colin Kaepernick (0-1), Joe Montana (4-0), Steve Young (1-0)"
-3,Dallas Cowboys,8,5,3,.625,221,132,+89,"Troy Aikman (3-0), Craig Morton (0-1), Roger Staubach (2-2)"
-4,Green Bay Packers,5,4,1,.800,158,101,+57,"Brett Favre (1-1), Aaron Rodgers (1-0), Bart Starr (2-0)"
-5,New York Giants,5,4,1,.800,104,104,0,"Kerry Collins (0-1), Jeff Hostetler (1-0), Eli Manning (2-0), Phil Simms (1-0)"
-6,New England Patriots,8,4,4,.500,166,210,-44,"Drew Bledsoe (0-1), Tom Brady (4-2), Tony Eason (0-1)"
-7,Oakland Raiders,5,3,2,.600,132,114,+18,"Rich Gannon (0-1), Daryle Lamonica (0-1), Jim Plunkett (2-0), Ken Stabler (1-0)"
-8,Washington Redskins,5,3,2,.600,122,103,+19,"Billy Kilmer (0-1), Mark Rypien (1-0), Joe Theismann (1-1), Doug Williams (1-0)"
-9,Baltimore Ravens,2,2,0,1.000,68,38,+30,"Trent Dilfer (1-0), Joe Flacco (1-0)"
-10,Indianapolis Colts,4,2,2,.500,69,77,-8,"Peyton Manning (1-1), Earl Morrall (0-1), Johnny Unitas (1-0)"
-11,Miami Dolphins,5,2,3,.400,74,103,-29,"Bob Griese (2-1), Dan Marino (0-1), David Woodley (0-1)"
-12,Denver Broncos,7,2,5,.286,123,249,-126,"John Elway (2-3), Peyton Manning (0-1), Craig Morton (0-1)"
-13,New Orleans Saints,1,1,0,1.000,31,17,+14,"Drew Brees (1-0)"
-14,New York Jets,1,1,0,1.000,16,7,+9,"Joe Namath (1-0)"
-15,Tampa Bay Buccaneers,1,1,0,1.000,48,21,+27,"Brad Johnson (1-0)"
-16,Chicago Bears,2,1,1,.500,63,39,+24,"Rex Grossman (0-1), Jim McMahon (1-0)"
-17,Kansas City Chiefs,2,1,1,.500,33,42,-9,"Len Dawson (1-1)"
-18,St. Louis Rams,3,1,2,.333,59,67,-8,"Vince Ferragamo (0-1), Kurt Warner (1-1)"
-19,Seattle Seahawks,3,1,2,.333,77,57,+20,"Matt Hasselbeck (0-1), Russell Wilson (1-1)"
-20,Buffalo Bills,4,0,4,.000,73,139,-66,"Jim Kelly (0-4)"
-21,Minnesota Vikings,4,0,4,.000,34,95,-61,"Joe Kapp (0-1), Fran Tarkenton (0-3)"
-22,Cincinnati Bengals,2,0,2,.000,37,46,-9,"Ken Anderson (0-1), Boomer Esiason (0-1)"
-23,Philadelphia Eagles,2,0,2,.000,31,51,-20,"Ron Jaworski (0-1), Donovan McNabb (0-1)"
-24,Atlanta Falcons,1,0,1,.000,19,34,-15,"Chris Chandler (0-1)"
-25,Carolina Panthers,1,0,1,.000,29,32,-3,"Jake Delhomme (0-1)"
-26,Arizona Cardinals,1,0,1,.000,23,27,-4,"Kurt Warner (0-1)"
-27,Tennessee Titans,1,0,1,.000,16,23,-7,"Steve McNair (0-1)"
-28,San Diego Chargers,1,0,1,.000,26,49,-23,"Stan Humphries (0-1)"
+Name,Team,Wins,Losses,WP
+Aikman, Troy,Dallas Cowboys,3,0,1
+Anderson, Ken,Cincinnati Bengals,0,1,0
+Bledsoe, Drew,New England Patriots,0,1,0
+Bradshaw, Terry,Pittsburgh Steelers,4,0,1
+Brady, Tom,New England Patriots,4,2,0.667
+Brees, Drew,New Orleans Saints,1,0,1
+Chandler, Chris,Atlanta Falcons,0,1,0
+Collins, Kerry,New York Giants,0,1,0
+Dawson, Len,Kansas City Chiefs,1,1,0.5
+Delhomme, Jake,Carolina Panthers,0,1,0
+Dilfer, Trent,Baltimore Ravens,1,0,1
+Eason, Tony,New England Patriots,0,1,0
+Elway, John,Denver Broncos,2,3,0.4
+Esiason, Boomer,Cincinnati Bengals,0,1,0
+Favre, Brett,Green Bay Packers,1,1,0.5
+Ferragamo, Vince,St. Louis Rams,0,1,0
+Flacco, Joe,Baltimore Ravens,1,0,1
+Gannon, Rich,Oakland Raiders,0,1,0
+Griese, Bob,Miami Dolphins,2,1,0.667
+Grossman, Rex,Chicago Bears,0,1,0
+Hasselbeck, Matt,Seattle Seahawks,0,1,0
+Hostetler, Jeff,New York Giants,1,0,1
+Humphries, Stan,San Diego Chargers,0,1,0
+Jaworski, Ron,Philadelphia Eagles,0,1,0
+Johnson, Brad,Tampa Bay Buccaneers,1,0,1
+Kaepernick, Colin,San Francisco 49ers,0,1,0
+Kapp, Joe,Minnesota Vikings,0,1,0
+Kelly, Jim,Buffalo Bills,0,4,0
+Kilmer, Billy,Washington Redskins,0,1,0
+Lamonica, Daryle,Oakland Raiders,0,1,0
+Manning, Eli,New York Giants,2,0,1
+Manning, Peyton,Denver Broncos,0,1,0
+Manning, Peyton,Indianapolis Colts,1,1,0.5
+Marino, Dan,Miami Dolphins,0,1,0
+McMahon, Jim,Chicago Bears,1,0,1
+McNabb, Donovan,Philadelphia Eagles,0,1,0
+McNair, Steve,Tennessee Titans,0,1,0
+Montana, Joe,San Francisco 49ers,4,0,1
+Morrall, Earl,Indianapolis Colts,0,1,0
+Morton, Craig,Dallas Cowboys,0,1,0
+Morton, Craig,Denver Broncos,0,1,0
+Namath, Joe,New York Jets,1,0,1
+O'Donnell, Neil,Pittsburgh Steelers,0,1,0
+Plunkett, Jim,Oakland Raiders,2,0,1
+Rodgers, Aaron,Green Bay Packers,1,0,1
+Roethlisberger, Ben,Pittsburgh Steelers,2,1,0.667
+Rypien, Mark,Washington Redskins,1,0,1
+Simms, Phil,New York Giants,1,0,1
+Stabler, Ken,Oakland Raiders,1,0,1
+Starr, Bart,Green Bay Packers,2,0,1
+Staubach, Roger,Dallas Cowboys,2,2,0.5
+Tarkenton, Fran,Minnesota Vikings,0,3,0
+Theismann, Joe,Washington Redskins,1,1,0.5
+Unitas, Johnny,Indianapolis Colts,1,0,1
+Warner, Kurt,Arizona Cardinals,0,1,0
+Warner, Kurt,St. Louis Rams,1,1,0.5
+Williams, Doug,Washington Redskins,1,0,1
+Wilson, Russell,Seattle Seahawks,1,1,0.5
+Woodley, David,Miami Dolphins,0,1,0
+Young, Steve,San Francisco 49ers,1,0,1
