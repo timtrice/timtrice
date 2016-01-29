@@ -1,6 +1,4 @@
-library(ggplot2)
 library(data.table)
-library(xtable)
 
 # Import datasets
 draft_qb_csv <- "./data/sports/football/draft_qb.csv"
@@ -20,10 +18,6 @@ column_class = sapply(read.csv(sbqb_csv, nrows = 100), class)
 sbqb <- fread(sbqb_csv, colClasses = column_class)
 
 rm(column_class)
-
-str(draft_qb)
-
-str(sbqb)
 
 # Create a new data table starting with Name, College, Rnd and Pick
 dt <- draft_qb[, .(Name, College, Year, Rnd, Pick, Tm)]
