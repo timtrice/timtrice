@@ -79,4 +79,4 @@ sbqb <- sbqb %>%
 
 # Lastly, save the dataset
 sbqb_csv <- "./data/sports/football/sbqb.csv"
-write.csv(sbqb, sbqb_csv, quote = FALSE, row.names = FALSE)
+write.csv(sbqb, sbqb_csv, quote = c(1), row.names = FALSE)
