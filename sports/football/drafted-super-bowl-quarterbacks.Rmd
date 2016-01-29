@@ -16,42 +16,15 @@ knitr::opts_chunk$set(
 )
 ```
 
-
 ```{r, include = FALSE}
 library(ggplot2)
 library(data.table)
 library(xtable)
 ```
 
-```{r, include = FALSE}
-# Get column classes
-colClasses = sapply(read.csv("./data/sports/football/draft_qb.csv", 
-                             nrows = 250), class)
-
-draft_qb <- fread("./data/sports/football/draft_qb.csv", 
-                  colClasses = colClasses)
-
-sbqb <- fread("./data/sports/football/csv")
-```
-
 ## Super Bowl Quarterbacks
 
-I have two datasets that I parsed from [Pro-Football-Reference.com](http://www.pro-football-reference.com/). The first is of starting quarterbacks in a Super Bowl. The second is of all quarterback drafts since 1937. 
+As a Houston Texans fan, the big talk this offseason has been drafting a quarterback. Inevitably, that discussion seems to tilt towards finding winning quarterbacks in late rounds, a la Tom Brady. 
 
-Here is a quick look at the data structures of both.
+I wanted to get a look at Super Bowl quarterbacks and where they were drafted. I'm using two data sets I've obtained from [Pro-Football-Reference.com](http://www.sports-reference.com/data_use.shtml). 
 
-```{r}
-str(draft_qb)
-
-str(sbqb)
-```
-
-
-Here is a list of Super Bowl starting quarterbacks:
-
-```{r, echo = FALSE, results = "asis"}
-#print(xtable(sbqb[, .(Name, 
-#                      Record = paste(AdjWins, "-", AdjLosses))][]), 
-#      type = "html", 
-#      include.rownames = FALSE)
-```
