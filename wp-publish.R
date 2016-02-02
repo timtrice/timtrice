@@ -27,95 +27,24 @@
 #' @todo description doesn't push through. 
 #' @todo allow some meta to push through as defaults rather than header
 #' 
+
+
+
 wpPublish <- function(ext = "*.Rmd", edit = FALSE, publish = FALSE, 
                       post_type = "post", wp_author_display_name = "timtrice") {
     
-    getFileName <- function(infile) {
+    getTag <- function(infile, c, tag) {
         
-        file_dir <- strsplit(infile, "/")
-        file_name <- file_dir[[1]][[length(file_dir[[1]])]]
-        return (file_name)
+        extract_tag <- grep(tag, contents, value = TRUE)
         
-    }
-    
-    getMeta <- function(infile) { 
-        
-        getContents <- function(infile) {
-            
-            con <- file(infile)
-            
-            open(con)
-            
-            contents <- readLines(con)
-            
-            close(con)
-            
-            return(contents)
-            
+        if(length(extract_tag) == 0) {
+            warning(sprintf("No %s tag present in %s", tag, infile))
+            return (NULL)
         }
         
-        getTag <- function(infile, c, tag) {
-            
-            extract_tag <- grep(tag, contents, value = TRUE)
-            
-            if(nchar(extract_tag) == 0)
-                warning(sprintf("No %s tag present in %s", tag, infile))
-            
-            tag <- sub(paste(tag, "[ :]+(.)", sep = ""), "\\1", extract_tag)
-            
-            return(tag)
-        }
+        tag <- sub(paste(tag, "[ :]+(.)", sep = ""), "\\1", extract_tag)
         
-        contents <- getContents(infile)
-        
-        title <- getTag(infile, contents, "title")
-        
-        description <- getTag(infile, contents, "description")
-
-        post_type <- getTag(infile, contents, "post_type")        
-
-        categories <- getTag(infile, contents, "categories")
-        categories <- strsplit(categories, ",")
-
-        mt_keywords <- getTag(infile, contents, "mt_keywords")
-        mt_keywords <- strsplit(mt_keywords, ",")
-
-        wp_slug <- getTag(infile, contents, "wp_slug")
-
-        wp_author_display_name <- getTag(infile, contents, 
-                                         "wp_author_display_name")
-
-        meta <- list("title" = title, 
-                     "description" = description, 
-                     "post_type" = post_type, 
-                     "categories" = categories, 
-                     "mt_keywords" = mt_keywords, 
-                     "wp_slug" = wp_slug, 
-                     "wp_author_display_name" = wp_author_display_name)
-        
-        return(meta)
-        
-    }
-    
-    # Check dataframe for post existence
-    postExists <- function(file_name) {
-        
-        if(!exists("posts")) posts <- readRDS("./posts.rds")
-        
-        require("dplyr")
-        
-        post_id <- posts %>% filter(file_name == file_name) %>% 
-            select(postid)
-        
-        if(nrow(post_id) == 0) {
-            return (FALSE)
-        } else if (nrow(post_id) == 1) {
-            return (TRUE)
-        } else {
-            # Uh oh
-            stop("postExists returned more than one row.")
-        }
-        
+        return(tag)
     }
     
     publishPost <- function(file, rmd, meta) {
@@ -146,7 +75,7 @@ wpPublish <- function(ext = "*.Rmd", edit = FALSE, publish = FALSE,
                            shortcode = FALSE)
         
         return (post_id)
-
+        
     }
     
     current_wd <- getwd()
@@ -156,14 +85,60 @@ wpPublish <- function(ext = "*.Rmd", edit = FALSE, publish = FALSE,
     for (infile in list.files(".", pattern = ext, full.names = TRUE, 
                               recursive = TRUE)) {
         
-        file_name <- getFileName(infile)
+        # Get the file directory and file name w/ extension        
+        file_dir <- strsplit(infile, "/")
+        file_name <- file_dir[[1]][[length(file_dir[[1]])]]
         
-        meta <- getMeta(infile)
+        # Open file and get content, close file
+        con <- file(infile)
+        open(con)
+        contents <- readLines(con)
+        close(con)
         
-        pe <- postExists(file_name)
+        # If draft == TRUE, go to next post
+        draft <- getTag(infile, contents, "draft")
+        if(draft == TRUE || is.null(draft)) next
         
-        if(!pe) {
-            # Post does not exist, create new post
+        title <- getTag(infile, contents, "title")
+        description <- getTag(infile, contents, "description")
+        post_type <- getTag(infile, contents, "post_type")        
+        categories <- getTag(infile, contents, "categories")
+        categories <- strsplit(categories, ",")
+        mt_keywords <- getTag(infile, contents, "mt_keywords")
+        mt_keywords <- strsplit(mt_keywords, ",")
+        wp_slug <- getTag(infile, contents, "wp_slug")
+        wp_author_display_name <- getTag(infile, contents, 
+                                         "wp_author_display_name")
+        
+        meta <- list("title" = title, 
+                     "description" = description, 
+                     "post_type" = post_type, 
+                     "categories" = categories, 
+                     "mt_keywords" = mt_keywords, 
+                     "wp_slug" = wp_slug, 
+                     "wp_author_display_name" = wp_author_display_name)
+        
+        # Check if post already exists
+        if(!exists("posts")) posts <- read.csv("./data/posts.csv")
+        
+        require("dplyr")
+        
+        post_id <- posts %>% filter(file_name == file_name) %>% 
+            select(post_id)
+        
+        # Post already exists but edit is FALSE; can't work.
+        if(nrow(post_id) == 1 & edit == FALSE) {
+            warning(paste(file_name, 
+                          "already exists with this file name;", 
+                          "Edit is FALSE. Ignoring."), 
+                    sep = " ")
+            next
+        } else if(nrow(post_id) > 1) {
+            # Uh oh
+            warning(paste("Too many posts with", file_name, sep = " "))
+            next
+        } else if(nrow(post_id) == 0) {
+            # New post
             post_id <- publishPost(file = infile, rmd = infile, meta = meta)
             if(post_id == 401) {
                 warning("Not published. User does not have permission.")
@@ -171,14 +146,16 @@ wpPublish <- function(ext = "*.Rmd", edit = FALSE, publish = FALSE,
                 warning("Not published. Invalid post format.")
             } else { 
                 message("Page/Post Published")
-#                updatePostsDf(post_id)
+                newPosts <- data.frame(post_id = post_id[1], 
+                                       file_name = file_name)
+                posts <- rbind(posts, newPosts)
+                write.csv(posts, "./data/posts.csv", row.names = FALSE)
+                message("Posts DF updated!")
             }
-        } else {
-            # Post exists
+        } else if(nrow(post_id) == 1 & edit == TRUE) {
+            # Edit post
         }
         
     }
-    
-    setwd(current_wd)
     
 }
