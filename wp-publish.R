@@ -34,9 +34,6 @@
 #'
 #' @todo description doesn't push through. 
 #' @todo allow some meta to push through as defaults rather than header
-#' @todo files will edit regardless of mtime
-#' @todo can figures be updated?
-#' @todo categories cannot be updated; tags can
 #' 
 
 wpPublish <- function(ext = "\\.[R]?md", # Extension of markdown files
@@ -92,6 +89,8 @@ wpPublish <- function(ext = "\\.[R]?md", # Extension of markdown files
     
     doPublish <- function(infile) { 
         
+        require(lubridate)
+        
         article <- getArticle(infile)
         
         # If article is localDraft or wp_draft tag not set, skip
@@ -118,6 +117,11 @@ wpPublish <- function(ext = "\\.[R]?md", # Extension of markdown files
         if(nrow(post) == 0 || nrow(post) == 1) {
             
             # Get post meta
+            # If file has not been modified since post$mtime, next
+            if(nrow(post) == 1)
+                if(post$mtime == file.info(infile)$mtime) 
+                    return(NULL)
+            
             meta <- getMeta(infile, article)
             
             # Clean and trim wp_categories
@@ -136,8 +140,18 @@ wpPublish <- function(ext = "\\.[R]?md", # Extension of markdown files
                                                      FUN = trimws))
             }
             
-            # Need to check if categories and tags exist, 
-            # Not sure if WP requires this; check it out
+            # If categories and tags exist, send warning but continue
+            if(is.null(meta$wp_categories)) 
+                warning(sprintf(paste("No categories in %s.", 
+                                      "Update this via the WP Admin Panel", 
+                                      sep = " "), 
+                                infile))
+            
+            if(is.null(meta$wp_mt_keywords)) 
+                warning(sprintf(paste("No keywords(tags) in %s.", 
+                                      "Update this via the WP Admin Panel", 
+                                      sep = " "), 
+                                infile))
             
             # If wp_slug doesn't exist, use filename
             if(length(meta$wp_slug) == 0) 
@@ -173,9 +187,10 @@ wpPublish <- function(ext = "\\.[R]?md", # Extension of markdown files
                                        mt_keywords = meta$wp_mt_keywords, 
                                        post_type = meta$wp_post_type, 
                                        wp_author_display_name = meta$wp_author, 
-                                       action = "newPost", 
-                                       publish = publish, 
-                                       shortcode = shortcode)
+                                       shortcode = shortcode, 
+                                       action = "editPost", 
+                                       postid = post$post_id, 
+                                       publish = publish)
                 
                 if(return_code == 401) {
                     warning(paste("Error 401: User does not have permission", 
@@ -190,8 +205,8 @@ wpPublish <- function(ext = "\\.[R]?md", # Extension of markdown files
                 message(sprintf("%s uploaded", basename(infile)))
                 newPosts <- data.frame(post_id = return_code[1], 
                                        file_name = infile, 
-                                       mtime = file.info(infile)$mtime)
-                posts <- rbind(posts, newPosts)                
+                                       mtime = ymd_hms(file.info(infile)$mtime))
+                posts <- rbind(posts, newPosts)
                 
             } else {
                 
@@ -199,8 +214,11 @@ wpPublish <- function(ext = "\\.[R]?md", # Extension of markdown files
                 # Categories and tags cannot be updated . See WP XML-RPC docs
                 
                 return_code <- knit2wp(infile, 
+                                       title = meta$wp_title, 
+                                       shortcode = shortcode, 
+                                       action = "editPost", 
                                        postid = post$post_id, 
-                                       action = "editPost")
+                                       publish = publish)
                 
                 if(return_code == 401) {
                     warning(paste("Error 401: User does not have permission", 
@@ -213,7 +231,8 @@ wpPublish <- function(ext = "\\.[R]?md", # Extension of markdown files
                 }
                 
                 message(sprintf("%s updated", basename(infile)))
-                posts[posts$post_id == post$post_id]$mtime <- "test"
+                posts[posts$post_id == post$post_id]$mtime <- ymd_hms(file.info(infile)$mtime)
+                message("ok")
                 
             }
             
