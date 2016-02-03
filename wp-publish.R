@@ -232,8 +232,7 @@ wpPublish <- function(ext = "\\.[R]?md", # Extension of markdown files
                 
                 message(sprintf("%s updated", basename(infile)))
                 posts[posts$post_id == post$post_id]$mtime <- ymd_hms(file.info(infile)$mtime)
-                message("ok")
-                
+
             }
             
             write.csv(posts, "./data/posts.csv", row.names = FALSE)
