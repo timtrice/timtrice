@@ -1,4 +1,33 @@
-
+#' wpPublish
+#'
+#' See https://codex.wordpress.org/XML-RPC_MetaWeblog_API for additional details
+#' https://codex.wordpress.org/XML-RPC_WordPress_API/Categories_%26_Tags
+#' Sample header of a markdown file:
+#' 
+#' ---
+#' title: Drafts and Super Bowl Quarterbacks
+#' description: The Quick Red Fox Jumps Over The Lazy Brown Dog. The Quick Red Fox Jumps Over The Lazy Brown Dog. 
+#' post_type: post
+#' categories: Sports, Football
+#' mt_keywords: football, super bowl
+#' wp_slug: drafted-super-bowl-quarterbacks
+#' wp_author_display_name: timtrice
+#' ---
+#' 
+#' The "---" strings are not required but good for readability.
+#' 
+#' @param ext character file extension of the markdown
+#' @param edit boolean TRUE if editing a post
+#' @param publish boolean TRUE if the post should be published
+#' @param post_type character c("post", "page")
+#' @param wp_author_display_name character author's display name. See WordPress Profile
+#'
+#' @todo description doesn't push through. 
+#' @todo allow some meta to push through as defaults rather than header
+#' @todo files will edit regardless of mtime
+#' @todo can figures be updated?
+#' @todo categories cannot be updated; tags can
+#' 
 
 wpPublish <- function(ext = "\\.[R]?md", # Extension of markdown files
                       publish = FALSE,  # TRUE if want WP to publish post; 
@@ -165,7 +194,7 @@ wpPublish <- function(ext = "\\.[R]?md", # Extension of markdown files
                                        post_type = meta$wp_post_type, 
                                        wp_author_display_name = meta$wp_author, 
                                        action = "editPost", 
-                                       postid = post_id, 
+                                       postid = post$post_id, 
                                        publish = publish, 
                                        shortcode = shortcode)
                 
@@ -180,7 +209,7 @@ wpPublish <- function(ext = "\\.[R]?md", # Extension of markdown files
                 }
                 
                 message(sprintf("%s updated", basename(infile)))
-                posts[posts$post_id == post_id]$mtime <- "test"
+                posts[posts$post_id == post$post_id]$mtime <- "test"
                 
             }
             
