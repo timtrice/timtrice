@@ -5,16 +5,26 @@
 #' Sample header of a markdown file:
 #' 
 #' ---
-#' title: Drafts and Super Bowl Quarterbacks
-#' description: The Quick Red Fox Jumps Over The Lazy Brown Dog. The Quick Red Fox Jumps Over The Lazy Brown Dog. 
-#' post_type: post
-#' categories: Sports, Football
-#' mt_keywords: football, super bowl
+#' wp_title: Drafts and Super Bowl Quarterbacks
+#' wp_description: The Quick Red Fox Jumps Over The Lazy Brown Dog. The Quick Red Fox Jumps Over The Lazy Brown Dog. 
+#' wp_post_type: post
+#' wp_categories: Sports, Football
+#' wp_mt_keywords: football, super bowl
 #' wp_slug: drafted-super-bowl-quarterbacks
 #' wp_author_display_name: timtrice
+#' draft: TRUE
 #' ---
 #' 
 #' The "---" strings are not required but good for readability.
+#' 
+#' When editing articles, only the content can be edited per the WP XML-RPC API. 
+#' To change the categories or tags, it must be done through the admin panel.
+#' 
+#' wp_slug is the permalink of the article. If not set in the header of the  
+#' markdown, it will default to the filename. 
+#' 
+#' At this time, figures cannot be updated and I do not see any documentation on 
+#' this in the API. 
 #' 
 #' @param ext character file extension of the markdown
 #' @param edit boolean TRUE if editing a post
@@ -186,17 +196,11 @@ wpPublish <- function(ext = "\\.[R]?md", # Extension of markdown files
             } else {
                 
                 # Editing an existing post
+                # Categories and tags cannot be updated . See WP XML-RPC docs
+                
                 return_code <- knit2wp(infile, 
-                                       title = meta$wp_title, 
-                                       categories = meta$wp_categories,  
-                                       description = meta$wp_description, 
-                                       mt_keywords = meta$wp_mt_keywords, 
-                                       post_type = meta$wp_post_type, 
-                                       wp_author_display_name = meta$wp_author, 
-                                       action = "editPost", 
                                        postid = post$post_id, 
-                                       publish = publish, 
-                                       shortcode = shortcode)
+                                       action = "editPost")
                 
                 if(return_code == 401) {
                     warning(paste("Error 401: User does not have permission", 
