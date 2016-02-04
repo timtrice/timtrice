@@ -1,0 +1,168 @@
+---
+title: Drafts and Super Bowl Quarterbacks
+description: The Quick Red Fox Jumps Over The Lazy Brown Dog. The Quick Red Fox Jumps Over The Lazy Brown Dog. 
+post_type: post
+categories: Sports, Football
+mt_keywords: football, super bowl
+wp_slug: drafted-super-bowl-quarterbacks
+wp_author_display_name: timtrice
+draft: true
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+    fig.align = "center",
+    fig.width=7, 
+    fig.asp = 1, 
+    echo = FALSE
+)
+```
+
+```{r}
+library(ggplot2)
+library(data.table)
+library(tidyr)
+library(knitr)
+library(xtable)
+```
+
+```{r}
+data_dir <- "../../data/sports/football"
+
+dqbsb_csv <- paste(data_dir, "drafted-qb-super-bowl.csv", sep = "/")
+
+column_class = sapply(read.csv(dqbsb_csv, nrows = 100), class)
+
+dqbsb <- fread(dqbsb_csv, colClasses = column_class)
+
+dqb_csv <- paste(data_dir, "draft_qb.csv", sep = "/")
+
+column_class = sapply(read.csv(dqb_csv, nrows = 250), class)
+
+dqb <- fread(dqb_csv, colClasses = column_class)
+```
+
+## Our Questions
+
+As a Houston Texans fan, the big talk this offseason has been drafting a quarterback. Inevitably, that discussion involves some who believe you can find winning quarterbacks in late rounds, a la Tom Brady, an exceptional four-time Super Bowl Champion drafted in the 6th round. 
+
+But, certainly, he's an exception right? If you want to draft a Super Bowl winning quarterback, you have to get it in the first round, right?
+
+I want to answer the following questions:
+
+* What round produces the most/least Super Bowl starts? 
+
+* What is the proportion of quarterbacks drafted by round?
+
+* What is the win/loss record of Super Bowl starting quarterbacks, by round?
+
+* What is the total number of Super Bowl starts by pick?
+
+* What is the ranking of Super Bowl starting quarterbacks?
+
+* Compared to draft position, what starting quarterbacks are the outliers?
+
+## About the NFL Draft
+
+The first NFL Draft took place in 1936. However, the first Super Bowl didn't take place until 1967 (the first two Super Bowls were referred to as the *AFL-NFL World Championship Game* before the term *Super Bowl* was officially adopted for the third championship game). 
+
+The official draft format has changed over the years with total number of rounds up to seven. Additional rounds are associated with compensatory or supplemental draft picks due to mergers or players not meeting draft deadlines, among other reasons. 
+
+## Super Bowl Starts by Draft Round
+
+```{r}
+ptitle <- "Super Bowl Starts by Draft Round"
+dt <- dqbsb[, .(G = sum(Wins, Losses)), by = Rnd][order(Rnd)]
+
+ggplot(dt, aes(x = factor(Rnd), y = G, fill = factor(Rnd))) + 
+    geom_bar(stat = "identity") + 
+    geom_text(aes(label = G), vjust = -0.75) + 
+    expand_limits(y = c(0, 52)) + 
+    theme_light() + 
+    theme(legend.position = "none") + 
+    xlab("Draft Round") + 
+    ylab("Games") + 
+    ggtitle(ptitle)
+```
+
+Clearly our chart shows our data is right-skewed in that the peak is on the left or the first round of the draft. The 2nd and 4th round of the draft haven't been as productive as the 3rd or 6th round (where Tom Brady was drafted). 
+
+We also note that no quarterbacks drafted in the 5th round have ever started a Super Bowl. What we don't know is the proportion of quarterbacks drafted in those rounds compared to those drafted in the previous or next. 
+
+```{r}
+ptitle <- "Quarterbacks Drafted by Round"
+
+ggplot(dqb, aes(x = Rnd)) + 
+    geom_histogram(binwidth = 1, fill = "#000000", colour = "#FFFFFF", 
+                   origin = 1) + 
+    theme_light() + 
+    scale_x_continuous(breaks = c(1:30)) + 
+    xlab("Draft Round") + 
+    ylab("Count") + 
+    ggtitle(ptitle)
+
+dt <- dqb[, .N, by = Rnd]
+
+dt <- dt[, .(N, NProp = sprintf("%1.2f", N/sum(N, dt$N) * 100)), 
+         by = Rnd][order(Rnd)]
+
+dt$NProp <- as.numeric(dt$NProp)
+
+kable(dt, align = "c", col.names = c("Round", "QB's", "Proportion"), 
+      caption = ptitle)
+```
+
+So, draft rounds two and four have seen `r sum(dt$NProp[2], dt$NProp[4])`% of the overall quarterbacks drafted wh ile rounds three and six have seen `r sum(dt$NProp[3], dt$NProp[6])`% of the overall quarterbacks drafted; a slight advantage to the latter.   
+
+```{r}
+# Games won by draft round
+ptitle <- "Super Bowls Wins/Losses by Draft Round"
+dt <- dqbsb[, .(W = sum(Wins), L = sum(Losses)), by = Rnd][order(Rnd)] %>% 
+    gather(key, value, W, L)
+
+ggplot(dt, aes(x = factor(Rnd), y = value, fill = key)) + 
+    geom_bar(stat = "identity", position = position_dodge()) + 
+    geom_text(aes(label = value), position = position_dodge(width = 0.9), 
+              vjust = -0.75) + 
+    expand_limits(y = c(0, 28)) + 
+    theme_light() + 
+    theme(legend.position = c(0.95, 0.85), legend.title = element_blank()) + 
+    xlab("Draft Round") + 
+    ylab("Wins/Losses") + 
+    ggtitle(ptitle)
+
+dt <- spread(dt, key, value)
+
+kable(t(dt[2:3]), col.names = dt$Rnd, align = "c", caption = ptitle)
+
+#multiplot(p1, p2, cols = 2)
+
+# Games by Pick
+ptitle <- "Super Bowls Started by Pick"
+dt <- dqbsb[, .(G = sum(Wins, Losses)), by = Pick][order(Pick)]
+
+dt$Pick <- factor(dt$Pick, levels = rev(dt$Pick))
+
+ggplot(dt, aes(x = Pick, y = G, fill = Pick)) + 
+    geom_bar(stat = "identity") + 
+    coord_flip(ylim = c(0, 21)) + 
+    geom_text(aes(label = G), hjust = -0.75) + 
+    theme_light() + 
+    theme(legend.position = "none") + 
+    xlab("Draft Round") + 
+    ylab("Games") + 
+    ggtitle(ptitle) + 
+    geom_text(label = "(Tom Brady, New England Patriots)", x = 5, y = 6, 
+              hjust = -0.1) + 
+    geom_text(label = "(Roger Staubach, Dallas Cowboys)", x = 10, y = 4, 
+              hjust = -0.1) + 
+    geom_text(label = "(Joe Montana, San Francisco 49ers)", x = 15, y = 4, 
+              hjust = -0.1)
+```
+
+## The Data
+
+I wanted to get a look at Super Bowl quarterbacks and where they were drafted. I'm using two data sets I've obtained from [Pro-Football-Reference.com](http://www.sports-reference.com/data_use.shtml). 
+
+One dataset contains all QBs drafted since 1937. The second contains Super Bowl statistics that list the starting quarterbacks 
+
