@@ -26,6 +26,9 @@
 #' At this time, figures cannot be updated and I do not see any documentation on 
 #' this in the API. 
 #' 
+#' If editing an article that is already published online, you must set 
+#' publish == TRUE. The default is FALSE which will move the online version to draft
+#' 
 #' @param ext character file extension of the markdown
 #' @param edit boolean TRUE if editing a post
 #' @param publish boolean TRUE if the post should be published
@@ -34,6 +37,7 @@
 #'
 #' @todo description doesn't push through. 
 #' @todo allow some meta to push through as defaults rather than header
+#' @todo wp_categories does not push through if length == 1
 #' 
 
 wpPublish <- function(ext = "\\.[R]?md", # Extension of markdown files
@@ -89,8 +93,6 @@ wpPublish <- function(ext = "\\.[R]?md", # Extension of markdown files
     
     doPublish <- function(infile) { 
         
-        require(lubridate)
-        
         article <- getArticle(infile)
         
         # If article is localDraft or wp_draft tag not set, skip
@@ -106,8 +108,21 @@ wpPublish <- function(ext = "\\.[R]?md", # Extension of markdown files
         # At this point localDraft == TRUE
         
         # import posts
-        if(!exists("posts")) posts <- read.csv("./data/posts.csv", 
-                                               stringsAsFactors = FALSE)
+        # Adding fallback if there is no posts.csv
+        if(!exists("posts")) {
+            if(file.exists("./data/posts.csv")) {
+                posts <- read.csv("./data/posts.csv", 
+                                  stringsAsFactors = FALSE, 
+                                  colClasses = c("numeric", 
+                                                 "character", 
+                                                 "POSIXct"))
+            } else {
+                posts <- data.frame(post_id = integer(), 
+                                    file_name = character(), 
+                                    mtime = as.Date(character()))
+            }
+        }
+        
         require("dplyr")
         post <- posts %>% 
             filter(file_name == infile) %>% 
@@ -126,16 +141,16 @@ wpPublish <- function(ext = "\\.[R]?md", # Extension of markdown files
             
             # Clean and trim wp_categories
             if(length(meta$wp_categories) > 0) {
-                meta$wp_categories <- unlist(strsplit(meta$wp_categories, 
-                                                      ","))
+                meta$wp_categories <- strsplit(meta$wp_categories, 
+                                               ",")
                 meta$wp_categories <- unlist(lapply(meta$wp_categories, 
                                                     FUN = trimws))
             }
             
             # Clean and trim wp_mt_keywords
             if(length(meta$wp_mt_keywords) > 0) {
-                meta$wp_mt_keywords <- unlist(strsplit(meta$wp_mt_keywords, 
-                                                       ","))
+                meta$wp_mt_keywords <- strsplit(meta$wp_mt_keywords, 
+                                                ",")
                 meta$wp_mt_keywords <- unlist(lapply(meta$wp_mt_keywords, 
                                                      FUN = trimws))
             }
@@ -188,8 +203,7 @@ wpPublish <- function(ext = "\\.[R]?md", # Extension of markdown files
                                        post_type = meta$wp_post_type, 
                                        wp_author_display_name = meta$wp_author, 
                                        shortcode = shortcode, 
-                                       action = "editPost", 
-                                       postid = post$post_id, 
+                                       action = "newPost", 
                                        publish = publish)
                 
                 if(return_code == 401) {
@@ -205,7 +219,7 @@ wpPublish <- function(ext = "\\.[R]?md", # Extension of markdown files
                 message(sprintf("%s uploaded", basename(infile)))
                 newPosts <- data.frame(post_id = return_code[1], 
                                        file_name = infile, 
-                                       mtime = ymd_hms(file.info(infile)$mtime))
+                                       mtime = file.info(infile)$mtime)
                 posts <- rbind(posts, newPosts)
                 
             } else {
@@ -213,11 +227,13 @@ wpPublish <- function(ext = "\\.[R]?md", # Extension of markdown files
                 # Editing an existing post
                 # Categories and tags cannot be updated . See WP XML-RPC docs
                 
+                id <- post$post_id
+                
                 return_code <- knit2wp(infile, 
                                        title = meta$wp_title, 
                                        shortcode = shortcode, 
                                        action = "editPost", 
-                                       postid = post$post_id, 
+                                       postid = id, 
                                        publish = publish)
                 
                 if(return_code == 401) {
@@ -231,13 +247,13 @@ wpPublish <- function(ext = "\\.[R]?md", # Extension of markdown files
                 }
                 
                 message(sprintf("%s updated", basename(infile)))
-                posts[posts$post_id == post$post_id]$mtime <- ymd_hms(file.info(infile)$mtime)
-
+                posts[posts$post_id == id,]$mtime <- file.info(infile)$mtime
+                
             }
             
-            write.csv(posts, "./data/posts.csv", row.names = FALSE)
+            write.csv(posts, "./data/posts.csv", quote = FALSE, 
+                      row.names = FALSE)
             rm(posts)
-            message(sprintf("%s uploaded successfully!", basename(infile)))
             
         } else {
             # Problem
