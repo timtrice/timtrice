@@ -9,13 +9,13 @@ This repository serves as a backup to scripts and datasets for posts I write on 
  >
  > ---| R (stores all R script files used to process data)
  >
- > ---| py (stores all Python script files used to process data)
+ > ---| Rmd (stores all R markdown files published to site)
  >
- > ---| data (datasets)
- >
- > ---| posts (stores all markdown files for post content on the site)
- >
- > ---| pages (stores all markdown files for page content on the site)
+ > wp-publish.R (published Rmd or md files to site)
+
+## Datasets
+
+All datasets, unless otherwise noted, are kept in my [dataset repository](https://github.com/timtrice/datasets). 
 
 ## MIT License
 
