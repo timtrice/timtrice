@@ -16,8 +16,9 @@
 #' Set our variables
 url <- "http://www.pro-football-reference.com/play-index/draft-finder.cgi"
 
-#' Dir to save data
+#' Dir to save data and name of csv file to save
 data_dir <- "./data/sports/football"
+csv_filename <- "draft-qb.csv"
 
 #' URL Parameters
 url_params <- list(request = 1, 
@@ -98,5 +99,5 @@ qdb_names <- c("Year", "Rnd", "Pick", "Name", "Pos", "DrAge", "Tm", "From",
 names(draft_qb) <- qdb_names
 
 #' Write the CSV
-write.csv(draft_qb, paste(data_dir, "draft-qb.csv", sep = "/"), quote = FALSE, 
+write.csv(draft_qb, paste(data_dir, csv_filename, sep = "/"), quote = FALSE, 
           row.names = FALSE)

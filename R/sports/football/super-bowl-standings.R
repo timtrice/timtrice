@@ -29,6 +29,8 @@ sbs_names <- c("Tm", "G", "W", "L", "WLP", "PF", "PA", "PD", "StartingQB")
 
 names(sbs) <- sbs_names
 
+sbs <- lapply(sbs, function(x){ trimws(x) })
+
 if(!dir.exists(data_dir)) {
     dir.create(data_dir, recursive = TRUE)
 }
