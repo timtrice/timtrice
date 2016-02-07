@@ -1,34 +1,55 @@
+#' Drafted Quartebacks courtesy of Pro-Football-Reference.com
+#' 
+#' Please read Sports Reference LLC's Use of Data terms before operating this 
+#' script
+#' 
+#' http://www.sports-reference.com/data_use.shtml
+#' 
+#' This script access the site and loops through all pages of data, retrieving
+#' the tables on each page. Tables are then parsed and loaded into a dataframe 
+#' for further parsing. 
+#' 
+#' At this time I do not know all of the parameters. Visit the page and explore 
+#' the url for the specific params. 
+#' 
+
+#' Set our variables
+url <- "http://www.pro-football-reference.com/play-index/draft-finder.cgi"
+
+#' Dir to save data
+data_dir <- "./data/sports/football"
+
+#' URL Parameters
+url_params <- list(request = 1, 
+                   year_min = 1936, # Starting year
+                   year_max = 2015, # Ending year 
+                   year_only = "", 
+                   type = "B",  # Regular draft and supplemental draft
+                   round_min = 1, 
+                   round_max = 30, 
+                   slot_min = 1, 
+                   slot_max = 500, # Maxium draft slot
+                   league_id = "", # NFL, AFL or AAFC
+                   team_id = "", # Team
+                   college_id = "all", 
+                   conference = "any", 
+                   show = "all", 
+                   order_by = "", 
+                   order_by_asc = "DESC", 
+                   mobile = 0, 
+                   pos_new = "qb", 
+                   offset = 0)
+
+#' Load our libraries
 library(XML)
 library(httr)
 library(data.table)
 
-url <- "http://www.pro-football-reference.com/play-index/draft-finder.cgi"
-
+#' Set the empty dataframe
 draft_qb <- data.frame()
 
-offset <- 0
 while(TRUE) {
 
-    url_params <- list(request = 1, 
-                       year_min = 1936, 
-                       year_max = 2015, 
-                       year_only = "", 
-                       type = "B",  # Regular draft and supplemental draft
-                       round_min = 1, 
-                       round_max = 30, 
-                       slot_min = 1, 
-                       slot_max = 500, 
-                       league_id = "", 
-                       team_id = "", 
-                       college_id = "all", 
-                       conference = "any", 
-                       show = "all", 
-                       order_by = "", 
-                       order_by_asc = "DESC", 
-                       mobile = 0, 
-                       pos_new = "qb", 
-                       offset = offset)
-    
     query_string <- paste0(paste(names(url_params), 
                                  url_params, sep = "="), 
                            collapse = "&")
@@ -44,63 +65,38 @@ while(TRUE) {
     
     matches <- gregexpr(pattern, content)
 
-    # Each tr will be a row in our dataframe but
+    # Each tr will be a row in our dataframe except the first(header)
     tr <- regmatches(content, matches)[[1]]
-
-    for(n in tr) {
-        parsedHtml = htmlParse(n, asText = TRUE)
-
-        td <- xpathSApply(parsedHtml, "//td", xmlValue)
     
-        if(length(td) > 0) {
-            row <- data.frame(Rk = trimws(td[1]), 
-                              Year = trimws(td[2]),  
-                              Rnd = trimws(td[3]), 
-                              Pick = trimws(td[4]), 
-                              Name = trimws(td[5]), 
-                              Pos = trimws(td[6]), 
-                              DrAge = trimws(td[7]), 
-                              Tm = trimws(td[8]), 
-                              From = trimws(td[9]), 
-                              To = trimws(td[10]), 
-                              AP1 = trimws(td[11]), 
-                              PB = trimws(td[12]), 
-                              St = trimws(td[13]), 
-                              CarAV = trimws(td[14]), 
-                              G = trimws(td[15]), 
-                              GS = trimws(td[16]), 
-                              QBrec = trimws(td[17]), 
-                              Cmp = trimws(td[18]), 
-                              PAtt = trimws(td[19]), 
-                              PYds = trimws(td[20]), 
-                              PTD = trimws(td[21]), 
-                              Int = trimws(td[22]), 
-                              RAtt = trimws(td[23]), 
-                              RYds = trimws(td[24]), 
-                              RTD = trimws(td[25]), 
-                              College = trimws(td[26]))
-
-            l <- list(draft_qb, row)
-
-            draft_qb <- rbindlist(l, use.names = TRUE, fill = TRUE)
-        }
+    td <- lapply(tr, htmlParse, asText = TRUE)
     
-    }
+    trow <- lapply(td, xpathSApply, "//td", xmlValue)
+    
+    trow <- trow[-1]
+    
+    trow <- as.data.frame(t(as.data.frame(trow)))
+    
+    qbl <- list(draft_qb, trow)
+    
+    draft_qb <- rbindlist(qbl)
 
-
-    if(length(tr) < 300) {
+    if(length(tr) < 301) {
         message("End of data")
         break # We have no more 
     } else {
-        offset <- offset + 300
+        url_params$offset <- url_params$offset + 300
     }
 }
 
-football_dir <- "./data/sports/football"
+# Drop the Rnk var
+draft_qb <- draft_qb[, .(V1, V27) := NULL]
 
-if(!dir.exists(football_dir)) {
-    dir.create(football_dir, recursive = TRUE)
-}
+qdb_names <- c("Year", "Rnd", "Pick", "Name", "Pos", "DrAge", "Tm", "From", 
+               "To", "AP1", "PB", "St", "CarAV", "G", "GS", "QBrec", "Cmp", 
+               "PAtt", "PYds", "PTD", "Int", "RAtt", "RYds", "RTD", "College")
 
-write.csv(draft_qb, paste(football_dir, "draft_qb.csv", sep = "/"), 
-          quote = FALSE, row.names = FALSE)
+names(draft_qb) <- qdb_names
+
+#' Write the CSV
+write.csv(draft_qb, paste(data_dir, "draft-qb.csv", sep = "/"), quote = FALSE, 
+          row.names = FALSE)
