@@ -3,6 +3,10 @@ library(dplyr)
 library(readr)
 library(tidyr)
 
+#' Execute before starting to assure we have the latest data
+source("draft-qb.R")
+source("super-bowl-standings.R")
+
 #' Setting
 data_dir <- "./data/sports/football"
 csv_filename <- "super-bowl-quarterbacks.csv"
