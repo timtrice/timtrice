@@ -3,45 +3,35 @@ library(XML)
 library(httr)
 library(tidyr)
 
-sb_standings <- data.frame()
-
 qbsrc <- "http://www.pro-football-reference.com/super-bowl/standings.htm#standings::none"
+
+data_dir <- "./data/sports/football"
+
+csv_filename <- "sb-standings.csv"
 
 html <- GET(qbsrc)
 
 content = content(html, as = "text")
 
-parsed_html = htmlParse(content, asText = TRUE)
+td <- lapply(content, htmlParse, asText = TRUE)
 
-tr <- xpathSApply(parsed_html, "//tr", xmlValue)
+sbs <- lapply(td, xpathSApply, "//tr", xmlValue)
 
-for(i in tr[2:length(tr)]) { # Skip the header row
-    
-    parsed_html = htmlParse(i, asText = TRUE)
-    
-    values <- strsplit(i, "\n")
-    
-    this_td <- data.frame(Rk = trimws(values[[1]][1]), 
-                          Tm = trimws(values[[1]][2]), 
-                          G = trimws(values[[1]][3]), 
-                          W = trimws(values[[1]][4]), 
-                          L = trimws(values[[1]][5]), 
-                          WLP = trimws(values[[1]][6]), #W-L% 
-                          PF = trimws(values[[1]][7]), 
-                          PA = trimws(values[[1]][8]), 
-                          PD = trimws(trimws(values[[1]][9])), 
-                          StartingQB = trimws(values[[1]][10]))
-    clist <- list(sb_standings, this_td)
-    
-    sb_standings <- rbindlist(clist, use.names = TRUE, fill = TRUE)
-    
+sbs <- lapply(sbs, strsplit, "\n")
+
+sbs <- t(as.data.frame(sbs[[1]][-1]))
+
+sbs <- as.data.table(sbs)
+
+sbs <- sbs[, V1 := NULL]
+
+sbs_names <- c("Tm", "G", "W", "L", "WLP", "PF", "PA", "PD", "StartingQB")
+
+names(sbs) <- sbs_names
+
+if(!dir.exists(data_dir)) {
+    dir.create(data_dir, recursive = TRUE)
 }
 
-football_dir <- "./data/sports/football"
-
-if(!dir.exists(football_dir)) {
-    dir.create(football_dir, recursive = TRUE)
-}
-
-write.csv(sb_standings, paste(football_dir, "sb_standings.csv", sep = "/"), quote = c(10), 
+write.csv(sbs, paste(data_dir, csv_filename, sep = "/"), quote = c(9), 
           row.names = FALSE)
