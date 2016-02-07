@@ -1,67 +1,60 @@
-library(data.table)
+#' Load libraries
 library(dplyr)
+library(readr)
 library(tidyr)
 
-# Import datasets
-sb_standings_csv <- "./data/sports/football/sb_standings.csv"
+#' Setting
+data_dir <- "./data/sports/football"
+csv_filename <- "super-bowl-quarterbacks.csv"
 
-# Get column classes for sb_standings
-column_class = sapply(read.csv(sb_standings_csv, nrows = 100), class)
+#' Import dataset
+sb_standings <- read_csv("https://raw.githubusercontent.com/timtrice/datasets/master/sports/football/sb-standings.csv")
 
-sb_standings <- fread(sb_standings_csv, colClasses = column_class)
+#' Keep only Tm and StartingQB
+sb_standings <- select(sb_standings, Tm, StartingQB)
 
-rm(column_class)
+#' StartingQB has multiple names per row. I want to know the max number of names 
+#' in one row.
+cqb <- c()
+cqb <- lapply(sb_standings$StartingQB, function(x) { length(strsplit(x, ", ")[[1]])})
+cqb <- unlist(cqb)
+maxY <- max(cqb)
 
-# First, I want to extract StartingQB from sb_standings
-qb_list <- sb_standings[, StartingQB]
+#' Now split into new variables while keeping original variable
+sb_standings <- separate(sb_standings, StartingQB, c(paste0("QB", 1:4)), 
+                         remove = FALSE, sep = ",", fill = "right")
 
-# Now, the column has multiple names per row. I want to know the max number of names in one row.
-y <- c()
-y <- lapply(qb_list, function(x) { length(strsplit(x, ", ")[[1]])})
-y <- unlist(y)
-maxY <- max(y)
+#' Gather all QB Columns back to one. D1 will be removed later
+sb_standings <- sb_standings %>% gather(D1, QB, QB1:QB4)
 
-# So, we have a maximum of 4 names in one element. I'll split them up into new variables
-sbqb <- sb_standings[, .(Rk, StartingQB, Tm)]
+#' We have some NA's under value we can get rid of. 
+sb_standings <- sb_standings[complete.cases(sb_standings$QB),]
 
-# We keep the original variable to make sure our script is accurate
-sbqb <- separate(sbqb, StartingQB, c(paste0("QB", 1:4)), 
-                       sep = ",", fill = "right")
+#' I've spot checked the new QB column versus StartingQB and, happy with the 
+#' results I'll drop StartingQB and D1
+sb_standings <- select(sb_standings, Tm, QB)
 
-# Now I unite all QB Columns back to one. D1 will be removed later
-sbqb <- sbqb %>% gather(D1, QB, QB1:QB4)
-
-# We have some NA's under value we can get rid of. 
-sbqb <- sbqb[complete.cases(sbqb$QB),]
-
-# Now I'll add a win/loss column
+#' Now I'll add a win/loss column
 patt <- "([A-Za-z ']+).*?([0-9]{1})-([0-9]{1})."
-sbqb <- sbqb %>% 
+sb_standings <- sb_standings %>% 
     group_by(QB) %>% 
-    mutate(ProperName = trimws(sub(patt, "\\1", QB)),  
-           Wins = as.integer(sub(patt, "\\2", QB)), 
+    mutate(Wins = as.integer(sub(patt, "\\2", QB)), 
            Losses = as.integer(sub(patt, "\\3", QB)))
 
-# Now I want to put family name first, followed by given, comma-delimited
-sbqb <- sbqb %>% 
-    separate(ProperName, c("FirstName", "LastName"), sep = " ") %>% 
-    unite(FamilyGivenName, LastName, FirstName, sep = ", ")
-
-# At the end, I'll select the clean vars and rearrange a little
-sbqb <- sbqb %>% 
-    select(FamilyGivenName, Tm, Wins, Losses)
-
-# Rename FamilyGivenName to Name
-names(sbqb)[1] <- "Name"
-# Rename Tm to Team
-names(sbqb)[2] <- "Team"
-
-# And I'll add a winning percentage (WP) then order by Name
-sbqb <- sbqb %>% 
-    group_by(Name, Team) %>% 
+#' And I'll add a winning percentage (WP) then order by Name
+sb_standings <- sb_standings %>% 
+    group_by(QB, Tm) %>% 
     mutate(WP = as.numeric(sprintf("%0.3f", Wins/sum(Wins, Losses)))) %>% 
-    arrange(Name)
+    arrange(QB)
 
-# Lastly, save the dataset
-sbqb_csv <- "./data/sports/football/sbqb.csv"
-write.csv(sbqb, sbqb_csv, quote = c(1), row.names = FALSE)
+#' I'll clean the W-L record from the QB varaible
+sb_standings$QB <- gsub(patt, "\\1", sb_standings$QB)
+
+#' Clean whitespace
+sb_standings$QB <- trimws(sb_standings$QB)
+
+#' Lastly, save the dataset
+write.csv(sb_standings, paste(data_dir, csv_filename, sep = "/"), quote = FALSE, 
+          row.names = FALSE)
+
+#' And we're done
