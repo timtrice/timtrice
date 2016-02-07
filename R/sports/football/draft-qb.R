@@ -90,13 +90,17 @@ while(TRUE) {
 }
 
 # Drop the Rnk var
-draft_qb <- draft_qb[, .(V1, V27) := NULL]
+draft_qb <- draft_qb[, c("V1", "V27") := NULL]
 
 qdb_names <- c("Year", "Rnd", "Pick", "Name", "Pos", "DrAge", "Tm", "From", 
                "To", "AP1", "PB", "St", "CarAV", "G", "GS", "QBrec", "Cmp", 
                "PAtt", "PYds", "PTD", "Int", "RAtt", "RYds", "RTD", "College")
 
 names(draft_qb) <- qdb_names
+
+#' In Name, some names are appended with " HOF" for Hall of Fame. I want to 
+#' remove this
+draft_qb$Name <- gsub(" HOF", "", draft_qb$Name)
 
 #' Write the CSV
 write.csv(draft_qb, paste(data_dir, csv_filename, sep = "/"), quote = FALSE, 
