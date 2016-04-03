@@ -1,0 +1,202 @@
+---
+wp_title: Ratios and Proportions
+wp_post_type: post
+wp_categories: Pre Algebra
+wp_mt_keywords: pre-algebra
+wp_draft: TRUE
+---
+
+### Setting up proportions to solve word problems
+
+Nine markers cost $11.50. How much do seven markers cost.
+
+Define the unknown with $x$:
+
+$$9/$11.50 - 7/x$$
+
+$$$11.50/9 = x/7$$
+
+$$9/7  = $11.50/x$$
+
+$$7/9 = x/$11.50$$
+
+Seven apples cost $5. How many apples can I buy with $8?
+
+$$7/5 = x/8$$
+
+A cake recipe for five people requires two eggs. How many eggs do we need for a 15 person cake?
+
+$$5/2 = 15/x$$
+
+* Solve $8/36 = 10/n$
+
+We start first by reducing $8/36$ to $2/9$
+
+Solve for n over the real numbers:
+
+$$2/9 = 10/n$$
+
+$2/9 = 10/n$ is equivalent to $10/n = 2/9$:
+
+$$10/n = 2/9$$
+
+Take the reciprocal of both sides:
+
+$$n/10 = 9/2$$
+
+Multiply both sides by $10$:
+
+$$\left(10\right)n/10 = 9/2 \left(10\right)$$
+
+* Answer:
+
+$$n = 90/2$$
+
+$$n = 45$$
+
+We double-check by plugging in $n$:
+
+$$8/36 = 10/n$$
+
+$$8/36 = 10/45$$
+
+$$2/9 = 2/9$$
+
+* Solve $7/8 = 5/x+1$
+
+Here to solve for $x$ we can flip sides and also take the reciprocal of both sides.
+
+$$5/x+1 = 7/8$$
+
+$$x+1/5 = 8/7$$
+
+Then we can multiply both sides by 5. 
+
+$$\left(5\right) x+1/5 = 8/7 \left(5\right)$$
+
+Which leaves us with
+
+$$x + 1 = 40/7$$
+
+Then we solve for $x$ by subtracting one from both sides. 
+
+$$ x = 40/7 - 1$$
+
+$$ x = 40/7 - 7/7 = 33/7$$
+
+* Answer:
+
+$$x = 33/7$$
+
+Double-check. 
+
+$$ 7/8 = 5/(33/7 + 1)$$
+
+$$ 7/8 = 5/(40/7)$$
+
+We'll clean up that right hand side first.
+
+$$5/\left(40/7\right) = 5 * 7/40 = 35/40 = 7/8$$
+
+And to put it back together:
+
+$$7/8 = 7/8$$
+
+* Solve $(x-9)/12 = 2/3$
+
+We can also cross multiply to get $x$.
+
+$$(x-9)/12 = 2/3$$
+
+$$3(x-9) = 3x - 27$$
+
+$$12 * 2 = 24$$
+
+$$3x - 27 = 24$$
+
+$$3x = 24 + 27$$
+
+$$3x = 51$$
+
+$$x = 51/3 = 17$$
+
+Double-check:
+
+$$(17-9)/12 = 2/3$$
+
+$$8/12 = 2/3$$
+
+$$2/3 = 2/3$$
+
+* Solve:
+
+Rick just finished eating with his family at a restaurant. The total bill for his family was $52 and Rick was pretty impressed with the service so he is going to leave a 25% tip. 
+
+He wants to know the total amount he should leave at the table.
+
+$$x/52 = 100% + 25%/100%$$
+
+$$x/52 = 125/100$$
+
+I'll start by reducing the fraction $125/100$ which is $5/4$
+
+$$x/52 = 5/4$$
+
+Then we can cross-multiply and solve.
+
+$$4x = (52)(5)$$
+
+$$4x = 260$$
+
+$$x = 260/4 = 65$$
+
+Answer:
+
+$$x = $65$$
+
+* Solve:
+
+You have a classroom of 55 students. The ratio of boys to girls is 4:7. 
+
+How many girls do we add to make the ratio 1:2?
+
+Let's start by identifying how many boys and girls we have.
+
+The ratio $4:7$ tells us that for every 11 students, there are 4 boys and 7 girls.
+
+$$11/55 = 7/g$$
+
+Here, g is how many girls we have. 
+
+$$g11 = (55)(7)$$
+
+$$g11 = 385$$
+
+$$g = 385/11 = 35$$
+
+So we have 35 girls in the classroom. If there are 55 students total then we must have 20 boys in the classroom.
+
+$$b = s - g$$
+
+$$b = 55 - 35 = 20$$
+
+Back to the original question, how many girls do we add to make the ratio 1:2, we simply multiply $(b)(2)$ then subtract $g$ from that value.
+
+$$(b)(2) - g$$
+
+$$(20)(2) - 35$$
+
+$$40 - 35 = 5$$
+
+So, adding five more girls should give us a 1:2 ratio. Let's double-check. 
+
+Remember that we have 20 boys ($b = 20$). But, because we added five students, $s$ now equals 60.
+
+$$1/2 = b/g$$
+
+$$1/2 = 20/(35 + 5)$$
+
+$$1/2 = 20/40 = 1/2$$
+
+Therefore, to go from a ratio of $4:7$ to $1:2$, boys to girls, we must add five girls to the classroom.
+
