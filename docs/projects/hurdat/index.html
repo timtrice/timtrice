@@ -110,20 +110,21 @@
 <div id="installation" class="section level2">
 <h2>Installation</h2>
 <p>HURDAT requires R version 3.4.0 or greater.</p>
-<pre class="r"><code>library(dplyr)
+<pre class="r"><code>install.packages(&quot;HURDAT&quot;)</code></pre>
+<pre class="r"><code>library(HURDAT)</code></pre>
+<pre class="r"><code># Additional libraries used for this document
+library(dplyr)
 library(ggplot2)
 library(Hmisc)
-library(HURDAT)
 library(knitr)
-library(lubridate)
 library(purrr)
 library(readr)</code></pre>
 </div>
 <div id="included-datasets" class="section level2">
 <h2>Included Datasets</h2>
 <p>The raw dataset is updated annually; typically during late winter or spring. Both included datasets are updated through 2016.</p>
-<pre class="r"><code>data(&quot;AL&quot;)
-data(&quot;EP&quot;)</code></pre>
+<pre class="r"><code>data(AL)
+data(EP)</code></pre>
 <div id="atlantic-al" class="section level3">
 <h3>Atlantic (<code>AL</code>)</h3>
 <pre class="r"><code>str(AL)</code></pre>
@@ -248,14 +249,13 @@ data(&quot;EP&quot;)</code></pre>
 ## lowest : -359.1 -358.4 -109.5 -109.3 -109.1, highest:   38.5   40.0   41.5   48.0   63.0</code></pre>
 <p>For this dataset we expect values between -180 and 0. For Atlantic cyclones <code>Lon</code> really be greater than -105; essentially when storms have either disipated or entered the Pacific ocean.</p>
 <p>Let’s plot these values and see what we’re dealing with.</p>
-<pre class="r"><code>library(maps)</code></pre>
+<pre class="r"><code>world_map &lt;- map_data(&quot;world&quot;)</code></pre>
 <pre><code>## 
 ## Attaching package: &#39;maps&#39;</code></pre>
 <pre><code>## The following object is masked from &#39;package:purrr&#39;:
 ## 
 ##     map</code></pre>
-<pre class="r"><code>world_map &lt;- map_data(&quot;world&quot;)
-ggplot(AL, aes(x = Lon, y = Lat)) + 
+<pre class="r"><code>ggplot(AL, aes(x = Lon, y = Lat)) + 
     geom_polygon(data = world_map, aes(x = long, y = lat, group = group), 
                  colour = &quot;grey10&quot;, fill = &quot;white&quot;) + 
     geom_point(size = 0.5, color = &quot;red&quot;)</code></pre>
@@ -686,6 +686,16 @@ read_csv(url, skip = 23823L, n_max = 2, col_names = FALSE)</code></pre>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
         <script src="../../js/jquery.fitvids.js"></script>
         <script src="../../js/scripts.js"></script>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    });
+    </script>
+    <script type="text/javascript"
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
     </body>
 </html>
 

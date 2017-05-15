@@ -14,13 +14,20 @@ HURDAT is a R package based off the [Hurricane Re-Analysis Project](http://www.a
 
 HURDAT requires R version 3.4.0 or greater.
 
-```{r library, message = FALSE, warning = FALSE}
+```{r install, eval = FALSE}
+install.packages("HURDAT")
+```
+
+```{r hurdat}
+library(HURDAT)
+```
+
+```{r libraries, message = FALSE, warning = FALSE}
+# Additional libraries used for this document
 library(dplyr)
 library(ggplot2)
 library(Hmisc)
-library(HURDAT)
 library(knitr)
-library(lubridate)
 library(purrr)
 library(readr)
 ```
@@ -30,8 +37,8 @@ library(readr)
 The raw dataset is updated annually; typically during late winter or spring. Both included datasets are updated through 2016.
 
 ```{r data}
-data("AL")
-data("EP")
+data(AL)
+data(EP)
 ```
 
 ### Atlantic (`AL`)
@@ -129,9 +136,6 @@ For this dataset we expect values between -180 and 0. For Atlantic cyclones `Lon
 
 Let's plot these values and see what we're dealing with.
 
-```{r map-libraries}
-library(maps)
-```
 
 ```{r lat.lon.plot}
 world_map <- map_data("world")

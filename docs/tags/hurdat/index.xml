@@ -30,20 +30,21 @@
 &lt;div id=&#34;installation&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Installation&lt;/h2&gt;
 &lt;p&gt;HURDAT requires R version 3.4.0 or greater.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(dplyr)
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;install.packages(&amp;quot;HURDAT&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(HURDAT)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Additional libraries used for this document
+library(dplyr)
 library(ggplot2)
 library(Hmisc)
-library(HURDAT)
 library(knitr)
-library(lubridate)
 library(purrr)
 library(readr)&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;included-datasets&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Included Datasets&lt;/h2&gt;
 &lt;p&gt;The raw dataset is updated annually; typically during late winter or spring. Both included datasets are updated through 2016.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;data(&amp;quot;AL&amp;quot;)
-data(&amp;quot;EP&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;data(AL)
+data(EP)&lt;/code&gt;&lt;/pre&gt;
 &lt;div id=&#34;atlantic-al&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Atlantic (&lt;code&gt;AL&lt;/code&gt;)&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;str(AL)&lt;/code&gt;&lt;/pre&gt;
@@ -168,14 +169,13 @@ data(&amp;quot;EP&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 ## lowest : -359.1 -358.4 -109.5 -109.3 -109.1, highest:   38.5   40.0   41.5   48.0   63.0&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;For this dataset we expect values between -180 and 0. For Atlantic cyclones &lt;code&gt;Lon&lt;/code&gt; really be greater than -105; essentially when storms have either disipated or entered the Pacific ocean.&lt;/p&gt;
 &lt;p&gt;Let’s plot these values and see what we’re dealing with.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(maps)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;world_map &amp;lt;- map_data(&amp;quot;world&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## 
 ## Attaching package: &amp;#39;maps&amp;#39;&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## The following object is masked from &amp;#39;package:purrr&amp;#39;:
 ## 
 ##     map&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;world_map &amp;lt;- map_data(&amp;quot;world&amp;quot;)
-ggplot(AL, aes(x = Lon, y = Lat)) + 
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(AL, aes(x = Lon, y = Lat)) + 
     geom_polygon(data = world_map, aes(x = long, y = lat, group = group), 
                  colour = &amp;quot;grey10&amp;quot;, fill = &amp;quot;white&amp;quot;) + 
     geom_point(size = 0.5, color = &amp;quot;red&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
