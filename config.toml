@@ -37,9 +37,6 @@ publishDir = "docs"
     highlightjsLang = ["r", "yaml"]
     highlightjsTheme = "github"
 
-    MathJaxCDN = "//cdn.bootcss.com"
-    MathJaxVersion = "2.7.1"
-
 [[menu.main]]
     name = "Blog"
     url = "/"
