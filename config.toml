@@ -8,21 +8,28 @@ disqusShortname = ""
 ignoreFiles = ["\\.Rmd$", "_files$", "_cache$"]
 publishDir = "docs"
 
+[Author]
+    name = "Tim Trice"
+    profile = "https://github.com/timtrice"
+
 [permalinks]
-    post = "/:year/:month/:day/:slug/"
+    post = "/:year-:month-:day-:slug/"
 
-[[menu.main]]
-    name = "About"
-    url = "/about/"
-[[menu.main]]
-    name = "GitHub"
-    url = "https://github.com/timtrice"
-[[menu.main]]
-    name = "Twitter"
-    url = "https://twitter.com/timtrice"
-
-[params]
-    description = "Data Management and Analysis"
+[Params]
+    intro = true
+    headline = "Tim Trice"
+    description = "Data Exploration, Management and Analysis"
+    github = "https://github.com/timtrice"
+    linkedin = "https://www.linkedin.com/in/timtrice/"
+    twitter = "https://twitter.com/timtrice"
+    stackoverflow = "http://stackoverflow.com/users/2576935/timtrice"
+    email = "tim.trice@gmail.com"
+    opengraph = true
+    shareTwitter = true
+    shareFacebook = true
+    shareGooglePlus = true
+    shareLinkedIn = true
+    dateFormat = "Mon, Jan 2, 2006"
 
     # options for highlight.js (version, additional languages, and theme)
     highlightjsVersion = "9.11.0"
@@ -33,3 +40,12 @@ publishDir = "docs"
     MathJaxCDN = "//cdn.bootcss.com"
     MathJaxVersion = "2.7.1"
 
+[[menu.main]]
+    name = "Blog"
+    url = "/"
+    weight = 1
+
+[[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 2
