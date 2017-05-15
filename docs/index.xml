@@ -11,10 +11,10 @@
     
     <item>
       <title>A Plain Markdown Post</title>
-      <link>/2016/12/30/a-plain-markdown-post/</link>
+      <link>/2016-12-30-a-plain-markdown-post/</link>
       <pubDate>Fri, 30 Dec 2016 21:49:57 -0700</pubDate>
       
-      <guid>/2016/12/30/a-plain-markdown-post/</guid>
+      <guid>/2016-12-30-a-plain-markdown-post/</guid>
       <description>&lt;p&gt;This is a post written in plain Markdown (&lt;code&gt;*.md&lt;/code&gt;) instead of R Markdown (&lt;code&gt;*.Rmd&lt;/code&gt;). The major differences are:&lt;/p&gt;
 
 &lt;ol&gt;
@@ -49,21 +49,11 @@
     </item>
     
     <item>
-      <title>About</title>
-      <link>/about/</link>
-      <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
-      
-      <guid>/about/</guid>
-      <description>&lt;p&gt;This is a &amp;ldquo;hello world&amp;rdquo; example website for the &lt;a href=&#34;https://github.com/rstudio/blogdown&#34;&gt;&lt;strong&gt;blogdown&lt;/strong&gt;&lt;/a&gt; package. The theme was forked from &lt;a href=&#34;https://github.com/jrutheiser/hugo-lithium-theme&#34;&gt;@jrutheiser/hugo-lithium-theme&lt;/a&gt; and modified by &lt;a href=&#34;https://github.com/yihui/hugo-lithium-theme&#34;&gt;Yihui Xie&lt;/a&gt;.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Hello R Markdown</title>
-      <link>/2015/07/23/hello-r-markdown/</link>
+      <link>/2015-07-23-hello-r-markdown/</link>
       <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
       
-      <guid>/2015/07/23/hello-r-markdown/</guid>
+      <guid>/2015-07-23-hello-r-markdown/</guid>
       <description>&lt;div id=&#34;r-markdown&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;R Markdown&lt;/h1&gt;
 &lt;p&gt;This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see &lt;a href=&#34;http://rmarkdown.rstudio.com&#34; class=&#34;uri&#34;&gt;http://rmarkdown.rstudio.com&lt;/a&gt;.&lt;/p&gt;
@@ -108,11 +98,35 @@ Figure 1: A fancy pie chart.
     
     <item>
       <title>Lorem Ipsum</title>
-      <link>/2015/01/01/lorem-ipsum/</link>
+      <link>/2015-01-01-lorem-ipsum/</link>
       <pubDate>Thu, 01 Jan 2015 13:09:13 -0600</pubDate>
       
-      <guid>/2015/01/01/lorem-ipsum/</guid>
+      <guid>/2015-01-01-lorem-ipsum/</guid>
       <description>&lt;p&gt;&lt;strong&gt;Lorem ipsum&lt;/strong&gt; dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore &lt;em&gt;magna aliqua&lt;/em&gt;. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/about/</guid>
+      <description>&lt;p&gt;I have a huge love of data and finding better solutions to known and unknown issues. For example, when I learned a team was manually entering information into their software, I developed a way to make it point-and-click saving several hours worth of work per week.&lt;/p&gt;
+
+&lt;p&gt;I began programming shortly after my son&amp;rsquo;s birth in 2003. I had already been somewhat exposed to MS Access when a company I worked for needed me to help clean their vendor data registers. This helped expose me to some VBA and SQL.&lt;/p&gt;
+
+&lt;p&gt;Shortly after I bought my first laptop and began writing a hurricane tracking program. After all, what better way to learn to do something than to apply it to what you know.&lt;/p&gt;
+
+&lt;p&gt;I quickly learned pattern matching, creating maps and scheduling scripts to keep the program up-to-date. At one point, Personal Hurricane Center was one of the top-selling hurricane tracking programs available.&lt;/p&gt;
+
+&lt;p&gt;Soon after I moved it online and made the information free. This meant learning PHP and MySQL and, at some point, the CakePHP framework. I developed other projects as well; web scrapers, custom WordPress-like blogs, HTML, etc. But, none of it kept my interest. Eventually I let all of the projects disappear or handed them off to whoever wanted them.&lt;/p&gt;
+
+&lt;p&gt;In 2009 I began trading the stock market finding cheap stocks looking for some returns and moving onto the next. It took a couple of years before someone had pointed me in the direction of not only analyzing the results; i.e., the data, but using what I knew to examine potentially new opportunities.&lt;/p&gt;
+
+&lt;p&gt;In essence, data science.&lt;/p&gt;
+
+&lt;p&gt;I am not a data scientist; I do not have a college degree. I do consider myself a data enthusiast. I have seen firsthand how data clarity can lead to better decisions in all aspects of life. And my hope with this site is to help others who are on a similar path.&lt;/p&gt;
 </description>
     </item>
     
