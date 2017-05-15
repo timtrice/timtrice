@@ -1,0 +1,6 @@
+---
+author: "Tim Trice"
+title: "Projects"
+description: "Current Projects"
+tags: ["Projects"]
+---
