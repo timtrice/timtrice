@@ -1,5 +1,5 @@
 ---
-title: "HURDAT"
+title: "HURDAT 0.1.0"
 description: "Hurricane Re-Analysis Project"
 author: "Tim Trice"
 tags: ["R", "HURDAT"]
@@ -138,11 +138,11 @@ Let's plot these values and see what we're dealing with.
 
 
 ```{r lat.lon.plot}
-world_map <- map_data("world")
-ggplot(AL, aes(x = Lon, y = Lat)) + 
-    geom_polygon(data = world_map, aes(x = long, y = lat, group = group), 
-                 colour = "grey10", fill = "white") + 
-    geom_point(size = 0.5, color = "red")
+ggplot(data = map_data("world"), aes(long, lat, group = group), color = "grey10") + 
+    geom_path() + 
+    geom_point(data = AL, aes(x = Lon, y = Lat), group = NA, 
+               color = "red", size = 0.5) + 
+    theme_bw()
 ```
 
 The two values in `AL$Lon`, -359.1 and -358.4 will need to be fixed. This is an error in the raw dataset:
@@ -164,10 +164,13 @@ AL051952 <- AL %>%
 ```
 
 ```{r plot.AL051952}
-ggplot(AL051952, aes(x = Lon, y = Lat)) + 
-    geom_polygon(data = world_map, aes(x = long, y = lat, group = group), 
-                 colour = "grey10", fill = "white") + 
-    geom_point(size = 0.5, color = "red")
+ggplot(data = map_data("world"), aes(long, lat, group = group), color = "grey10") + 
+    geom_path() + 
+    geom_point(data = AL051952, aes(x = Lon, y = Lat), group = NA, 
+               color = "red", size = 0.5) + 
+    scale_x_continuous(expand = c(0, 0)) + 
+    scale_y_continuous(expand = c(0, 0)) + 
+    theme_bw()
 ```
 
 ```{r kable.al051952, results = "asis"}
@@ -193,10 +196,13 @@ kable(AL051952 %>% select(DateTime, Lat, Lon), format = "markdown")
 Corrected plot:
 
 ```{r plot.AL051952.corrected}
-ggplot(AL051952, aes(x = Lon, y = Lat)) + 
-    geom_polygon(data = world_map, aes(x = long, y = lat, group = group), 
-                 colour = "grey10", fill = "white") + 
-    geom_point(size = 0.5, color = "red")
+ggplot(data = map_data("world"), aes(long, lat, group = group), color = "grey10") + 
+    geom_path() + 
+    geom_point(data = AL051952, aes(x = Lon, y = Lat), group = NA, 
+               color = "red", size = 0.5) + 
+    scale_x_continuous(expand = c(0, 0)) + 
+    scale_y_continuous(expand = c(0, 0)) + 
+    theme_bw()
 ```
 
 There may be other small errors in the dataset I am not aware of. If you find any please submit an issue to the [GitHub repo](https://github.com/timtrice/HURDAT/issues).

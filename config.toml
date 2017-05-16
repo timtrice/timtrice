@@ -3,8 +3,8 @@ relativeurls = true
 languageCode = "en-us"
 title = "Tim Trice"
 theme = "ghostwriter"
-googleAnalytics = ""
-disqusShortname = ""
+googleAnalytics = "UA-1507390-26"
+disqusShortname = "timtrice"
 ignoreFiles = ["\\.Rmd$", "_files$", "_cache$"]
 publishDir = "docs"
 
