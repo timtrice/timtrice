@@ -37,7 +37,7 @@ After loading ___HURDAT___ take a look at the vignette.
 vignette("hurdat", package = "HURDAT")
 ```
 
-[Hurricanes](http://timtrice.net/projects/hurricanes/) gathers more comprehensive data for Atlantic and northeast Pacific tropical cyclones. However, this data currently only goes back to 1998. It does include real-time data for active cyclones.
+[Hurricanes](/projects/hurricanes/) gathers more comprehensive data for Atlantic and northeast Pacific tropical cyclones. However, this data currently only goes back to 1998. It does include real-time data for active cyclones.
 
 ___Hurricanes___ provides details on the current position and structure of the storm as well as forecast positions. Additionally, technical and public discussions, if available, can be retrieved from the package. 
 
