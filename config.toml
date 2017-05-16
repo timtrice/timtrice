@@ -4,7 +4,7 @@ languageCode = "en-us"
 title = "Tim Trice"
 theme = "ghostwriter"
 googleAnalytics = "UA-1507390-26"
-disqusShortname = ""
+disqusShortname = "timtrice"
 ignoreFiles = ["\\.Rmd$", "_files$", "_cache$"]
 publishDir = "docs"
 
