@@ -1,5 +1,5 @@
 ---
-title: "HURDAT"
+title: "HURDAT 0.1.0"
 description: "Hurricane Re-Analysis Project"
 author: "Tim Trice"
 tags: ["R", "HURDAT"]
