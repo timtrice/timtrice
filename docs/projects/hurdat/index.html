@@ -3,14 +3,14 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>HURDAT &middot; Tim Trice</title>
+        <title>HURDAT 0.1.0 &middot; Tim Trice</title>
         <meta name="description" content="Hurricane Re-Analysis Project">
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
         <meta name="generator" content="Hugo 0.18.1" />
         <meta name="robots" content="index,follow">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta property="og:title" content="HURDAT">
+        <meta property="og:title" content="HURDAT 0.1.0">
 <meta property="og:description" content="Hurricane Re-Analysis Project">
 <meta property="og:type" content="article">
 <meta property="og:url" content="/projects/hurdat/">
@@ -21,6 +21,16 @@
     </head>
     <body>
         
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-1507390-26', 'auto');
+ga('send', 'pageview');
+</script>
+
 
         <div id="wrapper">
             <header class="site-header">
@@ -85,7 +95,7 @@
 <div class="container">
     <article class="post-container">
         <header class="post-header">
-    <h1 class="post-title">HURDAT</h1>
+    <h1 class="post-title">HURDAT 0.1.0</h1>
     
         <p class="post-description">Hurricane Re-Analysis Project</p>
     
@@ -249,16 +259,16 @@ data(EP)</code></pre>
 ## lowest : -359.1 -358.4 -109.5 -109.3 -109.1, highest:   38.5   40.0   41.5   48.0   63.0</code></pre>
 <p>For this dataset we expect values between -180 and 0. For Atlantic cyclones <code>Lon</code> really be greater than -105; essentially when storms have either disipated or entered the Pacific ocean.</p>
 <p>Let’s plot these values and see what we’re dealing with.</p>
-<pre class="r"><code>world_map &lt;- map_data(&quot;world&quot;)</code></pre>
+<pre class="r"><code>ggplot(data = map_data(&quot;world&quot;), aes(long, lat, group = group), color = &quot;grey10&quot;) + 
+    geom_path() + 
+    geom_point(data = AL, aes(x = Lon, y = Lat), group = NA, 
+               color = &quot;red&quot;, size = 0.5) + 
+    theme_bw()</code></pre>
 <pre><code>## 
 ## Attaching package: &#39;maps&#39;</code></pre>
 <pre><code>## The following object is masked from &#39;package:purrr&#39;:
 ## 
 ##     map</code></pre>
-<pre class="r"><code>ggplot(AL, aes(x = Lon, y = Lat)) + 
-    geom_polygon(data = world_map, aes(x = long, y = lat, group = group), 
-                 colour = &quot;grey10&quot;, fill = &quot;white&quot;) + 
-    geom_point(size = 0.5, color = &quot;red&quot;)</code></pre>
 <p><img src="../../projects/hurdat/index_files/figure-html/lat.lon.plot-1.png" width="672" /></p>
 <p>The two values in <code>AL$Lon</code>, -359.1 and -358.4 will need to be fixed. This is an error in the raw dataset:</p>
 <pre class="r"><code>url &lt;- &quot;http://www.nhc.noaa.gov/data/hurdat/hurdat2-1851-2016-041117.txt&quot;
@@ -293,10 +303,13 @@ read_csv(url, skip = 23823L, n_max = 2, col_names = FALSE)</code></pre>
 ## #   NW50 &lt;int&gt;, NE64 &lt;int&gt;, SE64 &lt;int&gt;, SW64 &lt;int&gt;, NW64 &lt;int&gt;</code></pre>
 <pre class="r"><code>AL051952 &lt;- AL %&gt;% 
     filter(Key == &quot;AL051952&quot;)</code></pre>
-<pre class="r"><code>ggplot(AL051952, aes(x = Lon, y = Lat)) + 
-    geom_polygon(data = world_map, aes(x = long, y = lat, group = group), 
-                 colour = &quot;grey10&quot;, fill = &quot;white&quot;) + 
-    geom_point(size = 0.5, color = &quot;red&quot;)</code></pre>
+<pre class="r"><code>ggplot(data = map_data(&quot;world&quot;), aes(long, lat, group = group), color = &quot;grey10&quot;) + 
+    geom_path() + 
+    geom_point(data = AL051952, aes(x = Lon, y = Lat), group = NA, 
+               color = &quot;red&quot;, size = 0.5) + 
+    scale_x_continuous(expand = c(0, 0)) + 
+    scale_y_continuous(expand = c(0, 0)) + 
+    theme_bw()</code></pre>
 <p><img src="../../projects/hurdat/index_files/figure-html/plot.AL051952-1.png" width="672" /></p>
 <pre class="r"><code>kable(AL051952 %&gt;% select(DateTime, Lat, Lon), format = &quot;markdown&quot;)</code></pre>
 <table>
@@ -599,10 +612,13 @@ read_csv(url, skip = 23823L, n_max = 2, col_names = FALSE)</code></pre>
 </tbody>
 </table>
 <p>Corrected plot:</p>
-<pre class="r"><code>ggplot(AL051952, aes(x = Lon, y = Lat)) + 
-    geom_polygon(data = world_map, aes(x = long, y = lat, group = group), 
-                 colour = &quot;grey10&quot;, fill = &quot;white&quot;) + 
-    geom_point(size = 0.5, color = &quot;red&quot;)</code></pre>
+<pre class="r"><code>ggplot(data = map_data(&quot;world&quot;), aes(long, lat, group = group), color = &quot;grey10&quot;) + 
+    geom_path() + 
+    geom_point(data = AL051952, aes(x = Lon, y = Lat), group = NA, 
+               color = &quot;red&quot;, size = 0.5) + 
+    scale_x_continuous(expand = c(0, 0)) + 
+    scale_y_continuous(expand = c(0, 0)) + 
+    theme_bw()</code></pre>
 <p><img src="../../projects/hurdat/index_files/figure-html/plot.AL051952.corrected-1.png" width="672" /></p>
 <p>There may be other small errors in the dataset I am not aware of. If you find any please submit an issue to the <a href="https://github.com/timtrice/HURDAT/issues">GitHub repo</a>.</p>
 </div>
@@ -624,7 +640,7 @@ read_csv(url, skip = 23823L, n_max = 2, col_names = FALSE)</code></pre>
 
     <div class="share">
         
-            <a class="icon-twitter" href="https://twitter.com/share?text=HURDAT&url=%2fprojects%2fhurdat%2f"
+            <a class="icon-twitter" href="https://twitter.com/share?text=HURDAT%200.1.0&url=%2fprojects%2fhurdat%2f"
                 onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                 <i class="fa fa-twitter"></i>
                 <span class="hidden">Twitter</span>
@@ -647,7 +663,7 @@ read_csv(url, skip = 23823L, n_max = 2, col_names = FALSE)</code></pre>
             </a>
         
         
-            <a class="icon-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&title=HURDAT&url=%2fprojects%2fhurdat%2f&summary=Hurricane%20Re-Analysis%20Project"
+            <a class="icon-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&title=HURDAT%200.1.0&url=%2fprojects%2fhurdat%2f&summary=Hurricane%20Re-Analysis%20Project"
                onclick="window.open(this.href, 'linkedin-share', 'width=554,height=481');return false;">
                <i class="fa fa-linkedin"></i>
                <span class="hidden">LinkedIn</span>
@@ -673,7 +689,7 @@ read_csv(url, skip = 23823L, n_max = 2, col_names = FALSE)</code></pre>
                 </div>
 
                 <p class="footer-copyright">
-                    <span>&copy; 2016 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
+                    <span>&copy; 2017 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
                 </p>
                 <p class="footer-copyright">
                     <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>

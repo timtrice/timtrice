@@ -1,5 +1,5 @@
 ---
-title: "HURDAT"
+title: "HURDAT 0.1.0"
 description: "Hurricane Re-Analysis Project"
 author: "Tim Trice"
 tags: ["R", "HURDAT"]
@@ -164,16 +164,16 @@ data(EP)</code></pre>
 ## lowest : -359.1 -358.4 -109.5 -109.3 -109.1, highest:   38.5   40.0   41.5   48.0   63.0</code></pre>
 <p>For this dataset we expect values between -180 and 0. For Atlantic cyclones <code>Lon</code> really be greater than -105; essentially when storms have either disipated or entered the Pacific ocean.</p>
 <p>Let’s plot these values and see what we’re dealing with.</p>
-<pre class="r"><code>world_map &lt;- map_data(&quot;world&quot;)</code></pre>
+<pre class="r"><code>ggplot(data = map_data(&quot;world&quot;), aes(long, lat, group = group), color = &quot;grey10&quot;) + 
+    geom_path() + 
+    geom_point(data = AL, aes(x = Lon, y = Lat), group = NA, 
+               color = &quot;red&quot;, size = 0.5) + 
+    theme_bw()</code></pre>
 <pre><code>## 
 ## Attaching package: &#39;maps&#39;</code></pre>
 <pre><code>## The following object is masked from &#39;package:purrr&#39;:
 ## 
 ##     map</code></pre>
-<pre class="r"><code>ggplot(AL, aes(x = Lon, y = Lat)) + 
-    geom_polygon(data = world_map, aes(x = long, y = lat, group = group), 
-                 colour = &quot;grey10&quot;, fill = &quot;white&quot;) + 
-    geom_point(size = 0.5, color = &quot;red&quot;)</code></pre>
 <p><img src="/projects/hurdat/index_files/figure-html/lat.lon.plot-1.png" width="672" /></p>
 <p>The two values in <code>AL$Lon</code>, -359.1 and -358.4 will need to be fixed. This is an error in the raw dataset:</p>
 <pre class="r"><code>url &lt;- &quot;http://www.nhc.noaa.gov/data/hurdat/hurdat2-1851-2016-041117.txt&quot;
@@ -208,10 +208,13 @@ read_csv(url, skip = 23823L, n_max = 2, col_names = FALSE)</code></pre>
 ## #   NW50 &lt;int&gt;, NE64 &lt;int&gt;, SE64 &lt;int&gt;, SW64 &lt;int&gt;, NW64 &lt;int&gt;</code></pre>
 <pre class="r"><code>AL051952 &lt;- AL %&gt;% 
     filter(Key == &quot;AL051952&quot;)</code></pre>
-<pre class="r"><code>ggplot(AL051952, aes(x = Lon, y = Lat)) + 
-    geom_polygon(data = world_map, aes(x = long, y = lat, group = group), 
-                 colour = &quot;grey10&quot;, fill = &quot;white&quot;) + 
-    geom_point(size = 0.5, color = &quot;red&quot;)</code></pre>
+<pre class="r"><code>ggplot(data = map_data(&quot;world&quot;), aes(long, lat, group = group), color = &quot;grey10&quot;) + 
+    geom_path() + 
+    geom_point(data = AL051952, aes(x = Lon, y = Lat), group = NA, 
+               color = &quot;red&quot;, size = 0.5) + 
+    scale_x_continuous(expand = c(0, 0)) + 
+    scale_y_continuous(expand = c(0, 0)) + 
+    theme_bw()</code></pre>
 <p><img src="/projects/hurdat/index_files/figure-html/plot.AL051952-1.png" width="672" /></p>
 <pre class="r"><code>kable(AL051952 %&gt;% select(DateTime, Lat, Lon), format = &quot;markdown&quot;)</code></pre>
 <table>
@@ -514,10 +517,13 @@ read_csv(url, skip = 23823L, n_max = 2, col_names = FALSE)</code></pre>
 </tbody>
 </table>
 <p>Corrected plot:</p>
-<pre class="r"><code>ggplot(AL051952, aes(x = Lon, y = Lat)) + 
-    geom_polygon(data = world_map, aes(x = long, y = lat, group = group), 
-                 colour = &quot;grey10&quot;, fill = &quot;white&quot;) + 
-    geom_point(size = 0.5, color = &quot;red&quot;)</code></pre>
+<pre class="r"><code>ggplot(data = map_data(&quot;world&quot;), aes(long, lat, group = group), color = &quot;grey10&quot;) + 
+    geom_path() + 
+    geom_point(data = AL051952, aes(x = Lon, y = Lat), group = NA, 
+               color = &quot;red&quot;, size = 0.5) + 
+    scale_x_continuous(expand = c(0, 0)) + 
+    scale_y_continuous(expand = c(0, 0)) + 
+    theme_bw()</code></pre>
 <p><img src="/projects/hurdat/index_files/figure-html/plot.AL051952.corrected-1.png" width="672" /></p>
 <p>There may be other small errors in the dataset I am not aware of. If you find any please submit an issue to the <a href="https://github.com/timtrice/HURDAT/issues">GitHub repo</a>.</p>
 </div>

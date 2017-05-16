@@ -8,3 +8,5 @@ tags: ["Projects"]
 ## R
 
 [HURDAT](/projects/hurdat/) is a dataset from the Hurricane Re-Analysis project. It contains storm data for hundreds of cyclones for storms that have developed in the northwestern hemisphere (Atlantic and Pacific) since 1851.
+
+[Hurricanes](/projects/hurricanes/) is a more comprehensive dataset of Atlantic and Pacific cyclones but only those since 1998. It gives access to as-issued text products for past and current cyclones including forecast and structure data.

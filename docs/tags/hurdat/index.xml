@@ -9,7 +9,61 @@
     <atom:link href="/tags/hurdat/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>HURDAT</title>
+      <title>Introducing Hurricanes, HURDAT</title>
+      <link>/2017-05-16-introducing-hurricanes-hurdat/</link>
+      <pubDate>Tue, 16 May 2017 10:47:00 -0500</pubDate>
+      
+      <guid>/2017-05-16-introducing-hurricanes-hurdat/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;m proud to introduce two new packages for the R community: &lt;strong&gt;HURDAT&lt;/strong&gt; and &lt;strong&gt;&lt;em&gt;Hurricanes&lt;/em&gt;&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Both packages are complimentary to one another.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://timtrice.net/projects/hurdat/&#34;&gt;HURDAT&lt;/a&gt; is a dataset of tropical cyclones that have developed in the Atlantic and northeast Pacific oceans since 1851 and 1949, respectively. &lt;strong&gt;&lt;em&gt;HURDAT&lt;/em&gt;&lt;/strong&gt; is a re-analysis project as conducated by the Hurricane Research Division of the National Oceanic and Atmospheric Administration. They review known data to determine the best track, intensity and structure of a cyclone.&lt;/p&gt;
+
+&lt;p&gt;This is a great dataset to work with:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Climatology&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Relationship between wind/pressure.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Hurricanes by landfall location&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Accumulated_cyclone_energy&#34;&gt;ACE&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Largest and smallest (by wind radius).&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The &lt;a href=&#34;http://www.aoml.noaa.gov/hrd/hurdat/Data_Storm.html&#34;&gt;HURDAT&lt;/a&gt; project homepage has some other ideas that can be extracted from this data.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;HURDAT&lt;/em&gt;&lt;/strong&gt; is available on &lt;a href=&#34;https://cran.r-project.org/web/packages/HURDAT/index.html&#34;&gt;CRAN&lt;/a&gt; for R &amp;gt;= 3.4.0.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;install.packages(&amp;quot;HURDAT&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After loading &lt;strong&gt;&lt;em&gt;HURDAT&lt;/em&gt;&lt;/strong&gt; take a look at the vignette.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;vignette(&amp;quot;hurdat&amp;quot;, package = &amp;quot;HURDAT&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href=&#34;../../projects/hurricanes/&#34;&gt;Hurricanes&lt;/a&gt; gathers more comprehensive data for Atlantic and northeast Pacific tropical cyclones. However, this data currently only goes back to 1998. It does include real-time data for active cyclones.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Hurricanes&lt;/em&gt;&lt;/strong&gt; provides details on the current position and structure of the storm as well as forecast positions. Additionally, technical and public discussions, if available, can be retrieved from the package.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Hurricanes&lt;/em&gt;&lt;/strong&gt; is not currently available in CRAN. Please consider it a beta release. Install the package with:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;devtools::install_github(&amp;quot;timtrice/Hurricanes&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After loading the library, take a look at the &amp;ldquo;Getting Started&amp;rdquo; vignette:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;vignette(&amp;quot;getting-started&amp;quot;, package = &amp;quot;Hurricanes&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>HURDAT 0.1.0</title>
       <link>/projects/hurdat/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -169,16 +223,16 @@ data(EP)&lt;/code&gt;&lt;/pre&gt;
 ## lowest : -359.1 -358.4 -109.5 -109.3 -109.1, highest:   38.5   40.0   41.5   48.0   63.0&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;For this dataset we expect values between -180 and 0. For Atlantic cyclones &lt;code&gt;Lon&lt;/code&gt; really be greater than -105; essentially when storms have either disipated or entered the Pacific ocean.&lt;/p&gt;
 &lt;p&gt;Let’s plot these values and see what we’re dealing with.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;world_map &amp;lt;- map_data(&amp;quot;world&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(data = map_data(&amp;quot;world&amp;quot;), aes(long, lat, group = group), color = &amp;quot;grey10&amp;quot;) + 
+    geom_path() + 
+    geom_point(data = AL, aes(x = Lon, y = Lat), group = NA, 
+               color = &amp;quot;red&amp;quot;, size = 0.5) + 
+    theme_bw()&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## 
 ## Attaching package: &amp;#39;maps&amp;#39;&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## The following object is masked from &amp;#39;package:purrr&amp;#39;:
 ## 
 ##     map&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(AL, aes(x = Lon, y = Lat)) + 
-    geom_polygon(data = world_map, aes(x = long, y = lat, group = group), 
-                 colour = &amp;quot;grey10&amp;quot;, fill = &amp;quot;white&amp;quot;) + 
-    geom_point(size = 0.5, color = &amp;quot;red&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;../../projects/hurdat/index_files/figure-html/lat.lon.plot-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;The two values in &lt;code&gt;AL$Lon&lt;/code&gt;, -359.1 and -358.4 will need to be fixed. This is an error in the raw dataset:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;url &amp;lt;- &amp;quot;http://www.nhc.noaa.gov/data/hurdat/hurdat2-1851-2016-041117.txt&amp;quot;
@@ -213,10 +267,13 @@ read_csv(url, skip = 23823L, n_max = 2, col_names = FALSE)&lt;/code&gt;&lt;/pre&
 ## #   NW50 &amp;lt;int&amp;gt;, NE64 &amp;lt;int&amp;gt;, SE64 &amp;lt;int&amp;gt;, SW64 &amp;lt;int&amp;gt;, NW64 &amp;lt;int&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;AL051952 &amp;lt;- AL %&amp;gt;% 
     filter(Key == &amp;quot;AL051952&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(AL051952, aes(x = Lon, y = Lat)) + 
-    geom_polygon(data = world_map, aes(x = long, y = lat, group = group), 
-                 colour = &amp;quot;grey10&amp;quot;, fill = &amp;quot;white&amp;quot;) + 
-    geom_point(size = 0.5, color = &amp;quot;red&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(data = map_data(&amp;quot;world&amp;quot;), aes(long, lat, group = group), color = &amp;quot;grey10&amp;quot;) + 
+    geom_path() + 
+    geom_point(data = AL051952, aes(x = Lon, y = Lat), group = NA, 
+               color = &amp;quot;red&amp;quot;, size = 0.5) + 
+    scale_x_continuous(expand = c(0, 0)) + 
+    scale_y_continuous(expand = c(0, 0)) + 
+    theme_bw()&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;../../projects/hurdat/index_files/figure-html/plot.AL051952-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;kable(AL051952 %&amp;gt;% select(DateTime, Lat, Lon), format = &amp;quot;markdown&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;table&gt;
@@ -519,10 +576,13 @@ read_csv(url, skip = 23823L, n_max = 2, col_names = FALSE)&lt;/code&gt;&lt;/pre&
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;Corrected plot:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(AL051952, aes(x = Lon, y = Lat)) + 
-    geom_polygon(data = world_map, aes(x = long, y = lat, group = group), 
-                 colour = &amp;quot;grey10&amp;quot;, fill = &amp;quot;white&amp;quot;) + 
-    geom_point(size = 0.5, color = &amp;quot;red&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(data = map_data(&amp;quot;world&amp;quot;), aes(long, lat, group = group), color = &amp;quot;grey10&amp;quot;) + 
+    geom_path() + 
+    geom_point(data = AL051952, aes(x = Lon, y = Lat), group = NA, 
+               color = &amp;quot;red&amp;quot;, size = 0.5) + 
+    scale_x_continuous(expand = c(0, 0)) + 
+    scale_y_continuous(expand = c(0, 0)) + 
+    theme_bw()&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;../../projects/hurdat/index_files/figure-html/plot.AL051952.corrected-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;There may be other small errors in the dataset I am not aware of. If you find any please submit an issue to the &lt;a href=&#34;https://github.com/timtrice/HURDAT/issues&#34;&gt;GitHub repo&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;

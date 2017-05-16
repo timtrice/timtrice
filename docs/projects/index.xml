@@ -9,7 +9,7 @@
     <atom:link href="/projects/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>HURDAT</title>
+      <title>HURDAT 0.1.0</title>
       <link>/projects/hurdat/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -169,16 +169,16 @@ data(EP)&lt;/code&gt;&lt;/pre&gt;
 ## lowest : -359.1 -358.4 -109.5 -109.3 -109.1, highest:   38.5   40.0   41.5   48.0   63.0&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;For this dataset we expect values between -180 and 0. For Atlantic cyclones &lt;code&gt;Lon&lt;/code&gt; really be greater than -105; essentially when storms have either disipated or entered the Pacific ocean.&lt;/p&gt;
 &lt;p&gt;Let’s plot these values and see what we’re dealing with.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;world_map &amp;lt;- map_data(&amp;quot;world&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(data = map_data(&amp;quot;world&amp;quot;), aes(long, lat, group = group), color = &amp;quot;grey10&amp;quot;) + 
+    geom_path() + 
+    geom_point(data = AL, aes(x = Lon, y = Lat), group = NA, 
+               color = &amp;quot;red&amp;quot;, size = 0.5) + 
+    theme_bw()&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## 
 ## Attaching package: &amp;#39;maps&amp;#39;&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## The following object is masked from &amp;#39;package:purrr&amp;#39;:
 ## 
 ##     map&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(AL, aes(x = Lon, y = Lat)) + 
-    geom_polygon(data = world_map, aes(x = long, y = lat, group = group), 
-                 colour = &amp;quot;grey10&amp;quot;, fill = &amp;quot;white&amp;quot;) + 
-    geom_point(size = 0.5, color = &amp;quot;red&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;../projects/hurdat/index_files/figure-html/lat.lon.plot-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;The two values in &lt;code&gt;AL$Lon&lt;/code&gt;, -359.1 and -358.4 will need to be fixed. This is an error in the raw dataset:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;url &amp;lt;- &amp;quot;http://www.nhc.noaa.gov/data/hurdat/hurdat2-1851-2016-041117.txt&amp;quot;
@@ -213,10 +213,13 @@ read_csv(url, skip = 23823L, n_max = 2, col_names = FALSE)&lt;/code&gt;&lt;/pre&
 ## #   NW50 &amp;lt;int&amp;gt;, NE64 &amp;lt;int&amp;gt;, SE64 &amp;lt;int&amp;gt;, SW64 &amp;lt;int&amp;gt;, NW64 &amp;lt;int&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;AL051952 &amp;lt;- AL %&amp;gt;% 
     filter(Key == &amp;quot;AL051952&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(AL051952, aes(x = Lon, y = Lat)) + 
-    geom_polygon(data = world_map, aes(x = long, y = lat, group = group), 
-                 colour = &amp;quot;grey10&amp;quot;, fill = &amp;quot;white&amp;quot;) + 
-    geom_point(size = 0.5, color = &amp;quot;red&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(data = map_data(&amp;quot;world&amp;quot;), aes(long, lat, group = group), color = &amp;quot;grey10&amp;quot;) + 
+    geom_path() + 
+    geom_point(data = AL051952, aes(x = Lon, y = Lat), group = NA, 
+               color = &amp;quot;red&amp;quot;, size = 0.5) + 
+    scale_x_continuous(expand = c(0, 0)) + 
+    scale_y_continuous(expand = c(0, 0)) + 
+    theme_bw()&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;../projects/hurdat/index_files/figure-html/plot.AL051952-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;kable(AL051952 %&amp;gt;% select(DateTime, Lat, Lon), format = &amp;quot;markdown&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;table&gt;
@@ -519,12 +522,492 @@ read_csv(url, skip = 23823L, n_max = 2, col_names = FALSE)&lt;/code&gt;&lt;/pre&
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;Corrected plot:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(AL051952, aes(x = Lon, y = Lat)) + 
-    geom_polygon(data = world_map, aes(x = long, y = lat, group = group), 
-                 colour = &amp;quot;grey10&amp;quot;, fill = &amp;quot;white&amp;quot;) + 
-    geom_point(size = 0.5, color = &amp;quot;red&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(data = map_data(&amp;quot;world&amp;quot;), aes(long, lat, group = group), color = &amp;quot;grey10&amp;quot;) + 
+    geom_path() + 
+    geom_point(data = AL051952, aes(x = Lon, y = Lat), group = NA, 
+               color = &amp;quot;red&amp;quot;, size = 0.5) + 
+    scale_x_continuous(expand = c(0, 0)) + 
+    scale_y_continuous(expand = c(0, 0)) + 
+    theme_bw()&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;../projects/hurdat/index_files/figure-html/plot.AL051952.corrected-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;There may be other small errors in the dataset I am not aware of. If you find any please submit an issue to the &lt;a href=&#34;https://github.com/timtrice/HURDAT/issues&#34;&gt;GitHub repo&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Hurricanes 0.1.0</title>
+      <link>/projects/hurricanes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/projects/hurricanes/</guid>
+      <description>&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#what-is-hurricanes&#34;&gt;What is &lt;code&gt;Hurricanes&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#installing-hurricanes&#34;&gt;Installing &lt;code&gt;Hurricanes&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#about-the-data&#34;&gt;About the Data&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#getting-data&#34;&gt;Getting Data&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#basic-data&#34;&gt;Basic Data&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#track&#34;&gt;Track&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#wind-and-gust&#34;&gt;Wind and Gust&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#pressure&#34;&gt;Pressure&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#seas&#34;&gt;Seas&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#wind-radius&#34;&gt;Wind Radius&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#hurricane-ike-wind-radius&#34;&gt;Hurricane Ike Wind Radius&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#forecast-positions&#34;&gt;Forecast Positions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#forecast-wind-radius&#34;&gt;Forecast Wind Radius&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#future-plans&#34;&gt;Future Plans&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#issues&#34;&gt;Issues&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;p&gt;To go along with my &lt;a href=&#34;http://timtrice.net/projects/%60HURDAT%60/&#34;&gt;HURDAT&lt;/a&gt; package I’m releasing &lt;a href=&#34;https://github.com/timtrice/%60Hurricanes%60&#34;&gt;Hurricanes&lt;/a&gt;, version 0.1.0. This library is &lt;em&gt;not&lt;/em&gt; in cran and will not be submitted until release 0.2.0.&lt;/p&gt;
+&lt;div id=&#34;what-is-hurricanes&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;What is &lt;code&gt;Hurricanes&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;I’ve had a fascination with &lt;code&gt;Hurricanes&lt;/code&gt; since I was a very little kid. Watching The Weather Channel’s John Hope talk about Hurricane Gilbert captured me instantly. So, part of my efforts while learning R has been working with what I already know.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Hurricanes&lt;/code&gt; access and parses real-time data and returns it in dataframe format. Unlike &lt;code&gt;HURDAT&lt;/code&gt;,&lt;code&gt;Hurricanes&lt;/code&gt; can get the the latest data available for any cyclone in the Atlanic or northeastern Pacific ocean.&lt;/p&gt;
+&lt;p&gt;Keep in mind &lt;code&gt;HURDAT&lt;/code&gt; is a re-analysis dataset and is meant as a compliment to &lt;code&gt;Hurricanes&lt;/code&gt;. &lt;code&gt;Hurricanes&lt;/code&gt;, at this time, can only access it’s set of data back to 1998. But, the data is much more comprehensive than &lt;code&gt;HURDAT&lt;/code&gt; which goes back to 1851.&lt;/p&gt;
+&lt;p&gt;Additionally, some data in &lt;code&gt;Hurricanes&lt;/code&gt; may not match up with that for &lt;code&gt;HURDAT&lt;/code&gt;. For example, you may find an observation for a specific storm at a specific time has different values for latitude. This is because originally the National Hurricane Center (NHC) believed the center of the hurricane to be in one location. But, after re-analysis, determined it was somewhere else.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;installing-hurricanes&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Installing &lt;code&gt;Hurricanes&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;With all of that said, let’s examine &lt;code&gt;Hurricanes&lt;/code&gt;. First, install the library using &lt;code&gt;devtools&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;devtools::install_github(&amp;quot;timtrice/Hurricanes&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(Hurricanes)
+
+# Additional packages used for this document
+library(ggplot2)
+library(knitr)
+library(purrr)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;Hurricanes&lt;/code&gt; should work with any R version &amp;gt;= 3.2.3.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;about-the-data&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;About the Data&lt;/h2&gt;
+&lt;p&gt;You can view the vignette “Getting Started” with the following command:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;vignette(&amp;quot;getting-started&amp;quot;, package = &amp;quot;Hurricanes&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I’ve tried to be as detailed as possible while keeping the vignette short. Here, I want to focus on what I think the best aspect of &lt;code&gt;Hurricanes&lt;/code&gt; is so far.&lt;/p&gt;
+&lt;p&gt;Hurricane text products are generally issued at the same time. But there are two products that, at this time, contain the meat of data for a particular storm: Forecast/Advisory Products and Wind Speed Probability Products (formerly Strike Probability).&lt;/p&gt;
+&lt;p&gt;Hurricanes in both the Atlantic and Pacific ocean will always have Forecast/Advisory products; the widest dataset. Functions related to this product always contain &lt;code&gt;fstadv&lt;/code&gt; which is the shorthand term used by the NHC.&lt;/p&gt;
+&lt;p&gt;Wind Speed Probabilities are the longest dataset. This product is issued for every Atlantic hurricane. However, Pacific hurricanes only have this product if they are a threat to land.&lt;/p&gt;
+&lt;p&gt;Wind Speed Probabilities were issued beginning in 2006; prior to that they were called Strike Probabilities. Those products are also available. Strike Probabilities focused on the probability of the center of a hurricane passing within 65 nautical miles of a location within a given period of time. The Wind Speed Probabilities focus on the probability of one-minute sustained winds of a certain threshold (34, 50 and 64 knots) affecting an area within a given period of time.&lt;/p&gt;
+&lt;p&gt;Wind Speed Probability functions are identified by the term &lt;code&gt;wndprb&lt;/code&gt;; Strike Probabilities use the term &lt;code&gt;prblty&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;getting-data&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Getting Data&lt;/h2&gt;
+&lt;p&gt;We start off by getting a list of storms that have developed in a specified year. You can pass multiple years. But, for this example, we’ll stick to the current year.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(al2017 &amp;lt;- get_storms(year = 2017))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 2 × 4
+##    Year                  Name Basin
+##   &amp;lt;dbl&amp;gt;                 &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;
+## 1  2017 Tropical Storm Arlene    AL
+## 2  2017 Tropical Storm Adrian    EP
+## # ... with 1 more variables: Link &amp;lt;chr&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So far we’ve had one cyclone for each basin. Let’s get the &lt;code&gt;fstadv&lt;/code&gt; data for Tropical Storm Arlene.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;url &amp;lt;- al2017 %&amp;gt;% filter(Name == &amp;quot;Tropical Storm Arlene&amp;quot;) %&amp;gt;% .$Link
+al012017.fstadv &amp;lt;- get_fstadv(link = url)
+dim(al012017.fstadv)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1]   9 125&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You’ll notice it’s a pretty wide dataframe. As I would imagine many people (myself included) would want something a bit better formatted, I wrote a tidyr function to split the dataframe into four. &lt;code&gt;fstadv_split&lt;/code&gt; takes the name of our original dataframe and tidy’s it up.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;fstadv_split(&amp;quot;al012017.fstadv&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] TRUE&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Each of the datasets contains three variables: &lt;code&gt;Key&lt;/code&gt;, &lt;code&gt;Adv&lt;/code&gt; and &lt;code&gt;DateTime&lt;/code&gt;. You can use these to join back datasets as you see fit. While you probably do not need &lt;code&gt;DateTime&lt;/code&gt; for joins, I would encourage it anyway in case multiple observations share the same &lt;code&gt;Adv&lt;/code&gt;. I haven’t seen it. But that doesn’t mean it can’t happen.&lt;/p&gt;
+&lt;p&gt;Let’s look at the datasets and the variables within.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;basic-data&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Basic Data&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;str(al012017.fstadv)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Classes &amp;#39;tbl_df&amp;#39;, &amp;#39;tbl&amp;#39; and &amp;#39;data.frame&amp;#39;:    9 obs. of  18 variables:
+##  $ Key     : chr  &amp;quot;AL012017&amp;quot; &amp;quot;AL012017&amp;quot; &amp;quot;AL012017&amp;quot; &amp;quot;AL012017&amp;quot; ...
+##  $ Adv     : chr  &amp;quot;1&amp;quot; &amp;quot;2&amp;quot; &amp;quot;3&amp;quot; &amp;quot;4&amp;quot; ...
+##  $ Date    : POSIXct, format: &amp;quot;2017-04-19 15:00:00&amp;quot; &amp;quot;2017-04-19 21:00:00&amp;quot; ...
+##  $ Name    : chr  &amp;quot;One&amp;quot; &amp;quot;One&amp;quot; &amp;quot;One&amp;quot; &amp;quot;One&amp;quot; ...
+##  $ Status  : chr  &amp;quot;Tropical Depression&amp;quot; &amp;quot;Tropical Depression&amp;quot; &amp;quot;Tropical Depression&amp;quot; &amp;quot;Tropical Depression&amp;quot; ...
+##  $ Lat     : num  31.9 32.4 33.2 34.4 36.1 37.7 39.4 40 39.3
+##  $ Lon     : num  -40.9 -40 -39.3 -39.3 -40 -42 -44.2 -48 -49.9
+##  $ Wind    : num  30 30 30 30 30 40 45 45 45
+##  $ Gust    : num  40 40 40 40 40 50 55 55 55
+##  $ Pressure: num  995 996 996 996 996 993 993 993 995
+##  $ PosAcc  : num  25 25 30 30 30 30 30 30 30
+##  $ FwdDir  : num  30 10 45 350 320 290 305 270 220
+##  $ FwdSpeed: num  7 10 10 12 12 22 24 27 20
+##  $ Eye     : num  NA NA NA NA NA NA NA NA NA
+##  $ SeasNE  : num  0 0 0 0 NA 180 240 300 300
+##  $ SeasSE  : num  0 0 0 210 NA 90 90 240 220
+##  $ SeasSW  : num  240 240 210 0 NA 0 60 90 100
+##  $ SeasNW  : num  0 0 0 0 NA 0 240 180 170&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;Key&lt;/code&gt; through &lt;code&gt;PosAcc&lt;/code&gt; should all have values. I’m not aware of a situation where there wouldn’t be.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;FwdDir&lt;/code&gt; and &lt;code&gt;FwdSpeed&lt;/code&gt; should be NA only if the system is stationary or barely moving.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Eye&lt;/code&gt; will only be available for hurricanes and only if there is an eye present. For this storm’s case, there is no valid data.&lt;/p&gt;
+&lt;p&gt;The Seas variables are, in nautical miles, the distance of 12 foot seas from the center of circulation.&lt;/p&gt;
+&lt;p&gt;A couple of points:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Do not use &lt;code&gt;Name&lt;/code&gt; as any join key; notice above the &lt;code&gt;Name&lt;/code&gt; values of “One”. Any tropical depression that has not yet become a tropical storm is given a cardinal number as a name. Once they become tropical storms, then they are given the next name available from &lt;a href=&#34;http://www.nhc.noaa.gov/aboutnames.shtml&#34;&gt;the list&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;Adv&lt;/code&gt; is a character string. Advisory products (&lt;code&gt;public&lt;/code&gt;) may have intermediate advsories such as 1A, 2A, 2B. &lt;code&gt;fstadv&lt;/code&gt; products are not issued in this fashion. Be cautious if you change the format.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;track&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Track&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(data = map_data(&amp;quot;world&amp;quot;), aes(long, lat, group = group), color = &amp;quot;grey10&amp;quot;) + 
+    geom_path() + 
+    geom_point(data = al012017.fstadv, aes(x = Lon, y = Lat), group = NA, 
+               color = &amp;quot;red&amp;quot;, size = 0.5) + 
+    scale_x_continuous(limits = c(-100, 0), expand = c(0, 0)) + 
+    scale_y_continuous(limits = c(0, 60), expand = c(0, 0)) + 
+    theme_bw() + 
+    labs(x = &amp;quot;Longitude&amp;quot;, 
+         y = &amp;quot;Latitude&amp;quot;) + 
+    ggtitle(&amp;quot;Track of Tropical Storm Arlene&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+## Attaching package: &amp;#39;maps&amp;#39;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## The following object is masked from &amp;#39;package:purrr&amp;#39;:
+## 
+##     map&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: Removed 3031 rows containing missing values (geom_path).&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;../projects/hurricanes/index_files/figure-html/al012017.track-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;wind-and-gust&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Wind and Gust&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;al012017.fstadv %&amp;gt;% 
+    gather(Var, Val, Wind, Gust) %&amp;gt;% 
+    select(Date, Var, Val) %&amp;gt;% 
+    ggplot(aes(x = Date, y = Val, color = Var)) + 
+    geom_line() + 
+    theme(legend.title = element_blank()) + 
+    labs(title = &amp;quot;Tropical Storm Arlene Wind/Gust (kts)&amp;quot;, 
+         y = &amp;quot;knots&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;../projects/hurricanes/index_files/figure-html/al012017.wind-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;pressure&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Pressure&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;al012017.fstadv %&amp;gt;% 
+    ggplot(aes(x = Date, y = Pressure)) + 
+    geom_line() + 
+    labs(title = &amp;quot;Tropical Storm Arlene Pressure (mb)&amp;quot;, 
+         y = &amp;quot;Pressure (mb)&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;../projects/hurricanes/index_files/figure-html/al012017.pressure-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;seas&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Seas&lt;/h3&gt;
+&lt;p&gt;In this example we’ll plot the radius of 12 foot seas for the last advisory, #9.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;quads &amp;lt;- c(&amp;quot;NE&amp;quot;, &amp;quot;SE&amp;quot;, &amp;quot;SW&amp;quot;, &amp;quot;NW&amp;quot;)
+al012017.fstadv %&amp;gt;% 
+    select(SeasNE:SeasNW) %&amp;gt;% 
+    slice(n()) %&amp;gt;% 
+    rename(NE = SeasNE, SE = SeasSE, SW = SeasSW, NW = SeasNW) %&amp;gt;% 
+    gather(Quadrant, Distance, NE:NW) %&amp;gt;% 
+    ggplot(aes(x = factor(Quadrant, levels = quads), 
+               y = Distance, 
+               fill = factor(Quadrant, levels = quads))) + 
+    geom_col(width = 1) + 
+    coord_polar() + 
+    theme_bw() + 
+    labs(title = &amp;quot;Tropical Storm Arlene Sea Radius, Adv 9&amp;quot;, 
+         subtitle = &amp;quot;Distance of 12ft seas from center of circulation&amp;quot;, 
+         x = &amp;quot;Quadrant&amp;quot;, 
+         y = &amp;quot;Distance (nm)&amp;quot;) + 
+    guides(fill = guide_legend(title = &amp;quot;Quadrant&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;../projects/hurricanes/index_files/figure-html/al012017.seas-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;wind-radius&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Wind Radius&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dim(al012017.fstadv.wr)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 4 8&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;For storms greater than tropical storm strength (wind &amp;gt;= 34 knots), a wind radius profile is included. They are issued for three values: 34, 50 and 64, and for the four quadrants: northeast, southeast, southwest and northwest. So a minimal tropical storm will have a 34 knot wind profile while a hurricane will have all three.&lt;/p&gt;
+&lt;p&gt;These values show how far from the center in nautical miles those wind values can be obtained. It’s a great way to watch how the structure of a storm changes over time. Most often newborn storms have a very assymetric structure; strongest winds are generally in the northeastern quadrant while weaker winds (if any at all) can be found in the other quadrants. If the cyclone becomes better organized it’s structure becomes more symmetric.&lt;/p&gt;
+&lt;p&gt;The current storm we were working on has no wind radius values greater than 34 knots. Let’s pull Hurricane Ike and look at the advisory just prior to landfall.&lt;/p&gt;
+&lt;div id=&#34;hurricane-ike-wind-radius&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Hurricane Ike Wind Radius&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Get storms for 2008
+al2008 &amp;lt;- get_storms(year = 2008, basin = &amp;quot;AL&amp;quot;)
+
+# Load Hurricane Ike data
+al092008 &amp;lt;- al2008 %&amp;gt;% 
+    filter(Name == &amp;quot;Hurricane Ike&amp;quot;) %&amp;gt;% 
+    .$Link %&amp;gt;% 
+    get_fstadv()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Instead of using fstadv_split, I’ll show an alternative to work with the original dataframe.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Extract wind radius values
+al092008.49.wr &amp;lt;- al092008 %&amp;gt;% 
+    filter(Adv == &amp;quot;49&amp;quot;) %&amp;gt;% # Remember, Adv is character string
+    select(NE34:NW64)
+
+# Rearrange to long dataframe with variables WindField, NE:NW
+# i.e., 34, 50, 64
+wr &amp;lt;- purrr::map_df(
+    .x = c(34, 50, 64),
+    .f = function(y) {
+        select_(al092008.49.wr,
+                .dots = c(paste0(quads, y))) %&amp;gt;%
+            rename_(
+                .dots = list(&amp;quot;NE&amp;quot; = paste0(&amp;quot;NE&amp;quot;, y),
+                             &amp;quot;SE&amp;quot; = paste0(&amp;quot;SE&amp;quot;, y),
+                             &amp;quot;SW&amp;quot; = paste0(&amp;quot;SW&amp;quot;, y),
+                             &amp;quot;NW&amp;quot; = paste0(&amp;quot;NW&amp;quot;, y))) %&amp;gt;%
+            mutate_(&amp;quot;WindField&amp;quot; = y)
+    }) %&amp;gt;% 
+    gather(Quadrant, Distance, NE:NW)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Plot wind radius
+ggplot(wr, aes(x = factor(Quadrant, levels = quads), 
+               y = Distance, fill = factor(WindField), 
+               group = factor(Quadrant, levels = quads))) + 
+    geom_col(width = 1, position = position_dodge()) + 
+    coord_polar() + 
+    theme_bw() + 
+    labs(title = &amp;quot;Hurricane Ike Wind Radius, Adv 49&amp;quot;, 
+         subtitle = &amp;quot;Distance of 34, 50, 64kt winds from center of circulation&amp;quot;, 
+         x = &amp;quot;Quadrant&amp;quot;, 
+         y = &amp;quot;Distance (nm)&amp;quot;) + 
+    guides(fill = guide_legend(title = &amp;quot;Max Wind (kts)&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;../projects/hurricanes/index_files/figure-html/al092008.wr.plot-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;forecast-positions&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Forecast Positions&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dim(al012017.fstadv.fst)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 11  8&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Most storms will have a set of forecast positions up to five days out. These variables begin with HrN where N is 12, 24, 36, 48, 72 (and, for the more recent years, 96 and 120).&lt;/p&gt;
+&lt;p&gt;This data contains similar data to that of the basics: latitude, longitude, wind, and and gustForward movement, eye and seas data are not forecast.&lt;/p&gt;
+&lt;p&gt;If a storm is not expected to survive after a given period of time, there will be no forecasts available.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;kable(al012017.fstadv.fst, format = &amp;quot;markdown&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;Key&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Adv&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Date&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;FcstDate&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Lat&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Lon&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Wind&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Gust&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;AL012017&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-04-19 15:00:00&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-04-20 00:00:00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;32.8&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-40.2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;30&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;40&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;AL012017&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-04-19 15:00:00&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-04-20 12:00:00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;35.0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-40.5&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;30&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;40&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;AL012017&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-04-19 21:00:00&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-04-20 06:00:00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;34.0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-40.5&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;30&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;40&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;AL012017&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-04-20 03:00:00&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-04-20 12:00:00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;35.3&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-39.9&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;30&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;40&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;AL012017&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;4&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-04-20 09:00:00&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-04-20 18:00:00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;36.7&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-41.6&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;30&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;40&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;AL012017&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;4&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-04-20 09:00:00&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-04-21 06:00:00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;38.0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-46.5&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;30&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;40&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;AL012017&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;5&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-04-20 15:00:00&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-04-21 00:00:00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;38.0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-43.5&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;30&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;40&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;AL012017&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;6&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-04-20 21:00:00&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-04-21 06:00:00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;38.7&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-45.9&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;35&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;45&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;AL012017&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;7&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-04-21 03:00:00&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-04-21 12:00:00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;40.0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-48.0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;40&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;50&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;AL012017&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;8&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-04-21 09:00:00&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-04-21 18:00:00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;39.5&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-50.4&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;40&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;50&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;AL012017&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;9&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-04-21 15:00:00&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-04-22 00:00:00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;37.5&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-51.5&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;40&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;50&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;What we see from the output is that the NHC had very low confidence the storm would last long. There were two forecast positions issued for advisory #1 and #4. The remaining advisories only had one forecast position. So this storm was expected to weaken within 24 hours twice (#1 and #4) and within 12 hours the remaining advisories.&lt;/p&gt;
+&lt;p&gt;One important note regarding the &lt;code&gt;FcstDate&lt;/code&gt; variable. When forecast/advisory products are issued, forecast dates and times are not exactly from issuance of the product. For example, take a look at the first &lt;a href=&#34;http://www.nhc.noaa.gov/archive/2017/al01/al012017.fstadv.001.shtml?&#34;&gt;forecast/advisory&lt;/a&gt; for Arlene. Note the following segment:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;REPEAT…CENTER LOCATED NEAR 31.9N 40.9W AT 19/1500Z&lt;/p&gt;
+&lt;p&gt;AT 19/1200Z CENTER WAS LOCATED NEAR 31.6N 41.1W&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The first line is regarding the date and time the product was issued: April 19, 15:00 UTC. The second line lists where the center was located three hours prior: April 19, 12:00 UTC. This is done in all forecast/advisory products (I’ve not taken the time to find out why).&lt;/p&gt;
+&lt;p&gt;So forecast positions are based off the earlier time. Note the first forecast position in that advisory:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;FORECAST VALID 20/0000Z 32.8N 40.2W&lt;/p&gt;
+&lt;p&gt;MAX WIND 30 KT…GUSTS 40 KT.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;As I mentioned earlier you &lt;em&gt;probably&lt;/em&gt; do not need to join dataframes using &lt;code&gt;DateTime&lt;/code&gt; as a key. But I’m nearly positive at some point you will because a storm may have the same advisory number but for different dates/times. It happens. Most often these advisories will be reissued with some note somewhere the advisory was corrected.&lt;/p&gt;
+&lt;p&gt;With that being said, I chose to stick with the date and time the product was issued as that value ties in the other products: public advisories, storm discussions, probabilities, etc.&lt;/p&gt;
+&lt;p&gt;So, really, the &lt;code&gt;FcstDate&lt;/code&gt; variable isn’t 12, 24, 36, 48, 72, 96 and 120 hours from &lt;code&gt;DateTime&lt;/code&gt;, but rather 12 - 3, 24 - 3, 36 - 3, etc. This is why the actual &lt;code&gt;FcstDate&lt;/code&gt; variable is POSIXct instead of just having values of c(12, 24, 36, …).&lt;/p&gt;
+&lt;p&gt;Hope that makes sense…&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;forecast-wind-radius&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Forecast Wind Radius&lt;/h2&gt;
+&lt;p&gt;For forecast wind radius:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;dim(al012017.fstadv.fst.wr)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 4 9&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Each forecast position (with the exception of 96 and 120 hours) will have associated wind radius if the storm is expected to be at least tropical storm strength.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;kable(al012017.fstadv.fst.wr, format = &amp;quot;markdown&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;Key&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Adv&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Date&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;FcstDate&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;WindField&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;NE&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;SE&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;SW&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;NW&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;AL012017&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;6&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-04-20 21:00:00&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-04-21 06:00:00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;34&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;90&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;90&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;AL012017&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;7&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-04-21 03:00:00&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-04-21 12:00:00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;34&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;180&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;60&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;AL012017&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;8&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-04-21 09:00:00&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-04-21 18:00:00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;34&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;90&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;150&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;AL012017&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;9&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-04-21 15:00:00&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-04-22 00:00:00&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;34&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;90&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;90&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;90&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;150&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Here we see only four forecast positions where Arlene was expected to have winds of at least 34 knots, and the forecast radius of those winds. Wind radius values will exist, when appropriate, for forecast positions up to 72 hours. Forecasts at 96 and 120 hours will not have associated wind radius values.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;future-plans&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Future Plans&lt;/h2&gt;
+&lt;p&gt;There is a ton of data available for tropical cyclones and not just in the northwestern hemisphere. Here are some things I’m hoping to add in future releases:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;reconnaissance: there is a vast amount of this data out there waiting to be claimed. However, the products and formats of those products have changed considerably over the years. This will be a major product (&lt;a href=&#34;https://gist.github.com/timtrice/f2a4c2a020c87669178dad27e73bfce1&#34;&gt;would you like to help&lt;/a&gt;?) to add in though pattern-matching on this will be significantly easier than that of the advisory data.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;gis data: I do not know how far back this data goes but it is readily avaiable for past and current storms. There is an &lt;a href=&#34;https://github.com/timtrice/Hurricanes/issues/47&#34;&gt;issue&lt;/a&gt; opened for this to be added; but, no milestone as of yet.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;daily products (outlook, weather discussion): these products are in GIS format and text as well. GIS is the priorirty as I think it would be better; I’m not sure there’s much value in parsing the text. But, I haven’t made a decision one way or another.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;computer forecast models: this may be a little more complicated. Some of the forecast models are readily available (&lt;a href=&#34;http://rammb.cira.colostate.edu/research/tropical_cyclones/ships/index.asp&#34;&gt;SHIPS&lt;/a&gt;, for one). Some forecast models are proprietary. Resources will need to be gathered and planned out accordingly before being added.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;issues&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Issues&lt;/h2&gt;
+&lt;p&gt;I have done my best to ensure the data matches the products exactly. Unfortunately, the product formats have changed over time. And, there is no clear-set structure for some of the variables. If I could guarantee 100% accuracy this product would be in CRAN.&lt;/p&gt;
+&lt;p&gt;Needless to say, this is beta. I will spend a great deal of time doing QA/QC on every storm, each basin to be sure.&lt;/p&gt;
+&lt;p&gt;That being said, if you notice anything unusual, I ask you to do two things:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;Check the &lt;a href=&#34;http://www.nhc.noaa.gov/archive/2017/&#34;&gt;hurricane archives&lt;/a&gt; first to verify if the error is in the package itself or in the original product.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/timtrice/Hurricanes/issues&#34;&gt;Submit an issue&lt;/a&gt;. Errors in data will be given top priority and hotfixes will be created to address any corrections that can be made.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Optionally,&lt;/p&gt;
+&lt;ol start=&#34;3&#34; style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;a href=&#34;https://gist.github.com/timtrice/f2a4c2a020c87669178dad27e73bfce1&#34;&gt;Contribute&lt;/a&gt;. I would love to have some help with this package as I do have a couple of other products I am working on or plan on working on. With hurricane season underway, the quicker some of the features can be implemented, the better. Any contributors will receive acknowledgements in the repo and package documentation.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Thank you for taking the time to check out &lt;code&gt;Hurricanes&lt;/code&gt;. Please feel free to check out &lt;a href=&#34;http://timtrice.net/projects/hurdat/&#34;&gt;HURDAT&lt;/a&gt; as well.&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>
@@ -538,6 +1021,7 @@ read_csv(url, skip = 23823L, n_max = 2, col_names = FALSE)&lt;/code&gt;&lt;/pre&
       <description>&lt;div id=&#34;r&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;R&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&#34;../projects/hurdat/&#34;&gt;HURDAT&lt;/a&gt; is a dataset from the Hurricane Re-Analysis project. It contains storm data for hundreds of cyclones for storms that have developed in the northwestern hemisphere (Atlantic and Pacific) since 1851.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;../projects/hurricanes/&#34;&gt;Hurricanes&lt;/a&gt; is a more comprehensive dataset of Atlantic and Pacific cyclones but only those since 1998. It gives access to as-issued text products for past and current cyclones including forecast and structure data.&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>
