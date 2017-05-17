@@ -15,7 +15,7 @@ output:
 
 When developing some of my applications I wanted the ability to test these applications on different versions of R. But setting this up on Linux proved to be more difficult than on my Windows machine. Docker makes it significantly easier. 
 
-You do not need a Linux system to run Docker; Windows and macOS are supported as well as several other platforms. Once you get into the docker application, the codes (to my knowledge) are the same.
+You do not need a Linux system to run Docker; Windows and macOS are supported as well as several other platforms. Once you get into the docker application, the language is the same.
 
 ## Brief Overview of Docker
 
@@ -79,7 +79,7 @@ rocker/rstudio      latest              7a807646f0be        13 days ago         
 
 ## Pull rocker from GitHub
 
-Clone the (rocker)[https://github.com/rocker-org/rocker] GitHub repo into your projects directory. When finished, fire up a terminal or console and go to the cloned directory.
+Clone the [rocker](https://github.com/rocker-org/rocker) GitHub repo into your projects directory. When finished, fire up a terminal or console and go to the cloned directory.
 
 Your directory contents should be similar to this:
 
@@ -268,7 +268,7 @@ First, make sure you have stopped the container (or `exit` if running from a ter
 
 You need a [Docker Hub](https://cloud.docker.com) account to use their online repository. The Free Plan gives you unlimited public repositories and one private repository. 
 
-Then, from your terminal or console, 
+Log in from your terminal or console, 
 
 ```
 sudo docker login
