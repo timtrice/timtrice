@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Projects on Tim Trice</title>
-    <link>/projects/index.xml</link>
+    <link>http://timtrice.net/projects/index.xml</link>
     <description>Recent content in Projects on Tim Trice</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="/projects/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://timtrice.net/projects/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>HURDAT 0.1.0</title>
-      <link>/projects/hurdat/</link>
+      <link>http://timtrice.net/projects/hurdat/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/projects/hurdat/</guid>
+      <guid>http://timtrice.net/projects/hurdat/</guid>
       <description>&lt;div id=&#34;TOC&#34;&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#installation&#34;&gt;Installation&lt;/a&gt;&lt;/li&gt;
@@ -537,10 +537,10 @@ read_csv(url, skip = 23823L, n_max = 2, col_names = FALSE)&lt;/code&gt;&lt;/pre&
     
     <item>
       <title>Hurricanes 0.1.0</title>
-      <link>/projects/hurricanes/</link>
+      <link>http://timtrice.net/projects/hurricanes/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/projects/hurricanes/</guid>
+      <guid>http://timtrice.net/projects/hurricanes/</guid>
       <description>&lt;div id=&#34;TOC&#34;&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#what-is-hurricanes&#34;&gt;What is &lt;code&gt;Hurricanes&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
@@ -1014,10 +1014,10 @@ ggplot(wr, aes(x = factor(Quadrant, levels = quads),
     
     <item>
       <title>Projects</title>
-      <link>/projects/</link>
+      <link>http://timtrice.net/projects/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/projects/</guid>
+      <guid>http://timtrice.net/projects/</guid>
       <description>&lt;div id=&#34;r&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;R&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&#34;../projects/hurdat/&#34;&gt;HURDAT&lt;/a&gt; is a dataset from the Hurricane Re-Analysis project. It contains storm data for hundreds of cyclones for storms that have developed in the northwestern hemisphere (Atlantic and Pacific) since 1851.&lt;/p&gt;
