@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tim Trice</title>
-    <link>http://timtrice.net/index.xml</link>
+    <link>/index.xml</link>
     <description>Recent content on Tim Trice</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 17 May 2017 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://timtrice.net/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>RStudio in Docker</title>
-      <link>http://timtrice.net/2017-05-17-rstudio-in-docker/</link>
+      <link>/2017-05-17-rstudio-in-docker/</link>
       <pubDate>Wed, 17 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/2017-05-17-rstudio-in-docker/</guid>
+      <guid>/2017-05-17-rstudio-in-docker/</guid>
       <description>&lt;div id=&#34;TOC&#34;&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#brief-overview-of-docker&#34;&gt;Brief Overview of Docker&lt;/a&gt;&lt;/li&gt;
@@ -201,10 +201,10 @@ sudo docker push timtrice/rstudio-3.3.1&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Introducing Hurricanes, HURDAT</title>
-      <link>http://timtrice.net/2017-05-16-introducing-hurricanes-hurdat/</link>
+      <link>/2017-05-16-introducing-hurricanes-hurdat/</link>
       <pubDate>Tue, 16 May 2017 10:47:00 -0500</pubDate>
       
-      <guid>http://timtrice.net/2017-05-16-introducing-hurricanes-hurdat/</guid>
+      <guid>/2017-05-16-introducing-hurricanes-hurdat/</guid>
       <description>&lt;p&gt;I&amp;rsquo;m proud to introduce two new packages for the R community: &lt;strong&gt;HURDAT&lt;/strong&gt; and &lt;strong&gt;&lt;em&gt;Hurricanes&lt;/em&gt;&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;p&gt;Both packages are complimentary to one another.&lt;/p&gt;
@@ -255,10 +255,10 @@ sudo docker push timtrice/rstudio-3.3.1&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>About</title>
-      <link>http://timtrice.net/about/</link>
+      <link>/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/about/</guid>
+      <guid>/about/</guid>
       <description>&lt;p&gt;I have a huge love of data and finding better solutions to known and unknown issues. For example, when I learned a team was manually entering information into their software, I developed a way to make it point-and-click saving several hours worth of work per week.&lt;/p&gt;
 
 &lt;p&gt;I began programming shortly after my son&amp;rsquo;s birth in 2003. I had already been somewhat exposed to MS Access when a company I worked for needed me to help clean their vendor data registers. This helped expose me to some VBA and SQL.&lt;/p&gt;
@@ -279,10 +279,10 @@ sudo docker push timtrice/rstudio-3.3.1&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>HURDAT 0.1.0</title>
-      <link>http://timtrice.net/projects/hurdat/</link>
+      <link>/projects/hurdat/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/projects/hurdat/</guid>
+      <guid>/projects/hurdat/</guid>
       <description>&lt;div id=&#34;TOC&#34;&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#installation&#34;&gt;Installation&lt;/a&gt;&lt;/li&gt;
@@ -806,10 +806,10 @@ read_csv(url, skip = 23823L, n_max = 2, col_names = FALSE)&lt;/code&gt;&lt;/pre&
     
     <item>
       <title>Hurricanes 0.1.0</title>
-      <link>http://timtrice.net/projects/hurricanes/</link>
+      <link>/projects/hurricanes/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/projects/hurricanes/</guid>
+      <guid>/projects/hurricanes/</guid>
       <description>&lt;div id=&#34;TOC&#34;&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#what-is-hurricanes&#34;&gt;What is &lt;code&gt;Hurricanes&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
@@ -1283,10 +1283,10 @@ ggplot(wr, aes(x = factor(Quadrant, levels = quads),
     
     <item>
       <title>Projects</title>
-      <link>http://timtrice.net/projects/</link>
+      <link>/projects/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/projects/</guid>
+      <guid>/projects/</guid>
       <description>&lt;div id=&#34;r&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;R&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&#34;./projects/hurdat/&#34;&gt;HURDAT&lt;/a&gt; is a dataset from the Hurricane Re-Analysis project. It contains storm data for hundreds of cyclones for storms that have developed in the northwestern hemisphere (Atlantic and Pacific) since 1851.&lt;/p&gt;

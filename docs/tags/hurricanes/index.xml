@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Hurricanes on Tim Trice</title>
-    <link>http://timtrice.net/tags/hurricanes/index.xml</link>
+    <link>/tags/hurricanes/index.xml</link>
     <description>Recent content in Hurricanes on Tim Trice</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="http://timtrice.net/tags/hurricanes/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/tags/hurricanes/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Introducing Hurricanes, HURDAT</title>
-      <link>http://timtrice.net/2017-05-16-introducing-hurricanes-hurdat/</link>
+      <link>/2017-05-16-introducing-hurricanes-hurdat/</link>
       <pubDate>Tue, 16 May 2017 10:47:00 -0500</pubDate>
       
-      <guid>http://timtrice.net/2017-05-16-introducing-hurricanes-hurdat/</guid>
+      <guid>/2017-05-16-introducing-hurricanes-hurdat/</guid>
       <description>&lt;p&gt;I&amp;rsquo;m proud to introduce two new packages for the R community: &lt;strong&gt;HURDAT&lt;/strong&gt; and &lt;strong&gt;&lt;em&gt;Hurricanes&lt;/em&gt;&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;p&gt;Both packages are complimentary to one another.&lt;/p&gt;
@@ -64,10 +64,10 @@
     
     <item>
       <title>Hurricanes 0.1.0</title>
-      <link>http://timtrice.net/projects/hurricanes/</link>
+      <link>/projects/hurricanes/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/projects/hurricanes/</guid>
+      <guid>/projects/hurricanes/</guid>
       <description>&lt;div id=&#34;TOC&#34;&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#what-is-hurricanes&#34;&gt;What is &lt;code&gt;Hurricanes&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;

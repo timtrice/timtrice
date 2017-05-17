@@ -2,89 +2,89 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://timtrice.net/2017-05-17-rstudio-in-docker/</loc>
+    <loc>/2017-05-17-rstudio-in-docker/</loc>
     <lastmod>2017-05-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://timtrice.net/2017-05-16-introducing-hurricanes-hurdat/</loc>
+    <loc>/2017-05-16-introducing-hurricanes-hurdat/</loc>
     <lastmod>2017-05-16T10:47:00-05:00</lastmod>
   </url>
   
   <url>
-    <loc>http://timtrice.net/about/</loc>
+    <loc>/about/</loc>
   </url>
   
   <url>
-    <loc>http://timtrice.net/categories/</loc>
+    <loc>/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://timtrice.net/tags/docker/</loc>
+    <loc>/tags/docker/</loc>
     <lastmod>2017-05-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://timtrice.net/projects/hurdat/</loc>
+    <loc>/projects/hurdat/</loc>
   </url>
   
   <url>
-    <loc>http://timtrice.net/tags/hurdat/</loc>
-    <lastmod>2017-05-16T10:47:00-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://timtrice.net/tags/hurricanes/</loc>
+    <loc>/tags/hurdat/</loc>
     <lastmod>2017-05-16T10:47:00-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://timtrice.net/projects/hurricanes/</loc>
+    <loc>/tags/hurricanes/</loc>
+    <lastmod>2017-05-16T10:47:00-05:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://timtrice.net/post/</loc>
+    <loc>/projects/hurricanes/</loc>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
     <lastmod>2017-05-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://timtrice.net/tags/projects/</loc>
+    <loc>/tags/projects/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://timtrice.net/projects/</loc>
+    <loc>/projects/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://timtrice.net/projects/</loc>
+    <loc>/projects/</loc>
   </url>
   
   <url>
-    <loc>http://timtrice.net/tags/r/</loc>
+    <loc>/tags/r/</loc>
     <lastmod>2017-05-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://timtrice.net/categories/r/</loc>
+    <loc>/categories/r/</loc>
     <lastmod>2017-05-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://timtrice.net/tags/</loc>
+    <loc>/tags/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://timtrice.net/</loc>
+    <loc>/</loc>
     <lastmod>2017-05-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
