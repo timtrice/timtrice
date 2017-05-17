@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Tim Trice</title>
-    <link>http://timtrice.net/post/index.xml</link>
-    <description>Recent content in Posts on Tim Trice</description>
+    <title>Docker on Tim Trice</title>
+    <link>http://timtrice.net/tags/docker/index.xml</link>
+    <description>Recent content in Docker on Tim Trice</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 17 May 2017 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://timtrice.net/post/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://timtrice.net/tags/docker/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>RStudio in Docker</title>
@@ -196,60 +195,6 @@ sudo docker push timtrice/rstudio-3.3.1&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Setting up Docker with R and RStudio is great for testing and debugging. The last thing I would recommend is that, before you start cloning your repos or starting new projects, install and use &lt;a href=&#34;http://rstudio.github.io/packrat/&#34;&gt;Packrat&lt;/a&gt;. Packrat isolates your packages to your project effectively making them invisible to other projects. This adds an additional layer to customize your setup.&lt;/p&gt;
 &lt;p&gt;You could, of course, keep this information in different containers. For example, say you save a container using dplyr version 0.5.0 and another container using a developer version. But I don’t think this is feasible. Packrat will document all of your package changes and you can easily reset to an earlier snapshot if things break. So set up Packrat for your projects before you start going crazy with the &lt;code&gt;install.package&lt;/code&gt; function.&lt;/p&gt;
 &lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Introducing Hurricanes, HURDAT</title>
-      <link>http://timtrice.net/2017-05-16-introducing-hurricanes-hurdat/</link>
-      <pubDate>Tue, 16 May 2017 10:47:00 -0500</pubDate>
-      
-      <guid>http://timtrice.net/2017-05-16-introducing-hurricanes-hurdat/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;m proud to introduce two new packages for the R community: &lt;strong&gt;HURDAT&lt;/strong&gt; and &lt;strong&gt;&lt;em&gt;Hurricanes&lt;/em&gt;&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;Both packages are complimentary to one another.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://timtrice.net/projects/hurdat/&#34;&gt;HURDAT&lt;/a&gt; is a dataset of tropical cyclones that have developed in the Atlantic and northeast Pacific oceans since 1851 and 1949, respectively. &lt;strong&gt;&lt;em&gt;HURDAT&lt;/em&gt;&lt;/strong&gt; is a re-analysis project as conducated by the Hurricane Research Division of the National Oceanic and Atmospheric Administration. They review known data to determine the best track, intensity and structure of a cyclone.&lt;/p&gt;
-
-&lt;p&gt;This is a great dataset to work with:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Climatology&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Relationship between wind/pressure.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Hurricanes by landfall location&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Accumulated_cyclone_energy&#34;&gt;ACE&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;Largest and smallest (by wind radius).&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The &lt;a href=&#34;http://www.aoml.noaa.gov/hrd/hurdat/Data_Storm.html&#34;&gt;HURDAT&lt;/a&gt; project homepage has some other ideas that can be extracted from this data.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;HURDAT&lt;/em&gt;&lt;/strong&gt; is available on &lt;a href=&#34;https://cran.r-project.org/web/packages/HURDAT/index.html&#34;&gt;CRAN&lt;/a&gt; for R &amp;gt;= 3.4.0.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;install.packages(&amp;quot;HURDAT&amp;quot;)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;After loading &lt;strong&gt;&lt;em&gt;HURDAT&lt;/em&gt;&lt;/strong&gt; take a look at the vignette.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;vignette(&amp;quot;hurdat&amp;quot;, package = &amp;quot;HURDAT&amp;quot;)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;a href=&#34;../projects/hurricanes/&#34;&gt;Hurricanes&lt;/a&gt; gathers more comprehensive data for Atlantic and northeast Pacific tropical cyclones. However, this data currently only goes back to 1998. It does include real-time data for active cyclones.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Hurricanes&lt;/em&gt;&lt;/strong&gt; provides details on the current position and structure of the storm as well as forecast positions. Additionally, technical and public discussions, if available, can be retrieved from the package.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Hurricanes&lt;/em&gt;&lt;/strong&gt; is not currently available in CRAN. Please consider it a beta release. Install the package with:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;devtools::install_github(&amp;quot;timtrice/Hurricanes&amp;quot;)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;After loading the library, take a look at the &amp;ldquo;Getting Started&amp;rdquo; vignette:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;vignette(&amp;quot;getting-started&amp;quot;, package = &amp;quot;Hurricanes&amp;quot;)
-&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
