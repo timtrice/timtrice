@@ -1,4 +1,4 @@
-baseurl = "http://timtrice.net"
+baseurl = "/"
 relativeurls = true
 languageCode = "en-us"
 title = "Tim Trice"
