@@ -184,9 +184,8 @@ So, to correct these values use the following formula:
 $$ Lon = \begin{cases} 360 + Lon, & Lon < -180 \ Lon, & Lon \end{cases} $$
 
 ```{r AL051952.correct}
-AL051952 <- dmap_at(.d = AL051952, 
-             .at = "Lon", 
-             .f = function(x) {ifelse(x < -180, 360 + x, x)})
+AL051952 <- mutate_at(AL051952, .cols = vars(Lon), 
+             .funs = function(x) {ifelse(x < -180, 360 + x, x)})
 ```
 
 ```{r}

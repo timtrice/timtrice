@@ -189,7 +189,7 @@ read_csv(url, skip = 23823L, n_max = 2, col_names = FALSE)</code></pre>
 ##   X21 = col_character()
 ## )</code></pre>
 <pre><code>## See spec(...) for full column specifications.</code></pre>
-<pre><code>## # A tibble: 2 × 21
+<pre><code>## # A tibble: 2 x 21
 ##         X1    X2    X3    X4    X5     X6    X7    X8    X9   X10   X11
 ##      &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
 ## 1 19520914  0600  &lt;NA&gt;    EX 43.2N 359.1W    35  -999  -999  -999  -999
@@ -198,7 +198,7 @@ read_csv(url, skip = 23823L, n_max = 2, col_names = FALSE)</code></pre>
 ## #   X16 &lt;int&gt;, X17 &lt;int&gt;, X18 &lt;int&gt;, X19 &lt;int&gt;, X20 &lt;int&gt;, X21 &lt;chr&gt;</code></pre>
 <p>The two consecutive observations belong to one particular storm.</p>
 <pre class="r"><code>AL %&gt;% filter(Lon &lt; -180)</code></pre>
-<pre><code>## # A tibble: 2 × 21
+<pre><code>## # A tibble: 2 x 21
 ##        Key    Name            DateTime Record Status   Lat    Lon  Wind
 ##      &lt;chr&gt;   &lt;chr&gt;              &lt;dttm&gt;  &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt;
 ## 1 AL051952 UNNAMED 1952-09-14 06:00:00   &lt;NA&gt;     EX  43.2 -359.1    35
@@ -366,9 +366,8 @@ read_csv(url, skip = 23823L, n_max = 2, col_names = FALSE)</code></pre>
 <p>You can see the tendency is that <code>Lon</code> continues to decrease to 0. But once 0 is crossed, instead of continuing in order the longitude values reset to -360. So, really, for the value of -359.1 it should be 0.9 (360 - 359.1). The last value should be 360 - 358.4 or 1.6.</p>
 <p>So, to correct these values use the following formula:</p>
 <p><span class="math display">\[ Lon = \begin{cases} 360 + Lon, &amp; Lon &lt; -180 \ Lon, &amp; Lon \end{cases} \]</span></p>
-<pre class="r"><code>AL051952 &lt;- dmap_at(.d = AL051952, 
-             .at = &quot;Lon&quot;, 
-             .f = function(x) {ifelse(x &lt; -180, 360 + x, x)})</code></pre>
+<pre class="r"><code>AL051952 &lt;- mutate_at(AL051952, .cols = vars(Lon), 
+             .funs = function(x) {ifelse(x &lt; -180, 360 + x, x)})</code></pre>
 <pre class="r"><code>kable(AL051952 %&gt;% select(DateTime, Lat, Lon), format = &quot;markdown&quot;)</code></pre>
 <table>
 <thead>

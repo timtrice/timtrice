@@ -200,12 +200,12 @@ sudo docker push timtrice/rstudio-3.3.1&lt;/code&gt;&lt;/pre&gt;
     </item>
     
     <item>
-      <title>Introducing Hurricanes, HURDAT</title>
-      <link>/2017-05-16-introducing-hurricanes-hurdat/</link>
+      <title>Introducing rrricanes, HURDAT</title>
+      <link>/2017-05-16-introducing-rrricanes-hurdat/</link>
       <pubDate>Tue, 16 May 2017 10:47:00 -0500</pubDate>
       
-      <guid>/2017-05-16-introducing-hurricanes-hurdat/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;m proud to introduce two new packages for the R community: &lt;strong&gt;HURDAT&lt;/strong&gt; and &lt;strong&gt;&lt;em&gt;Hurricanes&lt;/em&gt;&lt;/strong&gt;.&lt;/p&gt;
+      <guid>/2017-05-16-introducing-rrricanes-hurdat/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;m proud to introduce two new packages for the R community: &lt;strong&gt;HURDAT&lt;/strong&gt; and &lt;strong&gt;&lt;em&gt;rrricanes&lt;/em&gt;&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;p&gt;Both packages are complimentary to one another.&lt;/p&gt;
 
@@ -237,18 +237,18 @@ sudo docker push timtrice/rstudio-3.3.1&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;vignette(&amp;quot;hurdat&amp;quot;, package = &amp;quot;HURDAT&amp;quot;)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;a href=&#34;./projects/hurricanes/&#34;&gt;Hurricanes&lt;/a&gt; gathers more comprehensive data for Atlantic and northeast Pacific tropical cyclones. However, this data currently only goes back to 1998. It does include real-time data for active cyclones.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;./projects/rrricanes/&#34;&gt;rrricanes&lt;/a&gt; gathers more comprehensive data for Atlantic and northeast Pacific tropical cyclones. However, this data currently only goes back to 1998. It does include real-time data for active cyclones.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Hurricanes&lt;/em&gt;&lt;/strong&gt; provides details on the current position and structure of the storm as well as forecast positions. Additionally, technical and public discussions, if available, can be retrieved from the package.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;rrricanes&lt;/em&gt;&lt;/strong&gt; provides details on the current position and structure of the storm as well as forecast positions. Additionally, technical and public discussions, if available, can be retrieved from the package.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Hurricanes&lt;/em&gt;&lt;/strong&gt; is not currently available in CRAN. Please consider it a beta release. Install the package with:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;rrricanes&lt;/em&gt;&lt;/strong&gt; is not currently available in CRAN. Please consider it a beta release. Install the package with:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;devtools::install_github(&amp;quot;timtrice/Hurricanes&amp;quot;)
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;devtools::install_github(&amp;quot;timtrice/rrricanes&amp;quot;)
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;After loading the library, take a look at the &amp;ldquo;Getting Started&amp;rdquo; vignette:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;vignette(&amp;quot;getting-started&amp;quot;, package = &amp;quot;Hurricanes&amp;quot;)
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;vignette(&amp;quot;getting-started&amp;quot;, package = &amp;quot;rrricanes&amp;quot;)
 &lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
@@ -463,7 +463,7 @@ read_csv(url, skip = 23823L, n_max = 2, col_names = FALSE)&lt;/code&gt;&lt;/pre&
 ##   X21 = col_character()
 ## )&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## See spec(...) for full column specifications.&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## # A tibble: 2 × 21
+&lt;pre&gt;&lt;code&gt;## # A tibble: 2 x 21
 ##         X1    X2    X3    X4    X5     X6    X7    X8    X9   X10   X11
 ##      &amp;lt;int&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt; &amp;lt;int&amp;gt; &amp;lt;int&amp;gt; &amp;lt;int&amp;gt; &amp;lt;int&amp;gt; &amp;lt;int&amp;gt;
 ## 1 19520914  0600  &amp;lt;NA&amp;gt;    EX 43.2N 359.1W    35  -999  -999  -999  -999
@@ -472,7 +472,7 @@ read_csv(url, skip = 23823L, n_max = 2, col_names = FALSE)&lt;/code&gt;&lt;/pre&
 ## #   X16 &amp;lt;int&amp;gt;, X17 &amp;lt;int&amp;gt;, X18 &amp;lt;int&amp;gt;, X19 &amp;lt;int&amp;gt;, X20 &amp;lt;int&amp;gt;, X21 &amp;lt;chr&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The two consecutive observations belong to one particular storm.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;AL %&amp;gt;% filter(Lon &amp;lt; -180)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## # A tibble: 2 × 21
+&lt;pre&gt;&lt;code&gt;## # A tibble: 2 x 21
 ##        Key    Name            DateTime Record Status   Lat    Lon  Wind
 ##      &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;              &amp;lt;dttm&amp;gt;  &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt; &amp;lt;dbl&amp;gt;  &amp;lt;dbl&amp;gt; &amp;lt;int&amp;gt;
 ## 1 AL051952 UNNAMED 1952-09-14 06:00:00   &amp;lt;NA&amp;gt;     EX  43.2 -359.1    35
@@ -640,9 +640,8 @@ read_csv(url, skip = 23823L, n_max = 2, col_names = FALSE)&lt;/code&gt;&lt;/pre&
 &lt;p&gt;You can see the tendency is that &lt;code&gt;Lon&lt;/code&gt; continues to decrease to 0. But once 0 is crossed, instead of continuing in order the longitude values reset to -360. So, really, for the value of -359.1 it should be 0.9 (360 - 359.1). The last value should be 360 - 358.4 or 1.6.&lt;/p&gt;
 &lt;p&gt;So, to correct these values use the following formula:&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ Lon = \begin{cases} 360 + Lon, &amp;amp; Lon &amp;lt; -180 \ Lon, &amp;amp; Lon \end{cases} \]&lt;/span&gt;&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;AL051952 &amp;lt;- dmap_at(.d = AL051952, 
-             .at = &amp;quot;Lon&amp;quot;, 
-             .f = function(x) {ifelse(x &amp;lt; -180, 360 + x, x)})&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;AL051952 &amp;lt;- mutate_at(AL051952, .cols = vars(Lon), 
+             .funs = function(x) {ifelse(x &amp;lt; -180, 360 + x, x)})&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;kable(AL051952 %&amp;gt;% select(DateTime, Lat, Lon), format = &amp;quot;markdown&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -805,15 +804,29 @@ read_csv(url, skip = 23823L, n_max = 2, col_names = FALSE)&lt;/code&gt;&lt;/pre&
     </item>
     
     <item>
-      <title>Hurricanes 0.1.0</title>
-      <link>/projects/hurricanes/</link>
+      <title>Projects</title>
+      <link>/projects/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/projects/hurricanes/</guid>
+      <guid>/projects/</guid>
+      <description>&lt;div id=&#34;r&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;R&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;./projects/hurdat/&#34;&gt;HURDAT&lt;/a&gt; is a dataset from the Hurricane Re-Analysis project. It contains storm data for hundreds of cyclones for storms that have developed in the northwestern hemisphere (Atlantic and Pacific) since 1851.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;./projects/rrricanes/&#34;&gt;rrricanes&lt;/a&gt; is a more comprehensive dataset of Atlantic and Pacific cyclones but only those since 1998. It gives access to as-issued text products for past and current cyclones including forecast and structure data.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>rrricanes 0.1.0</title>
+      <link>/projects/rrricanes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/projects/rrricanes/</guid>
       <description>&lt;div id=&#34;TOC&#34;&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#what-is-hurricanes&#34;&gt;What is &lt;code&gt;Hurricanes&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#installing-hurricanes&#34;&gt;Installing &lt;code&gt;Hurricanes&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#what-is-rrricanes&#34;&gt;What is &lt;code&gt;rrricanes&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#installing-rrricanes&#34;&gt;Installing &lt;code&gt;rrricanes&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#about-the-data&#34;&gt;About the Data&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#getting-data&#34;&gt;Getting Data&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#basic-data&#34;&gt;Basic Data&lt;/a&gt;&lt;ul&gt;
@@ -832,31 +845,33 @@ read_csv(url, skip = 23823L, n_max = 2, col_names = FALSE)&lt;/code&gt;&lt;/pre&
 &lt;/ul&gt;
 &lt;/div&gt;
 
-&lt;p&gt;To go along with my &lt;a href=&#34;http://timtrice.net/projects/%60HURDAT%60/&#34;&gt;HURDAT&lt;/a&gt; package I’m releasing &lt;a href=&#34;https://github.com/timtrice/%60Hurricanes%60&#34;&gt;Hurricanes&lt;/a&gt;, version 0.1.0. This library is &lt;em&gt;not&lt;/em&gt; in cran and will not be submitted until release 0.2.0.&lt;/p&gt;
-&lt;div id=&#34;what-is-hurricanes&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;What is &lt;code&gt;Hurricanes&lt;/code&gt;&lt;/h2&gt;
-&lt;p&gt;I’ve had a fascination with &lt;code&gt;Hurricanes&lt;/code&gt; since I was a very little kid. Watching The Weather Channel’s John Hope talk about Hurricane Gilbert captured me instantly. So, part of my efforts while learning R has been working with what I already know.&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;Hurricanes&lt;/code&gt; access and parses real-time data and returns it in dataframe format. Unlike &lt;code&gt;HURDAT&lt;/code&gt;,&lt;code&gt;Hurricanes&lt;/code&gt; can get the the latest data available for any cyclone in the Atlanic or northeastern Pacific ocean.&lt;/p&gt;
-&lt;p&gt;Keep in mind &lt;code&gt;HURDAT&lt;/code&gt; is a re-analysis dataset and is meant as a compliment to &lt;code&gt;Hurricanes&lt;/code&gt;. &lt;code&gt;Hurricanes&lt;/code&gt;, at this time, can only access it’s set of data back to 1998. But, the data is much more comprehensive than &lt;code&gt;HURDAT&lt;/code&gt; which goes back to 1851.&lt;/p&gt;
-&lt;p&gt;Additionally, some data in &lt;code&gt;Hurricanes&lt;/code&gt; may not match up with that for &lt;code&gt;HURDAT&lt;/code&gt;. For example, you may find an observation for a specific storm at a specific time has different values for latitude. This is because originally the National Hurricane Center (NHC) believed the center of the hurricane to be in one location. But, after re-analysis, determined it was somewhere else.&lt;/p&gt;
+&lt;p&gt;To go along with my &lt;a href=&#34;http://timtrice.net/projects/%60HURDAT%60/&#34;&gt;HURDAT&lt;/a&gt; package I’m releasing &lt;a href=&#34;https://github.com/timtrice/rrricanes&#34;&gt;rrricanes&lt;/a&gt;, version 0.1.0. This library is &lt;em&gt;not&lt;/em&gt; in cran and will not be submitted until release 0.2.0.&lt;/p&gt;
+&lt;div id=&#34;what-is-rrricanes&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;What is &lt;code&gt;rrricanes&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;I’ve had a fascination with hurricanes since I was a very little kid. Watching The Weather Channel’s John Hope talk about Hurricane Gilbert captured me instantly. So, part of my efforts while learning R has been working with what I already know.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;rrricanes&lt;/code&gt; access and parses real-time data and returns it in dataframe format. Unlike &lt;code&gt;HURDAT&lt;/code&gt;,&lt;code&gt;rrricanes&lt;/code&gt; can get the the latest data available for any cyclone in the Atlanic or northeastern Pacific ocean.&lt;/p&gt;
+&lt;p&gt;Keep in mind &lt;code&gt;HURDAT&lt;/code&gt; is a re-analysis dataset and is meant as a compliment to &lt;code&gt;rrricanes&lt;/code&gt;. &lt;code&gt;rrricanes&lt;/code&gt;, at this time, can only access it’s set of data back to 1998. But, the data is much more comprehensive than &lt;code&gt;HURDAT&lt;/code&gt; which goes back to 1851.&lt;/p&gt;
+&lt;p&gt;Additionally, some data in &lt;code&gt;rrricanes&lt;/code&gt; may not match up with that for &lt;code&gt;HURDAT&lt;/code&gt;. For example, you may find an observation for a specific storm at a specific time has different values for latitude. This is because originally the National Hurricane Center (NHC) believed the center of the hurricane to be in one location. But, after re-analysis, determined it was somewhere else.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div id=&#34;installing-hurricanes&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Installing &lt;code&gt;Hurricanes&lt;/code&gt;&lt;/h2&gt;
-&lt;p&gt;With all of that said, let’s examine &lt;code&gt;Hurricanes&lt;/code&gt;. First, install the library using &lt;code&gt;devtools&lt;/code&gt;.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;devtools::install_github(&amp;quot;timtrice/Hurricanes&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(Hurricanes)
+&lt;div id=&#34;installing-rrricanes&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Installing &lt;code&gt;rrricanes&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;With all of that said, let’s examine &lt;code&gt;rrricanes&lt;/code&gt;. First, install the library using &lt;code&gt;devtools&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;devtools::install_github(&amp;quot;timtrice/rrricanes&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(rrricanes)
 
 # Additional packages used for this document
+library(dplyr)
 library(ggplot2)
 library(knitr)
-library(purrr)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;code&gt;Hurricanes&lt;/code&gt; should work with any R version &amp;gt;= 3.2.3.&lt;/p&gt;
+library(purrr)
+library(tidyr)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;rrricanes&lt;/code&gt; should work with any R version &amp;gt;= 3.2.3.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;about-the-data&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;About the Data&lt;/h2&gt;
 &lt;p&gt;You can view the vignette “Getting Started” with the following command:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;vignette(&amp;quot;getting-started&amp;quot;, package = &amp;quot;Hurricanes&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I’ve tried to be as detailed as possible while keeping the vignette short. Here, I want to focus on what I think the best aspect of &lt;code&gt;Hurricanes&lt;/code&gt; is so far.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;vignette(&amp;quot;getting-started&amp;quot;, package = &amp;quot;rrricanes&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I’ve tried to be as detailed as possible while keeping the vignette short. Here, I want to focus on what I think the best aspect of &lt;code&gt;rrricanes&lt;/code&gt; is so far.&lt;/p&gt;
 &lt;p&gt;Hurricane text products are generally issued at the same time. But there are two products that, at this time, contain the meat of data for a particular storm: Forecast/Advisory Products and Wind Speed Probability Products (formerly Strike Probability).&lt;/p&gt;
 &lt;p&gt;Hurricanes in both the Atlantic and Pacific ocean will always have Forecast/Advisory products; the widest dataset. Functions related to this product always contain &lt;code&gt;fstadv&lt;/code&gt; which is the shorthand term used by the NHC.&lt;/p&gt;
 &lt;p&gt;Wind Speed Probabilities are the longest dataset. This product is issued for every Atlantic hurricane. However, Pacific hurricanes only have this product if they are a threat to land.&lt;/p&gt;
@@ -867,11 +882,12 @@ library(purrr)&lt;/code&gt;&lt;/pre&gt;
 &lt;h2&gt;Getting Data&lt;/h2&gt;
 &lt;p&gt;We start off by getting a list of storms that have developed in a specified year. You can pass multiple years. But, for this example, we’ll stick to the current year.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(al2017 &amp;lt;- get_storms(year = 2017))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## # A tibble: 2 × 4
-##    Year                  Name Basin
-##   &amp;lt;dbl&amp;gt;                 &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;
-## 1  2017 Tropical Storm Arlene    AL
-## 2  2017 Tropical Storm Adrian    EP
+&lt;pre&gt;&lt;code&gt;## # A tibble: 3 x 4
+##    Year                   Name Basin
+##   &amp;lt;dbl&amp;gt;                  &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;
+## 1  2017  Tropical Storm Arlene    AL
+## 2  2017  Tropical Storm Adrian    EP
+## 3  2017 Tropical Storm Beatriz    EP
 ## # ... with 1 more variables: Link &amp;lt;chr&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;So far we’ve had one cyclone for each basin. Let’s get the &lt;code&gt;fstadv&lt;/code&gt; data for Tropical Storm Arlene.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;url &amp;lt;- al2017 %&amp;gt;% filter(Name == &amp;quot;Tropical Storm Arlene&amp;quot;) %&amp;gt;% .$Link
@@ -933,7 +949,7 @@ dim(al012017.fstadv)&lt;/code&gt;&lt;/pre&gt;
 ## 
 ##     map&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## Warning: Removed 3031 rows containing missing values (geom_path).&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;./projects/hurricanes/index_files/figure-html/al012017.track-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./projects/rrricanes/index_files/figure-html/al012017.track-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;wind-and-gust&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Wind and Gust&lt;/h3&gt;
@@ -945,7 +961,7 @@ dim(al012017.fstadv)&lt;/code&gt;&lt;/pre&gt;
     theme(legend.title = element_blank()) + 
     labs(title = &amp;quot;Tropical Storm Arlene Wind/Gust (kts)&amp;quot;, 
          y = &amp;quot;knots&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;./projects/hurricanes/index_files/figure-html/al012017.wind-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./projects/rrricanes/index_files/figure-html/al012017.wind-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;pressure&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Pressure&lt;/h3&gt;
@@ -954,7 +970,7 @@ dim(al012017.fstadv)&lt;/code&gt;&lt;/pre&gt;
     geom_line() + 
     labs(title = &amp;quot;Tropical Storm Arlene Pressure (mb)&amp;quot;, 
          y = &amp;quot;Pressure (mb)&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;./projects/hurricanes/index_files/figure-html/al012017.pressure-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./projects/rrricanes/index_files/figure-html/al012017.pressure-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;seas&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Seas&lt;/h3&gt;
@@ -976,7 +992,7 @@ al012017.fstadv %&amp;gt;%
          x = &amp;quot;Quadrant&amp;quot;, 
          y = &amp;quot;Distance (nm)&amp;quot;) + 
     guides(fill = guide_legend(title = &amp;quot;Quadrant&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;./projects/hurricanes/index_files/figure-html/al012017.seas-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./projects/rrricanes/index_files/figure-html/al012017.seas-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;wind-radius&#34; class=&#34;section level2&#34;&gt;
@@ -1029,7 +1045,7 @@ ggplot(wr, aes(x = factor(Quadrant, levels = quads),
          x = &amp;quot;Quadrant&amp;quot;, 
          y = &amp;quot;Distance (nm)&amp;quot;) + 
     guides(fill = guide_legend(title = &amp;quot;Max Wind (kts)&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;./projects/hurricanes/index_files/figure-html/al092008.wr.plot-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./projects/rrricanes/index_files/figure-html/al092008.wr.plot-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;forecast-positions&#34; class=&#34;section level2&#34;&gt;
@@ -1258,7 +1274,7 @@ ggplot(wr, aes(x = factor(Quadrant, levels = quads),
 &lt;p&gt;There is a ton of data available for tropical cyclones and not just in the northwestern hemisphere. Here are some things I’m hoping to add in future releases:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;reconnaissance: there is a vast amount of this data out there waiting to be claimed. However, the products and formats of those products have changed considerably over the years. This will be a major product (&lt;a href=&#34;https://gist.github.com/timtrice/f2a4c2a020c87669178dad27e73bfce1&#34;&gt;would you like to help&lt;/a&gt;?) to add in though pattern-matching on this will be significantly easier than that of the advisory data.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;gis data: I do not know how far back this data goes but it is readily avaiable for past and current storms. There is an &lt;a href=&#34;https://github.com/timtrice/Hurricanes/issues/47&#34;&gt;issue&lt;/a&gt; opened for this to be added; but, no milestone as of yet.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;gis data: I do not know how far back this data goes but it is readily avaiable for past and current storms. There is an &lt;a href=&#34;https://github.com/timtrice/rrricanes/issues/47&#34;&gt;issue&lt;/a&gt; opened for this to be added; but, no milestone as of yet.&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;daily products (outlook, weather discussion): these products are in GIS format and text as well. GIS is the priorirty as I think it would be better; I’m not sure there’s much value in parsing the text. But, I haven’t made a decision one way or another.&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;computer forecast models: this may be a little more complicated. Some of the forecast models are readily available (&lt;a href=&#34;http://rammb.cira.colostate.edu/research/tropical_cyclones/ships/index.asp&#34;&gt;SHIPS&lt;/a&gt;, for one). Some forecast models are proprietary. Resources will need to be gathered and planned out accordingly before being added.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -1270,27 +1286,14 @@ ggplot(wr, aes(x = factor(Quadrant, levels = quads),
 &lt;p&gt;That being said, if you notice anything unusual, I ask you to do two things:&lt;/p&gt;
 &lt;ol style=&#34;list-style-type: decimal&#34;&gt;
 &lt;li&gt;&lt;p&gt;Check the &lt;a href=&#34;http://www.nhc.noaa.gov/archive/2017/&#34;&gt;hurricane archives&lt;/a&gt; first to verify if the error is in the package itself or in the original product.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/timtrice/Hurricanes/issues&#34;&gt;Submit an issue&lt;/a&gt;. Errors in data will be given top priority and hotfixes will be created to address any corrections that can be made.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://github.com/timtrice/rrricanes/issues&#34;&gt;Submit an issue&lt;/a&gt;. Errors in data will be given top priority and hotfixes will be created to address any corrections that can be made.&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Optionally,&lt;/p&gt;
 &lt;ol start=&#34;3&#34; style=&#34;list-style-type: decimal&#34;&gt;
 &lt;li&gt;&lt;a href=&#34;https://gist.github.com/timtrice/f2a4c2a020c87669178dad27e73bfce1&#34;&gt;Contribute&lt;/a&gt;. I would love to have some help with this package as I do have a couple of other products I am working on or plan on working on. With hurricane season underway, the quicker some of the features can be implemented, the better. Any contributors will receive acknowledgements in the repo and package documentation.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;Thank you for taking the time to check out &lt;code&gt;Hurricanes&lt;/code&gt;. Please feel free to check out &lt;a href=&#34;http://timtrice.net/projects/hurdat/&#34;&gt;HURDAT&lt;/a&gt; as well.&lt;/p&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Projects</title>
-      <link>/projects/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/projects/</guid>
-      <description>&lt;div id=&#34;r&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;R&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&#34;./projects/hurdat/&#34;&gt;HURDAT&lt;/a&gt; is a dataset from the Hurricane Re-Analysis project. It contains storm data for hundreds of cyclones for storms that have developed in the northwestern hemisphere (Atlantic and Pacific) since 1851.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;./projects/hurricanes/&#34;&gt;Hurricanes&lt;/a&gt; is a more comprehensive dataset of Atlantic and Pacific cyclones but only those since 1998. It gives access to as-issued text products for past and current cyclones including forecast and structure data.&lt;/p&gt;
+&lt;p&gt;Thank you for taking the time to check out &lt;code&gt;rrricanes&lt;/code&gt;. Please feel free to check out &lt;a href=&#34;http://timtrice.net/projects/hurdat/&#34;&gt;HURDAT&lt;/a&gt; as well.&lt;/p&gt;
+&lt;p&gt;&lt;small&gt;&lt;code&gt;Hurricanes&lt;/code&gt; was renamed to &lt;code&gt;rrricanes&lt;/code&gt;. This page is updated to reflect this change.&lt;/small&gt;&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>

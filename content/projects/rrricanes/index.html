@@ -1,8 +1,8 @@
 ---
-title: "Hurricanes 0.1.0"
+title: "rrricanes 0.1.0"
 description: "Access real-time hurricane text products"
 author: "Tim Trice"
-tags: ["R", "Hurricanes"]
+tags: ["R", "rrricanes"]
 output:
     blogdown::html_page:
         toc: true
@@ -11,8 +11,8 @@ output:
 
 <div id="TOC">
 <ul>
-<li><a href="#what-is-hurricanes">What is <code>Hurricanes</code></a></li>
-<li><a href="#installing-hurricanes">Installing <code>Hurricanes</code></a></li>
+<li><a href="#what-is-rrricanes">What is <code>rrricanes</code></a></li>
+<li><a href="#installing-rrricanes">Installing <code>rrricanes</code></a></li>
 <li><a href="#about-the-data">About the Data</a></li>
 <li><a href="#getting-data">Getting Data</a></li>
 <li><a href="#basic-data">Basic Data</a><ul>
@@ -31,31 +31,33 @@ output:
 </ul>
 </div>
 
-<p>To go along with my <a href="http://timtrice.net/projects/%60HURDAT%60/">HURDAT</a> package I’m releasing <a href="https://github.com/timtrice/%60Hurricanes%60">Hurricanes</a>, version 0.1.0. This library is <em>not</em> in cran and will not be submitted until release 0.2.0.</p>
-<div id="what-is-hurricanes" class="section level2">
-<h2>What is <code>Hurricanes</code></h2>
-<p>I’ve had a fascination with <code>Hurricanes</code> since I was a very little kid. Watching The Weather Channel’s John Hope talk about Hurricane Gilbert captured me instantly. So, part of my efforts while learning R has been working with what I already know.</p>
-<p><code>Hurricanes</code> access and parses real-time data and returns it in dataframe format. Unlike <code>HURDAT</code>,<code>Hurricanes</code> can get the the latest data available for any cyclone in the Atlanic or northeastern Pacific ocean.</p>
-<p>Keep in mind <code>HURDAT</code> is a re-analysis dataset and is meant as a compliment to <code>Hurricanes</code>. <code>Hurricanes</code>, at this time, can only access it’s set of data back to 1998. But, the data is much more comprehensive than <code>HURDAT</code> which goes back to 1851.</p>
-<p>Additionally, some data in <code>Hurricanes</code> may not match up with that for <code>HURDAT</code>. For example, you may find an observation for a specific storm at a specific time has different values for latitude. This is because originally the National Hurricane Center (NHC) believed the center of the hurricane to be in one location. But, after re-analysis, determined it was somewhere else.</p>
+<p>To go along with my <a href="http://timtrice.net/projects/%60HURDAT%60/">HURDAT</a> package I’m releasing <a href="https://github.com/timtrice/rrricanes">rrricanes</a>, version 0.1.0. This library is <em>not</em> in cran and will not be submitted until release 0.2.0.</p>
+<div id="what-is-rrricanes" class="section level2">
+<h2>What is <code>rrricanes</code></h2>
+<p>I’ve had a fascination with hurricanes since I was a very little kid. Watching The Weather Channel’s John Hope talk about Hurricane Gilbert captured me instantly. So, part of my efforts while learning R has been working with what I already know.</p>
+<p><code>rrricanes</code> access and parses real-time data and returns it in dataframe format. Unlike <code>HURDAT</code>,<code>rrricanes</code> can get the the latest data available for any cyclone in the Atlanic or northeastern Pacific ocean.</p>
+<p>Keep in mind <code>HURDAT</code> is a re-analysis dataset and is meant as a compliment to <code>rrricanes</code>. <code>rrricanes</code>, at this time, can only access it’s set of data back to 1998. But, the data is much more comprehensive than <code>HURDAT</code> which goes back to 1851.</p>
+<p>Additionally, some data in <code>rrricanes</code> may not match up with that for <code>HURDAT</code>. For example, you may find an observation for a specific storm at a specific time has different values for latitude. This is because originally the National Hurricane Center (NHC) believed the center of the hurricane to be in one location. But, after re-analysis, determined it was somewhere else.</p>
 </div>
-<div id="installing-hurricanes" class="section level2">
-<h2>Installing <code>Hurricanes</code></h2>
-<p>With all of that said, let’s examine <code>Hurricanes</code>. First, install the library using <code>devtools</code>.</p>
-<pre class="r"><code>devtools::install_github(&quot;timtrice/Hurricanes&quot;)</code></pre>
-<pre class="r"><code>library(Hurricanes)
+<div id="installing-rrricanes" class="section level2">
+<h2>Installing <code>rrricanes</code></h2>
+<p>With all of that said, let’s examine <code>rrricanes</code>. First, install the library using <code>devtools</code>.</p>
+<pre class="r"><code>devtools::install_github(&quot;timtrice/rrricanes&quot;)</code></pre>
+<pre class="r"><code>library(rrricanes)
 
 # Additional packages used for this document
+library(dplyr)
 library(ggplot2)
 library(knitr)
-library(purrr)</code></pre>
-<p><code>Hurricanes</code> should work with any R version &gt;= 3.2.3.</p>
+library(purrr)
+library(tidyr)</code></pre>
+<p><code>rrricanes</code> should work with any R version &gt;= 3.2.3.</p>
 </div>
 <div id="about-the-data" class="section level2">
 <h2>About the Data</h2>
 <p>You can view the vignette “Getting Started” with the following command:</p>
-<pre class="r"><code>vignette(&quot;getting-started&quot;, package = &quot;Hurricanes&quot;)</code></pre>
-<p>I’ve tried to be as detailed as possible while keeping the vignette short. Here, I want to focus on what I think the best aspect of <code>Hurricanes</code> is so far.</p>
+<pre class="r"><code>vignette(&quot;getting-started&quot;, package = &quot;rrricanes&quot;)</code></pre>
+<p>I’ve tried to be as detailed as possible while keeping the vignette short. Here, I want to focus on what I think the best aspect of <code>rrricanes</code> is so far.</p>
 <p>Hurricane text products are generally issued at the same time. But there are two products that, at this time, contain the meat of data for a particular storm: Forecast/Advisory Products and Wind Speed Probability Products (formerly Strike Probability).</p>
 <p>Hurricanes in both the Atlantic and Pacific ocean will always have Forecast/Advisory products; the widest dataset. Functions related to this product always contain <code>fstadv</code> which is the shorthand term used by the NHC.</p>
 <p>Wind Speed Probabilities are the longest dataset. This product is issued for every Atlantic hurricane. However, Pacific hurricanes only have this product if they are a threat to land.</p>
@@ -66,11 +68,12 @@ library(purrr)</code></pre>
 <h2>Getting Data</h2>
 <p>We start off by getting a list of storms that have developed in a specified year. You can pass multiple years. But, for this example, we’ll stick to the current year.</p>
 <pre class="r"><code>(al2017 &lt;- get_storms(year = 2017))</code></pre>
-<pre><code>## # A tibble: 2 × 4
-##    Year                  Name Basin
-##   &lt;dbl&gt;                 &lt;chr&gt; &lt;chr&gt;
-## 1  2017 Tropical Storm Arlene    AL
-## 2  2017 Tropical Storm Adrian    EP
+<pre><code>## # A tibble: 3 x 4
+##    Year                   Name Basin
+##   &lt;dbl&gt;                  &lt;chr&gt; &lt;chr&gt;
+## 1  2017  Tropical Storm Arlene    AL
+## 2  2017  Tropical Storm Adrian    EP
+## 3  2017 Tropical Storm Beatriz    EP
 ## # ... with 1 more variables: Link &lt;chr&gt;</code></pre>
 <p>So far we’ve had one cyclone for each basin. Let’s get the <code>fstadv</code> data for Tropical Storm Arlene.</p>
 <pre class="r"><code>url &lt;- al2017 %&gt;% filter(Name == &quot;Tropical Storm Arlene&quot;) %&gt;% .$Link
@@ -132,7 +135,7 @@ dim(al012017.fstadv)</code></pre>
 ## 
 ##     map</code></pre>
 <pre><code>## Warning: Removed 3031 rows containing missing values (geom_path).</code></pre>
-<p><img src="/projects/hurricanes/index_files/figure-html/al012017.track-1.png" width="672" /></p>
+<p><img src="/projects/rrricanes/index_files/figure-html/al012017.track-1.png" width="672" /></p>
 </div>
 <div id="wind-and-gust" class="section level3">
 <h3>Wind and Gust</h3>
@@ -144,7 +147,7 @@ dim(al012017.fstadv)</code></pre>
     theme(legend.title = element_blank()) + 
     labs(title = &quot;Tropical Storm Arlene Wind/Gust (kts)&quot;, 
          y = &quot;knots&quot;)</code></pre>
-<p><img src="/projects/hurricanes/index_files/figure-html/al012017.wind-1.png" width="672" /></p>
+<p><img src="/projects/rrricanes/index_files/figure-html/al012017.wind-1.png" width="672" /></p>
 </div>
 <div id="pressure" class="section level3">
 <h3>Pressure</h3>
@@ -153,7 +156,7 @@ dim(al012017.fstadv)</code></pre>
     geom_line() + 
     labs(title = &quot;Tropical Storm Arlene Pressure (mb)&quot;, 
          y = &quot;Pressure (mb)&quot;)</code></pre>
-<p><img src="/projects/hurricanes/index_files/figure-html/al012017.pressure-1.png" width="672" /></p>
+<p><img src="/projects/rrricanes/index_files/figure-html/al012017.pressure-1.png" width="672" /></p>
 </div>
 <div id="seas" class="section level3">
 <h3>Seas</h3>
@@ -175,7 +178,7 @@ al012017.fstadv %&gt;%
          x = &quot;Quadrant&quot;, 
          y = &quot;Distance (nm)&quot;) + 
     guides(fill = guide_legend(title = &quot;Quadrant&quot;))</code></pre>
-<p><img src="/projects/hurricanes/index_files/figure-html/al012017.seas-1.png" width="672" /></p>
+<p><img src="/projects/rrricanes/index_files/figure-html/al012017.seas-1.png" width="672" /></p>
 </div>
 </div>
 <div id="wind-radius" class="section level2">
@@ -228,7 +231,7 @@ ggplot(wr, aes(x = factor(Quadrant, levels = quads),
          x = &quot;Quadrant&quot;, 
          y = &quot;Distance (nm)&quot;) + 
     guides(fill = guide_legend(title = &quot;Max Wind (kts)&quot;))</code></pre>
-<p><img src="/projects/hurricanes/index_files/figure-html/al092008.wr.plot-1.png" width="672" /></p>
+<p><img src="/projects/rrricanes/index_files/figure-html/al092008.wr.plot-1.png" width="672" /></p>
 </div>
 </div>
 <div id="forecast-positions" class="section level2">
@@ -457,7 +460,7 @@ ggplot(wr, aes(x = factor(Quadrant, levels = quads),
 <p>There is a ton of data available for tropical cyclones and not just in the northwestern hemisphere. Here are some things I’m hoping to add in future releases:</p>
 <ul>
 <li><p>reconnaissance: there is a vast amount of this data out there waiting to be claimed. However, the products and formats of those products have changed considerably over the years. This will be a major product (<a href="https://gist.github.com/timtrice/f2a4c2a020c87669178dad27e73bfce1">would you like to help</a>?) to add in though pattern-matching on this will be significantly easier than that of the advisory data.</p></li>
-<li><p>gis data: I do not know how far back this data goes but it is readily avaiable for past and current storms. There is an <a href="https://github.com/timtrice/Hurricanes/issues/47">issue</a> opened for this to be added; but, no milestone as of yet.</p></li>
+<li><p>gis data: I do not know how far back this data goes but it is readily avaiable for past and current storms. There is an <a href="https://github.com/timtrice/rrricanes/issues/47">issue</a> opened for this to be added; but, no milestone as of yet.</p></li>
 <li><p>daily products (outlook, weather discussion): these products are in GIS format and text as well. GIS is the priorirty as I think it would be better; I’m not sure there’s much value in parsing the text. But, I haven’t made a decision one way or another.</p></li>
 <li><p>computer forecast models: this may be a little more complicated. Some of the forecast models are readily available (<a href="http://rammb.cira.colostate.edu/research/tropical_cyclones/ships/index.asp">SHIPS</a>, for one). Some forecast models are proprietary. Resources will need to be gathered and planned out accordingly before being added.</p></li>
 </ul>
@@ -469,11 +472,12 @@ ggplot(wr, aes(x = factor(Quadrant, levels = quads),
 <p>That being said, if you notice anything unusual, I ask you to do two things:</p>
 <ol style="list-style-type: decimal">
 <li><p>Check the <a href="http://www.nhc.noaa.gov/archive/2017/">hurricane archives</a> first to verify if the error is in the package itself or in the original product.</p></li>
-<li><p><a href="https://github.com/timtrice/Hurricanes/issues">Submit an issue</a>. Errors in data will be given top priority and hotfixes will be created to address any corrections that can be made.</p></li>
+<li><p><a href="https://github.com/timtrice/rrricanes/issues">Submit an issue</a>. Errors in data will be given top priority and hotfixes will be created to address any corrections that can be made.</p></li>
 </ol>
 <p>Optionally,</p>
 <ol start="3" style="list-style-type: decimal">
 <li><a href="https://gist.github.com/timtrice/f2a4c2a020c87669178dad27e73bfce1">Contribute</a>. I would love to have some help with this package as I do have a couple of other products I am working on or plan on working on. With hurricane season underway, the quicker some of the features can be implemented, the better. Any contributors will receive acknowledgements in the repo and package documentation.</li>
 </ol>
-<p>Thank you for taking the time to check out <code>Hurricanes</code>. Please feel free to check out <a href="http://timtrice.net/projects/hurdat/">HURDAT</a> as well.</p>
+<p>Thank you for taking the time to check out <code>rrricanes</code>. Please feel free to check out <a href="http://timtrice.net/projects/hurdat/">HURDAT</a> as well.</p>
+<p><small><code>Hurricanes</code> was renamed to <code>rrricanes</code>. This page is updated to reflect this change.</small></p>
 </div>

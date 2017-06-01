@@ -1,53 +1,55 @@
 ---
-title: "Hurricanes 0.1.0"
+title: "rrricanes 0.1.0"
 description: "Access real-time hurricane text products"
 author: "Tim Trice"
-tags: ["R", "Hurricanes"]
+tags: ["R", "rrricanes"]
 output:
     blogdown::html_page:
         toc: true
 ---
 
-To go along with my [HURDAT](http://timtrice.net/projects/`HURDAT`/) package I'm releasing [Hurricanes](https://github.com/timtrice/`Hurricanes`), version 0.1.0. This library is *not* in cran and will not be submitted until release 0.2.0.
+To go along with my [HURDAT](http://timtrice.net/projects/`HURDAT`/) package I'm releasing [rrricanes](https://github.com/timtrice/rrricanes), version 0.1.0. This library is *not* in cran and will not be submitted until release 0.2.0.
 
-## What is `Hurricanes`
+## What is `rrricanes`
 
-I've had a fascination with `Hurricanes` since I was a very little kid. Watching The Weather Channel's John Hope talk about Hurricane Gilbert captured me instantly. So, part of my efforts while learning R has been working with what I already know.
+I've had a fascination with hurricanes since I was a very little kid. Watching The Weather Channel's John Hope talk about Hurricane Gilbert captured me instantly. So, part of my efforts while learning R has been working with what I already know.
 
-`Hurricanes` access and parses real-time data and returns it in dataframe format. Unlike `HURDAT`,`Hurricanes` can get the the latest data available for any cyclone in the Atlanic or northeastern Pacific ocean. 
+`rrricanes` access and parses real-time data and returns it in dataframe format. Unlike `HURDAT`,`rrricanes` can get the the latest data available for any cyclone in the Atlanic or northeastern Pacific ocean. 
 
-Keep in mind `HURDAT` is a re-analysis dataset and is meant as a compliment to `Hurricanes`. `Hurricanes`, at this time, can only access it's set of data back to 1998. But, the data is much more comprehensive than `HURDAT` which goes back to 1851.
+Keep in mind `HURDAT` is a re-analysis dataset and is meant as a compliment to `rrricanes`. `rrricanes`, at this time, can only access it's set of data back to 1998. But, the data is much more comprehensive than `HURDAT` which goes back to 1851.
 
-Additionally, some data in `Hurricanes` may not match up with that for `HURDAT`. For example, you may find an observation for a specific storm at a specific time has different values for latitude. This is because originally the National Hurricane Center (NHC) believed the center of the hurricane to be in one location. But, after re-analysis, determined it was somewhere else.
+Additionally, some data in `rrricanes` may not match up with that for `HURDAT`. For example, you may find an observation for a specific storm at a specific time has different values for latitude. This is because originally the National Hurricane Center (NHC) believed the center of the hurricane to be in one location. But, after re-analysis, determined it was somewhere else.
 
-## Installing `Hurricanes`
+## Installing `rrricanes`
 
-With all of that said, let's examine `Hurricanes`. First, install the library using `devtools`.
+With all of that said, let's examine `rrricanes`. First, install the library using `devtools`.
 
 ```r
-devtools::install_github("timtrice/Hurricanes")
+devtools::install_github("timtrice/rrricanes")
 ```
 
 ```{r library, message = FALSE, warning = FALSE}
-library(Hurricanes)
+library(rrricanes)
 
 # Additional packages used for this document
+library(dplyr)
 library(ggplot2)
 library(knitr)
 library(purrr)
+library(tidyr)
 ```
 
-`Hurricanes` should work with any R version >= 3.2.3.
+`rrricanes` should work with any R version >= 3.2.3.
 
 ## About the Data
 
 You can view the vignette "Getting Started" with the following command:
 
 ```r
-vignette("getting-started", package = "Hurricanes")
+vignette("getting-started", package = "rrricanes")
 ```
 
-I've tried to be as detailed as possible while keeping the vignette short. Here, I want to focus on what I think the best aspect of `Hurricanes` is so far. 
+I've tried to be as detailed as possible while keeping the vignette short. Here, I want to focus on what I think the best aspect of `rrricanes` is so far. 
 
 Hurricane text products are generally issued at the same time. But there are two products that, at this time, contain the meat of data for a particular storm: Forecast/Advisory Products and Wind Speed Probability Products (formerly Strike Probability).
 
@@ -295,7 +297,7 @@ There is a ton of data available for tropical cyclones and not just in the north
 
 * reconnaissance: there is a vast amount of this data out there waiting to be claimed. However, the products and formats of those products have changed considerably over the years. This will be a major product ([would you like to help](https://gist.github.com/timtrice/f2a4c2a020c87669178dad27e73bfce1)?) to add in though pattern-matching on this will be significantly easier than that of the advisory data. 
 
-* gis data: I do not know how far back this data goes but it is readily avaiable for past and current storms. There is an [issue](https://github.com/timtrice/Hurricanes/issues/47) opened for this to be added; but, no milestone as of yet. 
+* gis data: I do not know how far back this data goes but it is readily avaiable for past and current storms. There is an [issue](https://github.com/timtrice/rrricanes/issues/47) opened for this to be added; but, no milestone as of yet. 
 
 * daily products (outlook, weather discussion): these products are in GIS format and text as well. GIS is the priorirty as I think it would be better; I'm not sure there's much value in parsing the text. But, I haven't made a decision one way or another.
 
@@ -311,10 +313,12 @@ That being said, if you notice anything unusual, I ask you to do two things:
 
 1. Check the [hurricane archives](http://www.nhc.noaa.gov/archive/2017/) first to verify if the error is in the package itself or in the original product. 
 
-2. [Submit an issue](https://github.com/timtrice/Hurricanes/issues). Errors in data will be given top priority and hotfixes will be created to address any corrections that can be made. 
+2. [Submit an issue](https://github.com/timtrice/rrricanes/issues). Errors in data will be given top priority and hotfixes will be created to address any corrections that can be made. 
 
 Optionally, 
 
 3. [Contribute](https://gist.github.com/timtrice/f2a4c2a020c87669178dad27e73bfce1). I would love to have some help with this package as I do have a couple of other products I am working on or plan on working on. With hurricane season underway, the quicker some of the features can be implemented, the better. Any contributors will receive acknowledgements in the repo and package documentation.
 
-Thank you for taking the time to check out `Hurricanes`. Please feel free to check out [HURDAT](http://timtrice.net/projects/hurdat/) as well. 
+Thank you for taking the time to check out `rrricanes`. Please feel free to check out [HURDAT](http://timtrice.net/projects/hurdat/) as well. 
+
+<small>`Hurricanes` was renamed to `rrricanes`. This page is updated to reflect this change.</small>

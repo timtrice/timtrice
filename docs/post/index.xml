@@ -200,12 +200,12 @@ sudo docker push timtrice/rstudio-3.3.1&lt;/code&gt;&lt;/pre&gt;
     </item>
     
     <item>
-      <title>Introducing Hurricanes, HURDAT</title>
-      <link>/2017-05-16-introducing-hurricanes-hurdat/</link>
+      <title>Introducing rrricanes, HURDAT</title>
+      <link>/2017-05-16-introducing-rrricanes-hurdat/</link>
       <pubDate>Tue, 16 May 2017 10:47:00 -0500</pubDate>
       
-      <guid>/2017-05-16-introducing-hurricanes-hurdat/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;m proud to introduce two new packages for the R community: &lt;strong&gt;HURDAT&lt;/strong&gt; and &lt;strong&gt;&lt;em&gt;Hurricanes&lt;/em&gt;&lt;/strong&gt;.&lt;/p&gt;
+      <guid>/2017-05-16-introducing-rrricanes-hurdat/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;m proud to introduce two new packages for the R community: &lt;strong&gt;HURDAT&lt;/strong&gt; and &lt;strong&gt;&lt;em&gt;rrricanes&lt;/em&gt;&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;p&gt;Both packages are complimentary to one another.&lt;/p&gt;
 
@@ -237,18 +237,18 @@ sudo docker push timtrice/rstudio-3.3.1&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;vignette(&amp;quot;hurdat&amp;quot;, package = &amp;quot;HURDAT&amp;quot;)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;a href=&#34;../projects/hurricanes/&#34;&gt;Hurricanes&lt;/a&gt; gathers more comprehensive data for Atlantic and northeast Pacific tropical cyclones. However, this data currently only goes back to 1998. It does include real-time data for active cyclones.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;../projects/rrricanes/&#34;&gt;rrricanes&lt;/a&gt; gathers more comprehensive data for Atlantic and northeast Pacific tropical cyclones. However, this data currently only goes back to 1998. It does include real-time data for active cyclones.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Hurricanes&lt;/em&gt;&lt;/strong&gt; provides details on the current position and structure of the storm as well as forecast positions. Additionally, technical and public discussions, if available, can be retrieved from the package.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;rrricanes&lt;/em&gt;&lt;/strong&gt; provides details on the current position and structure of the storm as well as forecast positions. Additionally, technical and public discussions, if available, can be retrieved from the package.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Hurricanes&lt;/em&gt;&lt;/strong&gt; is not currently available in CRAN. Please consider it a beta release. Install the package with:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;rrricanes&lt;/em&gt;&lt;/strong&gt; is not currently available in CRAN. Please consider it a beta release. Install the package with:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;devtools::install_github(&amp;quot;timtrice/Hurricanes&amp;quot;)
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;devtools::install_github(&amp;quot;timtrice/rrricanes&amp;quot;)
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;After loading the library, take a look at the &amp;ldquo;Getting Started&amp;rdquo; vignette:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;vignette(&amp;quot;getting-started&amp;quot;, package = &amp;quot;Hurricanes&amp;quot;)
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;vignette(&amp;quot;getting-started&amp;quot;, package = &amp;quot;rrricanes&amp;quot;)
 &lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>

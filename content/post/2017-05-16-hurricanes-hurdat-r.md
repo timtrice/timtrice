@@ -1,11 +1,11 @@
 ---
-title: "Introducing Hurricanes, HURDAT"
+title: "Introducing rrricanes, HURDAT"
 date: 2017-05-16T10:47:00-05:00
 author: "Tim Trice"
-tags: ["R", "Hurricanes", "HURDAT"]
+tags: ["R", "rrricanes", "HURDAT"]
 ---
 
-I'm proud to introduce two new packages for the R community: __HURDAT__ and ___Hurricanes___. 
+I'm proud to introduce two new packages for the R community: __HURDAT__ and ___rrricanes___. 
 
 Both packages are complimentary to one another. 
 
@@ -37,18 +37,18 @@ After loading ___HURDAT___ take a look at the vignette.
 vignette("hurdat", package = "HURDAT")
 ```
 
-[Hurricanes](/projects/hurricanes/) gathers more comprehensive data for Atlantic and northeast Pacific tropical cyclones. However, this data currently only goes back to 1998. It does include real-time data for active cyclones.
+[rrricanes](/projects/rrricanes/) gathers more comprehensive data for Atlantic and northeast Pacific tropical cyclones. However, this data currently only goes back to 1998. It does include real-time data for active cyclones.
 
-___Hurricanes___ provides details on the current position and structure of the storm as well as forecast positions. Additionally, technical and public discussions, if available, can be retrieved from the package. 
+___rrricanes___ provides details on the current position and structure of the storm as well as forecast positions. Additionally, technical and public discussions, if available, can be retrieved from the package. 
 
-___Hurricanes___ is not currently available in CRAN. Please consider it a beta release. Install the package with:
+___rrricanes___ is not currently available in CRAN. Please consider it a beta release. Install the package with:
 
 ```r
-devtools::install_github("timtrice/Hurricanes")
+devtools::install_github("timtrice/rrricanes")
 ```
 
 After loading the library, take a look at the "Getting Started" vignette:
 
 ```r
-vignette("getting-started", package = "Hurricanes")
+vignette("getting-started", package = "rrricanes")
 ```
