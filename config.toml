@@ -34,7 +34,7 @@ publishDir = "docs"
     # options for highlight.js (version, additional languages, and theme)
     highlightjsVersion = "9.11.0"
     highlightjsCDN = "//cdn.bootcss.com"
-    highlightjsLang = ["r", "yaml"]
+    highlightjsLang = ["r", "yaml", "sql", "python"]
     highlightjsTheme = "github"
 
 [[menu.main]]
