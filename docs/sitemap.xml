@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
     <loc>/2017-05-17-rstudio-in-docker/</loc>
     <lastmod>2017-05-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/2017-05-16-introducing-rrricanes-hurdat/</loc>
-    <lastmod>2017-05-16T10:47:00-05:00</lastmod>
   </url>
   
   <url>
@@ -27,16 +23,6 @@
   </url>
   
   <url>
-    <loc>/projects/hurdat/</loc>
-  </url>
-  
-  <url>
-    <loc>/tags/hurdat/</loc>
-    <lastmod>2017-05-16T10:47:00-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/post/</loc>
     <lastmod>2017-05-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -44,11 +30,6 @@
   
   <url>
     <loc>/tags/projects/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/projects/</loc>
     <priority>0</priority>
   </url>
   
@@ -69,13 +50,8 @@
   </url>
   
   <url>
-    <loc>/tags/rrricanes/</loc>
-    <lastmod>2017-05-16T10:47:00-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/tags/</loc>
+    <lastmod>2017-05-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -83,10 +59,6 @@
     <loc>/</loc>
     <lastmod>2017-05-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/projects/rrricanes/</loc>
   </url>
   
 </urlset>
