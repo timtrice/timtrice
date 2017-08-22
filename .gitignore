@@ -5,3 +5,4 @@
 web.Rproj
 docker-compose.yml
 .secrets.env
+blogdown
