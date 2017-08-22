@@ -1,0 +1,130 @@
+---
+title: "Basic Aggregation with MySQL"
+author: "Tim Trice"
+description: "Query statistical values of tropical cyclones"
+categories: ["MySQL", "Basic Aggregation"]
+tags: ["MySQL", "Basic Aggregation"]
+output:
+    blogdown::html_page:
+        toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, 
+                      max.print = NA)
+```
+
+```{r, include = FALSE}
+library(DBI)
+library(RMariaDB)
+```
+
+```{r, include = FALSE}
+host <- Sys.getenv("loving_lamarr.ip")
+user <- Sys.getenv("loving_lamarr.user")
+password <- Sys.getenv("loving_lamarr.password")
+```
+
+```{r, include = FALSE}
+con <- dbConnect(dbDriver("MariaDB"), 
+                 dbname = "rrricanesdata", 
+                 host = host,
+                 user = user, 
+                 password = password)
+```
+
+## Maximum Wind
+
+```{sql, connection = con}
+SELECT `Key`, 
+  MAX(`Wind`) AS MaxWind 
+FROM `adv`
+GROUP BY `Key`
+ORDER BY `MaxWind` DESC
+LIMIT 0, 10;
+```
+
+## Minimum Pressure
+
+```{sql, connection = con}
+SELECT `Key`, 
+  MIN(`Pressure`) AS MinPress
+FROM `adv`
+GROUP BY `Key`
+ORDER BY `MinPress`
+LIMIT 0, 10;
+```
+
+## Count Cyclones per Year
+
+```{sql, connection = con}
+SELECT YEAR(`Date`) AS `Yr`, 
+  COUNT(DISTINCT(`Key`)) AS `n`
+FROM `adv`
+GROUP BY YEAR(`Date`)
+ORDER BY `n` DESC
+LIMIT 0, 10;
+```
+
+## Average Wind
+
+```{sql, connection = con}
+SELECT `Key`, 
+  AVG(`Wind`) AS `AvgWind`
+FROM `adv`
+GROUP BY `Key` 
+ORDER BY `AvgWind` DESC
+LIMIT 0, 10;
+```
+
+## Standard Deviation
+
+$$\text{s} = \sqrt{\frac{1}{N}\sum_{i=1}^{N}\left( x_i - \mu \right)^2}$$
+
+```{sql, connection = con}
+SELECT `Key`, 
+  STDDEV(`Wind`) AS `StdDevWind`
+FROM `adv`
+GROUP BY `Key` 
+ORDER BY `StdDevWind` DESC
+LIMIT 0, 10;
+```
+
+## Sample Standard Deviation
+
+$$\text{s} = \sqrt{\frac{1}{N-1}\sum_{i=1}^{N}\left( x_i - \overline{x} \right)^2}$$
+
+```{sql, connection = con}
+SELECT `Key`, 
+  STDDEV_SAMP(`Wind`) AS `StdDevWind`
+FROM `adv`
+GROUP BY `Key` 
+ORDER BY `StdDevWind` DESC
+LIMIT 0, 10;
+```
+
+## Variance
+
+$$ s^2 = \frac{1}{N}\sum_{i=1}^{N}\left(x_i - \mu^2\right) $$
+
+```{sql, connection = con}
+SELECT `Key`, 
+ VARIANCE(`Wind`) AS `VarWind`
+FROM `adv`
+GROUP BY `Key` 
+ORDER BY `VarWind` DESC
+LIMIT 0, 10
+```
+
+## Sample Variance
+
+$$ s^2 = \frac{1}{N-1}\sum_{i=1}^{N}\left(x_i - \mu\right)^2 $$
+
+```{sql, connection = con}
+SELECT `Key`, 
+ VAR_SAMP(`Wind`) AS `VarWind`
+FROM `adv`
+GROUP BY `Key` 
+ORDER BY `VarWind` DESC
+LIMIT 0, 10
+```
