@@ -43,11 +43,21 @@ publishDir = "docs"
     weight = 1
 
 [[menu.main]]
+  name = "R"
+  url = "/r/"
+  weight = 100
+
+[[menu.main]]
+  name = "MySQL"
+  url = "/mysql/"
+  weight = 500
+
+[[menu.main]]
     name = "Projects"
     url = "/projects/"
-    weight = 2
+    weight = 10000
 
 [[menu.main]]
     name = "About"
     url = "/about/"
-    weight = 3
+    weight = 10000000
