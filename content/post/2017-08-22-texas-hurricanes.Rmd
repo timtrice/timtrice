@@ -1,0 +1,77 @@
+---
+title: Texas Hurricanes
+author: ~
+date: '2017-08-22'
+slug: texas-hurricanes
+categories: []
+tags: []
+description: ''
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(geosphere)
+library(HURDAT)
+library(lubridate)
+library(purrr)
+library(rrricanes)
+```
+
+```{r}
+stations <- al_prblty_stations()
+stations.tx <- stations[grepl("Brownsville|Corpus Christi|Galveston", 
+                              stations$Location, 
+                              ignore.case = TRUE),]
+```
+
+```{r}
+p2 <- AL %>% select(Lon, Lat) %>% as.matrix()
+
+df <- AL %>% 
+  mutate(Brownsville = distHaversine(stations.tx %>% 
+                                       filter(Location == "BROWNSVILLE TX") %>% 
+                                       select(Lon, Lat) %>% 
+                                       as.matrix(), 
+                                     p2), 
+         Corpus.Christi = distHaversine(stations.tx %>%
+                                          filter(Location == "CORPUS CHRISTI") %>% 
+                                          select(Lon, Lat) %>% 
+                                          as.matrix(), 
+                                        p2), 
+         Galveston = distHaversine(stations.tx %>% 
+                                     filter(Location == "GALVESTON TX") %>% 
+                                     select(Lon, Lat) %>% 
+                                     as.matrix(), 
+                                   p2))
+```
+
+## Brownsville, TX
+
+```{r}
+x <- df %>% 
+  group_by(Key) %>% 
+  arrange(Brownsville) %>% 
+  filter(Brownsville < 5280 * 50) %>% 
+  summarise(Name = first(Name), 
+            Dist = first(Brownsville), 
+            Wind = first(Wind), 
+            Date = first(DateTime)) %>% 
+  arrange(Dist)
+```
+
+## Landfall by Date
+
+```{r}
+ggplot(x, aes(x = month(Date))) + geom_histogram()
+```
+
+```{r}
+al_tracking_chart(color = "black", size = 0.1, fill = "white") + 
+  geom_point(data = HURDAT::AL %>% filter(Key %in% x$Key), 
+             aes(x = Lon, y = Lat))
+```
