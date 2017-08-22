@@ -1,0 +1,216 @@
+---
+title: "Basic Aggregation with R"
+author: "Tim Trice"
+description: "Query statistical values of tropical cyclones"
+categories: ["R", "Basic Aggregation"]
+tags: ["R", "Basic Aggregation"]
+output:
+    blogdown::html_page:
+        toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(knitr)
+library(rrricanesdata)
+```
+
+```{r}
+str(adv)
+```
+
+## Base
+
+### Maximum Wind
+
+Find maximum `Wind` grouped by `Key`:
+
+```{r}
+df <- aggregate(Wind ~ Key, adv, max)
+df <- df[with(df, order(-df$Wind)),][1:10,]
+kable(df, row.names = FALSE)
+```
+
+### Minimum Pressure
+
+Find minimum `Wind` grouped by `Pressure`:
+
+```{r}
+df <- aggregate(Pressure ~ Key, adv, min)
+df <- df[with(df, order(df$Pressure)),][1:10,]
+kable(df, row.names = FALSE)
+```
+
+### Count Cyclones per Year
+
+```{r}
+df <- adv
+df$Yr <- as.numeric(format(df$Date, "%Y"))
+df <- aggregate(Key ~ Yr, df, FUN = function(x) length(unique(x)))
+df <- df[with(df, order(-df$Key)),][1:10,]
+kable(df, row.names = FALSE)
+```
+
+### Average Wind
+
+```{r}
+df <- aggregate(Wind ~ Key, adv, mean)
+df <- df[with(df, order(-df$Wind)),][1:10,]
+kable(df, row.names = FALSE)
+```
+
+### Sample Standard Deviation
+
+```{r}
+df <- aggregate(Wind ~ Key, adv, sd)
+df <- df[with(df, order(-df$Wind)),][1:10,]
+kable(df, row.names = FALSE)
+```
+
+### Sample Variance
+
+```{r}
+df <- aggregate(Wind ~ Key, adv, var)
+df <- df[with(df, order(-df$Wind)),][1:10,]
+kable(df, row.names = FALSE)
+```
+
+## dplyr
+
+```{r, message = FALSE}
+library(dplyr)
+```
+
+### Maximum Wind
+
+```{r}
+adv %>% group_by(Key) %>% 
+  summarise(MaxWind = max(Wind)) %>% 
+  arrange(desc(MaxWind)) %>% 
+  slice(1:10) %>% 
+  # for presentation only
+  kable()
+```
+
+### Minimum Pressure
+
+```{r}
+adv %>% group_by(Key) %>% 
+  summarise(MinPress = min(Pressure)) %>% 
+  arrange(MinPress) %>% 
+  slice(1:10) %>% 
+  # for presentation only
+  kable()
+```
+
+### Count Cyclones per Year
+
+```{r}
+adv %>% 
+  mutate(Yr = as.numeric(format(Date, "%Y"))) %>% 
+  group_by(Yr) %>% 
+  summarise(n = n_distinct(Key)) %>% 
+  arrange(desc(n)) %>% 
+  slice(1:10) %>% 
+  # for presentation only
+  kable()
+```
+
+### Average Wind
+
+```{r}
+adv %>% 
+  group_by(Key) %>% 
+  summarise(AvgWind = mean(Wind)) %>% 
+  arrange(desc(AvgWind)) %>% 
+  slice(1:10) %>% 
+  # for presentation only
+  kable()
+```
+
+### Sample Standard Deviation
+
+```{r}
+adv %>% 
+  group_by(Key) %>% 
+  summarise(StdDevWind = sd(Wind, na.rm = TRUE)) %>% 
+  arrange(desc(StdDevWind)) %>% 
+  slice(1:10) %>% 
+  # for presentation only
+  kable()
+```
+
+### Sample Variance
+
+```{r}
+adv %>% 
+  group_by(Key) %>% 
+  summarise(VarWind = var(Wind)) %>% 
+  arrange(desc(VarWind)) %>% 
+  slice(1:10) %>% 
+  # for presentation only
+  kable()
+```
+
+## data.table
+
+```{r, message = FALSE}
+library(data.table)
+```
+
+### Maximum Wind
+
+```{r}
+df <- data.table(adv)
+df <- df[, .(MaxWind = max(Wind, na.rm = TRUE)), by = Key][order(-MaxWind)][1:10,]
+kable(df)
+```
+
+### Minimum Pressure
+
+```{r}
+df <- data.table(adv)
+df <- df[, .(MinPress = min(Pressure, na.rm = TRUE)), by = Key][order(MinPress)][1:10,]
+kable(df)
+```
+
+### Count Cyclones per Year
+
+```{r}
+df <- data.table(adv)
+df <- df[, .(n = uniqueN(Key)), by = .(Yr = format(Date, "%Y"))][order(-n)][1:10,]
+kable(df)
+```
+
+### Average Wind
+
+```{r}
+df <- data.table(adv)
+df <- df[, .(AvgWind = mean(Wind)), by = Key][order(-AvgWind)][1:10,]
+kable(df)
+```
+
+### Sample Standard Deviation
+
+```{r}
+df <- data.table(adv)
+df <- df[, .(StdDevWind = sd(Wind)), by = Key][order(-StdDevWind)][1:10,]
+kable(df)
+```
+
+### Sample Variance
+
+```{r}
+df <- data.table(adv)
+df <- df[, .(VarWind = var(Wind)), by = Key][order(-VarWind)][1:10,]
+kable(df)
+```
+
+## Session Info
+
+```{r}
+pander::pander(sessionInfo(), compact = FALSE)
+```
