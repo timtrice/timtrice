@@ -3,12 +3,45 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/2017-08-28-tropical-cyclone-time-over-land/</loc>
+    <lastmod>2017-08-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2017-08-26-top-tornadic-tropical-cyclones/</loc>
+    <lastmod>2017-08-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/2017-05-17-rstudio-in-docker/</loc>
     <lastmod>2017-05-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
+    <loc>/2017-05-16-introducing-rrricanes-hurdat/</loc>
+    <lastmod>2017-05-16T10:47:00-05:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/about/</loc>
+  </url>
+  
+  <url>
+    <loc>/tags/basic-aggregation/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/basic-aggregation/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/mysql/mysql-basic-aggregation/</loc>
+  </url>
+  
+  <url>
+    <loc>/r/r-basic-aggregation/</loc>
   </url>
   
   <url>
@@ -23,8 +56,29 @@
   </url>
   
   <url>
+    <loc>/tags/hurdat/</loc>
+    <lastmod>2017-05-16T10:47:00-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/mysql/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/mysql/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/mysql/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/post/</loc>
-    <lastmod>2017-05-17T00:00:00+00:00</lastmod>
+    <lastmod>2017-08-28T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -39,13 +93,24 @@
   
   <url>
     <loc>/tags/r/</loc>
-    <lastmod>2017-05-17T00:00:00+00:00</lastmod>
+    <lastmod>2017-08-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/categories/r/</loc>
-    <lastmod>2017-05-17T00:00:00+00:00</lastmod>
+    <lastmod>2017-08-26T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/rrricanes/</loc>
+    <lastmod>2017-05-16T10:47:00-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/r/</loc>
     <priority>0</priority>
   </url>
   
@@ -57,7 +122,13 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2017-05-17T00:00:00+00:00</lastmod>
+    <lastmod>2017-08-28T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/weather/</loc>
+    <lastmod>2017-08-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

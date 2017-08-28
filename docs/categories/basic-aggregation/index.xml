@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Basic Aggregation on Tim Trice</title>
+    <link>/categories/basic-aggregation/</link>
+    <description>Recent content in Basic Aggregation on Tim Trice</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="/categories/basic-aggregation/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Basic Aggregation with MySQL</title>
+      <link>/mysql/mysql-basic-aggregation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/mysql/mysql-basic-aggregation/</guid>
+      <description>Maximum Wind Minimum Pressure Count Cyclones per Year Average Wind Standard Deviation Sample Standard Deviation Variance Sample Variance   Maximum Wind SELECT `Key`, MAX(`Wind`) AS MaxWind FROM `adv` GROUP BY `Key` ORDER BY `MaxWind` DESC LIMIT 0, 10;  Table 1: 10 records  Key MaxWind    EP202015 175  AL131998 155  EP202009 155  AL122005 150  AL182005 150  AL242005 150  EP142002 145  AL092004 145  AL042007 145  AL062007 145      Minimum Pressure SELECT `Key`, MIN(`Pressure`) AS MinPress FROM `adv` GROUP BY `Key` ORDER BY `MinPress` LIMIT 0, 10;  Table 2: 10 records  Key MinPress    EP202015 880  AL242005 882  AL182005 897  AL122005 902  AL131998 906  AL042007 906  EP202009 906  AL092004 910  EP142002 915  EP132014 918      Count Cyclones per Year SELECT YEAR(`Date`) AS `Yr`, COUNT(DISTINCT(`Key`)) AS `n` FROM `adv` GROUP BY YEAR(`Date`) ORDER BY `n` DESC LIMIT 0, 10;  Table 3: 10 records  Yr n    2005 46  2016 38  2000 37  2003 37  2012 36  2008 35  2015 34  2001 34  2010 33  2004 32      Average Wind SELECT `Key`, AVG(`Wind`) AS `AvgWind` FROM `adv` GROUP BY `Key` ORDER BY `AvgWind` DESC LIMIT 0, 10;  Table 4: 10 records  Key AvgWind    AL132003 102.</description>
+    </item>
+    
+    <item>
+      <title>Basic Aggregation with R</title>
+      <link>/r/r-basic-aggregation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/r/r-basic-aggregation/</guid>
+      <description>Base Maximum Wind Minimum Pressure Count Cyclones per Year Average Wind Sample Standard Deviation Sample Variance  dplyr Maximum Wind Minimum Pressure Count Cyclones per Year Average Wind Sample Standard Deviation Sample Variance  data.table Maximum Wind Minimum Pressure Count Cyclones per Year Average Wind Sample Standard Deviation Sample Variance  Session Info   library(knitr) library(rrricanesdata) str(adv) ## Classes &amp;#39;tbl_df&amp;#39;, &amp;#39;tbl&amp;#39; and &amp;#39;data.frame&amp;#39;: 13036 obs. of 18 variables: ## $ Key : chr &amp;quot;EP062017&amp;quot; &amp;quot;EP062017&amp;quot; &amp;quot;EP062017&amp;quot; &amp;quot;EP062017&amp;quot; .</description>
+    </item>
+    
+  </channel>
+</rss>

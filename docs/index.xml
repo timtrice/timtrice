@@ -6,10 +6,31 @@
     <description>Recent content on Tim Trice</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 17 May 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 28 Aug 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Tropical Cyclone Time Over Land</title>
+      <link>/2017-08-28-tropical-cyclone-time-over-land/</link>
+      <pubDate>Mon, 28 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017-08-28-tropical-cyclone-time-over-land/</guid>
+      <description>A question was posted earlier wondering the longest time a cyclone had spent over land. Using HURDAT we can calculate this.
+library(dplyr) ## ## Attaching package: &amp;#39;dplyr&amp;#39; ## The following objects are masked from &amp;#39;package:stats&amp;#39;: ## ## filter, lag ## The following objects are masked from &amp;#39;package:base&amp;#39;: ## ## intersect, setdiff, setequal, union library(HURDAT) library(rnaturalearthdata) library(sp) The dataset for Atlantic cyclones dates back to 1851. Using the rnaturalearthdata package in conjunction with HURDAT::AL, we identify Lat/Lon points within AL that are within the map_units50 polygon shapefile.</description>
+    </item>
+    
+    <item>
+      <title>Top Tornadic Tropical Cyclones</title>
+      <link>/2017-08-26-top-tornadic-tropical-cyclones/</link>
+      <pubDate>Sat, 26 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017-08-26-top-tornadic-tropical-cyclones/</guid>
+      <description>With Hurricane Harvey seemingly producing numerous tornadoes (many unconfirmed touchdowns) I wanted to get a view of the top tornadic-producing tropical cyclones.
+History of tropical cyclone-spawned tornadoes lists the “Tropical cyclone tornado data set” (xls) as a source. However, this dataset does not include anything post-2015. I am unable to find an updated dataset.
+As of this writing, officially Harvey has only produced two tornadoes. But, as a resident of the greater Houston area I can tell you the warnings are flying!</description>
+    </item>
     
     <item>
       <title>RStudio in Docker</title>
@@ -21,6 +42,17 @@
     </item>
     
     <item>
+      <title>Introducing rrricanes, HURDAT</title>
+      <link>/2017-05-16-introducing-rrricanes-hurdat/</link>
+      <pubDate>Tue, 16 May 2017 10:47:00 -0500</pubDate>
+      
+      <guid>/2017-05-16-introducing-rrricanes-hurdat/</guid>
+      <description>I&amp;rsquo;m proud to introduce two new packages for the R community: HURDAT and rrricanes.
+Both packages are complimentary to one another.
+HURDAT is a dataset of tropical cyclones that have developed in the Atlantic and northeast Pacific oceans since 1851 and 1949, respectively. HURDAT is a re-analysis project as conducated by the Hurricane Research Division of the National Oceanic and Atmospheric Administration. They review known data to determine the best track, intensity and structure of a cyclone.</description>
+    </item>
+    
+    <item>
       <title>About</title>
       <link>/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -28,6 +60,24 @@
       <guid>/about/</guid>
       <description>I have a huge love of data and finding better solutions to known and unknown issues. For example, when I learned a team was manually entering information into their software, I developed a way to make it point-and-click saving several hours worth of work per week.
 I began programming shortly after my son&amp;rsquo;s birth in 2003. I had already been somewhat exposed to MS Access when a company I worked for needed me to help clean their vendor data registers.</description>
+    </item>
+    
+    <item>
+      <title>Basic Aggregation with MySQL</title>
+      <link>/mysql/mysql-basic-aggregation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/mysql/mysql-basic-aggregation/</guid>
+      <description>Maximum Wind Minimum Pressure Count Cyclones per Year Average Wind Standard Deviation Sample Standard Deviation Variance Sample Variance   Maximum Wind SELECT `Key`, MAX(`Wind`) AS MaxWind FROM `adv` GROUP BY `Key` ORDER BY `MaxWind` DESC LIMIT 0, 10;  Table 1: 10 records  Key MaxWind    EP202015 175  AL131998 155  EP202009 155  AL122005 150  AL182005 150  AL242005 150  EP142002 145  AL092004 145  AL042007 145  AL062007 145      Minimum Pressure SELECT `Key`, MIN(`Pressure`) AS MinPress FROM `adv` GROUP BY `Key` ORDER BY `MinPress` LIMIT 0, 10;  Table 2: 10 records  Key MinPress    EP202015 880  AL242005 882  AL182005 897  AL122005 902  AL131998 906  AL042007 906  EP202009 906  AL092004 910  EP142002 915  EP132014 918      Count Cyclones per Year SELECT YEAR(`Date`) AS `Yr`, COUNT(DISTINCT(`Key`)) AS `n` FROM `adv` GROUP BY YEAR(`Date`) ORDER BY `n` DESC LIMIT 0, 10;  Table 3: 10 records  Yr n    2005 46  2016 38  2000 37  2003 37  2012 36  2008 35  2015 34  2001 34  2010 33  2004 32      Average Wind SELECT `Key`, AVG(`Wind`) AS `AvgWind` FROM `adv` GROUP BY `Key` ORDER BY `AvgWind` DESC LIMIT 0, 10;  Table 4: 10 records  Key AvgWind    AL132003 102.</description>
+    </item>
+    
+    <item>
+      <title>Basic Aggregation with R</title>
+      <link>/r/r-basic-aggregation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/r/r-basic-aggregation/</guid>
+      <description>Base Maximum Wind Minimum Pressure Count Cyclones per Year Average Wind Sample Standard Deviation Sample Variance  dplyr Maximum Wind Minimum Pressure Count Cyclones per Year Average Wind Sample Standard Deviation Sample Variance  data.table Maximum Wind Minimum Pressure Count Cyclones per Year Average Wind Sample Standard Deviation Sample Variance  Session Info   library(knitr) library(rrricanesdata) str(adv) ## Classes &amp;#39;tbl_df&amp;#39;, &amp;#39;tbl&amp;#39; and &amp;#39;data.frame&amp;#39;: 13036 obs. of 18 variables: ## $ Key : chr &amp;quot;EP062017&amp;quot; &amp;quot;EP062017&amp;quot; &amp;quot;EP062017&amp;quot; &amp;quot;EP062017&amp;quot; .</description>
     </item>
     
     <item>

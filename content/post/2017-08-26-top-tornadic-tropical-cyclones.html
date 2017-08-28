@@ -1,0 +1,37 @@
+---
+title: Top Tornadic Tropical Cyclones
+author: ~
+date: '2017-08-26'
+slug: top-tornadic-tropical-cyclones
+categories: [R]
+tags: [R, weather]
+---
+
+
+
+<p>With Hurricane Harvey seemingly producing numerous tornadoes (many unconfirmed touchdowns) I wanted to get a view of the top tornadic-producing tropical cyclones.</p>
+<p><a href="https://en.wikipedia.org/wiki/History_of_tropical_cyclone-spawned_tornadoes">History of tropical cyclone-spawned tornadoes</a> lists the “<a href="http://www.spc.noaa.gov/misc/edwards/TCTOR/tctor.xls">Tropical cyclone tornado data set</a>” (xls) as a source. However, this dataset does not include anything post-2015. I am unable to find an updated dataset.</p>
+<p>As of this writing, officially Harvey has only produced two tornadoes. But, as a resident of the greater Houston area I can tell you the warnings are flying! So, yea, I’m choosing to look for data rather than shelter down in the bathroom. Priorities, man!</p>
+<pre class="r"><code>library(dplyr)
+library(ggplot2)
+library(readxl)
+library(stringr)</code></pre>
+<pre class="r"><code>url &lt;- &quot;http://www.spc.noaa.gov/misc/edwards/TCTOR/tctor.xls&quot;
+tmp &lt;- tempfile()
+f &lt;- download.file(url, destfile = tmp)
+df &lt;- read_xls(path = tmp, sheet = &quot;By TC&quot;)
+names(df) &lt;- str_replace_all(names(df), &quot; &quot;, &quot;.&quot;)
+df &lt;- df[complete.cases(df),]</code></pre>
+<pre class="r"><code>df %&gt;% 
+  filter(!(TC.Name == &quot;TOTALS&quot;)) %&gt;% 
+  top_n(20, Tors) %&gt;% 
+  ggplot(aes(x = reorder(TC.Name, -Tors, sum), y = Tors)) + 
+  geom_bar(stat = &quot;identity&quot;) + 
+  theme_bw() + 
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.4, hjust = 1)) + 
+  labs(title = &quot;Tornadoes by Tropical Cyclone&quot;, 
+       subtitle = &quot;Top 20 tornadic-producing tropical cyclones (pre 2015)&quot;, 
+       caption = &quot;Edwards, Roger, et al. \&quot;Tropical cyclone tornado data set\ (xls)\&quot;. Storm Prediction Center.&quot;, 
+       x = &quot;Tropical Cyclone&quot;, 
+       y = &quot;Tornadoes&quot;)</code></pre>
+<p><img src="/post/2017-08-26-top-tornadic-tropical-cyclones_files/figure-html/top_20_tornadic_cyclones-1.png" width="672" /></p>
