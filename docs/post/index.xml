@@ -6,10 +6,21 @@
     <description>Recent content in Posts on Tim Trice</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 28 Aug 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 06 Sep 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Hurricane Harvey Post Storm Report (Houston)</title>
+      <link>/2017-09-06-hurricane-harvey-post-storm-report-houston/</link>
+      <pubDate>Wed, 06 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017-09-06-hurricane-harvey-post-storm-report-houston/</guid>
+      <description>library(dplyr) library(ggplot2) library(ggrepel) library(knitr) library(lubridate) library(plotly) library(purrr) library(rrricanes) library(stringr) library(tibble) library(tidyr) Per the National Weather Service in Houston, TX, the following data are preliminary results from Hurricane Harvey:
+ THE DATA SHOWN HERE ARE PRELIMINARY….AND SUBJECT TO UPDATES AND CORRECTIONS AS APPROPRIATE.
+  THIS REPORT INCLUDES EVENTS OCCURRING WHEN WATCHES AND/OR WARNINGS WERE IN EFFECT…OR WHEN SIGNIFICANT FLOODING ASSOCIATED WITH HARVEY OR ITS REMNANTS WAS AFFECTING THE AREA.</description>
+    </item>
     
     <item>
       <title>Tropical Cyclone Time Over Land</title>
