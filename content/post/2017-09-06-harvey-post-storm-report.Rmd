@@ -1,284 +1,340 @@
 ---
-title: Hurricane Harvey Post Storm Report (Houston)
+title: Hurricane Harvey Post Storm Report
 author: ~
 date: '2017-09-06'
-slug: hurricane-harvey-post-storm-report-houston
+slug: hurricane-harvey-report
 categories: [r, hurricanes, harvey]
 tags: [r, hurricanes, harvey]
+output:
+  blogdown::html_page:
+    toc: true
 ---
 
-```{r libraries, message = FALSE}
+In early September, 2017, National Weather Service offices in Brownsville, Corpus Christi, San Antonio, and Houston, Texas, and Lake Charles, Louisiana released preliminary data reports on Hurricane Harvey.
+
+```{r libraries, echo = FALSE, message = FALSE}
 library(dplyr)
 library(ggplot2)
 library(ggrepel)
 library(knitr)
 library(lubridate)
-library(plotly)
 library(purrr)
-library(rrricanes)
 library(stringr)
 library(tibble)
-library(tidyr)
 ```
 
-Per the National Weather Service in Houston, TX, the following data are preliminary results from Hurricane Harvey:
+```{r data, echo = FALSE}
+# URLs to reports. These links point to the latest product so the text may 
+# change over time. Raw data will be saved in the GitHub repo:
+# https://github.com/timtrice/web
 
-> THE DATA SHOWN HERE ARE PRELIMINARY....AND SUBJECT TO UPDATES AND CORRECTIONS AS APPROPRIATE.
-
-> THIS REPORT INCLUDES EVENTS OCCURRING WHEN WATCHES AND/OR WARNINGS WERE IN EFFECT...OR WHEN SIGNIFICANT FLOODING ASSOCIATED WITH HARVEY OR ITS REMNANTS WAS AFFECTING THE AREA.
-
-> COUNTIES INCLUDED...MADISON...MADISON...WALKER...BRAZOS...GRIMES...MONTGOMERY...SAN JACINTO...POLK...WASHINGTON...BURLESON...WALLER...HARRIS...LIBERTY...AUSTIN...COLORADO...WHARTON...FORT BEND...JACKSON...MATAGORDA...BRAZORIA...GALVESTON...CHAMBERS...TRINITY
-
-```{r data}
-# Load raw data
-rpt <- "https://nwschat.weather.gov/p.php?pid=201709062030-KHGX-ACUS74-PSHHGX"
-txt <- readLines(rpt)
-
-# Set base plot
-bp <- al_tracking_chart(color = "black", fill = "white", size = 0.1, res = 50)
+if (!(file.exists("data/harvey-post-storm-report.rds"))) {
+  rpts <- c(
+    "bro" = "ftp://tgftp.nws.noaa.gov/data/raw/ac/acus74.kbro.psh.bro.txt", 
+    "crp" = "ftp://tgftp.nws.noaa.gov/data/raw/ac/acus74.kcrp.psh.crp.txt", 
+    "ewx" = "ftp://tgftp.nws.noaa.gov/data/raw/ac/acus74.kewx.psh.ewx.txt", 
+    "hgx" = "ftp://tgftp.nws.noaa.gov/data/raw/ac/acus74.khgx.psh.hgx.txt", 
+    "lch" = "ftp://tgftp.nws.noaa.gov/data/raw/ac/acus74.klch.psh.lch.txt", 
+    "lix" = "ftp://tgftp.nws.noaa.gov/data/raw/ac/acus74.klix.psh.lix.txt")
+  
+  # Read data
+  txt <- map(rpts, ~readLines(.x))
+  
+  # Save data
+  saveRDS(txt, file = file.path("data/harvey-post-storm-report.rds"))
+  message("ok")
+} else {
+  txt <- readRDS(file = file.path("data/harvey-post-storm-report.rds"))
+}
 ```
 
-## Lowest SLP, Maximum Sustained Winds and Gusts
+```{r a_b_normalize, echo = FALSE}
+## ---- Section A. Lowest Sea Level Pressure ----
+## ---- Section B. Marine Obs ----
+slp_raw <- c(map(txt, ~.[grep("^A\\.", .):grep("^C\\.", .)])) %>% 
+  flatten_chr()
 
-```{r slp}
-# subset section A
-sec_a <- txt[grep("^A\\. LOWEST SEA LEVEL PRESSURE", txt):(grep("^B\\. MARINE OBSERVATIONS", txt) - 1)]
-# trim head
-sec_a <- sec_a[-c(1:9)]
-# trim tail
-sec_a <- head(sec_a, n = -4L)
+# Get a count of all rows that begin with a latitude followed by longitude. 
+# This will tell me exactly how many records I have.
+# * \\s between lat and lon may be one or multiple lengths. 
+slp_obs_ptn <- "^\\d\\d\\.\\d\\d\\s*-*\\d\\d\\d*\\.\\d\\d.+"
+slp_n <- sum(str_count(slp_raw, slp_obs_ptn))
 
-# subset section B
-sec_b <- txt[grep("^B\\. MARINE OBSERVATIONS", txt):(grep("^C\\. STORM TOTAL RAINFALL", txt) - 1)]
-# trim head
-sec_b <- sec_b[-c(1:8)]
-# trim tail
-sec_b <- head(sec_b, n = -5L)
+# Get indices of values for n
+slp_obs_n <- str_which(slp_raw, slp_obs_ptn)
+# The location for the obs will be the line immediatley preceeding it. 
+# Therefore, we can get the station data by calculating x - 1
+slp_stations_n <- slp_obs_n - 1
 
-# Bind to sec
-sec <- c(sec_a, sec_b)
+# Load stations
+# Here, I trim the strings then take the nchar of longest string, round to 
+# nearest ten and pad the string. I'll use this to help extract data.
+slp_stations <- slp_raw[slp_stations_n] %>% 
+  str_trim() %>% 
+  str_pad(width = round(max(nchar(.)), digits = -1), side = "right") %>% 
+  # Replace first "-" with "\t" to help split ID and Station
+  str_replace("\\s*-\\s*", "\t")
 
-# There is a subheader in middle I'll also manually remove
-sec <- sec[-c(78:88)]
+# Load observations and trim
+slp_obs <- slp_raw[slp_obs_n]
 
-# Get station header data
-stations <- str_match(sec, 
-                      sprintf("^%s[\\s-]*?%s[\\s-]*?%s[\\s]+$", 
-                              "([[K|X|J|4]\\w]{3,5})",   # Station
-                              "([\\w\\s/\\.\\(\\)]+)",       # Location
-                              "([\\D]{2})")) %>%             # State
-  .[complete.cases(.),]
-
-# Get station obs. I really wanted to expand the regex to do this; use it as 
-# a learning opportunity. But, apparently my skills aren't quite that 
-# advanced... oh, well
-obs <- str_match(sec, "^(\\d{2}\\.\\d{2}.+$)")[,2] %>% .[complete.cases(.)]
-
-# Move to dataframe
-slp <- as_data_frame(
-  list("Station" = stations[,2], 
-       "Location" = stations[,3], 
-       "State" = stations[,4], 
-       "Lat" = as.numeric(str_sub(obs, 0L, 5L)), 
-       "Lon" = as.numeric(str_sub(obs, 7L, 12L)), 
-       "MinPres" = as.numeric(str_sub(obs, 16L, 21L)), 
-       "MinPresDt" = as.POSIXct(ymd_hm(sprintf("2017-08-%s %s", 
-                                               str_sub(obs, 23L, 24L), 
-                                               str_sub(obs, 26L, 29L))), 
-                               tz = "UTC"), 
-       "Remarks" = str_sub(obs, 31L, 31L), 
-       "MaxSustDir" = as.numeric(str_sub(obs, 33L, 35L)), 
-       "MaxSustSpd" = as.numeric(str_sub(obs, 37L, 39L)),
-       "MaxSustDt" = as.POSIXct(ymd_hm(sprintf("2017-08-%s %s", 
-                                               str_sub(obs, 42L, 43L), 
-                                               str_sub(obs, 45L, 48L))), 
-                               tz = "UTC"), 
-       "PeakGustDir" = as.numeric(str_sub(obs, 52L, 54L)), 
-       "PeakGustSpd" = as.numeric(str_sub(obs, 56L, 58L)),
-       "PeakGustDt" = as.POSIXct(ymd_hm(sprintf("2017-08-%s %s", 
-                                                str_sub(obs, 60L, 61L), 
-                                                str_sub(obs, 63L, 66L))), 
-                               tz = "UTC"))) %>% 
-  mutate(Lat = if_else(Lat < 0, Lat * -1, Lat), 
-         Lon = if_else(Lon > 0, Lon * -1, Lon))
-
-# Clean up
-slp$MinPres[slp$MinPres == 9999.0] <- NA
-slp$MaxSustDir[slp$MaxSustDir == 999] <- NA
-slp$MaxSustSpd[slp$MaxSustSpd == 999] <- NA
+# Combine stations and obs
+slp <- str_c(slp_stations, slp_obs)
 ```
 
-```{r slp_plot, message = FALSE, fig.width = 7}
-p <- bp + 
-  geom_point(data = slp, 
-             aes(x = Lon, y = Lat, 
-                 text = sprintf("%s\n%s, %s\n%s UTC", 
-                                Station, 
-                                Location, 
-                                State, 
-                                MaxSustDt), 
-                 size = MaxSustSpd, color = MaxSustSpd)) + 
-  coord_equal(xlim = c(min(slp$Lon, na.rm = TRUE), max(slp$Lon, na.rm = TRUE)), 
-              ylim = c(min(slp$Lat, na.rm = TRUE), max(slp$Lat, na.rm = TRUE)))
-
-ggplotly(p, tooltip = c("text", "size", "color"))
+```{r a_b_parse, echo = FALSE}
+# Begin extraction.
+tmp <- str_match(slp, 
+                 sprintf("^%s%s%s%s%s%s%s%s%s%s%s%s$", 
+                         # ID-Station
+                         "(\\w+)\t*(?<=\t{0,1})(.+)(?=\\s+\\d{2}\\.\\d{2})",
+                         # Lat
+                         "\\s+(\\d{2}\\.\\d{2})",
+                         # Lon
+                         "\\s+-*(\\d{2,6}\\.\\d{2})",
+                         # Pres
+                         "\\s+(\\d{1,4}\\.\\d{1})*",
+                         # PresDT
+                         "\\s+([\\w/]{1,7})*",
+                         # PresRmks
+                         "\\s+(I)*",
+                         # WindDir, Wind
+                         "\\s+(\\w{3})/(\\d{3})", 
+                         # Wind DTd (d), WindDThm (hm)
+                         "\\s+(\\d{2,3})*/*(\\d{3,4})*", 
+                         # WindRmks
+                         "\\s+(I)*", 
+                         # GustDir, Gust
+                         "\\s+(\\w{3})*/*(\\d{3})*", 
+                         # GustDTd, GustDThm
+                         "\\s+(\\d{2})*/*(\\d{4})*", 
+                         # GustRmks
+                         "\\s+(I)*")) %>% 
+  as_tibble() %>% 
+  rename(txt = V1, ID = V2, Station = V3, Lat = V4, Lon = V5, Pres = V6, 
+         PresDT = V7, PresRmks = V8, WindDir = V9, Wind = V10, WindDTd = V11, 
+         WindDThm = V12, WindRmks = V13, GustDir = V14, Gust = V15, 
+         GustDTd = V16, GustDThm = V17, GustRmks = V18)
 ```
 
-## Storm Total Rainfall
+## Plots and Charts
 
-Storm total rainfall from Aug. 25, 12:00 UTC (7:00 AM CDT) through Aug. 31 12:00 UTC (7:00 AM CDT)
+## Tables
 
-```{r rain}
-rain_obs <- txt[grep("^C\\. STORM TOTAL RAINFALL", txt):(grep("^D\\. INLAND FLOODING", txt) - 1)]
+## Code
 
-# Drop header and tail data
-rain_obs <- rain_obs[-c(1:6)]
-rain_obs <- head(rain_obs, -2L)
+Explain the why you did what you did
 
-# Drop empties
-rain_obs <- rain_obs[rain_obs != ""]
+### Libraries
 
-# Here I'll get observations first
-pos <- str_match(rain_obs, sprintf("^%s[\\s]+%s[\\s]?$", 
-                                 "([\\d\\.]{5})", 
-                                 "([-\\d\\.]{6})"))
-# Remove NAs
-pos <- pos[complete.cases(pos),]
-
-# Get location details
-loc <- str_match(rain_obs, sprintf("^%s[\\s]{3,}%s[\\s]{3,}%s[\\s]{3,}%s[\\s]+%s$", 
-                                   "([\\w\\d\\s\\.\\-/]{1,29})", # Location
-                                   "([\\w\\s]{1,20})",           # County
-                                   "([\\w\\d-=]*)",         # ID
-                                   "([\\d\\.]{3,5})",           # Rainfall
-                                   "(I*)")) %>%             # Remarks
-  .[complete.cases(.),]
-
-# Make df
-rain <- as_data_frame(
-  list("Location" = loc[,2], 
-       "County" = loc[,3], 
-       "ID" = loc[,4], 
-       "Rainfall" = as.numeric(loc[,5]), 
-       "Remarks" = loc[,6],
-       "Lat" = as.numeric(pos[,2]), 
-       "Lon" = as.numeric(pos[,3]))) %>% 
-  mutate(Lat = if_else(Lat < 0, Lat * -1, Lat), 
-         Lon = if_else(Lon > 0, Lon * -1, Lon))
+```{r ref.label = "libraries", eval = FALSE}
 ```
 
-```{r rain_plot}
-p <- bp + 
-  geom_point(data = rain, 
-             aes(x = Lon, y = Lat, 
-                 text = sprintf("%s\n%s, %s", 
-                                ID, 
-                                Location, 
-                                County), 
-                 size = Rainfall, color = Rainfall)) + 
-  coord_equal(xlim = c(min(rain$Lon, na.rm = TRUE), max(rain$Lon, na.rm = TRUE)), 
-              ylim = c(min(rain$Lat, na.rm = TRUE), max(rain$Lat, na.rm = TRUE)))
+### Data
 
-ggplotly(p, tooltip = c("text", "size", "color"))
+```{r ref.label = "data", eval = FALSE}
 ```
 
-## Maximum Storm Surge and Storm Tide
+#### Sea Level Pressure and Marine Observations
+
+Each section has a header.
+
+```
+A. LOWEST SEA LEVEL PRESSURE/MAXIMUM SUSTAINED WINDS AND PEAK GUSTS
+---------------------------------------------------------------------
+METAR OBSERVATIONS...
+NOTE: ANEMOMETER HEIGHT IS 10 METERS AND WIND AVERAGING IS 2 MINUTES
+---------------------------------------------------------------------
+LOCATION  ID    MIN    DATE/     MAX      DATE/     PEAK    DATE/
+LAT  LON        PRES   TIME      SUST     TIME      GUST    TIME
+DEG DECIMAL     (MB)   (UTC)     (KT)     (UTC)     (KT)    (UTC)
+---------------------------------------------------------------------
+```
+
+```
+B. MARINE OBSERVATIONS...
+NOTE: ANEMOMETER HEIGHT IN METERS AND WIND AVERAGING PERIOD IN
+MINUTES INDICATED UNDER MAXIMUM SUSTAINED WIND IF KNOWN
+---------------------------------------------------------------------
+LOCATION  ID    MIN    DATE/     MAX      DATE/     PEAK    DATE/
+LAT  LON        PRES   TIME      SUST     TIME      GUST    TIME
+DEG DECIMAL     (MB)   (UTC)     (KT)     (UTC)     (KT)    (UTC)
+---------------------------------------------------------------------
+```
+
+Additionally, a subsection of A exists:
+
+```
+NON-METAR OBSERVATIONS... 
+NOTE: ANEMOMETER HEIGHT IN METERS AND WIND AVERAGING PERIOD IN
+MINUTES INDICATED UNDER MAXIMUM SUSTAINED WIND IF KNOWN
+---------------------------------------------------------------------
+LOCATION  ID    MIN    DATE/     MAX      DATE/     PEAK    DATE/
+LAT  LON        PRES   TIME      SUST     TIME      GUST    TIME
+DEG DECIMAL     (MB)   (UTC)     (KT)     (UTC)     (KT)    (UTC)
+---------------------------------------------------------------------
+```
+
+That is irrelevant and is ignored. 
+
+I loop through the text products and extract both sections A and B by identifying where section C begins. This gives me a start and end index that I can then subset to `slp_raw`. 
+
+From there, I identify all values that begin with a latitude and longitude field; our observations. First I count these values (`slp_n`) so that I know exactly how long my final results will be (and to check progress as I move along, making sure I haven't inadvertently removed anything).
+
+Once I know where the observation indices are (`slp_obs_n`) I can find the station identification by calculating `slp_obs_n - 1`; this gives me `slp_stations_n`. 
+
+Thereafter, I combine both subsets into `slp` which puts stations and observations on one line. 
+
+As a last bit of cleanup, I replace consecutive space characters (`\\s`) with one space and then trim the edges.
+
+```{r ref.label = "a_b_normalize", eval = FALSE}
+```
+
+Following are the expected fields that will be retrieved from the results of `slp`.
+
+##### Station ID [`ID`]
+
+1. Hyphen character does not necessarily separate `ID` and `Station`:
 
 ```{r}
-tide_obs <- txt[grep("^E\\. MAXIMUM STORM SURGE AND STORM TIDE", txt):(grep("^F\\. TORNADOES", txt) - 1)]
-# Trim the edges
-tide_obs <- tide_obs[-c(1:7)]
-tide_obs <- head(tide_obs, n = -5L)
-tide_obs[tide_obs == ""] <- NA
-tide_obs <- tide_obs[complete.cases(tide_obs)]
-
-tide <- as_data_frame(
-  list("County" = str_trim(str_sub(tide_obs, 0L, 16L)), 
-       "Location" = str_trim(str_sub(tide_obs, 18L, 32L)), 
-       "Surge" = as.numeric(str_trim(str_sub(tide_obs, 34L, 39L))), 
-       "Tide" = as.numeric(str_trim(str_sub(tide_obs, 42L, 46L))), 
-       "DateTime" = as.POSIXct(ymd_hm(sprintf("2017-08-%s %s", 
-                                              str_sub(tide_obs, 49L, 50L), 
-                                              str_sub(tide_obs, 52L, 55L))), 
-                               tz = "UTC"), 
-       "Erosion" = str_trim(str_sub(tide_obs, 58L, 64L))))
+slp[grep("^TXVC-4", slp)]
 ```
 
-```{r tide_table}
-kable(tide, caption = "Storm Surge and Storm Tide Totals (ft)")
-```
+##### Station [`Station`] *opt*
 
-## Tornadoes
+1. Old data may exist; see this reference to Tropical Storm Cindy:
 
 ```{r}
-tor_obs <- txt[grep("^F\\. TORNADOES", txt):(grep("^G\\. STORM IMPACTS BY COUNTY", txt) - 1)]
-tor_obs <- tor_obs[-c(1:6)]
-tor_obs <- head(tor_obs, n = -3L)
-
-# county, time and tornado scale
-loc <- str_match(tor_obs, "^([\\w\\d\\s]{28})\\s+([\\w\\s]{16})\\s+([\\d/]{7})\\s+(EF\\d)\\s+$") %>% 
-  .[complete.cases(.),]
-
-# lat, lon
-pos <- str_match(tor_obs, "^([\\d\\.]{4,5})\\s+([-\\d\\.]{4,6})$") %>% 
-  .[complete.cases(.),]
-
-# Now, get the remarks. Subtract loc and pos to make it easier.
-# Essentially, what I'm doing here is joining the vector together 
-# with a \t. Consecutive \t's indicate a break between remarks so 
-# make that a newline. Then split on \n and trim, return to vector.
-rmks <- tor_obs[!(tor_obs %in% c(loc, pos))]
-rmks <- str_c(rmks, collapse = "\t")
-rmks <- str_replace_all(rmks, "\t\t+", "\n")
-rmks <- str_replace_all(rmks, "\t", " ")
-rmks <- str_split(rmks, "\n")
-rmks <- map(rmks, str_trim, side = "both") %>% flatten_chr()
-
-tors <- as_data_frame(
-  list("Location" = loc[,2], 
-       "County" = loc[,3], 
-       "Date" = as.POSIXct(ymd_hm(sprintf("2017-08-%s %s", 
-                                          str_sub(loc[,4], 0L, 2L), 
-                                          str_sub(loc[,4], 4L, 7L)))), 
-       "Scale" = factor(loc[,5], 
-                        levels = c("EF0", "EF1", "EF2", "EF3", "EF4", "EF5"), 
-                        labels = c("EF0", "EF1", "EF2", "EF3", "EF4", "EF5")), 
-       "Lat" = as.numeric(pos[,2]), 
-       "Lon" = as.numeric(pos[,3]), 
-       "Remarks" = rmks))
+slp[grep("^XDUL", slp)]
 ```
 
+##### Latitude [`Lat`]
 
-| Scale | Wind (mph) | Wind (kts) |
-|:-----:|:----------:|:----------:|
-| EFO   | 65-85      | 55-74      |
-| EF1   | 86-110     | 75-96      |
-| EF2   | 111-135    | 97-117     |
-| EF3   | 136-165    | 118-143    |
-| EF4   | 166-200    | 143-174    |
-| EF5   | >200       | >175       |
+All values are clean. As entirety of event occured in northwestern hemisphere, values should be formatted as `\\d{2}\\.\\d{2}`.
 
-```{r tor_plot}
-tmp <- tors %>% filter(Lat > 0, Lon < 0) # Filter out missing values
-p <- bp + 
-  geom_point(data = tmp, 
-             aes(x = Lon, y = Lat, 
-                 text = sprintf("%s", 
-                                str_wrap(Remarks)), 
-                 size = Scale, color = Scale)) + 
-  coord_equal(xlim = c(min(tmp$Lon, na.rm = TRUE), max(tmp$Lon, na.rm = TRUE)), 
-              ylim = c(min(tmp$Lat, na.rm = TRUE), max(tmp$Lat, na.rm = TRUE)))
+##### Longitude [`Lon`]
 
-ggplotly(p, tooltip = c("text", "size", "color"))
+All longitude values should be formatted as `-\\d{2,3}\\.\\d{2}`. 
+
+1. Some values are not necessarily negative ("95.17" instead of "-95.17"):
+
+```{r}
+slp[grep("^KEFD", slp)][2]
+```
+
+2. Some values are just incorrect ("-903202.00"):
+
+```{r}
+slp[grep("^KXPY", slp)]
+```
+
+##### Minimum Pressure [`Pres`] *opt*
+
+Expected format: `\\d{3,4}\\.\\d{2}`. Value is optional and may be `\\s{5,6}`.
+
+1. Some values may be "0.0" (note the preceeding "N/A" which is also unusual in this dataset):
+
+```{r}
+slp[grep("^FADT2", slp)]
+```
+
+##### Date/time of pressure observation [`PresDT`] *opt*
+
+If `Pres` is provided, the date/time of that observation is also recorded in `\\d{2}/\\d{4}` format. 
+
+If `Pres` is empty (`\\s{5,6}`), `PresDT` will also be empty.
+
+If `Pres` is "0.0" then `PresDT` contains a "MM" string:
+
+```{r}
+slp[grep("^SPLL1", slp)]
+```
+
+In some cases, `Pres` may be "9999.0" which is invalid. In these cases, `PresDT` is "/" or "99/9999" (note the optional preceeding "I"; `PresRmks`).
+
+```{r}
+slp[grep("^KPKV", slp)]
 ```
 
 ```{r}
-kable(tors, caption = "Tornadoes")
+slp[grep("^KTXSMILE2", slp)]
+```
+
+`PresDT` may also be "N/A":
+
+```{r}
+slp[grep("^FADT2", slp)]
+```
+
+##### Pressure remarks [`PresRmks`] *opt*
+
+`PresRmks` may precede `PresDT` as stated above. Additionally, it may also exist for valid `Pres` and `PresDT` values:
+
+```{r}
+slp[grep("^KCWF", slp)]
+```
+##### Maximum sustained wind direction [`WindDir`]
+
+Wind direction is formatted as `\\d{3}`. It is the first part of the Wind field string, separated from `Wind` with a "/" character.
+
+1. Some values may be "999":
+
+```{r}
+slp[grep("^KTXS33", slp)]
+```
+
+2. Some values may also contain "MMM":
+
+```{r}
+slp[grep("^LOPL1", slp)]
+```
+
+##### Maximum sustained winds (opt) [`Wind`]
+
+Precedes `WindDir` separated by a "/" character.
+
+1. Valid values may be preceeded by invalid `WindDir` values:
+
+```{r}
+slp[grep("^FCMP", slp)]
+```
+
+It is assumed the observation above is reporting a 88kt wind but from an unrecorded direction.
+
+##### Date/time of winds [`WindDT`]
+
+Same as `PresDT`
+
+##### Wind remarks (opt) [`WindRmks`]
+
+Same as `PresRmks`
+
+##### Peak gust direction [`GustDir`]
+
+Same as `WindDir`
+
+##### Peak Gusts [`Gust`]
+
+Same as `WindDir`
+
+##### Date/time of peak gusts [`GustDT`]
+
+Same as `PresDT`
+
+##### Gust remarks (opt) [`PresRmks`]
+
+Same as `PresRmks`
+
+```{r ref.label = "a_b_parse", eval = FALSE}
 ```
 
 ## Source
 
 [Post Tropical Cyclone Report - Tropical Storm Harvey](https://nwschat.weather.gov/p.php?pid=201709062030-KHGX-ACUS74-PSHHGX)
+
+## Previous Versions
+
+  * [1](https://github.com/timtrice/web/blob/15f552b061a7200647cc2e7bfd8174fec631d816/content/post/2017-09-06-hurricane-harvey-post-storm-report-houston.Rmd)
 
 ## Session Info
 
