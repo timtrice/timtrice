@@ -10,7 +10,25 @@ output:
     toc: true
 ---
 
-In early September, 2017, National Weather Service offices in Brownsville, Corpus Christi, San Antonio, and Houston, Texas, and Lake Charles, Louisiana released preliminary data reports on Hurricane Harvey.
+As of this publishing, National Weather Service (NWS) offices in Brownsville, Corpus Christi, San Antonio, and Houston, Texas, and Lake Charles, Louisiana released preliminary data reports on Hurricane Harvey.
+
+These text products are listed under the header ACUS74. They can be found on the [National Weather Service FTP server](ftp://tgftp.nws.noaa.gov/data/raw/ac/).
+
+The following reports were obtained:
+
+  * [Brownsville, TX (BRO)](ftp://tgftp.nws.noaa.gov/data/raw/ac/acus74.kbro.psh.bro.txt)
+
+  * [Corpus Christi, TX (CRP)](ftp://tgftp.nws.noaa.gov/data/raw/ac/acus74.kcrp.psh.crp.txt)
+
+  * [Austin/San Antonion, TX (EWX)](ftp://tgftp.nws.noaa.gov/data/raw/ac/acus74.kewx.psh.ewx.txt)
+
+  * [Houston, TX (HGX)](ftp://tgftp.nws.noaa.gov/data/raw/ac/acus74.khgx.psh.hgx.txt)
+
+  * [Lake Charles, LA (LCH)](ftp://tgftp.nws.noaa.gov/data/raw/ac/acus74.klch.psh.lch.txt)
+
+  * [New Orleans, LA (LIX)](ftp://tgftp.nws.noaa.gov/data/raw/ac/acus74.klix.psh.lix.txt)
+
+The links above point to the latest ACUS74 product issued by the respective NWS office. Therefore, it is possible that by the time you have read this the content of the text product has changed. Because of this, the rds data files have been saved to this website's [GitHub repository](https://github.com/timtrice/web/tree/harvey-report/content/post/data).
 
 ```{r libraries, echo = FALSE, message = FALSE}
 library(dplyr)
@@ -19,11 +37,13 @@ library(ggrepel)
 library(knitr)
 library(lubridate)
 library(purrr)
+library(rrricanes)
 library(stringr)
 library(tibble)
+library(tidyr)
 ```
 
-```{r data, echo = FALSE}
+```{r load_data, echo = FALSE}
 # URLs to reports. These links point to the latest product so the text may 
 # change over time. Raw data will be saved in the GitHub repo:
 # https://github.com/timtrice/web
@@ -48,7 +68,7 @@ if (!(file.exists("data/harvey-post-storm-report.rds"))) {
 }
 ```
 
-```{r a_b_normalize, echo = FALSE}
+```{r slp_normalize, echo = FALSE}
 ## ---- Section A. Lowest Sea Level Pressure ----
 ## ---- Section B. Marine Obs ----
 slp_raw <- c(map(txt, ~.[grep("^A\\.", .):grep("^C\\.", .)])) %>% 
@@ -82,44 +102,143 @@ slp_obs <- slp_raw[slp_obs_n]
 slp <- str_c(slp_stations, slp_obs)
 ```
 
-```{r a_b_parse, echo = FALSE}
-# Begin extraction.
-tmp <- str_match(slp, 
-                 sprintf("^%s%s%s%s%s%s%s%s%s%s%s%s$", 
-                         # ID-Station
-                         "(\\w+)\t*(?<=\t{0,1})(.+)(?=\\s+\\d{2}\\.\\d{2})",
-                         # Lat
-                         "\\s+(\\d{2}\\.\\d{2})",
-                         # Lon
-                         "\\s+-*(\\d{2,6}\\.\\d{2})",
-                         # Pres
-                         "\\s+(\\d{1,4}\\.\\d{1})*",
-                         # PresDT
-                         "\\s+([\\w/]{1,7})*",
-                         # PresRmks
-                         "\\s+(I)*",
-                         # WindDir, Wind
-                         "\\s+(\\w{3})/(\\d{3})", 
-                         # Wind DTd (d), WindDThm (hm)
-                         "\\s+(\\d{2,3})*/*(\\d{3,4})*", 
-                         # WindRmks
-                         "\\s+(I)*", 
-                         # GustDir, Gust
-                         "\\s+(\\w{3})*/*(\\d{3})*", 
-                         # GustDTd, GustDThm
-                         "\\s+(\\d{2})*/*(\\d{4})*", 
-                         # GustRmks
-                         "\\s+(I)*")) %>% 
-  as_tibble() %>% 
+```{r slp_df, echo = FALSE}
+# Begin extraction. Move to dataframe and rename variables.
+slp_df <- str_match(slp, 
+          sprintf("^%s%s%s%s%s%s%s%s%s%s%s%s$", 
+                  # ID-Station
+                  "(\\w+)\t*(?<=\t{0,1})(.+)(?=\\s+\\d{2}\\.\\d{2})",
+                  # Lat
+                  "\\s+(\\d{2}\\.\\d{2})",
+                  # Lon
+                  "\\s+-*(\\d{2,6}\\.\\d{2})",
+                  # Pres
+                  "\\s+(\\d{1,4}\\.\\d{1})*",
+                  # PresDTd, PresDThm
+                  "\\s+(\\w{1,3}|N)*/*(\\w{1,4})*",
+                  # PresRmks
+                  "\\s+(I)*",
+                  # WindDir, Wind
+                  "\\s+(\\w{3})/(\\d{3})", 
+                  # Wind DTd, WindDThm
+                  "\\s+(\\d{2,3})*/*(\\d{3,4})*", 
+                  # WindRmks
+                  "\\s+(I)*", 
+                  # GustDir, Gust
+                  "\\s+(\\w{3})*/*(\\d{3})*", 
+                  # GustDTd, GustDThm
+                  "\\s+(\\d{2,3})*/*(\\d{3,4})*", 
+                  # GustRmks
+                  "\\s+(I)*")) %>% 
+  as_data_frame() %>% 
   rename(txt = V1, ID = V2, Station = V3, Lat = V4, Lon = V5, Pres = V6, 
-         PresDT = V7, PresRmks = V8, WindDir = V9, Wind = V10, WindDTd = V11, 
-         WindDThm = V12, WindRmks = V13, GustDir = V14, Gust = V15, 
-         GustDTd = V16, GustDThm = V17, GustRmks = V18)
+         PresDTd = V7, PresDThm = V8, PresRmks = V9, WindDir = V10, 
+         Wind = V11, WindDTd = V12, WindDThm = V13, WindRmks = V14, 
+         GustDir = V15, Gust = V16, GustDTd = V17, GustDThm = V18,
+         GustRmks = V19) %>% 
+  arrange(ID)
+```
+
+```{r data_clean, echo = FALSE}
+# Begin clean-up
+
+# Trim all values
+slp_df <- mutate_all(slp_df, .funs = str_trim)
+
+# Clean up Pres variables
+slp_df$Pres[slp_df$Pres %in% c("0", "0.0", "9999.0")] <- NA
+slp_df$PresDTd[slp_df$PresDTd %in% c("N", "MM", "99", "206")] <- NA
+slp_df$PresDThm[slp_df$PresDThm %in% c("A", "9999")] <- NA
+
+# Clean up Wind variables
+slp_df$WindDir[slp_df$WindDir %in% c("999", "MMM")] <- NA
+slp_df$Wind[slp_df$Wind %in% c("999")] <- NA
+slp_df$WindDTd[slp_df$WindDTd %in% c("000", "99")] <- NA
+slp_df$WindDThm[slp_df$WindDThm %in% c("9999")] <- NA
+
+# Clean up Gust variables
+slp_df$GustDir[slp_df$GustDir %in% c("MMM", "999")] <- NA
+slp_df$Gust[slp_df$Gust %in% c("999")] <- NA
+slp_df$GustDTd[slp_df$GustDTd %in% c("99")] <- NA
+slp_df$GustDThm[slp_df$GustDThm %in% c("000", "9999")] <- NA
+
+# Convert numeric vars (with exception of date/time vars)
+# For all positive Lon values, make negative
+slp_df <- slp_df %>% 
+  mutate_at(.vars = vars(Lat:Pres, WindDir:Wind, GustDir:Gust), 
+            .funs = as.numeric) %>% 
+  mutate(Lon = if_else(Lon > 0, Lon * -1, Lon))
+
+# Correct the Lon for KXPY. Google Maps puts Port Fourchon at 
+# 29.1055584,-90.2119496. Current values are 29.12, -903202.00. 
+# I'll modify -903202.00 to -90.32
+slp_df$Lon[slp_df$ID == "KXPY" & slp_df$Lon == -903202.00] <- -90.32
+
+# ID TXVC-4 has been inadvertently split because of the first hyphen (the ob 
+# is only an ID, no Station). Correct.
+slp_df$ID[slp_df$ID == "TXVC" & slp_df$Station == "4"] <- "TXVC-4"
+slp_df$Station[slp_df$ID == "TXVC-4"] <- NA
+```
+
+```{r slp_date_time, echo = FALSE, warning = FALSE}
+# Combine date variables for Pres, Wind, Gust to one POSIXct date variable
+# Since all events of the storm occurred in August I can supply year, month.
+# Some values will generate failure to parse due to being NA or other 
+# invalid date or time.
+slp_df <- slp_df %>% 
+  mutate(PresDT = ymd_hm(sprintf("2017-08-%s %s", PresDTd, PresDThm)), 
+         WindDT = ymd_hm(sprintf("2017-08-%s %s", WindDTd, WindDThm)), 
+         GustDT = ymd_hm(sprintf("2017-08-%s %s", GustDTd, GustDThm)))
+```
+
+```{r slp_df_reorg, echo = FALSE}
+slp_df <- slp_df %>% 
+  select(ID:Pres, PresDT, Wind, WindDir, WindDT, WindRmks, Gust, GustDir, 
+         GustDT, GustRmks)
+```
+
+```{r rain_normalize, echo = FALSE}
+## ---- Section C. STORM TOTAL RAINFALL ----
+rain_raw <- c(map(txt, ~.[grep("^A\\.", .):grep("^C\\.", .)]))  %>% 
+  flatten_chr()
+```
+
+```{r base_plot, echo = FALSE, message = FALSE}
+# Draw a base plot
+bp <- al_tracking_chart(color = "black", fill = "white", size = 0.1, res = 50) +
+  labs(x = "Lon", y = "Lat") + 
+  theme(legend.position = "bottom", 
+        legend.direction = "horizontal")
 ```
 
 ## Plots and Charts
 
+### Barometric Pressure
+
+```{r plot_pres, echo = FALSE}
+bp + 
+  geom_point(data = filter(slp_df, !is.na(Pres)) %>% arrange(desc(Pres)), 
+             aes(x = Lon, y = Lat, color = Pres), shape = 7) + 
+  coord_equal(xlim = c(min(slp_df$Lon, na.rm = TRUE), 
+                       max(slp_df$Lon, na.rm = TRUE)), 
+              ylim = c(min(slp_df$Lat, na.rm = TRUE), 
+                       max(slp_df$Lat, na.rm = TRUE))) + 
+  ggtitle("Hurricane Harvey Pressure Observations")
+```
+
+### Wind
+
 ## Tables
+
+### Barometric Pressure
+
+```{r tbl_pres, echo = FALSE}
+kable(slp_df %>% 
+        select(ID, Station, Pres, PresDT) %>% 
+        top_n(-10L, wt = Pres) %>% 
+        arrange(Pres),
+      caption = "Hurricane Harvey Barometric Pressure Observations (Top 10)")
+```
 
 ## Code
 
@@ -187,7 +306,7 @@ Thereafter, I combine both subsets into `slp` which puts stations and observatio
 
 As a last bit of cleanup, I replace consecutive space characters (`\\s`) with one space and then trim the edges.
 
-```{r ref.label = "a_b_normalize", eval = FALSE}
+```{r ref.label = "slp_normalize", eval = FALSE}
 ```
 
 Following are the expected fields that will be retrieved from the results of `slp`.
@@ -325,7 +444,7 @@ Same as `PresDT`
 
 Same as `PresRmks`
 
-```{r ref.label = "a_b_parse", eval = FALSE}
+```{r ref.label = "slp_df", eval = FALSE}
 ```
 
 ## Source
