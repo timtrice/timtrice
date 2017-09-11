@@ -663,6 +663,79 @@ The remaining variables followed generally the same rules as similar variables a
 ```{r ref.label = "slp", echo = c(33:66), eval = FALSE}
 ```
 
+#### Rainfall
+
+Section C of the text products listed recorded rainfall observations across the Texas and Louisiana area. These observations were similar in format to those of pressure:
+
+```
+COLETO CREEK                 GOLIAD              CKDT2         9.42 I
+28.73  -97.17
+```
+
+The following fields were extracted:
+
+  * `Location` ("COLETO CREEK")
+  
+  * `Count` ("GOLIAD")
+  
+  * `Station` ("CKDT2") *opt*
+  
+  * `Rain` ("9.42")
+  
+  * `RainRmks` ("I")
+  
+  * `Lat` ("28.73")
+  
+  * `Lon` ("-97.17")
+
+Extracting these observations followed the same premise for that of `slp`; identifying the latitude lines then subsetting those indices and the previous indices and combining into a vector.
+
+Unlike `slp`, there were no surprises in cleaning this data. The regex used:
+
+```{r ref.label = "rain", echo = c(23:36), eval = FALSE}
+```
+
+#### Tornadoes
+
+Section F lists reported tornadoes for each region of responsibility. Some NWS offices reported no tornado observations. Others, such as Houston, reported at least a dozen.
+
+An example observation is as follows:
+
+```
+4 NNE SEADRIFT               CALHOUN          25/2114          EF0   
+28.43  -96.67
+
+FACEBOOK PHOTOS AND VIDEO SHOWED A BRIEF TORNADO TOUCHED DOWN ON
+GATES ROAD NEAR SEADRIFT. A SHED AND CARPORT WERE DESTROYED AND A
+FEW TREES WERE BLOWN DOWN. RATED EF0. 
+```
+
+Each observation, again, was preceeded and proceeded by an empty line.
+
+  * `Location` ("4 NNE SEADRIFT")
+  
+  * `County` ("CALHOUN")
+  
+  * `Date` ("25/2114")
+  
+  * `Scale` ("EFO")
+  
+  * `Lat` ("28.43")
+  
+  * `Lon` ("-96.67")
+  
+  * `Details` ("FACEBOOK PHOTOS...")
+
+Extracting the first two lines used the same technique as previous. However, extracting the `Details` required a little creativity. 
+
+To do this, I took the values of `tor_y_n` which marked the indices of the latitude/longitude positions. Then, I created vector `tor_z_n` to identify all "^\\s+" elements in the original vector, `tor_raw`. With this, I was able to identify the first "^\\s+" index following the latitude/longitude line, `t_a` and then take the very next index, `t_b`. 
+
+Apologies for the non-descriptive names; I was lacking ingenuity.
+
+With `t_a` and `t_b`, I used `map2` through `tor_raw` to extract each subset. From that point there was some cleaning to bring the lines together as needed. If you have any better (even if slower, but more creative), I would love to hear them! I may have tried to get too creative with this task.
+
+The regex was very similar to the `rain` regex as most items were evenly delimited.
+
 ## Source
 
 [Post Tropical Cyclone Report - Tropical Storm Harvey](https://nwschat.weather.gov/p.php?pid=201709062030-KHGX-ACUS74-PSHHGX)
