@@ -499,24 +499,63 @@ Sections A and B may also contain additional anenometer height and wind-averagin
 
 #### Sea Level Pressure and Marine Observations
 
-I loop through the text products (`txt`) and extract both sections A and B by identifying where section C begins. This gives me a start and end index that I can then subset to `slp_raw`. 
+A typical observation in Section A or B will look like the following:
+
+```
+RCPT2-ROCKPORT                                                      
+28.02  -97.05   941.8 26/0336 I 017/059  26/0154 I 016/094 26/0148 I
+```
+
+There are 15 variables in the observation above (in order as they appear, with the example text):
+
+  * `ID` (RCPT2)
+  
+  * `Station` (ROCKPORT)
+  
+  * `Lat` (28.02)
+  
+  * `Lon` (-97.05)
+  
+  * `Pres` (941.8) [barometric pressure, mb]
+  
+  * `PresDT` (26/0336) [date/time of `Pres` observation, UTC]
+  
+  * `PresRmks` (I) [incomplete pressure observation]
+  
+  * `Wind`, `WindDir` (017/059) [wind speed, kts, and wind direction]
+  
+  * `WindDT` (26/0154) [date/time of preceeding wind observation, UTC]
+  
+  * `WindRmks` (I) [incomplete wind observation]
+  
+  * `Gust`, `GustDir` (016/094) [maximum gust, kts, and direction]
+  
+  * `GustDT` (26/0148) [date/time of preceeding gust observation, UTC]
+  
+  * `GustRmks` (I) [incomplete gust observation]
+
+Every observation has an empty line before and after which can be used as a delimiter to spilt observations.
+
+But, first, I need to extract the relevant sections. To do this, I loop through the text products (`txt`) and identify where Section A and Section C begins. With these numerical indices, I can extract both sections, assigning the subset to `slp_raw`. 
 
 ```{r ref.label = "slp", echo = 3:4, eval = FALSE}
 ```
 
-From there, I identify all values that begin with a latitude and longitude field; our observations. First I count these values (`slp_n`) so that I know exactly how long my final results will be (and to check progress as I move along, making sure I haven't inadvertently removed anything).
+From there, I identify all vector elements that begin with a latitude and longitude field. I counted these values (`slp_n`) so that I know exactly how long my final results will be (and to check progress as I move along, making sure I haven't inadvertently removed anything).
 
 Once I know where the observation indices are (`slp_obs_n`) I can find the station identification by calculating `slp_obs_n - 1`; this gives me `slp_stations_n`. 
 
 ```{r ref.label = "slp", echo = c(9:10, 13, 16), eval = FALSE}
 ```
 
-Before merging the two vectors, I found some station values were not all the same length, that this would be beneficial with the regex. I create `slp_stations`, first trimming all values then finding the max length value. With the max length, I rounded up to the nearest ten and padded all all values to a length of 60 characters (the max length was 56).
+Before merging the two vectors, I found some station values were not all the same length; I felt this would be beneficial with the regex. I create `slp_stations`, first trimming all values then finding the max length value. With the max length, I rounded up to the nearest ten and padded all all values to the right.
 
-The last bit of tidying involved replacing the first "-", if available, with a "\\t" character. This also helped me make it easier to split variables `ID` and `Station` since `Station` would contain additional "-" characters.
+The last bit of manipulation involved replacing the first "-", if available, with a "\\t" character. This also helped me make it easier to split variables `ID` and `Station` since `Station` would contain additional "-" characters.
 
 ```{r ref.label = "slp", echo = 21:25, eval = FALSE}
 ```
+
+Note that the code above split `ID` "TXCV-4" which would later be corrected.
 
 Finally, I subset `slp_obs` and then with `slp_stations` make vector `slp`.
 
@@ -529,142 +568,99 @@ Following is a look at the head of `slp`:
 head(slp, n = 5L)
 ```
 
-Following are the expected fields that will be retrieved from the results of `slp`.
+##### ID [`ID`], Station [`Station`] (opt)
 
-##### Station ID [`ID`]
+Matching `ID` and `Station` is easier after switching the first "-" with a "\\t". `Station` is optional. To find the end of the string I simply looked for the latitude pattern that would follow. 
 
-1. Hyphen character does not necessarily separate `ID` and `Station`:
-
-```{r}
-slp[grep("^TXVC-4", slp)]
+```{r ref.label = "slp", echo = c(36,37), eval = FALSE}
 ```
 
-##### Station [`Station`] *opt*
-
-1. Old data may exist; see this reference to Tropical Storm Cindy:
+In some cases, for `Station`, old data seems to exist from previous instances of this product; particularly, "XDUL". Notice the text that seems to reference "Tropical Storm Cindy":
 
 ```{r}
 slp[grep("^XDUL", slp)]
 ```
 
+For that record, I left as-is.
+
 ##### Latitude [`Lat`]
 
-All values are clean. As entirety of event occured in northwestern hemisphere, values should be formatted as `\\d{2}\\.\\d{2}`.
+Latitude was also very easy to extract. The pattern just looks for four digits with a decimal splitting in half.
+
+```{r ref.label = "slp", echo = c(38, 39), eval = FALSE}
+```
 
 ##### Longitude [`Lon`]
 
-All longitude values should be formatted as `-\\d{2,3}\\.\\d{2}`. 
-
-1. Some values are not necessarily negative ("95.17" instead of "-95.17"):
+Extracting Longitude was a little bit more of a challenge. Most observations have a negative longitude value (since occurring in the northwestern hemisphere). This was accurately reflected in the text products; mostly. Some values did not contain the leading "-" such as `Station` "KEFD":
 
 ```{r}
 slp[grep("^KEFD", slp)][2]
 ```
 
-2. Some values are just incorrect ("-903202.00"):
+Additionally, "KXPY" just had a bad value:
 
 ```{r}
 slp[grep("^KXPY", slp)]
 ```
 
+"KXPY" would later be corrected manually using my best guess.
+
+```{r ref.label = "slp", echo = c(97:100), eval = FALSE}
+```
+
+To accomodate the possibilities, I had to be loose with the number of digits expected in addition to making the negative sign optional.
+
+```{r ref.label = "slp", echo = c(40, 41), eval = FALSE}
+```
+
 ##### Minimum Pressure [`Pres`] *opt*
 
-Expected format: `\\d{3,4}\\.\\d{2}`. Value is optional and may be `\\s{5,6}`.
-
-1. Some values may be "0.0" (note the preceeding "N/A" which is also unusual in this dataset):
+Expected pressure values would have a format like `\\d{3,4}\\.\\d{2}`. This would not be the case as there were many "0.0" values such as "FADT2":
 
 ```{r}
 slp[grep("^FADT2", slp)]
+```
+
+Some observations even had values of "9999.0" which clearly were invalid (expected ranges were roughly between 940 and 1010). These would later be cleaned up.
+
+```{r ref.label = "slp", echo = c(42, 43), eval = FALSE}
 ```
 
 ##### Date/time of pressure observation [`PresDT`] *opt*
 
-If `Pres` is provided, the date/time of that observation is also recorded in `\\d{2}/\\d{4}` format. 
+`PresDT` was initially split to extract the date value first (`PresDTd`) followed by the "%h%m" value (`PresDThm`). The general format, "\\d{2}/\\d{4}" would not work primarily because many observations contained the text "MM" or "N/A". 
 
-If `Pres` is empty (`\\s{5,6}`), `PresDT` will also be empty.
+Additionally, some observations also held the value "99/9999". This would be accepted by the default format but would fail when converting the values to a valid date/time variable. These would later be cleaned. 
 
-If `Pres` is "0.0" then `PresDT` contains a "MM" string:
+With this, I ended up being very generous with the regex.
 
-```{r}
-slp[grep("^SPLL1", slp)]
-```
-
-In some cases, `Pres` may be "9999.0" which is invalid. In these cases, `PresDT` is "/" or "99/9999" (note the optional preceeding "I"; `PresRmks`).
-
-```{r}
-slp[grep("^KPKV", slp)]
-```
-
-```{r}
-slp[grep("^KTXSMILE2", slp)]
-```
-
-`PresDT` may also be "N/A":
-
-```{r}
-slp[grep("^FADT2", slp)]
+```{r ref.label = "slp", echo = c(44, 45), eval = FALSE}
 ```
 
 ##### Pressure remarks [`PresRmks`] *opt*
 
-`PresRmks` may precede `PresDT` as stated above. Additionally, it may also exist for valid `Pres` and `PresDT` values:
+As noted previously, some `Pres` variables may be incomplete for unknown reasons. These values would be indicated with the letter "I" as noted in the "RCPT2" example earlier.
 
-```{r}
-slp[grep("^KCWF", slp)]
-```
-##### Maximum sustained wind direction [`WindDir`]
-
-Wind direction is formatted as `\\d{3}`. It is the first part of the Wind field string, separated from `Wind` with a "/" character.
-
-1. Some values may be "999":
-
-```{r}
-slp[grep("^KTXS33", slp)]
+```{r ref.label = "slp", echo = c(46, 47), eval = FALSE}
 ```
 
-2. Some values may also contain "MMM":
+##### Maximum sustained wind direction [`WindDir`], Maximum sustained winds (opt) [`Wind`]
+
+Variables `WindDir` and `Wind` were split with a "/" character. However, again, not all values were numeric as expected, such as "LOPL1":
 
 ```{r}
 slp[grep("^LOPL1", slp)]
 ```
 
-##### Maximum sustained winds (opt) [`Wind`]
+Invalid values such as "999" would later be marked as `NA`.
 
-Precedes `WindDir` separated by a "/" character.
-
-1. Valid values may be preceeded by invalid `WindDir` values:
-
-```{r}
-slp[grep("^FCMP", slp)]
+```{r ref.label = "slp", echo = c(48, 49), eval = FALSE}
 ```
 
-It is assumed the observation above is reporting a 88kt wind but from an unrecorded direction.
+The remaining variables followed generally the same rules as similar variables above (i.e., `GustDir` for `WindDir`, `GustDT` for `WindDT`, etc.). The final `str_match` call brought all expected observations in order.
 
-##### Date/time of winds [`WindDT`]
-
-Same as `PresDT`
-
-##### Wind remarks (opt) [`WindRmks`]
-
-Same as `PresRmks`
-
-##### Peak gust direction [`GustDir`]
-
-Same as `WindDir`
-
-##### Peak Gusts [`Gust`]
-
-Same as `WindDir`
-
-##### Date/time of peak gusts [`GustDT`]
-
-Same as `PresDT`
-
-##### Gust remarks (opt) [`PresRmks`]
-
-Same as `PresRmks`
-
-```{r ref.label = "slp_df", eval = FALSE}
+```{r ref.label = "slp", echo = c(33:66), eval = FALSE}
 ```
 
 ## Source
