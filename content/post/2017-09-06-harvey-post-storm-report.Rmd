@@ -68,7 +68,7 @@ if (!(file.exists("data/harvey-post-storm-report.rds"))) {
 }
 ```
 
-```{r slp_normalize, echo = FALSE}
+```{r slp, echo = FALSE, warning = FALSE}
 ## ---- Section A. Lowest Sea Level Pressure ----
 ## ---- Section B. Marine Obs ----
 slp_raw <- c(map(txt, ~.[grep("^A\\.", .):grep("^C\\.", .)])) %>% 
@@ -100,9 +100,7 @@ slp_obs <- slp_raw[slp_obs_n]
 
 # Combine stations and obs
 slp <- str_c(slp_stations, slp_obs)
-```
 
-```{r slp_df, echo = FALSE}
 # Begin extraction. Move to dataframe and rename variables.
 slp_df <- str_match(slp, 
           sprintf("^%s%s%s%s%s%s%s%s%s%s%s%s$", 
@@ -137,9 +135,7 @@ slp_df <- str_match(slp,
          GustDir = V15, Gust = V16, GustDTd = V17, GustDThm = V18,
          GustRmks = V19) %>% 
   arrange(ID)
-```
 
-```{r data_clean, echo = FALSE}
 # Begin clean-up
 
 # Trim all values
@@ -178,9 +174,7 @@ slp_df$Lon[slp_df$ID == "KXPY" & slp_df$Lon == -903202.00] <- -90.32
 # is only an ID, no Station). Correct.
 slp_df$ID[slp_df$ID == "TXVC" & slp_df$Station == "4"] <- "TXVC-4"
 slp_df$Station[slp_df$ID == "TXVC-4"] <- NA
-```
 
-```{r slp_date_time, echo = FALSE, warning = FALSE}
 # Combine date variables for Pres, Wind, Gust to one POSIXct date variable
 # Since all events of the storm occurred in August I can supply year, month.
 # Some values will generate failure to parse due to being NA or other 
@@ -189,15 +183,13 @@ slp_df <- slp_df %>%
   mutate(PresDT = ymd_hm(sprintf("2017-08-%s %s", PresDTd, PresDThm)), 
          WindDT = ymd_hm(sprintf("2017-08-%s %s", WindDTd, WindDThm)), 
          GustDT = ymd_hm(sprintf("2017-08-%s %s", GustDTd, GustDThm)))
-```
 
-```{r slp_df_reorg, echo = FALSE}
 slp_df <- slp_df %>% 
   select(ID:Pres, PresDT, Wind, WindDir, WindDT, WindRmks, Gust, GustDir, 
          GustDT, GustRmks)
 ```
 
-```{r rain_normalize, echo = FALSE}
+```{r rain, echo = FALSE, warning = FALSE}
 ## ---- Section C. STORM TOTAL RAINFALL ----
 rain_raw <- c(map(txt, ~.[grep("^C\\.", .):grep("^D\\.", .)]))  %>% 
   flatten_chr()
@@ -236,7 +228,7 @@ rain_df <- str_match(rain,
   mutate(Lon = if_else(Lon > 0, Lon * -1, Lon))
 ```
 
-```{r}
+```{r tors, echo = FALSE, warning = FALSE}
 # F. Tornadoes
 
 # x = position data
@@ -324,6 +316,7 @@ bp <- al_tracking_chart(color = "black", fill = "white", size = 0.1, res = 50) +
 bp + 
   geom_point(data = filter(slp_df, !is.na(Pres)) %>% arrange(desc(Pres)), 
              aes(x = Lon, y = Lat, color = Pres), shape = 7) + 
+  scale_colour_gradientn(colours = terrain.colors(10)) + 
   coord_equal(xlim = c(min(slp_df$Lon, na.rm = TRUE), 
                        max(slp_df$Lon, na.rm = TRUE)), 
               ylim = c(min(slp_df$Lat, na.rm = TRUE), 
@@ -332,6 +325,45 @@ bp +
 ```
 
 ### Wind
+
+```{r plot_wind, echo = FALSE}
+bp + 
+  geom_point(data = filter(slp_df, !is.na(Wind)) %>% arrange(Wind), 
+             aes(x = Lon, y = Lat, color = Wind), shape = 9) + 
+  scale_colour_gradientn(colours = rev(terrain.colors(10))) + 
+  coord_equal(xlim = c(min(slp_df$Lon, na.rm = TRUE), 
+                       max(slp_df$Lon, na.rm = TRUE)), 
+              ylim = c(min(slp_df$Lat, na.rm = TRUE), 
+                       max(slp_df$Lat, na.rm = TRUE))) + 
+  ggtitle("Hurricane Harvey Maximum Wind Observations")
+```
+
+### Rain
+
+```{r plot_rain, echo = FALSE}
+bp + 
+  geom_point(data = filter(rain_df, !is.na(Rain)) %>% arrange(Rain), 
+             aes(x = Lon, y = Lat, color = Rain), shape = 2) + 
+  scale_color_gradientn(colors = rev(terrain.colors(10))) + 
+  coord_equal(xlim = c(min(slp_df$Lon, na.rm = TRUE), 
+                       max(slp_df$Lon, na.rm = TRUE)), 
+              ylim = c(min(slp_df$Lat, na.rm = TRUE), 
+                       max(slp_df$Lat, na.rm = TRUE))) + 
+  ggtitle("Hurricane Harvey Rainfall Observations")
+```
+
+### Tornadoes
+
+```{r plot_tors, echo = FALSE}
+bp + 
+  geom_point(data = filter(tor_df, !is.na(Scale)), 
+             aes(x = Lon, y = Lat, color = Scale, fill = Scale), shape = 25) + 
+  coord_equal(xlim = c(min(tor_df$Lon, na.rm = TRUE), 
+                       max(tor_df$Lon, na.rm = TRUE)), 
+              ylim = c(min(tor_df$Lat, na.rm = TRUE), 
+                       max(tor_df$Lat, na.rm = TRUE))) + 
+  ggtitle("Hurricane Harvey Tornado Reports")
+```
 
 ## Tables
 
@@ -403,26 +435,26 @@ That is irrelevant and is ignored.
 
 I loop through the text products (`txt`) and extract both sections A and B by identifying where section C begins. This gives me a start and end index that I can then subset to `slp_raw`. 
 
-```{r ref.label = "slp_normalize", echo = 3:4, eval = FALSE}
+```{r ref.label = "slp", echo = 3:4, eval = FALSE}
 ```
 
 From there, I identify all values that begin with a latitude and longitude field; our observations. First I count these values (`slp_n`) so that I know exactly how long my final results will be (and to check progress as I move along, making sure I haven't inadvertently removed anything).
 
 Once I know where the observation indices are (`slp_obs_n`) I can find the station identification by calculating `slp_obs_n - 1`; this gives me `slp_stations_n`. 
 
-```{r ref.label = "slp_normalize", echo = c(9:10, 13, 16), eval = FALSE}
+```{r ref.label = "slp", echo = c(9:10, 13, 16), eval = FALSE}
 ```
 
 Before merging the two vectors, I found some station values were not all the same length, that this would be beneficial with the regex. I create `slp_stations`, first trimming all values then finding the max length value. With the max length, I rounded up to the nearest ten and padded all all values to a length of 60 characters (the max length was 56).
 
 The last bit of tidying involved replacing the first "-", if available, with a "\\t" character. This also helped me make it easier to split variables `ID` and `Station` since `Station` would contain additional "-" characters.
 
-```{r ref.label = "slp_normalize", echo = 21:25, eval = FALSE}
+```{r ref.label = "slp", echo = 21:25, eval = FALSE}
 ```
 
 Finally, I subset `slp_obs` and then with `slp_stations` make vector `slp`.
 
-```{r ref.label = "slp_normalize", echo = c(28,31), eval = FALSE}
+```{r ref.label = "slp", echo = c(28,31), eval = FALSE}
 ```
 
 Following is a look at the head of `slp`:
