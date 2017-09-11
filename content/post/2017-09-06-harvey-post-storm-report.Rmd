@@ -10,26 +10,6 @@ output:
     toc: true
 ---
 
-As of this publishing, National Weather Service (NWS) offices in Brownsville, Corpus Christi, San Antonio, and Houston, Texas, and Lake Charles, Louisiana released preliminary data reports on Hurricane Harvey.
-
-These text products are listed under the header ACUS74. They can be found on the [National Weather Service FTP server](ftp://tgftp.nws.noaa.gov/data/raw/ac/).
-
-The following reports were obtained:
-
-  * [Brownsville, TX (BRO)](ftp://tgftp.nws.noaa.gov/data/raw/ac/acus74.kbro.psh.bro.txt)
-
-  * [Corpus Christi, TX (CRP)](ftp://tgftp.nws.noaa.gov/data/raw/ac/acus74.kcrp.psh.crp.txt)
-
-  * [Austin/San Antonion, TX (EWX)](ftp://tgftp.nws.noaa.gov/data/raw/ac/acus74.kewx.psh.ewx.txt)
-
-  * [Houston, TX (HGX)](ftp://tgftp.nws.noaa.gov/data/raw/ac/acus74.khgx.psh.hgx.txt)
-
-  * [Lake Charles, LA (LCH)](ftp://tgftp.nws.noaa.gov/data/raw/ac/acus74.klch.psh.lch.txt)
-
-  * [New Orleans, LA (LIX)](ftp://tgftp.nws.noaa.gov/data/raw/ac/acus74.klix.psh.lix.txt)
-
-The links above point to the latest ACUS74 product issued by the respective NWS office. Therefore, it is possible that by the time you have read this the content of the text product has changed. Because of this, the rds data files have been saved to this website's [GitHub repository](https://github.com/timtrice/web/tree/harvey-report/content/post/data).
-
 ```{r libraries, echo = FALSE, message = FALSE}
 library(dplyr)
 library(ggplot2)
@@ -38,6 +18,7 @@ library(knitr)
 library(lubridate)
 library(purrr)
 library(rrricanes)
+library(rrricanesdata)
 library(stringr)
 library(tibble)
 library(tidyr)
@@ -66,6 +47,9 @@ if (!(file.exists("data/harvey-post-storm-report.rds"))) {
 } else {
   txt <- readRDS(file = file.path("data/harvey-post-storm-report.rds"))
 }
+
+# Filter Harvey advisories after regeneration (Adv #12)
+adv <- filter(adv, Key == "AL092017", Adv >= 12)
 ```
 
 ```{r slp, echo = FALSE, warning = FALSE}
@@ -185,8 +169,8 @@ slp_df <- slp_df %>%
          GustDT = ymd_hm(sprintf("2017-08-%s %s", GustDTd, GustDThm)))
 
 slp_df <- slp_df %>% 
-  select(ID:Pres, PresDT, Wind, WindDir, WindDT, WindRmks, Gust, GustDir, 
-         GustDT, GustRmks)
+  select(ID:Pres, PresDT,PresRmks, Wind, WindDir, WindDT, WindRmks, Gust, 
+         GustDir, GustDT, GustRmks)
 ```
 
 ```{r rain, echo = FALSE, warning = FALSE}
@@ -303,6 +287,7 @@ tor_df$Details <- tor_details
 ```{r base_plot, echo = FALSE, message = FALSE}
 # Draw a base plot
 bp <- al_tracking_chart(color = "black", fill = "white", size = 0.1, res = 50) +
+   geom_path(data = adv, aes(x = Lon, y = Lat)) +
   labs(x = "Lon", y = "Lat") + 
   theme(legend.position = "bottom", 
         legend.direction = "horizontal")
@@ -313,16 +298,37 @@ bp <- al_tracking_chart(color = "black", fill = "white", size = 0.1, res = 50) +
 ### Barometric Pressure
 
 ```{r plot_pres, echo = FALSE}
-bp + 
-  geom_point(data = filter(slp_df, !is.na(Pres)) %>% arrange(desc(Pres)), 
+(tmp_plot <- bp + 
+  geom_point(data = filter(slp_df, 
+                           !is.na(Pres)) %>% 
+               arrange(desc(Pres)), 
              aes(x = Lon, y = Lat, color = Pres), shape = 7) + 
-  scale_colour_gradientn(colours = terrain.colors(10)) + 
+  scale_color_gradientn(colors = terrain.colors(10)) + 
   coord_equal(xlim = c(min(slp_df$Lon, na.rm = TRUE), 
                        max(slp_df$Lon, na.rm = TRUE)), 
               ylim = c(min(slp_df$Lat, na.rm = TRUE), 
                        max(slp_df$Lat, na.rm = TRUE))) + 
-  ggtitle("Hurricane Harvey Pressure Observations")
+  ggtitle("Hurricane Harvey Pressure Observations"))
 ```
+
+The minimum pressure observed was 941.8mb at RCPT in Rockport, TX. Official landfall occurred at 06:00 UTC on the morning of August 26, 2017; 2 1/2 hours after the RCPT observation. This is approximately the same reported minimum central pressure listed by the National Hurricane Center (NHC) in [Public Advisory 23A](http://www.nhc.noaa.gov/archive/2017/al09/al092017.public_a.023.shtml?). 
+
+```{r}
+tmp_plot + 
+    coord_equal(xlim = c(-98, -96), ylim = c(27, 29)) +
+  ggtitle("Hurricane Harvey Pressure Observations - South Texas")
+```
+
+
+```{r, echo = FALSE}
+slp_df %>% 
+  top_n(-1L, Pres) %>% 
+  select(-c(Wind:GustRmks))
+```
+
+The "I" in `PresRmks` denotes the observation is incomplete. 
+
+Many stations lost equipment during the height of the storm, leading to many incomplete data observations (at least 70).
 
 ### Wind
 
@@ -330,7 +336,7 @@ bp +
 bp + 
   geom_point(data = filter(slp_df, !is.na(Wind)) %>% arrange(Wind), 
              aes(x = Lon, y = Lat, color = Wind), shape = 9) + 
-  scale_colour_gradientn(colours = rev(terrain.colors(10))) + 
+  scale_color_gradientn(colors = rev(terrain.colors(10))) + 
   coord_equal(xlim = c(min(slp_df$Lon, na.rm = TRUE), 
                        max(slp_df$Lon, na.rm = TRUE)), 
               ylim = c(min(slp_df$Lat, na.rm = TRUE), 
@@ -379,21 +385,65 @@ kable(slp_df %>%
 
 ## Code
 
-Explain the why you did what you did
+In early September, National Weather Service (NWS) offices in Brownsville, Corpus Christi, San Antonio, and Houston, Texas, and Lake Charles, Louisiana released preliminary data reports on Hurricane Harvey.
+
+These text products are listed under the header ACUS74. They can be found on the [National Weather Service FTP server](ftp://tgftp.nws.noaa.gov/data/raw/ac/).
+
+The following reports were obtained:
+
+  * [Brownsville, TX (BRO)](ftp://tgftp.nws.noaa.gov/data/raw/ac/acus74.kbro.psh.bro.txt)
+
+  * [Corpus Christi, TX (CRP)](ftp://tgftp.nws.noaa.gov/data/raw/ac/acus74.kcrp.psh.crp.txt)
+
+  * [Austin/San Antonion, TX (EWX)](ftp://tgftp.nws.noaa.gov/data/raw/ac/acus74.kewx.psh.ewx.txt)
+
+  * [Houston, TX (HGX)](ftp://tgftp.nws.noaa.gov/data/raw/ac/acus74.khgx.psh.hgx.txt)
+
+  * [Lake Charles, LA (LCH)](ftp://tgftp.nws.noaa.gov/data/raw/ac/acus74.klch.psh.lch.txt)
+
+  * [New Orleans, LA (LIX)](ftp://tgftp.nws.noaa.gov/data/raw/ac/acus74.klix.psh.lix.txt)
+
+The links above point to the latest ACUS74 product issued by the respective NWS office. Therefore, it is possible that by the time you have read this article, the content of the text product has changed. Because of this, the rds data files have been saved to this website's [GitHub repository](https://github.com/timtrice/web/tree/harvey-report/content/post/data).
+
+All times reported are in UTC. Pressure observations are in millibars. Wind and Gust observations are in knots.
 
 ### Libraries
+
+The following libraries were used in this article:
 
 ```{r ref.label = "libraries", eval = FALSE}
 ```
 
 ### Data
 
-```{r ref.label = "data", eval = FALSE}
+To load the data, I just put the links into a named list. I originally had considered keeping the data separate by NWS office but determined this was not necessary. 
+
+The code below looks for the data file mentioned earlier and, if it exists, loads the `txt` vector. Otherwise, each of the text products will be collected for parsing.
+
+```{r ref.label = "load_data", eval = FALSE}
 ```
 
-#### Sea Level Pressure and Marine Observations
+Each text product contains several sections:
 
-Each section has a header:
+  * Section A. Lowest Sea Level Pressure/Maximum Sustained Winds and Peak Gusts
+  
+    + Non-METAR Observations
+  
+  * Section B. Marine Observations
+  
+  * Section C. Storm Total Rainfall
+  
+  * Section D. Inland Flooding (not collected)
+  
+  * Section E. Maximum Storm Surge and Storm Tide (not collected)
+  
+  * Section F. Tornadoes
+  
+  * Section G. Storm Impacts by County (not collected)
+
+Not all sections will contain data. For this article, all data collected was that which contained a latitude and longitude position.
+
+Each section contains a data header:
 
 ```
 A. LOWEST SEA LEVEL PRESSURE/MAXIMUM SUSTAINED WINDS AND PEAK GUSTS
@@ -431,7 +481,23 @@ DEG DECIMAL     (MB)   (UTC)     (KT)     (UTC)     (KT)    (UTC)
 ---------------------------------------------------------------------
 ```
 
-That is irrelevant and is ignored. 
+This subsection was added in as part of Sectoin A but is indistinguishable in the parsed dataset.
+
+Observation examples are inluded in the relevant section below.
+
+Numerous observations contain remarks (identified in the dataset by `ends_with("Rmks")`). Every section contains a Remarks footer; however, this may not be populated and, therefore, not every observation with a `.Rmks` variable would have additional Remarks listed in the text product. The additional Remarks were not collected.
+
+The `.Rmks` legend is identified in the footer of each text product as:
+
+  * "I" - Incomplete data
+  
+  * "E" - Estimated
+  
+All `.Rmks` variables in the datasets are either *NA* or "I".
+
+Sections A and B may also contain additional anenometer height and wind-averaging period variables on a third line. This data was not collected but could easily have been; I did not feel it was relevant to this article. 
+
+#### Sea Level Pressure and Marine Observations
 
 I loop through the text products (`txt`) and extract both sections A and B by identifying where section C begins. This gives me a start and end index that I can then subset to `slp_raw`. 
 
