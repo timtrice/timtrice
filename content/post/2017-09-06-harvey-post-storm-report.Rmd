@@ -199,8 +199,113 @@ slp_df <- slp_df %>%
 
 ```{r rain_normalize, echo = FALSE}
 ## ---- Section C. STORM TOTAL RAINFALL ----
-rain_raw <- c(map(txt, ~.[grep("^A\\.", .):grep("^C\\.", .)]))  %>% 
+rain_raw <- c(map(txt, ~.[grep("^C\\.", .):grep("^D\\.", .)]))  %>% 
   flatten_chr()
+
+rain_obs_ptn <- "^\\d\\d\\.\\d\\d\\s+-*\\d*\\d\\d\\.\\d\\d.*$"
+
+rain_n <- sum(str_count(rain_raw, rain_obs_ptn))
+
+rain_obs_n <- str_which(rain_raw, rain_obs_ptn)
+
+rain_stations_n <- rain_obs_n - 1
+
+rain_stations <- rain_raw[rain_stations_n] %>% str_trim()
+max_n <- max(nchar(rain_stations))
+rain_stations <- str_pad(rain_stations, 
+                         width = round(max_n, digits = -1), 
+                         side = "right")
+
+rain_obs <- rain_raw[rain_obs_n]
+
+rain <- str_c(rain_stations, rain_obs)
+
+rain_df <- str_match(rain,
+                 pattern = sprintf("^%s%s\\s+%s\\s+%s\\s*%s\\s+%s\\s+%s$", 
+                                   "(.{29})", 
+                                   "(.{19})", 
+                                   "(.{0,12})",
+                                   "(\\d{1,2}\\.\\d{2})", 
+                                   "(I)*", 
+                                   "(\\d{1,2}\\.\\d{2})",
+                                   "-*(\\d{2,3}\\.\\d{2})")) %>% 
+  as_data_frame() %>% 
+  rename(txt = V1, Location = V2, County = V3, Station = V4, Rain = V5, 
+         RainRmks = V6, Lat = V7, Lon = V8) %>% 
+  mutate_at(.vars = c("Rain", "Lat", "Lon"), .funs = as.numeric) %>% 
+  mutate(Lon = if_else(Lon > 0, Lon * -1, Lon))
+```
+
+```{r}
+# F. Tornadoes
+
+# x = position data
+# y = lat, lon row
+# z = observation details
+tor_raw <- c(map(txt, ~.[grep("^F\\.", .):grep("^G\\.", .)]))  %>% 
+  flatten_chr()
+
+# This will cut out 4 tornado observations from KLIX.
+tor_y_ptn <- "^\\d\\d\\.\\d\\d\\s+-*\\d*\\d\\d\\.\\d\\d.*$"
+
+tor_n <- sum(str_count(tor_raw, tor_y_ptn))
+
+tor_y_n <- str_which(tor_raw, tor_y_ptn)
+
+tor_x_n <- tor_y_n - 1
+
+tor_stations <- tor_raw[tor_x_n] %>% str_trim()
+max_n <- max(nchar(tor_stations))
+tor_stations <- str_pad(tor_stations, 
+                         width = round(max_n, digits = -1), 
+                         side = "right")
+
+tor_obs <- tor_raw[tor_y_n]
+
+# To extract details I identify all elements of tor_raw that contain only \\s 
+# as this tends to pre/proceed detail data of the observation. Once I know 
+# where the beginning delimiter is I then find the very next delimiter. With 
+# both of these values I'll map through tor_raw and subset the pieces.
+
+# indices of tor_raw containing \\s elements
+tor_z_n <- str_which(tor_raw, "^\\s*$")
+
+# t is the indexes of tor_z_n which represent the first \\s after tor_obs
+t <- match(c(tor_y_n + 1), tor_z_n)
+
+# What indices of tor_z_n mark the beginning delimiter \\s
+t_a <- tor_z_n[t]
+# and the end delimiter
+t_b <- tor_z_n[t + 1]
+
+tor_details <- map2(t_a, t_b, ~tor_raw[.x:.y]) %>% flatten_chr()
+
+# Now, at this point I want all the details on one line and to get rid of 
+# the extra stuff. So, basically, some more reorg and clean-up.
+tor_details <- str_c(tor_details, collapse = "\n") %>% 
+  str_replace_all("\n\n+", "\t") %>% 
+  str_replace_all("\n", " ") %>% 
+  str_split("\t") %>% 
+  map(str_trim) %>% 
+  flatten_chr()
+
+tor <- str_c(tor_stations, tor_obs)
+
+tor_df <- str_match(tor, sprintf("^%s%s%s\\s+%s\\s+%s\\s+%s$", 
+                                 "(.{29})", 
+                                 "(.{17})", 
+                                 "(\\d{2})/(\\d{4})", 
+                                 "(\\w{3})", 
+                                 "\\s+(\\d{2}\\.\\d{2})",
+                                 "\\s+(-\\d{2}\\.\\d{2})$")) %>% 
+  as_data_frame() %>% 
+  mutate(Date = ymd_hm(sprintf("2017-08-%s %s", V4, V5))) %>% 
+  rename(Location = V2, County = V3, Scale = V6, Lat = V7, Lon = V8) %>% 
+  mutate_at(.vars = c("Lat", "Lon"), .funs = as.numeric) %>% 
+  select(Location, County, Lat, Lon, Date, Scale)
+
+# Now add in tor_details
+tor_df$Details <- tor_details
 ```
 
 ```{r base_plot, echo = FALSE, message = FALSE}
@@ -256,7 +361,7 @@ Explain the why you did what you did
 
 #### Sea Level Pressure and Marine Observations
 
-Each section has a header.
+Each section has a header:
 
 ```
 A. LOWEST SEA LEVEL PRESSURE/MAXIMUM SUSTAINED WINDS AND PEAK GUSTS
@@ -296,17 +401,34 @@ DEG DECIMAL     (MB)   (UTC)     (KT)     (UTC)     (KT)    (UTC)
 
 That is irrelevant and is ignored. 
 
-I loop through the text products and extract both sections A and B by identifying where section C begins. This gives me a start and end index that I can then subset to `slp_raw`. 
+I loop through the text products (`txt`) and extract both sections A and B by identifying where section C begins. This gives me a start and end index that I can then subset to `slp_raw`. 
+
+```{r ref.label = "slp_normalize", echo = 3:4, eval = FALSE}
+```
 
 From there, I identify all values that begin with a latitude and longitude field; our observations. First I count these values (`slp_n`) so that I know exactly how long my final results will be (and to check progress as I move along, making sure I haven't inadvertently removed anything).
 
 Once I know where the observation indices are (`slp_obs_n`) I can find the station identification by calculating `slp_obs_n - 1`; this gives me `slp_stations_n`. 
 
-Thereafter, I combine both subsets into `slp` which puts stations and observations on one line. 
+```{r ref.label = "slp_normalize", echo = c(9:10, 13, 16), eval = FALSE}
+```
 
-As a last bit of cleanup, I replace consecutive space characters (`\\s`) with one space and then trim the edges.
+Before merging the two vectors, I found some station values were not all the same length, that this would be beneficial with the regex. I create `slp_stations`, first trimming all values then finding the max length value. With the max length, I rounded up to the nearest ten and padded all all values to a length of 60 characters (the max length was 56).
 
-```{r ref.label = "slp_normalize", eval = FALSE}
+The last bit of tidying involved replacing the first "-", if available, with a "\\t" character. This also helped me make it easier to split variables `ID` and `Station` since `Station` would contain additional "-" characters.
+
+```{r ref.label = "slp_normalize", echo = 21:25, eval = FALSE}
+```
+
+Finally, I subset `slp_obs` and then with `slp_stations` make vector `slp`.
+
+```{r ref.label = "slp_normalize", echo = c(28,31), eval = FALSE}
+```
+
+Following is a look at the head of `slp`:
+
+```{r}
+head(slp, n = 5L)
 ```
 
 Following are the expected fields that will be retrieved from the results of `slp`.
