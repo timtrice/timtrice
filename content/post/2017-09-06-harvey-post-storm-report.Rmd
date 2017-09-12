@@ -10,6 +10,8 @@ output:
     toc: true
 ---
 
+In early September, National Weather Service (NWS) offices in Brownsville, Corpus Christi, San Antonio, and Houston, Texas, and Lake Charles, Louisiana released preliminary data reports on Hurricane Harvey. The following data has been extracted from those reports.
+
 ```{r libraries, echo = FALSE, message = FALSE}
 library(dplyr)
 library(ggplot2)
@@ -209,7 +211,8 @@ rain_df <- str_match(rain,
   rename(txt = V1, Location = V2, County = V3, Station = V4, Rain = V5, 
          RainRmks = V6, Lat = V7, Lon = V8) %>% 
   mutate_at(.vars = c("Rain", "Lat", "Lon"), .funs = as.numeric) %>% 
-  mutate(Lon = if_else(Lon > 0, Lon * -1, Lon))
+  mutate(Lon = if_else(Lon > 0, Lon * -1, Lon)) %>% 
+  select(Location, County, Station, Lat, Lon, Rain, RainRmks)
 ```
 
 ```{r tors, echo = FALSE, warning = FALSE}
@@ -303,27 +306,24 @@ bp <- al_tracking_chart(color = "black", fill = "white", size = 0.1, res = 50) +
                            !is.na(Pres)) %>% 
                arrange(desc(Pres)), 
              aes(x = Lon, y = Lat, color = Pres), shape = 7) + 
-  scale_color_gradientn(colors = terrain.colors(10)) + 
+  scale_color_gradientn(colors = terrain.colors(10), 
+                        breaks = c(940, 975, 1010), 
+                        limits = c(940, 1010)) + 
   coord_equal(xlim = c(min(slp_df$Lon, na.rm = TRUE), 
                        max(slp_df$Lon, na.rm = TRUE)), 
               ylim = c(min(slp_df$Lat, na.rm = TRUE), 
                        max(slp_df$Lat, na.rm = TRUE))) + 
-  ggtitle("Hurricane Harvey Pressure Observations"))
+  ggtitle("Sea Level Pressure - Hurricane Harvey"))
 ```
 
-The minimum pressure observed was 941.8mb at RCPT in Rockport, TX. Official landfall occurred at 06:00 UTC on the morning of August 26, 2017; 2 1/2 hours after the RCPT observation. This is approximately the same reported minimum central pressure listed by the National Hurricane Center (NHC) in [Public Advisory 23A](http://www.nhc.noaa.gov/archive/2017/al09/al092017.public_a.023.shtml?). 
+The minimum pressure observed was 941.8mb at RCPT in Rockport, TX. Official landfall occurred at 06:00 UTC on the morning of August 26, 2017; 2 1/2 hours after the RCPT observation. This is approximately the same reported minimum central pressure listed by the National Hurricane Center (NHC) in [Public Advisory 23A](http://www.nhc.noaa.gov/archive/2017/al09/al092017.public_a.023.shtml?) which suggests pressure values may have been lower as the storm made passed over the statoin.
 
-```{r}
-tmp_plot + 
-    coord_equal(xlim = c(-98, -96), ylim = c(27, 29)) +
-  ggtitle("Hurricane Harvey Pressure Observations - South Texas")
-```
-
-
-```{r, echo = FALSE}
+```{r tbl_pres, echo = FALSE}
 slp_df %>% 
-  top_n(-1L, Pres) %>% 
-  select(-c(Wind:GustRmks))
+  top_n(-5L, Pres) %>% 
+  select(-c(Wind:GustRmks)) %>% 
+  arrange(Pres) %>% 
+  kable(caption = "Five lowest pressure observations (mb).")
 ```
 
 The "I" in `PresRmks` denotes the observation is incomplete. 
@@ -344,7 +344,42 @@ bp +
   ggtitle("Hurricane Harvey Maximum Wind Observations")
 ```
 
+Not surprisingly, many of the locations that recorded the lower pressure values also recorded the higher wind values.
+
+The highest wind value was recorded at ANPT2 several hours prior to the center of the hurricane moving ashore. NWS CRP (Corpus Christi) reports, 
+
+> ANPT2 SENTINEL STOPPED REPORTING AND MAY NOT HAVE RECORDED MAXIMUM EVENT VALUES
+
+```{r tbl_wind, echo = FALSE}
+kable(slp_df %>% 
+        top_n(5L, Wind) %>% 
+        select(ID, Station, Lat, Lon, Wind, WindDT) %>% 
+        arrange(desc(Wind)), 
+      caption = "Five highest wind observations (kts).")
+```
+
+In addition to ANPT2, RCPT2 (Rockport), MAXT2, RTAT2, MIST2 and MIRT2 all failed prior to the peak of the hurricane. XWLD failed when the pier housing the sensor was swept away.
+
+```{r tbl_wind_select, echo = FALSE}
+tmp <- slp_df %>% 
+  filter(!is.na(Wind),
+         ID %in% c("RCPT2", "RTAT2", "ANPT2", "XWLD", "MAXT2", "MIST2", 
+                   "MIRT2")) %>% 
+  arrange(Wind)
+
+bp + 
+  geom_point(data = tmp, 
+             aes(x = Lon, y = Lat, color = Wind), shape = 9) + 
+  geom_text_repel(data = tmp, 
+                  aes(x = Lon, y = Lat, label = ID)) + 
+  scale_color_gradientn(colors = rev(terrain.colors(10))) + 
+  coord_equal(xlim = c(-98, -96), ylim = c(27, 29)) + 
+  ggtitle("Select Wind Observations")
+```
+
 ### Rain
+
+Without a doubt, the main story from Hurricane Harvey will be the rain; some areas in southeast Texas recording over 50 inches. 
 
 ```{r plot_rain, echo = FALSE}
 bp + 
@@ -358,9 +393,25 @@ bp +
   ggtitle("Hurricane Harvey Rainfall Observations")
 ```
 
+```{r tbl_rain, echo = FALSE}
+rain_df %>% 
+  top_n(5L, Rain) %>% 
+  arrange(desc(Rain)) %>% 
+  select(-RainRmks) %>% 
+  kable(caption = "Top 5 Rainfall Amounts")
+```
+
+The text reports contain a Section D for Inland Flooding. Unfortunately at this time only the San Antonion/Austin NWS office have provided more info; generally river flooding and low water crossings. 
+
 ### Tornadoes
 
+There are 24 tornado observations for Hurricane Harvey. However, some observations may be for the same tornado. For example, there are two observations for a tornado in Fort Bend county with the same `Lat`, `Lat` and `Date` value; only `Details` is different. 
+
 ```{r plot_tors, echo = FALSE}
+tor_df$Scale <- factor(tor_df$Scale, 
+                       levels = c("EF0", "EF1", "EF2", "EF3", "EF4", "EF5"), 
+                       labels = c("EF0", "EF1", "EF2", "EF3", "EF4", "EF5"))
+
 bp + 
   geom_point(data = filter(tor_df, !is.na(Scale)), 
              aes(x = Lon, y = Lat, color = Scale, fill = Scale), shape = 25) + 
@@ -371,21 +422,23 @@ bp +
   ggtitle("Hurricane Harvey Tornado Reports")
 ```
 
-## Tables
+#### Enhanced Fujita Scale
 
-### Barometric Pressure
+| Scale | Wind (mph) | Wind (kts) |
+|:-----:|:----------:|:----------:|
+| EFO   | 65-85      | 55-74      |
+| EF1   | 86-110     | 75-96      |
+| EF2   | 111-135    | 97-117     |
+| EF3   | 136-165    | 118-143    |
+| EF4   | 166-200    | 143-174    |
+| EF5   | >200       | >175       |
 
-```{r tbl_pres, echo = FALSE}
-kable(slp_df %>% 
-        select(ID, Station, Pres, PresDT) %>% 
-        top_n(-10L, wt = Pres) %>% 
-        arrange(Pres),
-      caption = "Hurricane Harvey Barometric Pressure Observations (Top 10)")
+```{r tbl_tors, echo = FALSE}
+tor_df %>% 
+  kable(caption = "Tornado Remarks, Hurricane Harvey")
 ```
 
 ## Code
-
-In early September, National Weather Service (NWS) offices in Brownsville, Corpus Christi, San Antonio, and Houston, Texas, and Lake Charles, Louisiana released preliminary data reports on Hurricane Harvey.
 
 These text products are listed under the header ACUS74. They can be found on the [National Weather Service FTP server](ftp://tgftp.nws.noaa.gov/data/raw/ac/).
 
@@ -726,7 +779,7 @@ Each observation, again, was preceeded and proceeded by an empty line.
   
   * `Details` ("FACEBOOK PHOTOS...")
 
-Extracting the first two lines used the same technique as previous. However, extracting the `Details` required a little creativity. 
+Extracting the first two lines used the same technique as previous. However, extracting the `Details` required a little creativity since many spread over several lines.
 
 To do this, I took the values of `tor_y_n` which marked the indices of the latitude/longitude positions. Then, I created vector `tor_z_n` to identify all "^\\s+" elements in the original vector, `tor_raw`. With this, I was able to identify the first "^\\s+" index following the latitude/longitude line, `t_a` and then take the very next index, `t_b`. 
 
