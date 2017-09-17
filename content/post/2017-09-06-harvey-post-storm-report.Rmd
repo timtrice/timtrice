@@ -18,6 +18,7 @@ library(ggplot2)
 library(ggrepel)
 library(knitr)
 library(lubridate)
+library(pander)
 library(purrr)
 library(rrricanes)
 library(rrricanesdata)
@@ -49,9 +50,6 @@ if (!(file.exists("data/harvey-post-storm-report.rds"))) {
 } else {
   txt <- readRDS(file = file.path("data/harvey-post-storm-report.rds"))
 }
-
-# Filter Harvey advisories after regeneration (Adv #12)
-adv <- filter(adv, Key == "AL092017", Adv >= 12)
 ```
 
 ```{r slp, echo = FALSE, warning = FALSE}
@@ -114,16 +112,16 @@ slp_df <- str_match(slp,
                   "\\s+(\\d{2,3})*/*(\\d{3,4})*", 
                   # GustRmks
                   "\\s+(I)*")) %>% 
-  as_data_frame() %>% 
-  rename(txt = V1, ID = V2, Station = V3, Lat = V4, Lon = V5, Pres = V6, 
-         PresDTd = V7, PresDThm = V8, PresRmks = V9, WindDir = V10, 
-         Wind = V11, WindDTd = V12, WindDThm = V13, WindRmks = V14, 
-         GustDir = V15, Gust = V16, GustDTd = V17, GustDThm = V18,
-         GustRmks = V19) %>% 
-  arrange(ID)
+  as_data_frame()
+
+names(slp_df) <- c("txt", "ID", "Station", "Lat", "Lon", "Pres", "PresDTd", 
+                   "PresDThm", "PresRmks", "WindDir", "Wind", "WindDTd", 
+                   "WindDThm", "WindRmks", "GustDir", "Gust", "GustDTd", 
+                   "GustDThm", "GustRmks")
+
+slp_df <- arrange(slp_df, ID)
 
 # Begin clean-up
-
 # Trim all values
 slp_df <- mutate_all(slp_df, .funs = str_trim)
 
@@ -290,13 +288,122 @@ tor_df$Details <- tor_details
 ```{r base_plot, echo = FALSE, message = FALSE}
 # Draw a base plot
 bp <- al_tracking_chart(color = "black", fill = "white", size = 0.1, res = 50) +
-   geom_path(data = adv, aes(x = Lon, y = Lat)) +
   labs(x = "Lon", y = "Lat") + 
   theme(legend.position = "bottom", 
         legend.direction = "horizontal")
 ```
 
-## Plots and Charts
+## Hurricane Harvey
+
+```{r data_al092017, echo = FALSE}
+# Group Harvey advisories into two stages
+AL092017 <- adv %>% 
+  filter(Key == "AL092017") %>% 
+  mutate(Group = if_else(Adv <= 11, 1, 2), 
+         Class = factor(saffir(Wind), 
+                        levels = c("TD", "TS", "HU1", "HU2", "HU3", "HU4", 
+                                   "HU5"), 
+                        labels = c("Tropical Depression", "Tropical Storm", 
+                                   "Category 1", "Category 2", "Category 3", 
+                                   "Category 4", "Category 5")))
+
+# Harvey advs in Gulf
+AL09017_gulf <- filter(AL092017, Adv >= 12)
+
+# Landfall
+lf.AL092017 <- data.frame("Date" = c(ymd_hm("2017-08-26 06:00", tz = "UTC"), 
+                                     ymd_hm("2017-08-30 09:00", tz = "UTC")), 
+                          "Location" = c("Copano Bay, TX", 
+                                         "Cameron, LA"), 
+                          "Lat" = c(28.08, 29.77), 
+                          "Lon" = c(-96.88, -93.37),
+                          "Wind" = c(110, 45))
+```
+
+```{r plot_al092017, echo = FALSE}
+bp + 
+  geom_point(data = AL092017, 
+             aes(x = Lon, y = Lat, color = Class)) + 
+  geom_path(data = AL092017, 
+            aes(x = Lon, y = Lat, color = Class, group = Group)) + 
+  guides(color = guide_legend(title = NULL, nrow = 1)) + 
+  scale_color_brewer(type = "qual", palette = "Set1", direction = -1) +
+  # scale_color_viridis(discrete = TRUE) + 
+  coord_equal(xlim = c(min(AL092017$Lon), max(AL092017$Lon)), 
+              ylim = c(min(AL092017$Lat), max(AL092017$Lat)))
+```
+
+```{r plot_al092017_gulf, echo = FALSE}
+bp + 
+  geom_point(data = AL09017_gulf, aes(x = Lon, y = Lat, color = Class)) + 
+  geom_path(data = AL09017_gulf, 
+            aes(x = Lon, y = Lat, color = Class, group = Group)) + 
+  guides(color = guide_legend(title = NULL, nrow = 1)) + 
+  scale_color_brewer(type = "qual", palette = "Set1", direction = -1) +
+  coord_equal(xlim = c(min(AL09017_gulf$Lon) - 3, max(AL09017_gulf$Lon) + 3), 
+              ylim = c(min(AL09017_gulf$Lat), max(AL09017_gulf$Lat)))
+```
+
+```{r plot_al092017_wind, echo = FALSE}
+AL092017 %>% 
+  ggplot(aes(x = Date, y = Wind)) + 
+  geom_line(aes(group = Group)) + 
+  geom_point(aes(color = Class), size = 3) + 
+  guides(color = guide_legend(title = NULL, nrow = 1)) + 
+  scale_color_brewer(type = "qual", palette = "Set1", direction = -1) +
+  theme_bw() + 
+  theme(legend.position = "bottom", 
+        legend.box = "vertical") +
+  labs(title = "Hurricane Harvey Wind Profile", 
+       y = "Wind (kts)")
+```
+
+```{r plot_al092017_pres, echo = FALSE}
+AL092017 %>% 
+  ggplot(aes(x = Date, y = Pressure, group = Group)) + 
+  geom_line() + 
+  geom_point(aes(color = Class), size = 3) + 
+  guides(color = guide_legend(title = NULL, nrow = 1)) + 
+  scale_color_brewer(type = "qual", palette = "Set1", direction = -1) +
+  theme_bw() + 
+  theme(legend.position = "bottom", 
+        legend.box = "vertical") +
+  labs(title = "Pressure Profile", 
+       y = "Pressure (mb)")
+```
+
+```{r plot_al092017_wind_pres, echo = FALSE}
+ggplot(data = AL092017, aes(x = Wind, y = Pressure)) + 
+  geom_point() + 
+  theme_bw() + 
+  labs(title = "Wind/Pressure Relationship", 
+       x = "Wind (kts)", 
+       y = "Pressure (mb)")
+```
+
+```{r, echo = FALSE}
+ggplot(data = filter(slp_df, !is.na(Wind), !is.na(Pres)), 
+       aes(x = Wind, y = Pres, color = WindRmks)) + 
+  geom_point() + 
+  theme_bw() + 
+  theme(legend.position = "bottom", 
+        legend.direction = "horizontal") + 
+  labs(title = "Surface Wind/Pressure Observations", 
+       x = "Wind (kts)", 
+       y = "Pressure (mb)")
+```
+
+```{r, echo = FALSE}
+ggplot(data = filter(slp_df, !is.na(Gust), !is.na(Pres)), 
+       aes(x = Gust, y = Pres, color = GustRmks)) + 
+  geom_point() + 
+  theme_bw() + 
+  theme(legend.position = "bottom", 
+        legend.direction = "horizontal") + 
+  labs(title = "Surface Gust/Pressure Observations", 
+       x = "Gust (kts)", 
+       y = "Pressure (mb)")
+```
 
 ### Barometric Pressure
 
@@ -316,14 +423,15 @@ bp <- al_tracking_chart(color = "black", fill = "white", size = 0.1, res = 50) +
   ggtitle("Sea Level Pressure - Hurricane Harvey"))
 ```
 
-The minimum pressure observed was 941.8mb at RCPT in Rockport, TX. Official landfall occurred at 06:00 UTC on the morning of August 26, 2017; 2 1/2 hours after the RCPT observation. This is approximately the same reported minimum central pressure listed by the National Hurricane Center (NHC) in [Public Advisory 23A](http://www.nhc.noaa.gov/archive/2017/al09/al092017.public_a.023.shtml?) which suggests pressure values may have been lower as the storm made passed over the statoin.
+The minimum pressure observed was 941.8mb at RCPT in Rockport, TX. Official landfall occurred at 06:00 UTC on the morning of August 26, 2017; 2 1/2 hours after the RCPT observation. This is approximately the same reported minimum central pressure listed by the National Hurricane Center (NHC) in [Public Advisory 23A](http://www.nhc.noaa.gov/archive/2017/al09/al092017.public_a.023.shtml?) which suggests pressure values may have been lower as the storm made passed over the station.
 
-```{r tbl_pres, echo = FALSE}
+```{r tbl_pres, echo = FALSE, results = "asis"}
 slp_df %>% 
   top_n(-5L, Pres) %>% 
   select(-c(Wind:GustRmks)) %>% 
   arrange(Pres) %>% 
-  kable(caption = "Five lowest pressure observations (mb).")
+  pandoc.table(caption = "Five lowest pressure observations (mb).", 
+               style = "rmarkdown", justify = "left", split.table = Inf)
 ```
 
 The "I" in `PresRmks` denotes the observation is incomplete. 
@@ -332,7 +440,7 @@ Many stations lost equipment during the height of the storm, leading to many inc
 
 ### Wind
 
-```{r plot_wind, echo = FALSE}
+```{r plot_slp_df_wind}
 bp + 
   geom_point(data = filter(slp_df, !is.na(Wind)) %>% arrange(Wind), 
              aes(x = Lon, y = Lat, color = Wind), shape = 9) + 
@@ -350,30 +458,37 @@ The highest wind value was recorded at ANPT2 several hours prior to the center o
 
 > ANPT2 SENTINEL STOPPED REPORTING AND MAY NOT HAVE RECORDED MAXIMUM EVENT VALUES
 
-```{r tbl_wind, echo = FALSE}
-kable(slp_df %>% 
-        top_n(5L, Wind) %>% 
-        select(ID, Station, Lat, Lon, Wind, WindDT) %>% 
-        arrange(desc(Wind)), 
-      caption = "Five highest wind observations (kts).")
+```{r tbl_wind, echo = FALSE, results = "asis"}
+slp_df %>% 
+  top_n(5L, Wind) %>% 
+  select(ID, Station, Lat, Lon, Wind, WindDT) %>% 
+  arrange(desc(Wind)) %>% 
+  pandoc.table(caption = "Five highest wind observations (kts).", 
+               style = "rmarkdown", justify = "left", split.table = Inf)
 ```
 
 In addition to ANPT2, RCPT2 (Rockport), MAXT2, RTAT2, MIST2 and MIRT2 all failed prior to the peak of the hurricane. XWLD failed when the pier housing the sensor was swept away.
 
-```{r tbl_wind_select, echo = FALSE}
+```{r tbl_wind_select, echo = FALSE, results = "asis"}
 tmp <- slp_df %>% 
+  select(-c(Pres:PresRmks, Gust:GustRmks)) %>% 
   filter(!is.na(Wind),
          ID %in% c("RCPT2", "RTAT2", "ANPT2", "XWLD", "MAXT2", "MIST2", 
                    "MIRT2")) %>% 
-  arrange(Wind)
+  arrange(desc(Wind))
 
+pandoc.table(tmp, caption = "Select Wind observations.", style = "rmarkdown", 
+             justify = "left", split.table = Inf)
+```
+
+```{r plot_wind_select, echo = FALSE}
 bp + 
   geom_point(data = tmp, 
              aes(x = Lon, y = Lat, color = Wind), shape = 9) + 
   geom_text_repel(data = tmp, 
                   aes(x = Lon, y = Lat, label = ID)) + 
   scale_color_gradientn(colors = rev(terrain.colors(10))) + 
-  coord_equal(xlim = c(-98, -96), ylim = c(27, 29)) + 
+  coord_equal(xlim = c(-97.5, -96.75), ylim = c(27.5, 28.25)) + 
   ggtitle("Select Wind Observations")
 ```
 
@@ -393,12 +508,13 @@ bp +
   ggtitle("Hurricane Harvey Rainfall Observations")
 ```
 
-```{r tbl_rain, echo = FALSE}
+```{r tbl_rain, echo = FALSE, results = "asis"}
 rain_df %>% 
   top_n(5L, Rain) %>% 
   arrange(desc(Rain)) %>% 
   select(-RainRmks) %>% 
-  kable(caption = "Top 5 Rainfall Amounts")
+  pandoc.table(caption = "Top 5 Rainfall Amounts", 
+               style = "rmarkdown", justify = "left", split.table = Inf)
 ```
 
 The text reports contain a Section D for Inland Flooding. Unfortunately at this time only the San Antonion/Austin NWS office have provided more info; generally river flooding and low water crossings. 
@@ -422,20 +538,21 @@ bp +
   ggtitle("Hurricane Harvey Tornado Reports")
 ```
 
-#### Enhanced Fujita Scale
-
-| Scale | Wind (mph) | Wind (kts) |
-|:-----:|:----------:|:----------:|
-| EFO   | 65-85      | 55-74      |
-| EF1   | 86-110     | 75-96      |
-| EF2   | 111-135    | 97-117     |
-| EF3   | 136-165    | 118-143    |
-| EF4   | 166-200    | 143-174    |
-| EF5   | >200       | >175       |
-
-```{r tbl_tors, echo = FALSE}
+```{r tbl_tors, echo = FALSE, results = "asis"}
 tor_df %>% 
-  kable(caption = "Tornado Remarks, Hurricane Harvey")
+  pandoc.table(caption = "Tornado Remarks, Hurricane Harvey", 
+               style = "rmarkdown", justify = "left", split.table = Inf)
+```
+
+```{r efs, echo = FALSE, results = "asis"}
+efs <- data.frame("Scale" = c("EF0", "EF1", "EF2", "EF3", "EF4", "EF5"), 
+                  "WindMPH" = c("65-85", "86-110", "111-135", "136-165", 
+                                "166-200", ">200"), 
+                  "WindKTS" = c("55-74", "75-96", "97-117", "118-143", 
+                                "144-174", ">175"))
+
+pandoc.table(efs, caption = "Enhanced Fujita Scale", style = "rmarkdown", 
+             justify = "left")
 ```
 
 ## Code
@@ -713,7 +830,7 @@ Invalid values such as "999" would later be marked as `NA`.
 
 The remaining variables followed generally the same rules as similar variables above (i.e., `GustDir` for `WindDir`, `GustDT` for `WindDT`, etc.). The final `str_match` call brought all expected observations in order.
 
-```{r ref.label = "slp", echo = c(33:66), eval = FALSE}
+```{r ref.label = "slp", echo = c(33:60), eval = FALSE}
 ```
 
 #### Rainfall
@@ -789,10 +906,6 @@ With `t_a` and `t_b`, I used `map2` through `tor_raw` to extract each subset. Fr
 
 The regex was very similar to the `rain` regex as most items were evenly delimited.
 
-## Source
-
-[Post Tropical Cyclone Report - Tropical Storm Harvey](https://nwschat.weather.gov/p.php?pid=201709062030-KHGX-ACUS74-PSHHGX)
-
 ## Previous Versions
 
   * [1](https://github.com/timtrice/web/blob/15f552b061a7200647cc2e7bfd8174fec631d816/content/post/2017-09-06-hurricane-harvey-post-storm-report-houston.Rmd)
@@ -802,3 +915,8 @@ The regex was very similar to the `rain` regex as most items were evenly delimit
 ```{r session_info}
 pander::pander(sessionInfo())
 ```
+
+```{r}
+warnings()
+```
+
