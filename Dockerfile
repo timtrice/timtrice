@@ -12,21 +12,20 @@ RUN apt-get update \
     libproj-dev \
     libxml2-dev
 
+# Change default shell for user rstudio
+RUN chsh -s /bin/bash rstudio
+
 # Add working directory for proceeding commands
 WORKDIR /home/rstudio
-
-# Add and RUN install packages
-ADD packages.R .
-RUN Rscript packages.R
-
-# Add .Renviron
-ADD .Renviron .
 
 # Clone GitHub repo
 RUN git clone https://github.com/timtrice/web.git
 
+WORKDIR web
+
+RUN git checkout develop
+
 # Change ownership of all files to rstudio
 RUN chown -R rstudio:rstudio .
 
-# Change default shell for user rstudio
-RUN chsh -s /bin/bash rstudio
+RUN Rscript packages.R

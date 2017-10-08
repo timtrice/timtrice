@@ -19,8 +19,9 @@ install.packages(c("data.table",
                    "xml2"))
 
 # GitHub packages
-devtools::install_github("rstats-db/RMariaDB", build_vignettes = TRUE)
 devtools::install_github("rstudio/blogdown", build_vignettes = TRUE)
+devtools::install_github("rstats-db/RPostgres", build_vignettes = TRUE)
+devtools::install_github("rstats-db/RMariaDB", build_vignettes = TRUE)
 
 # Drat
 install.packages("rrricanesdata",

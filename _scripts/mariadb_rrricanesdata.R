@@ -8,7 +8,7 @@ host <- Sys.getenv("andromeda.host")
 user <- Sys.getenv("andromeda.user")
 password <- Sys.getenv("andromeda.password")
 
-con <- dbConnect(RMariaDB::MariaDB(), host = host, user = user,
+con <- dbConnect(MariaDB(), host = host, user = user,
                  password = password)
 
 dbSendQuery(con, "CREATE DATABASE rrricanesdata")

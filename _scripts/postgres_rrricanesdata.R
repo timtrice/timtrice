@@ -1,14 +1,19 @@
-library(RPostgreSQL)
+library(DBI)
+library(RPostgres)
 
 data(list = data(package = "rrricanesdata")$results[,3],
      package = "rrricanesdata")
 
-host <- Sys.getenv("focused_nightingale.ip")
-user <- Sys.getenv("focused_nightingale.user")
-password <- Sys.getenv("focused_nightingale.password")
+host <- Sys.getenv("antila.host")
+user <- Sys.getenv("antila.user")
+password <- Sys.getenv("antila.password")
 
-con <- dbConnect(dbDriver("PostgreSQL"), dbname = "rrricanesdata", host = host,
-                 port = 5432, user = user, password = password)
+con <- dbConnect(Postgres(), host = host, dbname = "rrricanesdata", port = 5432,
+                 user = user, password = password)
+
+dbSendQuery(con, "CREATE DATABASE rrricanesdata")
+
+dbSendQuery(con, "USE rrricanesdata")
 
 dbWriteTable(con, "adv", as.data.frame(adv), overwrite = TRUE)
 dbWriteTable(con, "discus", as.data.frame(discus), overwrite = TRUE)
