@@ -1,26 +1,28 @@
 # rrricanes dependencies
-install.packages(c("data.table",  
-                   "dplyr", 
-                   "devtools", 
-                   "DBI", 
+install.packages(c("data.table",
+                   "dplyr",
+                   "devtools",
+                   "DBI",
                    "HURDAT",
-                   "ggplot2", 
+                   "ggplot2",
                    "ggrepel",
-                   "knitr", 
+                   "knitr",
                    "lubridate",
                    "purrr",
                    "readxl",
+                   "rmarkdown",
                    "rnaturalearthdata",
-                   "sp", 
+                   "sp",
                    "stringr",
                    "tibble",
-                   "tidyr", 
+                   "tidyr",
                    "xml2"))
 
 # GitHub packages
 devtools::install_github("rstats-db/RMariaDB", build_vignettes = TRUE)
+devtools::install_github("rstudio/blogdown", build_vignettes = TRUE)
 
 # Drat
-install.packages("rrricanesdata", 
-                 repos = "https://timtrice.github.io/drat/", 
+install.packages("rrricanesdata",
+                 repos = "https://timtrice.github.io/drat/",
                  type = "source")
