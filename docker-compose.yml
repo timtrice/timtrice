@@ -1,7 +1,25 @@
 version: '3'
 
 services:
+  andromeda:
+    image: mariadb:10.3.1
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: qNlr0rZtf5VfGQ9m
+  antila:
+    image: postgres:9.6.5
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 5aJhjS7g7SAzE56K
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
   web:
     build: .
     ports:
       - "8787:8787"
+    depends_on:
+      - andromeda
+      - antila
