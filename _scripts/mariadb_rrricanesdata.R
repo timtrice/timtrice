@@ -4,12 +4,16 @@ library(RMariaDB)
 data(list = data(package = "rrricanesdata")$results[,3],
      package = "rrricanesdata")
 
-host <- Sys.getenv("loving_lamarr.ip")
-user <- Sys.getenv("loving_lamarr.user")
-password <- Sys.getenv("loving_lamarr.password")
+host <- Sys.getenv("andromeda.host")
+user <- Sys.getenv("andromeda.user")
+password <- Sys.getenv("andromeda.password")
 
-con <- dbConnect(dbDriver("MariaDB"), dbname = "rrricanesdata", host = host,
-                 user = user, password = password)
+con <- dbConnect(RMariaDB::MariaDB(), host = host, user = user,
+                 password = password)
+
+dbSendQuery(con, "CREATE DATABASE rrricanesdata")
+
+dbSendQuery(con, "USE rrricanesdata")
 
 dbWriteTable(con, "adv", as.data.frame(adv), overwrite = TRUE)
 dbWriteTable(con, "discus", as.data.frame(discus), overwrite = TRUE)
