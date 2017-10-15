@@ -8,7 +8,12 @@ tags: [r, hurricanes, harvey]
 output:
   blogdown::html_page:
     toc: true
+    fig_align: center
 ---
+
+On August 26, 2017, Hurricane Harvey made landfall along the central Texas gulf coast as a category four hurricane. The storm weakened but remained stationary in southeast Texas spawing dozens of tornadoes and dropping over 30 inches of rain in many locations with isolated amounts of over 50 inches.
+
+Harvey was the first major hurricane to strike the Texas coast since Hurricane Rita in 2005; the first category four hurricane to make landfall since Hurricane Bret in 1999.
 
 In early September, National Weather Service (NWS) offices in Brownsville, Corpus Christi, San Antonio, and Houston, Texas, and Lake Charles, Louisiana released preliminary data reports on Hurricane Harvey. The following data has been extracted from those reports.
 
@@ -27,7 +32,7 @@ library(tibble)
 library(tidyr)
 ```
 
-```{r load_data, echo = FALSE}
+```{r load-data, echo = FALSE}
 # URLs to reports. These links point to the latest product so the text may 
 # change over time. Raw data will be saved in the GitHub repo:
 # https://github.com/timtrice/web
@@ -285,7 +290,7 @@ tor_df <- str_match(tor, sprintf("^%s%s%s\\s+%s\\s+%s\\s+%s$",
 tor_df$Details <- tor_details
 ```
 
-```{r base_plot, echo = FALSE, message = FALSE}
+```{r base-plot, echo = FALSE, message = FALSE}
 # Draw a base plot
 bp <- al_tracking_chart(color = "black", fill = "white", size = 0.1, res = 50) +
   labs(x = "Lon", y = "Lat") + 
@@ -306,7 +311,6 @@ AL092017 <- adv %>%
                         labels = c("Tropical Depression", "Tropical Storm", 
                                    "Category 1", "Category 2", "Category 3", 
                                    "Category 4", "Category 5")))
-
 # Harvey advs in Gulf
 AL09017_gulf <- filter(AL092017, Adv >= 12)
 
@@ -320,7 +324,13 @@ lf.AL092017 <- data.frame("Date" = c(ymd_hm("2017-08-26 06:00", tz = "UTC"),
                           "Wind" = c(110, 45))
 ```
 
-```{r plot_al092017, echo = FALSE}
+Advisories were initiated on Potential Tropical Cyclone Nine on  the morning of August 17. Shortly thereafter, the cyclone was upgraded to a tropical storm but would not see additional strengthening as it moved into the eastern Caribbean Sea.
+
+By the evening of August 19, Harvey had degenerated from a cyclone to a tropical wave (no closed center of circulation) and the National Hurricane Center discontinued issuing advisories on the system.
+
+The full track of Hurricane Harvey is shown in [Figure 1](#fig:plot-al092017). 
+
+```{r plot-al092017, echo = FALSE, fig.cap = "Hurricane Harvey had two life cycles as a tropical cyclone; the first in the western Atlantic and eastern Caribbean, and the second in the Gulf of Mexico."}
 bp + 
   geom_point(data = AL092017, 
              aes(x = Lon, y = Lat, color = Class)) + 
@@ -330,10 +340,16 @@ bp +
   scale_color_brewer(type = "qual", palette = "Set1", direction = -1) +
   # scale_color_viridis(discrete = TRUE) + 
   coord_equal(xlim = c(min(AL092017$Lon), max(AL092017$Lon)), 
-              ylim = c(min(AL092017$Lat), max(AL092017$Lat)))
+              ylim = c(min(AL092017$Lat), max(AL092017$Lat))) + 
+  labs(title = "Hurricane Harvey - Full Track", 
+       subtitle = "Harvey's track from August 17 to August 31, 2017")
 ```
 
-```{r plot_al092017_gulf, echo = FALSE}
+By midday August 23, the remnants of Harvey had regenerated back into a tropical depression while in the southern Gulf of Mexico. The NHC began reissuing advisories on the system. 
+
+[Figure 2](#fig:plot-al092017-gulf) shows the track of Hurricane Harvey after regeneration in the Gulf of Mexico. Once the cyclone redeveloped, it quickly began strengthening as it moved north and north-northwest towards the central Texas coastline. [Figure 3](#fig:plot-al092017-pres) and [Figure 5](#fig:plot-al092017-wind) show how the pressure and wind of Harvey changed rapidly as the storm intensified.
+
+```{r plot-al092017-gulf, echo = FALSE, fig.cap = "Hurricane Harvey track in the Gulf of Mexico where the system intensified quickly into a category four hurricane."}
 bp + 
   geom_point(data = AL09017_gulf, aes(x = Lon, y = Lat, color = Class)) + 
   geom_path(data = AL09017_gulf, 
@@ -341,24 +357,18 @@ bp +
   guides(color = guide_legend(title = NULL, nrow = 1)) + 
   scale_color_brewer(type = "qual", palette = "Set1", direction = -1) +
   coord_equal(xlim = c(min(AL09017_gulf$Lon) - 3, max(AL09017_gulf$Lon) + 3), 
-              ylim = c(min(AL09017_gulf$Lat), max(AL09017_gulf$Lat)))
+              ylim = c(min(AL09017_gulf$Lat), max(AL09017_gulf$Lat))) + 
+  labs(title = "Hurricane Harvey - Gulf of Mexico", 
+       subtitle = "Harvey's track from August 23 to August 31, 2017")
 ```
 
-```{r plot_al092017_wind, echo = FALSE}
-AL092017 %>% 
-  ggplot(aes(x = Date, y = Wind)) + 
-  geom_line(aes(group = Group)) + 
-  geom_point(aes(color = Class), size = 3) + 
-  guides(color = guide_legend(title = NULL, nrow = 1)) + 
-  scale_color_brewer(type = "qual", palette = "Set1", direction = -1) +
-  theme_bw() + 
-  theme(legend.position = "bottom", 
-        legend.box = "vertical") +
-  labs(title = "Hurricane Harvey Wind Profile", 
-       y = "Wind (kts)")
-```
+### Barometric Pressure
 
-```{r plot_al092017_pres, echo = FALSE}
+Barometric pressure is the lowest atmospheric pressure either estimated or recorded in the center of a tropical cyclone. Generally speaking, the lower the barometric pressure, the stronger the cyclone. 
+
+[Figure 3](#fig:plot-al092017-pres) shows the barometric pressure observations over 6-hour intervals during the life cycle of the cyclone. The gap from August 21 to August 23 is due to the system temporarily losing cyclone characteristics in the Caribbean Sea. 
+
+```{r plot-al092017-pres, echo = FALSE, fig.cap = "Hurricane Harvey central barometric pressure observations during the life cycle of the tropical cyclone."}
 AL092017 %>% 
   ggplot(aes(x = Date, y = Pressure, group = Group)) + 
   geom_line() + 
@@ -368,47 +378,16 @@ AL092017 %>%
   theme_bw() + 
   theme(legend.position = "bottom", 
         legend.box = "vertical") +
-  labs(title = "Pressure Profile", 
+  labs(title = "Hurricane Harvey Pressure Profile", 
+       subtitle = "Central barometric pressure observations over 6-hour intervals", 
        y = "Pressure (mb)")
 ```
 
-```{r plot_al092017_wind_pres, echo = FALSE}
-ggplot(data = AL092017, aes(x = Wind, y = Pressure)) + 
-  geom_point() + 
-  theme_bw() + 
-  labs(title = "Wind/Pressure Relationship", 
-       x = "Wind (kts)", 
-       y = "Pressure (mb)")
-```
+[Figure 4](#fig:plot-pres) shows the lowest pressure observations as reported by the respective local NWS offices. As expected, the lowest values were recorded just north of Corpus Christi, Texas near the Rockport area where some locations reported pressure in the 940's (mb). 
+[Table 1](#tbl:tbl-pres) shows the five lowest pressure observations recorded.
 
-```{r, echo = FALSE}
-ggplot(data = filter(slp_df, !is.na(Wind), !is.na(Pres)), 
-       aes(x = Wind, y = Pres, color = WindRmks)) + 
-  geom_point() + 
-  theme_bw() + 
-  theme(legend.position = "bottom", 
-        legend.direction = "horizontal") + 
-  labs(title = "Surface Wind/Pressure Observations", 
-       x = "Wind (kts)", 
-       y = "Pressure (mb)")
-```
-
-```{r, echo = FALSE}
-ggplot(data = filter(slp_df, !is.na(Gust), !is.na(Pres)), 
-       aes(x = Gust, y = Pres, color = GustRmks)) + 
-  geom_point() + 
-  theme_bw() + 
-  theme(legend.position = "bottom", 
-        legend.direction = "horizontal") + 
-  labs(title = "Surface Gust/Pressure Observations", 
-       x = "Gust (kts)", 
-       y = "Pressure (mb)")
-```
-
-### Barometric Pressure
-
-```{r plot_pres, echo = FALSE}
-(tmp_plot <- bp + 
+```{r plot-pres, echo = FALSE, fig.cap = "Rockport, Texas recorded the lowest pressure observations. Many observations are incomplete due to weather stations losing power or equipment during the storm."}
+bp + 
   geom_point(data = filter(slp_df, 
                            !is.na(Pres)) %>% 
                arrange(desc(Pres)), 
@@ -420,18 +399,18 @@ ggplot(data = filter(slp_df, !is.na(Gust), !is.na(Pres)),
                        max(slp_df$Lon, na.rm = TRUE)), 
               ylim = c(min(slp_df$Lat, na.rm = TRUE), 
                        max(slp_df$Lat, na.rm = TRUE))) + 
-  ggtitle("Sea Level Pressure - Hurricane Harvey"))
+  labs(title = "Sea Level Pressure - Hurricane Harvey", 
+       subtitle = "Lowest observed barometric pressure observations during Hurricane Harvey.")
 ```
 
 The minimum pressure observed was 941.8mb at RCPT in Rockport, TX. Official landfall occurred at 06:00 UTC on the morning of August 26, 2017; 2 1/2 hours after the RCPT observation. This is approximately the same reported minimum central pressure listed by the National Hurricane Center (NHC) in [Public Advisory 23A](http://www.nhc.noaa.gov/archive/2017/al09/al092017.public_a.023.shtml?) which suggests pressure values may have been lower as the storm made passed over the station.
 
-```{r tbl_pres, echo = FALSE, results = "asis"}
+```{r tbl-pres, echo = FALSE, results = "asis"}
 slp_df %>% 
   top_n(-5L, Pres) %>% 
   select(-c(Wind:GustRmks)) %>% 
   arrange(Pres) %>% 
-  pandoc.table(caption = "Five lowest pressure observations (mb).", 
-               style = "rmarkdown", justify = "left", split.table = Inf)
+  kable(caption = "Five lowest pressure observations (mb).")
 ```
 
 The "I" in `PresRmks` denotes the observation is incomplete. 
@@ -440,7 +419,26 @@ Many stations lost equipment during the height of the storm, leading to many inc
 
 ### Wind
 
-```{r plot_slp_df_wind}
+[Figure 5](#fig:plot-al092017-wind) shows the quick increase in wind during Harvey's track over the Gulf of Mexico. It strengthened from a tropical depression to a category four hurricane in 60 hours; not record-breaking but quite impressive nonetheless.
+
+```{r plot-al092017-wind, echo = FALSE, fig.cap = "Harvey strengthened from a tropical depression to category four hurricane in just over two days once in the Gulf of Mexico."}
+AL092017 %>% 
+  ggplot(aes(x = Date, y = Wind)) + 
+  geom_line(aes(group = Group)) + 
+  geom_point(aes(color = Class), size = 3) + 
+  guides(color = guide_legend(title = NULL, nrow = 1)) + 
+  scale_color_brewer(type = "qual", palette = "Set1", direction = -1) +
+  theme_bw() + 
+  theme(legend.position = "bottom", 
+        legend.box = "vertical") +
+  labs(title = "Hurricane Harvey Wind Profile", 
+       subtitle = "Maximum sustained wind speeds over 6-hour intervals",
+       y = "Wind (kts)")
+```
+
+[Figure 6](#fig:plot-slp-df-wind) shows the plot of all maximum wind values during Hurricane Harvey. As with barometric pressure, the highest wind values were recorded where Harvey made landfall but drop significantly at nearby locations.
+
+```{r plot-slp-df-wind, echo = FALSE, fig.cap = "Maximum sustained wind observations as reported by weather stations during Hurricane Harvey."}
 bp + 
   geom_point(data = filter(slp_df, !is.na(Wind)) %>% arrange(Wind), 
              aes(x = Lon, y = Lat, color = Wind), shape = 9) + 
@@ -449,54 +447,39 @@ bp +
                        max(slp_df$Lon, na.rm = TRUE)), 
               ylim = c(min(slp_df$Lat, na.rm = TRUE), 
                        max(slp_df$Lat, na.rm = TRUE))) + 
-  ggtitle("Hurricane Harvey Maximum Wind Observations")
+  labs(title = "Hurricane Harvey Maximum Wind Observations", 
+       subtitle = "Highest wind observations during Hurricane Harvey.")
 ```
-
-Not surprisingly, many of the locations that recorded the lower pressure values also recorded the higher wind values.
 
 The highest wind value was recorded at ANPT2 several hours prior to the center of the hurricane moving ashore. NWS CRP (Corpus Christi) reports, 
 
 > ANPT2 SENTINEL STOPPED REPORTING AND MAY NOT HAVE RECORDED MAXIMUM EVENT VALUES
 
-```{r tbl_wind, echo = FALSE, results = "asis"}
+```{r tbl-wind, echo = FALSE, results = "asis"}
 slp_df %>% 
   top_n(5L, Wind) %>% 
   select(ID, Station, Lat, Lon, Wind, WindDT) %>% 
   arrange(desc(Wind)) %>% 
-  pandoc.table(caption = "Five highest wind observations (kts).", 
-               style = "rmarkdown", justify = "left", split.table = Inf)
+  kable(caption = "Five highest wind observations (kts).")
 ```
 
 In addition to ANPT2, RCPT2 (Rockport), MAXT2, RTAT2, MIST2 and MIRT2 all failed prior to the peak of the hurricane. XWLD failed when the pier housing the sensor was swept away.
 
-```{r tbl_wind_select, echo = FALSE, results = "asis"}
-tmp <- slp_df %>% 
+```{r tbl-wind-select, echo = FALSE, results = "asis"}
+slp_df %>% 
   select(-c(Pres:PresRmks, Gust:GustRmks)) %>% 
   filter(!is.na(Wind),
          ID %in% c("RCPT2", "RTAT2", "ANPT2", "XWLD", "MAXT2", "MIST2", 
                    "MIRT2")) %>% 
-  arrange(desc(Wind))
-
-pandoc.table(tmp, caption = "Select Wind observations.", style = "rmarkdown", 
-             justify = "left", split.table = Inf)
-```
-
-```{r plot_wind_select, echo = FALSE}
-bp + 
-  geom_point(data = tmp, 
-             aes(x = Lon, y = Lat, color = Wind), shape = 9) + 
-  geom_text_repel(data = tmp, 
-                  aes(x = Lon, y = Lat, label = ID)) + 
-  scale_color_gradientn(colors = rev(terrain.colors(10))) + 
-  coord_equal(xlim = c(-97.5, -96.75), ylim = c(27.5, 28.25)) + 
-  ggtitle("Select Wind Observations")
+  arrange(desc(Wind)) %>% 
+  kable(caption = "Select Wind observations.")
 ```
 
 ### Rain
 
-Without a doubt, the main story from Hurricane Harvey will be the rain; some areas in southeast Texas recording over 50 inches. 
+The story of Hurricane Harvey will always center around the significant flooding that took place as the hurricane weakened and stalled in southeast Texas. Harvey dropped record rainfall amounts across broad areas of southeast Texas turning highways into rivers and neighborhoods into lakes. 
 
-```{r plot_rain, echo = FALSE}
+```{r plot-rain, echo = FALSE, fig.cap = "Several locations across southeast Texas recorded over 30\" of rain with many isolated amounts of 40-50 inches."}
 bp + 
   geom_point(data = filter(rain_df, !is.na(Rain)) %>% arrange(Rain), 
              aes(x = Lon, y = Lat, color = Rain), shape = 2) + 
@@ -505,16 +488,18 @@ bp +
                        max(slp_df$Lon, na.rm = TRUE)), 
               ylim = c(min(slp_df$Lat, na.rm = TRUE), 
                        max(slp_df$Lat, na.rm = TRUE))) + 
-  ggtitle("Hurricane Harvey Rainfall Observations")
+  labs(title = "Hurricane Harvey Rainfall Observations", 
+       subtitle = "Maximum recorded rainfall, in inches, during Hurricane Harvey.")
 ```
 
-```{r tbl_rain, echo = FALSE, results = "asis"}
+Though the news focus of the flooding was centered in the Houston area (Harris County), the largest rainfall amounts were recorded in Chambers, Brazoria, Liberty and Jefferson counties.
+
+```{r tbl-rain, echo = FALSE, results = "asis"}
 rain_df %>% 
   top_n(5L, Rain) %>% 
   arrange(desc(Rain)) %>% 
   select(-RainRmks) %>% 
-  pandoc.table(caption = "Top 5 Rainfall Amounts", 
-               style = "rmarkdown", justify = "left", split.table = Inf)
+  kable(caption = "Top 5 Rainfall Amounts")
 ```
 
 The text reports contain a Section D for Inland Flooding. Unfortunately at this time only the San Antonion/Austin NWS office have provided more info; generally river flooding and low water crossings. 
@@ -523,7 +508,7 @@ The text reports contain a Section D for Inland Flooding. Unfortunately at this 
 
 There are 24 tornado observations for Hurricane Harvey. However, some observations may be for the same tornado. For example, there are two observations for a tornado in Fort Bend county with the same `Lat`, `Lat` and `Date` value; only `Details` is different. 
 
-```{r plot_tors, echo = FALSE}
+```{r plot-tors, echo = FALSE, fig.cap = "All tornadoes generated from Hurricane Harvey were relatively weak, as is typical of tropical cyclones."}
 tor_df$Scale <- factor(tor_df$Scale, 
                        levels = c("EF0", "EF1", "EF2", "EF3", "EF4", "EF5"), 
                        labels = c("EF0", "EF1", "EF2", "EF3", "EF4", "EF5"))
@@ -535,13 +520,15 @@ bp +
                        max(tor_df$Lon, na.rm = TRUE)), 
               ylim = c(min(tor_df$Lat, na.rm = TRUE), 
                        max(tor_df$Lat, na.rm = TRUE))) + 
-  ggtitle("Hurricane Harvey Tornado Reports")
+  labs(title = "Hurricane Harvey Tornado Reports", 
+       subtitle = "Confirmed tornado touchdowns generated from Hurricane Harvey.")
 ```
 
-```{r tbl_tors, echo = FALSE, results = "asis"}
+[Table 5](#tbl:tbl-tors) shows all tornado observations during the event from each of the NWS offices. [Table Six](#tab:efs) identifies wind range values for `Scale`.
+
+```{r tbl-tors, echo = FALSE, results = "asis"}
 tor_df %>% 
-  pandoc.table(caption = "Tornado Remarks, Hurricane Harvey", 
-               style = "rmarkdown", justify = "left", split.table = Inf)
+  kable(caption = "Tornado Remarks, Hurricane Harvey")
 ```
 
 ```{r efs, echo = FALSE, results = "asis"}
@@ -551,8 +538,7 @@ efs <- data.frame("Scale" = c("EF0", "EF1", "EF2", "EF3", "EF4", "EF5"),
                   "WindKTS" = c("55-74", "75-96", "97-117", "118-143", 
                                 "144-174", ">175"))
 
-pandoc.table(efs, caption = "Enhanced Fujita Scale", style = "rmarkdown", 
-             justify = "left")
+kable(efs, caption = "Enhanced Fujita Scale")
 ```
 
 ## Code
@@ -912,7 +898,7 @@ The regex was very similar to the `rain` regex as most items were evenly delimit
 
 ## Session Info
 
-```{r session_info}
+```{r session-info}
 pander::pander(sessionInfo())
 ```
 
