@@ -12,35 +12,13 @@
     
     
     <item>
-      <title>Hurricane Harvey Post Storm Report (Houston)</title>
-      <link>/2017-09-06-hurricane-harvey-post-storm-report-houston/</link>
+      <title>Hurricane Harvey Post Storm Report</title>
+      <link>/2017-09-06-hurricane-harvey-report/</link>
       <pubDate>Wed, 06 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017-09-06-hurricane-harvey-post-storm-report-houston/</guid>
-      <description>library(dplyr) library(ggplot2) library(ggrepel) library(knitr) library(lubridate) library(plotly) library(purrr) library(rrricanes) library(stringr) library(tibble) library(tidyr) Per the National Weather Service in Houston, TX, the following data are preliminary results from Hurricane Harvey:
- THE DATA SHOWN HERE ARE PRELIMINARY….AND SUBJECT TO UPDATES AND CORRECTIONS AS APPROPRIATE.
-  THIS REPORT INCLUDES EVENTS OCCURRING WHEN WATCHES AND/OR WARNINGS WERE IN EFFECT…OR WHEN SIGNIFICANT FLOODING ASSOCIATED WITH HARVEY OR ITS REMNANTS WAS AFFECTING THE AREA.</description>
-    </item>
-    
-    <item>
-      <title>Tropical Cyclone Time Over Land</title>
-      <link>/2017-08-28-tropical-cyclone-time-over-land/</link>
-      <pubDate>Mon, 28 Aug 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/2017-08-28-tropical-cyclone-time-over-land/</guid>
-      <description>A question was posted earlier wondering the longest time a cyclone had spent over land. Using HURDAT we can calculate this.
-library(dplyr) ## ## Attaching package: &amp;#39;dplyr&amp;#39; ## The following objects are masked from &amp;#39;package:stats&amp;#39;: ## ## filter, lag ## The following objects are masked from &amp;#39;package:base&amp;#39;: ## ## intersect, setdiff, setequal, union library(HURDAT) library(rnaturalearthdata) library(sp) The dataset for Atlantic cyclones dates back to 1851. Using the rnaturalearthdata package in conjunction with HURDAT::AL, we identify Lat/Lon points within AL that are within the map_units50 polygon shapefile.</description>
-    </item>
-    
-    <item>
-      <title>Top Tornadic Tropical Cyclones</title>
-      <link>/2017-08-26-top-tornadic-tropical-cyclones/</link>
-      <pubDate>Sat, 26 Aug 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/2017-08-26-top-tornadic-tropical-cyclones/</guid>
-      <description>With Hurricane Harvey seemingly producing numerous tornadoes (many unconfirmed touchdowns) I wanted to get a view of the top tornadic-producing tropical cyclones.
-History of tropical cyclone-spawned tornadoes lists the “Tropical cyclone tornado data set” (xls) as a source. However, this dataset does not include anything post-2015. I am unable to find an updated dataset.
-As of this writing, officially Harvey has only produced two tornadoes. But, as a resident of the greater Houston area I can tell you the warnings are flying!</description>
+      <guid>/2017-09-06-hurricane-harvey-report/</guid>
+      <description>Hurricane Harvey Barometric Pressure Wind Rain Tornadoes  Code Libraries Data  Previous Versions Session Info   On August 26, 2017, Hurricane Harvey made landfall along the central Texas gulf coast as a category four hurricane. The storm weakened but remained stationary in southeast Texas spawing dozens of tornadoes and dropping over 30 inches of rain in many locations with isolated amounts of over 50 inches.
+Harvey was the first major hurricane to strike the Texas coast since Hurricane Rita in 2005; the first category four hurricane to make landfall since Hurricane Bret in 1999.</description>
     </item>
     
     <item>
