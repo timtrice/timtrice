@@ -12,14 +12,13 @@
     
     
     <item>
-      <title>Hurricane Harvey Post Storm Report (Houston)</title>
-      <link>/2017-09-06-hurricane-harvey-post-storm-report-houston/</link>
+      <title>Hurricane Harvey Post Storm Report</title>
+      <link>/2017-09-06-hurricane-harvey-report/</link>
       <pubDate>Wed, 06 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017-09-06-hurricane-harvey-post-storm-report-houston/</guid>
-      <description>library(dplyr) library(ggplot2) library(ggrepel) library(knitr) library(lubridate) library(plotly) library(purrr) library(rrricanes) library(stringr) library(tibble) library(tidyr) Per the National Weather Service in Houston, TX, the following data are preliminary results from Hurricane Harvey:
- THE DATA SHOWN HERE ARE PRELIMINARY….AND SUBJECT TO UPDATES AND CORRECTIONS AS APPROPRIATE.
-  THIS REPORT INCLUDES EVENTS OCCURRING WHEN WATCHES AND/OR WARNINGS WERE IN EFFECT…OR WHEN SIGNIFICANT FLOODING ASSOCIATED WITH HARVEY OR ITS REMNANTS WAS AFFECTING THE AREA.</description>
+      <guid>/2017-09-06-hurricane-harvey-report/</guid>
+      <description>Hurricane Harvey Barometric Pressure Wind Rain Tornadoes  Code Libraries Data  Previous Versions Session Info   On August 26, 2017, Hurricane Harvey made landfall along the central Texas gulf coast as a category four hurricane. The storm weakened but remained stationary in southeast Texas spawing dozens of tornadoes and dropping over 30 inches of rain in many locations with isolated amounts of over 50 inches.
+Harvey was the first major hurricane to strike the Texas coast since Hurricane Rita in 2005; the first category four hurricane to make landfall since Hurricane Bret in 1999.</description>
     </item>
     
   </channel>

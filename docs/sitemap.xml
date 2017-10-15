@@ -3,18 +3,8 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/2017-09-06-hurricane-harvey-post-storm-report-houston/</loc>
+    <loc>/2017-09-06-hurricane-harvey-report/</loc>
     <lastmod>2017-09-06T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/2017-08-28-tropical-cyclone-time-over-land/</loc>
-    <lastmod>2017-08-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/2017-08-26-top-tornadic-tropical-cyclones/</loc>
-    <lastmod>2017-08-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -152,12 +142,6 @@
   <url>
     <loc>/</loc>
     <lastmod>2017-09-06T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/weather/</loc>
-    <lastmod>2017-08-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
