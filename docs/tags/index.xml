@@ -92,14 +92,5 @@
       <description></description>
     </item>
     
-    <item>
-      <title>Weather</title>
-      <link>/tags/weather/</link>
-      <pubDate>Sat, 26 Aug 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/weather/</guid>
-      <description></description>
-    </item>
-    
   </channel>
 </rss>
