@@ -8,6 +8,7 @@ install.packages(c("data.table",
                    "ggrepel",
                    "knitr",
                    "lubridate",
+                   "pander",
                    "purrr",
                    "readxl",
                    "rmarkdown",
@@ -22,6 +23,7 @@ install.packages(c("data.table",
 devtools::install_github("rstudio/blogdown", build_vignettes = TRUE)
 devtools::install_github("rstats-db/RPostgres", build_vignettes = TRUE)
 devtools::install_github("rstats-db/RMariaDB", build_vignettes = TRUE)
+devtools::install_github("ropensci/rrricanes", build_vignettes = TRUE)
 
 # Drat
 install.packages("rrricanesdata",
