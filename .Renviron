@@ -1,9 +1,0 @@
-# andromeda (MariaDB 10.3.1)
-andromeda.host=172.17.0.2
-andromeda.user=root
-andromeda.password=qNlr0rZtf5VfGQ9m
-
-# antila (Postgres 9.6.5)
-antila.host=172.17.0.3
-antila.user=postgres
-antila.password=5aJhjS7g7SAzE56K
