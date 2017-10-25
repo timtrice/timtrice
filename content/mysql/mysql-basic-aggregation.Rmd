@@ -28,7 +28,7 @@ password <- Sys.getenv("andromeda.password")
 ```{r, include = FALSE}
 con <- dbConnect(RMariaDB::MariaDB(), 
                  dbname = "rrricanesdata", 
-                 host = host,
+                 host = "andromeda",
                  user = user, 
                  password = password)
 ```
