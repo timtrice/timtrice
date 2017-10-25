@@ -2,23 +2,17 @@ version: '3.1'
 
 services:
 
-  mariadb:
+  andromeda:
     image: timtrice/andromeda
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: qNlr0rZtf5VfGQ9m
-    networks:
-      mynet:
-        ipv4_address: 172.25.0.10
 
-  postgres:
+  antila:
     image: timtrice/antila
     restart: always
     environment:
       POSTGRES_PASSWORD: 5aJhjS7g7SAzE56K
-    networks:
-      mynet:
-        ipv4_address: 172.25.0.20
 
   web:
     image: timtrice/web
@@ -32,12 +26,5 @@ services:
       - "8787:8787"
       - "8888:8888"
     depends_on:
-      - mariadb
-      - postgres
-
-networks:
-  mynet:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 172.25.0.0/24
+      - andromeda
+      - antila
