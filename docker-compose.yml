@@ -1,20 +1,43 @@
-version: '3'
+version: '3.1'
 
 services:
-  andromeda:
-    image: mariadb:10.3.1
+
+  mariadb:
+    image: timtrice/andromeda
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: qNlr0rZtf5VfGQ9m
-  antila:
-    image: postgres:9.6.5
+    networks:
+      mynet:
+        ipv4_address: 172.25.0.10
+
+  postgres:
+    image: timtrice/antila
     restart: always
     environment:
       POSTGRES_PASSWORD: 5aJhjS7g7SAzE56K
+    networks:
+      mynet:
+        ipv4_address: 172.25.0.20
+
   web:
-    build: .
+    image: timtrice/web
+#    Running the command below works and the notebook will run but RStudio will
+#    not load for some reason.
+#    command: jupyter-notebook --ip="*" --no-browser --allow-root
+    volumes:
+      - .:/home/rstudio/web
+      - ../.Renviron:/home/rstudio/.Renviron
     ports:
       - "8787:8787"
+      - "8888:8888"
     depends_on:
-      - andromeda
-      - antila
+      - mariadb
+      - postgres
+
+networks:
+  mynet:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.25.0.0/24
