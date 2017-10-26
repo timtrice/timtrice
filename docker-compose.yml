@@ -2,17 +2,21 @@ version: '3.1'
 
 services:
 
-  andromeda:
-    image: timtrice/andromeda
+  mariadb:
+    image: mariadb:10.3.1
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: qNlr0rZtf5VfGQ9m
+    volumes:
+      - web_mariadb:/var/lib/mysql
 
-  antila:
-    image: timtrice/antila
+  postgres:
+    image: postgres:9.6.5
     restart: always
     environment:
       POSTGRES_PASSWORD: 5aJhjS7g7SAzE56K
+    volumes:
+      - web_postgres:/var/lib/postgresql/data
 
   web:
     image: timtrice/web
@@ -26,5 +30,12 @@ services:
       - "8787:8787"
       - "8888:8888"
     depends_on:
-      - andromeda
-      - antila
+      - mariadb
+      - postgres
+
+volumes:
+  web_mariadb:
+    external: true
+  web_postgres:
+    external: true
+
