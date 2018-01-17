@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Finding nth salaries &middot; Tim Trice</title>
+        <meta name="description" content="Find ranked salaries in employees database">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="generator" content="Hugo 0.30.2" />
+        <meta name="robots" content="index,follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta property="og:title" content="Finding nth salaries">
+<meta property="og:description" content="Find ranked salaries in employees database">
+<meta property="og:type" content="article">
+<meta property="og:url" content="/sql/find-nth-salaries/">
+        <link rel="stylesheet" href="../../dist/styles.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+    </head>
+    <body>
+        
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-1507390-26', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+        <div id="wrapper">
+            <header class="site-header">
+                <div class="container">
+                    <div class="site-title-wrapper">
+                        
+                            <h1 class="site-title">
+                                <a title="Tim Trice" href="../../">Tim Trice</a>
+                            </h1>
+                        
+                        <a class="button-square" href="../../index.xml"><i class="fa fa-rss"></i></a>
+                        
+                            <a class="button-square button-social hint--top" data-hint="Twitter" title="Twitter" href="https://twitter.com/timtrice">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" title="Github" href="https://github.com/timtrice">
+                                <i class="fa fa-github-alt"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Stack Overflow" title="Stack Overflow" href="http://stackoverflow.com/users/2576935/timtrice">
+                                <i class="fa fa-stack-overflow"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="LinkedIn" title="LinkedIn" href="https://www.linkedin.com/in/timtrice/">
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Email" title="Email" href="mailto:tim.trice@gmail.com">
+                                <i class="fa fa-envelope"></i>
+                            </a>
+                        
+                    </div>
+
+                    <ul class="site-nav">
+                        
+    <li class="site-nav-item">
+        <a title="Python" href="../../python/">Python</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="R" href="../../r/">R</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="SQL" href="../../sql/">SQL</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="Projects" href="../../projects/">Projects</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="Blog" href="../../">Blog</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="About" href="../../about/">About</a>
+    </li>
+
+                    </ul>
+                </div>
+            </header>
+
+            <div id="container">
+
+
+<div class="container">
+    <article class="post-container">
+        <header class="post-header">
+    <h1 class="post-title">Finding nth salaries</h1>
+    
+        <p class="post-description">Find ranked salaries in employees database</p>
+    
+</header>
+
+        <div class="post-content clearfix">
+    
+
+    <p>We are asked to find specific <code>salary</code>.<code>salaries</code> values within our <code>employees</code> database.</p>
+<pre class="sql"><code>USE `employees`;</code></pre>
+<p>Let’s find who has the highest <code>salaries</code> in our database.</p>
+<pre class="sql"><code>SELECT * 
+FROM `salaries` 
+ORDER BY `salaries`.`salary` DESC 
+LIMIT 0, 5;</code></pre>
+<div class="knitsql-table">
+<table>
+<caption><span id="tab:unnamed-chunk-3">Table 1: </span>5 records</caption>
+<thead>
+<tr class="header">
+<th align="right">emp_no</th>
+<th align="right">salary</th>
+<th align="left">from_date</th>
+<th align="left">to_date</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">43624</td>
+<td align="right">158220</td>
+<td align="left">2002-03-22</td>
+<td align="left">9999-01-01</td>
+</tr>
+<tr class="even">
+<td align="right">43624</td>
+<td align="right">157821</td>
+<td align="left">2001-03-22</td>
+<td align="left">2002-03-22</td>
+</tr>
+<tr class="odd">
+<td align="right">254466</td>
+<td align="right">156286</td>
+<td align="left">2001-08-04</td>
+<td align="left">9999-01-01</td>
+</tr>
+<tr class="even">
+<td align="right">47978</td>
+<td align="right">155709</td>
+<td align="left">2002-07-14</td>
+<td align="left">9999-01-01</td>
+</tr>
+<tr class="odd">
+<td align="right">253939</td>
+<td align="right">155513</td>
+<td align="left">2002-04-11</td>
+<td align="left">9999-01-01</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>We notice in our query above we have multiple <code>salaries</code> per employee (see <code>emp_no</code> 43624). This is because <code>salaries</code> is a historical table; it keeps track of each employees salary over time. So we must find the latest salary per employee.</p>
+<pre class="sql"><code>SELECT *, 
+  MAX(`to_date`) AS `max_date`
+FROM `salaries`
+GROUP BY `emp_no`
+LIMIT 0, 5;</code></pre>
+<p>This generates an error:</p>
+<blockquote>
+<p>ERROR 1055 (42000): Expression #2 of SELECT list is not in GROUP BY clause and contains nonaggregated column ‘employees.salaries.salary’ which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by</p>
+</blockquote>
+<p>This error is effectively telling us that our query violated the “Single-Value Rule”. Every column we are selecting must have the same value per row group. In our case - having distinct values, i.e., <code>salary</code>, <code>from_date</code>, <code>to_date</code> - requires the database server to make assumptions on which of the other column values we wish to return.</p>
+<p>Isolate on the first three rows of <code>emp_no</code> 10001:</p>
+<pre class="sql"><code>SELECT * 
+FROM `salaries` 
+WHERE `emp_no` = 10001
+LIMIT 0, 3;</code></pre>
+<div class="knitsql-table">
+<table>
+<caption><span id="tab:unnamed-chunk-5">Table 2: </span>3 records</caption>
+<thead>
+<tr class="header">
+<th align="right">emp_no</th>
+<th align="right">salary</th>
+<th align="left">from_date</th>
+<th align="left">to_date</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">10001</td>
+<td align="right">60117</td>
+<td align="left">1986-06-26</td>
+<td align="left">1987-06-26</td>
+</tr>
+<tr class="even">
+<td align="right">10001</td>
+<td align="right">62102</td>
+<td align="left">1987-06-26</td>
+<td align="left">1988-06-25</td>
+</tr>
+<tr class="odd">
+<td align="right">10001</td>
+<td align="right">66074</td>
+<td align="left">1988-06-25</td>
+<td align="left">1989-06-25</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>I <strong>GROUP BY</strong> <code>emp_no</code> then find <strong>MAX</strong>(<code>to_date</code>). But, what <code>salary</code> value will the databse return? What <code>from_date</code> value will the server return? It is ambiguous and violates SQL standards.</p>
+<p>If I specify my query to return <code>emp_no</code> and <strong>MAX</strong>(<code>to_date</code>) then my query will execute correctly.</p>
+<pre class="sql"><code>SELECT `emp_no`, 
+  MAX(`to_date`) 
+FROM `salaries` 
+GROUP BY `emp_no` 
+LIMIT 0, 5;</code></pre>
+<div class="knitsql-table">
+<table>
+<caption><span id="tab:unnamed-chunk-6">Table 3: </span>5 records</caption>
+<thead>
+<tr class="header">
+<th align="left">emp_no</th>
+<th align="left">MAX(<code>to_date</code>)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">10001</td>
+<td align="left">9999-01-01</td>
+</tr>
+<tr class="even">
+<td align="left">10002</td>
+<td align="left">9999-01-01</td>
+</tr>
+<tr class="odd">
+<td align="left">10003</td>
+<td align="left">9999-01-01</td>
+</tr>
+<tr class="even">
+<td align="left">10004</td>
+<td align="left">9999-01-01</td>
+</tr>
+<tr class="odd">
+<td align="left">10005</td>
+<td align="left">9999-01-01</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>This query would solve our antipattern, generally speaking. But, it lacks the data we need; current <code>salary</code>. To resolve this we can use the query in Table 3 as a derived table and build a <strong>JOIN</strong> from this table.</p>
+<pre class="sql"><code>SELECT `t1`.`emp_no`, 
+  `t1`.`salary`, 
+  `t1`.`to_date`
+FROM `salaries` AS `t1` 
+JOIN (
+  SELECT `emp_no`, 
+    MAX(`to_date`) AS `max_to_date` 
+  FROM `salaries` 
+  GROUP BY `emp_no`) AS `t2` 
+ON `t1`.`emp_no` = `t2`.`emp_no` 
+  AND `t1`.`to_date` = `t2`.`max_to_date` 
+ORDER BY `t1`.`salary` DESC 
+LIMIT 0, 5;</code></pre>
+<div class="knitsql-table">
+<table>
+<caption><span id="tab:unnamed-chunk-7">Table 4: </span>5 records</caption>
+<thead>
+<tr class="header">
+<th align="right">emp_no</th>
+<th align="right">salary</th>
+<th align="left">to_date</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">43624</td>
+<td align="right">158220</td>
+<td align="left">9999-01-01</td>
+</tr>
+<tr class="even">
+<td align="right">254466</td>
+<td align="right">156286</td>
+<td align="left">9999-01-01</td>
+</tr>
+<tr class="odd">
+<td align="right">47978</td>
+<td align="right">155709</td>
+<td align="left">9999-01-01</td>
+</tr>
+<tr class="even">
+<td align="right">253939</td>
+<td align="right">155513</td>
+<td align="left">9999-01-01</td>
+</tr>
+<tr class="odd">
+<td align="right">109334</td>
+<td align="right">155190</td>
+<td align="left">9999-01-01</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>This query still doesn’t guarantee we have only one <code>salary</code> per <code>emp_no</code>. If you haven’t validated your data you must assume there could potentially be some issues. Trust, but verify. For the current purposes, we’ll assume our data is accurate.</p>
+<p>Currently, we’re returning the top five salaries in our database. However, we have no names. Let’s add them. To do this, we <strong>JOIN</strong> the <code>employees</code> table <strong>ON</strong> <code>emp_no</code>.</p>
+<pre class="sql"><code>SELECT `t1`.`emp_no`, 
+  `employees`.`emp_no`, 
+  `employees`.`first_name`, 
+  `employees`.`last_name`, 
+  `t1`.`salary`, 
+  `t1`.`to_date`
+FROM `salaries` AS `t1` 
+JOIN (
+  SELECT `emp_no`, 
+    MAX(`to_date`) AS `max_to_date` 
+  FROM `salaries` 
+  GROUP BY `emp_no`) AS `t2` 
+ON `t1`.`emp_no` = `t2`.`emp_no` 
+  AND `t1`.`to_date` = `t2`.`max_to_date` 
+LEFT JOIN `employees` 
+ON `t1`.`emp_no` = `employees`.`emp_no` 
+ORDER BY `t1`.`salary` DESC 
+LIMIT 0, 5;</code></pre>
+<div class="knitsql-table">
+<table>
+<caption><span id="tab:unnamed-chunk-8">Table 5: </span>5 records</caption>
+<thead>
+<tr class="header">
+<th align="right">emp_no</th>
+<th align="right">emp_no</th>
+<th align="left">first_name</th>
+<th align="left">last_name</th>
+<th align="right">salary</th>
+<th align="left">to_date</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">43624</td>
+<td align="right">43624</td>
+<td align="left">Tokuyasu</td>
+<td align="left">Pesch</td>
+<td align="right">158220</td>
+<td align="left">9999-01-01</td>
+</tr>
+<tr class="even">
+<td align="right">254466</td>
+<td align="right">254466</td>
+<td align="left">Honesty</td>
+<td align="left">Mukaidono</td>
+<td align="right">156286</td>
+<td align="left">9999-01-01</td>
+</tr>
+<tr class="odd">
+<td align="right">47978</td>
+<td align="right">47978</td>
+<td align="left">Xiahua</td>
+<td align="left">Whitcomb</td>
+<td align="right">155709</td>
+<td align="left">9999-01-01</td>
+</tr>
+<tr class="even">
+<td align="right">253939</td>
+<td align="right">253939</td>
+<td align="left">Sanjai</td>
+<td align="left">Luders</td>
+<td align="right">155513</td>
+<td align="left">9999-01-01</td>
+</tr>
+<tr class="odd">
+<td align="right">109334</td>
+<td align="right">109334</td>
+<td align="left">Tsutomu</td>
+<td align="left">Alameldin</td>
+<td align="right">155190</td>
+<td align="left">9999-01-01</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>At this point, you can modify the <strong>LIMIT</strong> call to return all or only specific ranks (keep in mind there are no tie-breakers in this query).</p>
+<p>The last result set may look fine from a developer’s perspective. Let’s clean it up though, remembering that our data will become part of a report. We can <strong>CONCAT</strong> <code>first_name</code> and <code>last_name</code>, <strong>FORMAT</strong> <code>salary</code>, and drop <code>emp_no</code> and <code>to_date</code> as they are not needed.</p>
+<pre class="sql"><code>SELECT CONCAT(`employees`.`last_name`, &quot;, &quot;, `employees`.`first_name`) AS `Name`, 
+  CONCAT(&quot;$&quot;, FORMAT(`t1`.`salary`, 0)) AS `Salary`
+FROM `salaries` AS `t1` 
+JOIN (
+  SELECT `emp_no`, 
+    MAX(`to_date`) AS `max_to_date` 
+  FROM `salaries` 
+  GROUP BY `emp_no`) AS `t2` 
+ON `t1`.`emp_no` = `t2`.`emp_no` 
+  AND `t1`.`to_date` = `t2`.`max_to_date` 
+LEFT JOIN `employees` 
+ON `t1`.`emp_no` = `employees`.`emp_no` 
+ORDER BY `t1`.`salary` DESC 
+LIMIT 0, 5;</code></pre>
+<div class="knitsql-table">
+<table>
+<caption><span id="tab:unnamed-chunk-9">Table 6: </span>5 records</caption>
+<thead>
+<tr class="header">
+<th align="left">Name</th>
+<th align="left">Salary</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Pesch, Tokuyasu</td>
+<td align="left">$158,220</td>
+</tr>
+<tr class="even">
+<td align="left">Mukaidono, Honesty</td>
+<td align="left">$156,286</td>
+</tr>
+<tr class="odd">
+<td align="left">Whitcomb, Xiahua</td>
+<td align="left">$155,709</td>
+</tr>
+<tr class="even">
+<td align="left">Luders, Sanjai</td>
+<td align="left">$155,513</td>
+</tr>
+<tr class="odd">
+<td align="left">Alameldin, Tsutomu</td>
+<td align="left">$155,190</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Remove the <strong>LIMIT</strong> clause to return a full set or modify as needed to find <span class="math inline">\(\text{nth}\)</span>.</p>
+<div id="database-server-info" class="section level2">
+<h2>Database Server Info</h2>
+<div id="mariadb" class="section level3">
+<h3>MariaDB</h3>
+<pre class="sql"><code>SELECT @@version_comment AS `Version`, 
+  @@version_compile_machine AS `Version Compile Machine`, 
+  @@innodb_version AS `InnoDB Version`, 
+  @@version_compile_os AS `Version Compile OS`;</code></pre>
+<div class="knitsql-table">
+<table>
+<caption><span id="tab:mariadb-version">Table 7: </span>MariaDB Server Info</caption>
+<thead>
+<tr class="header">
+<th align="left">Version</th>
+<th align="left">Version Compile Machine</th>
+<th align="left">InnoDB Version</th>
+<th align="left">Version Compile OS</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">mariadb.org binary distribution</td>
+<td align="left">x86_64</td>
+<td align="left">5.7.19</td>
+<td align="left">debian-linux-gnu</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="mysql" class="section level3">
+<h3>MySQL</h3>
+<pre class="sql"><code>SELECT @@version_comment AS `Version`, 
+  @@version_compile_machine AS `Version Compile Machine`, 
+  @@innodb_version AS `InnoDB Version`, 
+  @@version_compile_os AS `Version Compile OS`;</code></pre>
+<div class="knitsql-table">
+<table>
+<caption><span id="tab:mysql-version">Table 8: </span>MySQL Server Info</caption>
+<thead>
+<tr class="header">
+<th align="left">Version</th>
+<th align="left">Version Compile Machine</th>
+<th align="left">InnoDB Version</th>
+<th align="left">Version Compile OS</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">MySQL Community Server (GPL)</td>
+<td align="left">x86_64</td>
+<td align="left">5.7.20</td>
+<td align="left">Linux</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+</div>
+
+        <footer class="post-footer clearfix">
+    
+        <p class="post-tags">
+            <span>Tagged:</span>
+            
+            
+                <a href="../../tags/single-value-rule/">single-value rule</a>, 
+            
+                <a href="../../tags/rank/">rank</a>, 
+            
+                <a href="../../tags/join/">JOIN</a>
+            
+        </p>
+    
+
+    <div class="share">
+        
+            <a class="icon-twitter" href="https://twitter.com/share?text=Finding%20nth%20salaries&url=%2fsql%2ffind-nth-salaries%2f"
+                onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fa fa-twitter"></i>
+                <span class="hidden">Twitter</span>
+            </a>
+        
+
+        
+            <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=%2fsql%2ffind-nth-salaries%2f"
+                onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                <i class="fa fa-facebook"></i>
+                <span class="hidden">Facebook</span>
+            </a>
+        
+
+        
+            <a class="icon-google-plus" href="https://plus.google.com/share?url=%2fsql%2ffind-nth-salaries%2f"
+              onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+              <i class="fa fa-google-plus"></i>
+                <span class="hidden">Google+</span>
+            </a>
+        
+        
+            <a class="icon-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&title=Finding%20nth%20salaries&url=%2fsql%2ffind-nth-salaries%2f&summary=Find%20ranked%20salaries%20in%20employees%20database"
+               onclick="window.open(this.href, 'linkedin-share', 'width=554,height=481');return false;">
+               <i class="fa fa-linkedin"></i>
+               <span class="hidden">LinkedIn</span>
+            </a>
+        
+    </div>
+</footer>
+    </article>
+</div>
+
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="site-title-wrapper">
+                    <h1 class="site-title">
+                        <a title="Tim Trice" href="../../">Tim Trice</a>
+                    </h1>
+                    <a class="button-square button-jump-top js-jump-top" href="#">
+                        <i class="fa fa-angle-up"></i>
+                    </a>
+                </div>
+
+                <p class="footer-copyright">
+                    <span>&copy; 2017 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
+                </p>
+                <p class="footer-copyright">
+                    <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
+                    <span>/ <a href="https://github.com/jbub/ghostwriter">Ported</a> to Hugo By <a href="https://github.com/jbub">jbub</a></span>
+                </p>
+            </div>
+        </footer>
+
+        <script src="../../js/jquery-1.11.3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+        <script src="../../js/jquery.fitvids.js"></script>
+        <script src="../../js/scripts.js"></script>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    });
+    </script>
+    <script type="text/javascript"
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    </body>
+</html>
+

@@ -1,0 +1,528 @@
+---
+title: "HURDAT 0.1.0"
+description: "Hurricane Re-Analysis Project"
+author: "Tim Trice"
+tags: ["R", "HURDAT"]
+output:
+    blogdown::html_page:
+        toc: true
+---
+
+
+<div id="TOC">
+<ul>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#included-datasets">Included Datasets</a><ul>
+<li><a href="#atlantic-al">Atlantic (<code>AL</code>)</a></li>
+<li><a href="#northeast-pacific-ep">Northeast Pacific (<code>EP</code>)</a></li>
+</ul></li>
+<li><a href="#variables">Variables</a></li>
+<li><a href="#data-quality">Data Quality</a></li>
+</ul>
+</div>
+
+<p>HURDAT is a R package based off the <a href="http://www.aoml.noaa.gov/hrd/hurdat/Data_Storm.html">Hurricane Re-Analysis Project</a> by the Hurricane Research Division. The package contains two datasets; one for Atlantic Ocean cyclones and one for northeastern Pacific cyclones.</p>
+<div id="installation" class="section level2">
+<h2>Installation</h2>
+<p>HURDAT requires R version 3.4.0 or greater.</p>
+<pre class="r"><code>install.packages(&quot;HURDAT&quot;)</code></pre>
+<pre class="r"><code>library(HURDAT)</code></pre>
+<pre class="r"><code># Additional libraries used for this document
+library(dplyr)
+library(ggplot2)
+library(Hmisc)
+library(knitr)
+library(purrr)
+library(readr)</code></pre>
+</div>
+<div id="included-datasets" class="section level2">
+<h2>Included Datasets</h2>
+<p>The raw dataset is updated annually; typically during late winter or spring. Both included datasets are updated through 2016.</p>
+<pre class="r"><code>data(AL)
+data(EP)</code></pre>
+<div id="atlantic-al" class="section level3">
+<h3>Atlantic (<code>AL</code>)</h3>
+<pre class="r"><code>str(AL)</code></pre>
+<pre><code>## Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:    49691 obs. of  21 variables:
+##  $ Key     : chr  &quot;AL011851&quot; &quot;AL011851&quot; &quot;AL011851&quot; &quot;AL011851&quot; ...
+##  $ Name    : chr  &quot;UNNAMED&quot; &quot;UNNAMED&quot; &quot;UNNAMED&quot; &quot;UNNAMED&quot; ...
+##  $ DateTime: POSIXct, format: &quot;1851-06-25 00:00:00&quot; &quot;1851-06-25 06:00:00&quot; ...
+##  $ Record  : chr  NA NA NA NA ...
+##  $ Status  : chr  &quot;HU&quot; &quot;HU&quot; &quot;HU&quot; &quot;HU&quot; ...
+##  $ Lat     : num  28 28 28 28.1 28.2 28.2 28.3 28.4 28.6 29 ...
+##  $ Lon     : num  -94.8 -95.4 -96 -96.5 -96.8 -97 -97.6 -98.3 -98.9 -99.4 ...
+##  $ Wind    : int  80 80 80 80 80 70 60 60 50 50 ...
+##  $ Pressure: int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ NE34    : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ SE34    : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ SW34    : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ NW34    : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ NE50    : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ SE50    : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ SW50    : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ NW50    : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ NE64    : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ SE64    : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ SW64    : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ NW64    : int  NA NA NA NA NA NA NA NA NA NA ...</code></pre>
+</div>
+<div id="northeast-pacific-ep" class="section level3">
+<h3>Northeast Pacific (<code>EP</code>)</h3>
+<p>The raw dataset for the eastern Pacific actually contains cyclones for the eastern and central Pacific basin. Eastern Pacific cyclones are monitored by the <a href="http://www.nhc.noaa.gov/">National Hurricane Center</a> while central Pacific cyclones are monitored by the <a href="http://www.prh.noaa.gov/cphc/">Central Pacific Hurricane Center</a>.</p>
+<pre class="r"><code>str(EP)</code></pre>
+<pre><code>## Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:    26868 obs. of  21 variables:
+##  $ Key     : chr  &quot;EP011949&quot; &quot;EP011949&quot; &quot;EP011949&quot; &quot;EP011949&quot; ...
+##  $ Name    : chr  &quot;UNNAMED&quot; &quot;UNNAMED&quot; &quot;UNNAMED&quot; &quot;UNNAMED&quot; ...
+##  $ DateTime: POSIXct, format: &quot;1949-06-11 00:00:00&quot; &quot;1949-06-11 06:00:00&quot; ...
+##  $ Record  : chr  NA NA NA NA ...
+##  $ Status  : chr  &quot;TS&quot; &quot;TS&quot; &quot;TS&quot; &quot;TS&quot; ...
+##  $ Lat     : num  20.2 20.2 20.2 20.3 20.4 20.5 20.6 14.1 14.6 15 ...
+##  $ Lon     : num  -106 -106 -107 -108 -109 ...
+##  $ Wind    : int  45 45 45 45 45 45 45 45 45 45 ...
+##  $ Pressure: int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ NE34    : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ SE34    : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ SW34    : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ NW34    : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ NE50    : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ SE50    : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ SW50    : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ NW50    : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ NE64    : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ SE64    : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ SW64    : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ NW64    : int  NA NA NA NA NA NA NA NA NA NA ...</code></pre>
+</div>
+</div>
+<div id="variables" class="section level2">
+<h2>Variables</h2>
+<p>Here is an explanation of the variables based on the <a href="http://www.nhc.noaa.gov/data/hurdat/hurdat2-format-atlantic.pdf">Atlantic HURDAT codebook</a>:</p>
+<ul>
+<li><code>Key</code>: Primary key or unique identifier for each cyclone. <code>Key</code> contains three segements:
+<ul>
+<li>Basin</li>
+<li>ATCF cyclone number for that year</li>
+<li>Year of the cyclone</li>
+</ul></li>
+</ul>
+<p>So the first cyclone of the 2016 Atlantic hurricane season would have the key AL012016. The third cyclone of the 2000 east Pacific hurricane season would have the key EP032000.</p>
+<ul>
+<li><p><code>Name</code>: Name of cyclone, if given. Names were not assigned to cyclones until the 1950’s; “UNNAMED” is default.</p></li>
+<li><p><code>DateTime</code>: The date and time of the observation in UTC.</p></li>
+<li><code>Record</code>: One of the following, if available:
+<ul>
+<li>C - Closest approach to a coast without a landfall</li>
+<li>G - Genesis</li>
+<li>I - Intensity peak in terms of wind and pressure</li>
+<li>L - Landfall</li>
+<li>P - Minimum cetnral pressure</li>
+<li>R - Provides additional detail on the intensity of the cyclone when rapid changes are underway.</li>
+<li>S - Change of status in the system</li>
+<li>T - Providates additional detail on the track (position) of the cyclone</li>
+<li>W - Maximum sustained wind speed.</li>
+</ul></li>
+<li><code>Status</code>: One of the following:
+<ul>
+<li>TD - Tropical depression (tropical cyclone with winds &lt;34 knots)</li>
+<li>TS - Tropical storm (tropical cyclone with winds &gt;= 34 knots, &lt; 63 knots)</li>
+<li>HU - Hurricane (tropical cyclone with winds &gt;= 64 knots)</li>
+<li>EX - Extratropical cyclone of any intensity</li>
+<li>SD - Subtropical cyclone with winds &lt; 34 knots</li>
+<li>SS - Subtropical cyclone with winds &gt;= 34 knots</li>
+<li>LO - A low pressure system that is neither a tropical cyclone, subtropical cyclone, or extractropical cyclone</li>
+<li>WV - Tropical wave of any intensity (non-cyclonic)</li>
+<li>DB - Disturbance of any intensity</li>
+</ul></li>
+<li><p><code>Lat</code>: Latitude; positive if in northern hemisphere, else negative.</p></li>
+<li><p><code>Lon</code>: Longitude; positive if in eastern hemisphere, else negative.</p></li>
+<li><p><code>Wind</code>: maximum sustained wind speed in knots</p></li>
+<li><p><code>Pressure</code>: Minimum central pressure in millibars</p></li>
+<li><p><code>NE34</code>: Range of winds &gt;= 34 knots in the northeast quadrant</p></li>
+<li><p><code>SE34</code>: Range of winds &gt;= 34 knots in the southeast quadrant</p></li>
+<li><p><code>SW34</code>: Range of winds &gt;= 34 knots in the southwest quadrant</p></li>
+<li><p><code>NW34</code>: Range of winds &gt;= 34 knots in the northwest quadrant</p></li>
+<li><p><code>NE50</code>: Range of winds &gt;= 50 knots in the northeast quadrant</p></li>
+<li><p><code>SE50</code>: Range of winds &gt;= 50 knots in the southeast quadrant</p></li>
+<li><p><code>SW50</code>: Range of winds &gt;= 50 knots in the southwest quadrant</p></li>
+<li><p><code>NW50</code>: Range of winds &gt;= 50 knots in the northwest quadrant</p></li>
+<li><p><code>NE64</code>: Range of winds &gt;= 64 knots in the northeast quadrant</p></li>
+<li><p><code>SE64</code>: Range of winds &gt;= 64 knots in the southeast quadrant</p></li>
+<li><p><code>SW64</code>: Range of winds &gt;= 64 knots in the southwest quadrant</p></li>
+<li><p><code>NW64</code>: Range of winds &gt;= 64 knots in the northwest quadrant</p></li>
+</ul>
+</div>
+<div id="data-quality" class="section level2">
+<h2>Data Quality</h2>
+<p>The dataset’s previous version had a known issue with some <code>Lon</code> values that have not yet been fixed. This particularly stands out in <code>AL$Lon</code>:</p>
+<pre class="r"><code>describe(AL$Lon)</code></pre>
+<pre><code>## AL$Lon 
+##        n  missing distinct     Info     Mean      Gmd      .05      .10 
+##    49691        0     1036        1   -65.63    22.19    -93.8    -89.6 
+##      .25      .50      .75      .90      .95 
+##    -81.0    -67.9    -52.4    -38.0    -29.8 
+## 
+## lowest : -359.1 -358.4 -109.5 -109.3 -109.1, highest:   38.5   40.0   41.5   48.0   63.0</code></pre>
+<p>For this dataset we expect values between -180 and 0. For Atlantic cyclones <code>Lon</code> really be greater than -105; essentially when storms have either disipated or entered the Pacific ocean.</p>
+<p>Let’s plot these values and see what we’re dealing with.</p>
+<pre class="r"><code>ggplot(data = map_data(&quot;world&quot;), aes(long, lat, group = group), color = &quot;grey10&quot;) + 
+    geom_path() + 
+    geom_point(data = AL, aes(x = Lon, y = Lat), group = NA, 
+               color = &quot;red&quot;, size = 0.5) + 
+    theme_bw()</code></pre>
+<pre><code>## 
+## Attaching package: &#39;maps&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:purrr&#39;:
+## 
+##     map</code></pre>
+<p><img src="/projects/hurdat/index_files/figure-html/lat.lon.plot-1.png" width="672" /></p>
+<p>The two values in <code>AL$Lon</code>, -359.1 and -358.4 will need to be fixed. This is an error in the raw dataset:</p>
+<pre class="r"><code>url &lt;- &quot;http://www.nhc.noaa.gov/data/hurdat/hurdat2-1851-2016-041117.txt&quot;
+read_csv(url, skip = 23823L, n_max = 2, col_names = FALSE)</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   .default = col_integer(),
+##   X2 = col_character(),
+##   X3 = col_character(),
+##   X4 = col_character(),
+##   X5 = col_character(),
+##   X6 = col_character(),
+##   X21 = col_character()
+## )</code></pre>
+<pre><code>## See spec(...) for full column specifications.</code></pre>
+<pre><code>## # A tibble: 2 x 21
+##         X1    X2    X3    X4    X5     X6    X7    X8    X9   X10   X11
+##      &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
+## 1 19520914  0600  &lt;NA&gt;    EX 43.2N 359.1W    35  -999  -999  -999  -999
+## 2 19520914  1200  &lt;NA&gt;    EX 44.0N 358.4W    35  -999  -999  -999  -999
+## # ... with 10 more variables: X12 &lt;int&gt;, X13 &lt;int&gt;, X14 &lt;int&gt;, X15 &lt;int&gt;,
+## #   X16 &lt;int&gt;, X17 &lt;int&gt;, X18 &lt;int&gt;, X19 &lt;int&gt;, X20 &lt;int&gt;, X21 &lt;chr&gt;</code></pre>
+<p>The two consecutive observations belong to one particular storm.</p>
+<pre class="r"><code>AL %&gt;% filter(Lon &lt; -180)</code></pre>
+<pre><code>## # A tibble: 2 x 21
+##        Key    Name            DateTime Record Status   Lat    Lon  Wind
+##      &lt;chr&gt;   &lt;chr&gt;              &lt;dttm&gt;  &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt;
+## 1 AL051952 UNNAMED 1952-09-14 06:00:00   &lt;NA&gt;     EX  43.2 -359.1    35
+## 2 AL051952 UNNAMED 1952-09-14 12:00:00   &lt;NA&gt;     EX  44.0 -358.4    35
+## # ... with 13 more variables: Pressure &lt;int&gt;, NE34 &lt;int&gt;, SE34 &lt;int&gt;,
+## #   SW34 &lt;int&gt;, NW34 &lt;int&gt;, NE50 &lt;int&gt;, SE50 &lt;int&gt;, SW50 &lt;int&gt;,
+## #   NW50 &lt;int&gt;, NE64 &lt;int&gt;, SE64 &lt;int&gt;, SW64 &lt;int&gt;, NW64 &lt;int&gt;</code></pre>
+<pre class="r"><code>AL051952 &lt;- AL %&gt;% 
+    filter(Key == &quot;AL051952&quot;)</code></pre>
+<pre class="r"><code>ggplot(data = map_data(&quot;world&quot;), aes(long, lat, group = group), color = &quot;grey10&quot;) + 
+    geom_path() + 
+    geom_point(data = AL051952, aes(x = Lon, y = Lat), group = NA, 
+               color = &quot;red&quot;, size = 0.5) + 
+    scale_x_continuous(expand = c(0, 0)) + 
+    scale_y_continuous(expand = c(0, 0)) + 
+    theme_bw()</code></pre>
+<p><img src="/projects/hurdat/index_files/figure-html/plot.AL051952-1.png" width="672" /></p>
+<pre class="r"><code>kable(AL051952 %&gt;% select(DateTime, Lat, Lon), format = &quot;markdown&quot;)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">DateTime</th>
+<th align="right">Lat</th>
+<th align="right">Lon</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1952-09-08 00:00:00</td>
+<td align="right">42.0</td>
+<td align="right">-23.0</td>
+</tr>
+<tr class="even">
+<td align="left">1952-09-08 06:00:00</td>
+<td align="right">41.8</td>
+<td align="right">-25.0</td>
+</tr>
+<tr class="odd">
+<td align="left">1952-09-08 12:00:00</td>
+<td align="right">41.6</td>
+<td align="right">-27.0</td>
+</tr>
+<tr class="even">
+<td align="left">1952-09-08 18:00:00</td>
+<td align="right">41.1</td>
+<td align="right">-28.1</td>
+</tr>
+<tr class="odd">
+<td align="left">1952-09-09 00:00:00</td>
+<td align="right">40.6</td>
+<td align="right">-28.5</td>
+</tr>
+<tr class="even">
+<td align="left">1952-09-09 06:00:00</td>
+<td align="right">40.3</td>
+<td align="right">-27.6</td>
+</tr>
+<tr class="odd">
+<td align="left">1952-09-09 12:00:00</td>
+<td align="right">40.0</td>
+<td align="right">-26.5</td>
+</tr>
+<tr class="even">
+<td align="left">1952-09-09 18:00:00</td>
+<td align="right">39.8</td>
+<td align="right">-26.0</td>
+</tr>
+<tr class="odd">
+<td align="left">1952-09-10 00:00:00</td>
+<td align="right">39.5</td>
+<td align="right">-25.8</td>
+</tr>
+<tr class="even">
+<td align="left">1952-09-10 06:00:00</td>
+<td align="right">39.3</td>
+<td align="right">-25.4</td>
+</tr>
+<tr class="odd">
+<td align="left">1952-09-10 12:00:00</td>
+<td align="right">39.0</td>
+<td align="right">-25.0</td>
+</tr>
+<tr class="even">
+<td align="left">1952-09-10 18:00:00</td>
+<td align="right">38.6</td>
+<td align="right">-24.4</td>
+</tr>
+<tr class="odd">
+<td align="left">1952-09-11 00:00:00</td>
+<td align="right">38.5</td>
+<td align="right">-23.7</td>
+</tr>
+<tr class="even">
+<td align="left">1952-09-11 06:00:00</td>
+<td align="right">38.7</td>
+<td align="right">-23.0</td>
+</tr>
+<tr class="odd">
+<td align="left">1952-09-11 12:00:00</td>
+<td align="right">38.7</td>
+<td align="right">-22.3</td>
+</tr>
+<tr class="even">
+<td align="left">1952-09-11 18:00:00</td>
+<td align="right">38.3</td>
+<td align="right">-20.3</td>
+</tr>
+<tr class="odd">
+<td align="left">1952-09-12 00:00:00</td>
+<td align="right">37.5</td>
+<td align="right">-16.8</td>
+</tr>
+<tr class="even">
+<td align="left">1952-09-12 06:00:00</td>
+<td align="right">37.3</td>
+<td align="right">-13.9</td>
+</tr>
+<tr class="odd">
+<td align="left">1952-09-12 12:00:00</td>
+<td align="right">37.2</td>
+<td align="right">-11.2</td>
+</tr>
+<tr class="even">
+<td align="left">1952-09-12 18:00:00</td>
+<td align="right">37.0</td>
+<td align="right">-9.0</td>
+</tr>
+<tr class="odd">
+<td align="left">1952-09-13 00:00:00</td>
+<td align="right">37.2</td>
+<td align="right">-7.8</td>
+</tr>
+<tr class="even">
+<td align="left">1952-09-13 06:00:00</td>
+<td align="right">39.0</td>
+<td align="right">-5.8</td>
+</tr>
+<tr class="odd">
+<td align="left">1952-09-13 12:00:00</td>
+<td align="right">41.0</td>
+<td align="right">-3.8</td>
+</tr>
+<tr class="even">
+<td align="left">1952-09-13 18:00:00</td>
+<td align="right">41.7</td>
+<td align="right">-2.0</td>
+</tr>
+<tr class="odd">
+<td align="left">1952-09-14 00:00:00</td>
+<td align="right">42.3</td>
+<td align="right">-0.2</td>
+</tr>
+<tr class="even">
+<td align="left">1952-09-14 06:00:00</td>
+<td align="right">43.2</td>
+<td align="right">-359.1</td>
+</tr>
+<tr class="odd">
+<td align="left">1952-09-14 12:00:00</td>
+<td align="right">44.0</td>
+<td align="right">-358.4</td>
+</tr>
+</tbody>
+</table>
+<p>You can see the tendency is that <code>Lon</code> continues to decrease to 0. But once 0 is crossed, instead of continuing in order the longitude values reset to -360. So, really, for the value of -359.1 it should be 0.9 (360 - 359.1). The last value should be 360 - 358.4 or 1.6.</p>
+<p>So, to correct these values use the following formula:</p>
+<p><span class="math display">\[ Lon = \begin{cases} 360 + Lon, &amp; Lon &lt; -180 \ Lon, &amp; Lon \end{cases} \]</span></p>
+<pre class="r"><code>AL051952 &lt;- mutate_at(AL051952, .cols = vars(Lon), 
+             .funs = function(x) {ifelse(x &lt; -180, 360 + x, x)})</code></pre>
+<pre class="r"><code>kable(AL051952 %&gt;% select(DateTime, Lat, Lon), format = &quot;markdown&quot;)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">DateTime</th>
+<th align="right">Lat</th>
+<th align="right">Lon</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1952-09-08 00:00:00</td>
+<td align="right">42.0</td>
+<td align="right">-23.0</td>
+</tr>
+<tr class="even">
+<td align="left">1952-09-08 06:00:00</td>
+<td align="right">41.8</td>
+<td align="right">-25.0</td>
+</tr>
+<tr class="odd">
+<td align="left">1952-09-08 12:00:00</td>
+<td align="right">41.6</td>
+<td align="right">-27.0</td>
+</tr>
+<tr class="even">
+<td align="left">1952-09-08 18:00:00</td>
+<td align="right">41.1</td>
+<td align="right">-28.1</td>
+</tr>
+<tr class="odd">
+<td align="left">1952-09-09 00:00:00</td>
+<td align="right">40.6</td>
+<td align="right">-28.5</td>
+</tr>
+<tr class="even">
+<td align="left">1952-09-09 06:00:00</td>
+<td align="right">40.3</td>
+<td align="right">-27.6</td>
+</tr>
+<tr class="odd">
+<td align="left">1952-09-09 12:00:00</td>
+<td align="right">40.0</td>
+<td align="right">-26.5</td>
+</tr>
+<tr class="even">
+<td align="left">1952-09-09 18:00:00</td>
+<td align="right">39.8</td>
+<td align="right">-26.0</td>
+</tr>
+<tr class="odd">
+<td align="left">1952-09-10 00:00:00</td>
+<td align="right">39.5</td>
+<td align="right">-25.8</td>
+</tr>
+<tr class="even">
+<td align="left">1952-09-10 06:00:00</td>
+<td align="right">39.3</td>
+<td align="right">-25.4</td>
+</tr>
+<tr class="odd">
+<td align="left">1952-09-10 12:00:00</td>
+<td align="right">39.0</td>
+<td align="right">-25.0</td>
+</tr>
+<tr class="even">
+<td align="left">1952-09-10 18:00:00</td>
+<td align="right">38.6</td>
+<td align="right">-24.4</td>
+</tr>
+<tr class="odd">
+<td align="left">1952-09-11 00:00:00</td>
+<td align="right">38.5</td>
+<td align="right">-23.7</td>
+</tr>
+<tr class="even">
+<td align="left">1952-09-11 06:00:00</td>
+<td align="right">38.7</td>
+<td align="right">-23.0</td>
+</tr>
+<tr class="odd">
+<td align="left">1952-09-11 12:00:00</td>
+<td align="right">38.7</td>
+<td align="right">-22.3</td>
+</tr>
+<tr class="even">
+<td align="left">1952-09-11 18:00:00</td>
+<td align="right">38.3</td>
+<td align="right">-20.3</td>
+</tr>
+<tr class="odd">
+<td align="left">1952-09-12 00:00:00</td>
+<td align="right">37.5</td>
+<td align="right">-16.8</td>
+</tr>
+<tr class="even">
+<td align="left">1952-09-12 06:00:00</td>
+<td align="right">37.3</td>
+<td align="right">-13.9</td>
+</tr>
+<tr class="odd">
+<td align="left">1952-09-12 12:00:00</td>
+<td align="right">37.2</td>
+<td align="right">-11.2</td>
+</tr>
+<tr class="even">
+<td align="left">1952-09-12 18:00:00</td>
+<td align="right">37.0</td>
+<td align="right">-9.0</td>
+</tr>
+<tr class="odd">
+<td align="left">1952-09-13 00:00:00</td>
+<td align="right">37.2</td>
+<td align="right">-7.8</td>
+</tr>
+<tr class="even">
+<td align="left">1952-09-13 06:00:00</td>
+<td align="right">39.0</td>
+<td align="right">-5.8</td>
+</tr>
+<tr class="odd">
+<td align="left">1952-09-13 12:00:00</td>
+<td align="right">41.0</td>
+<td align="right">-3.8</td>
+</tr>
+<tr class="even">
+<td align="left">1952-09-13 18:00:00</td>
+<td align="right">41.7</td>
+<td align="right">-2.0</td>
+</tr>
+<tr class="odd">
+<td align="left">1952-09-14 00:00:00</td>
+<td align="right">42.3</td>
+<td align="right">-0.2</td>
+</tr>
+<tr class="even">
+<td align="left">1952-09-14 06:00:00</td>
+<td align="right">43.2</td>
+<td align="right">0.9</td>
+</tr>
+<tr class="odd">
+<td align="left">1952-09-14 12:00:00</td>
+<td align="right">44.0</td>
+<td align="right">1.6</td>
+</tr>
+</tbody>
+</table>
+<p>Corrected plot:</p>
+<pre class="r"><code>ggplot(data = map_data(&quot;world&quot;), aes(long, lat, group = group), color = &quot;grey10&quot;) + 
+    geom_path() + 
+    geom_point(data = AL051952, aes(x = Lon, y = Lat), group = NA, 
+               color = &quot;red&quot;, size = 0.5) + 
+    scale_x_continuous(expand = c(0, 0)) + 
+    scale_y_continuous(expand = c(0, 0)) + 
+    theme_bw()</code></pre>
+<p><img src="/projects/hurdat/index_files/figure-html/plot.AL051952.corrected-1.png" width="672" /></p>
+<p>There may be other small errors in the dataset I am not aware of. If you find any please submit an issue to the <a href="https://github.com/timtrice/HURDAT/issues">GitHub repo</a>.</p>
+</div>

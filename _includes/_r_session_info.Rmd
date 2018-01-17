@@ -1,0 +1,5 @@
+### R Session Info
+
+```{r r-session-info}
+pander::pander(sessionInfo(), compact = FALSE)
+```

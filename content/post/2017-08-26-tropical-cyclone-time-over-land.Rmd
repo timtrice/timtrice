@@ -1,0 +1,62 @@
+---
+title: Tropical Cyclone Time Over Land
+author: ~
+date: '2017-08-28'
+slug: tropical-cyclone-time-over-land
+categories: []
+tags: []
+---
+
+A question was posted earlier wondering the longest time a cyclone had spent over land. Using [HURDAT](https://github.com/timtrice/HURDAT) we can calculate this.
+
+```{r}
+library(dplyr)
+library(HURDAT)
+library(rnaturalearthdata)
+library(sp)
+```
+
+The dataset for Atlantic cyclones dates back to 1851. Using the [rnaturalearthdata](https://github.com/ropenscilabs/rnaturalearthdata) package in conjunction with `HURDAT::AL`, we identify Lat/Lon points within `AL` that are within the `map_units50` polygon shapefile.
+
+Additionally, we want to filter on records where `Status` is either “TD” (Tropical Depression), “TS” (Tropical Storm) or “HU” (Hurricane).
+
+Observations are six hours apart so `Days.Over.Land` is divided by 4.
+
+```{r}
+# Load data
+data(AL)
+data(map_units50)
+
+# Filter AL on Status
+AL <- AL %>% filter(Status %in% c("TD", "TS", "HU"))
+
+# Correct for some bad Lon values
+AL$Lon <- if_else(AL$Lon < -180, 360 + AL$Lon, AL$Lon)
+
+# Manipulate AL to use sp::over
+coordinates(AL) <- c("Lon", "Lat")
+
+proj4string(AL) <- proj4string(map_units50)
+
+AL$Over.Land <- !is.na(over(AL, as(map_units50, "SpatialPolygons")))
+
+# Move back to dataframe
+AL <- as.data.frame(AL)
+
+# Count sequential values and disregard NA's
+AL$n <- sequence(rle(as.character(AL$Over.Land))$lengths)/4
+AL$n[!AL$Over.Land] <- NA
+```
+
+```{r}
+AL %>% 
+  group_by(Key) %>% 
+  arrange(desc(n)) %>% 
+  filter(!is.na(n)) %>% 
+  summarise(Name = first(Name), 
+            Days.Over.Land = first(n)) %>% 
+  top_n(20L) %>% 
+  arrange(desc(Days.Over.Land)) %>% 
+  knitr::kable()
+```
+

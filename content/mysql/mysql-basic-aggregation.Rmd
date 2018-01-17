@@ -20,15 +20,15 @@ library(RMariaDB)
 ```
 
 ```{r, include = FALSE}
-host <- Sys.getenv("andromeda.host")
-user <- Sys.getenv("andromeda.user")
-password <- Sys.getenv("andromeda.password")
+host <- Sys.getenv("loving_lamarr.ip")
+user <- Sys.getenv("loving_lamarr.user")
+password <- Sys.getenv("loving_lamarr.password")
 ```
 
 ```{r, include = FALSE}
-con <- dbConnect(RMariaDB::MariaDB(), 
+con <- dbConnect(dbDriver("MariaDB"), 
                  dbname = "rrricanesdata", 
-                 host = "andromeda",
+                 host = host,
                  user = user, 
                  password = password)
 ```

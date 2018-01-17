@@ -22,5 +22,15 @@ Both packages are complimentary to one another.
 HURDAT is a dataset of tropical cyclones that have developed in the Atlantic and northeast Pacific oceans since 1851 and 1949, respectively. HURDAT is a re-analysis project as conducated by the Hurricane Research Division of the National Oceanic and Atmospheric Administration. They review known data to determine the best track, intensity and structure of a cyclone.</description>
     </item>
     
+    <item>
+      <title>rrricanes 0.1.0</title>
+      <link>/projects/rrricanes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/projects/rrricanes/</guid>
+      <description>What is rrricanes Installing rrricanes About the Data Getting Data Basic Data Track Wind and Gust Pressure Seas  Wind Radius Hurricane Ike Wind Radius  Forecast Positions Forecast Wind Radius Future Plans Issues   To go along with my HURDAT package I’m releasing rrricanes, version 0.1.0. This library is not in cran and will not be submitted until release 0.2.0.
+What is rrricanes I’ve had a fascination with hurricanes since I was a very little kid.</description>
+    </item>
+    
   </channel>
 </rss>

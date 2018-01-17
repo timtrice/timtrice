@@ -33,28 +33,21 @@ library(tidyr)
 ```
 
 ```{r load-data, echo = FALSE}
-# URLs to reports. These links point to the latest product so the text may 
-# change over time. Raw data will be saved in the GitHub repo:
-# https://github.com/timtrice/web
+# Source data saved to GH
+# https://github.com/timtrice/datasets/tree/master/harvey-prelims
 
-if (!(file.exists("data/harvey-post-storm-report.rds"))) {
-  rpts <- c(
-    "bro" = "ftp://tgftp.nws.noaa.gov/data/raw/ac/acus74.kbro.psh.bro.txt", 
-    "crp" = "ftp://tgftp.nws.noaa.gov/data/raw/ac/acus74.kcrp.psh.crp.txt", 
-    "ewx" = "ftp://tgftp.nws.noaa.gov/data/raw/ac/acus74.kewx.psh.ewx.txt", 
-    "hgx" = "ftp://tgftp.nws.noaa.gov/data/raw/ac/acus74.khgx.psh.hgx.txt", 
-    "lch" = "ftp://tgftp.nws.noaa.gov/data/raw/ac/acus74.klch.psh.lch.txt", 
-    "lix" = "ftp://tgftp.nws.noaa.gov/data/raw/ac/acus74.klix.psh.lix.txt")
-  
-  # Read data
-  txt <- map(rpts, ~readLines(.x))
-  
-  # Save data
-  saveRDS(txt, file = file.path("data/harvey-post-storm-report.rds"))
-  message("ok")
-} else {
-  txt <- readRDS(file = file.path("data/harvey-post-storm-report.rds"))
-}
+src_url <- "https://raw.githubusercontent.com/timtrice/datasets/master/harvey-prelims/"
+
+rpts <- c(
+  "bro" = "acus74.kbro.psh.bro.txt", 
+  "crp" = "acus74.kcrp.psh.crp.txt", 
+  "ewx" = "acus74.kewx.psh.ewx.txt", 
+  "hgx" = "acus74.khgx.psh.hgx.txt", 
+  "lch" = "acus74.klch.psh.lch.txt", 
+  "lix" = "acus74.klix.psh.lix.txt")
+
+# Read data
+txt <- map(rpts, ~readLines(sprintf("%s%s", src_url, .x)))
 ```
 
 ```{r slp, echo = FALSE, warning = FALSE}

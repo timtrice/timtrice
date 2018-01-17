@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Tim Trice</title>
+    <title>Post on Tim Trice</title>
     <link>/post/</link>
-    <description>Recent content in Posts on Tim Trice</description>
+    <description>Recent content in Post on Tim Trice</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 06 Sep 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 30 Oct 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Delete</title>
+      <link>/2017-10-30-delete/</link>
+      <pubDate>Mon, 30 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017-10-30-delete/</guid>
+      <description>test post</description>
+    </item>
     
     <item>
       <title>Hurricane Harvey Post Storm Report</title>
@@ -19,6 +28,27 @@
       <guid>/2017-09-06-hurricane-harvey-report/</guid>
       <description>Hurricane Harvey Barometric Pressure Wind Rain Tornadoes  Code Libraries Data  Previous Versions Session Info   On August 26, 2017, Hurricane Harvey made landfall along the central Texas gulf coast as a category four hurricane. The storm weakened but remained stationary in southeast Texas spawing dozens of tornadoes and dropping over 30 inches of rain in many locations with isolated amounts of over 50 inches.
 Harvey was the first major hurricane to strike the Texas coast since Hurricane Rita in 2005; the first category four hurricane to make landfall since Hurricane Bret in 1999.</description>
+    </item>
+    
+    <item>
+      <title>Tropical Cyclone Time Over Land</title>
+      <link>/2017-08-28-tropical-cyclone-time-over-land/</link>
+      <pubDate>Mon, 28 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017-08-28-tropical-cyclone-time-over-land/</guid>
+      <description>A question was posted earlier wondering the longest time a cyclone had spent over land. Using HURDAT we can calculate this.
+library(dplyr)## ## Attaching package: &amp;#39;dplyr&amp;#39;## The following objects are masked from &amp;#39;package:stats&amp;#39;:## ## filter, lag## The following objects are masked from &amp;#39;package:base&amp;#39;:## ## intersect, setdiff, setequal, unionlibrary(HURDAT)library(rnaturalearthdata)library(sp)The dataset for Atlantic cyclones dates back to 1851. Using the rnaturalearthdata package in conjunction with HURDAT::AL, we identify Lat/Lon points within AL that are within the map_units50 polygon shapefile.</description>
+    </item>
+    
+    <item>
+      <title>Top Tornadic Tropical Cyclones</title>
+      <link>/2017-08-26-top-tornadic-tropical-cyclones/</link>
+      <pubDate>Sat, 26 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017-08-26-top-tornadic-tropical-cyclones/</guid>
+      <description>With Hurricane Harvey seemingly producing numerous tornadoes (many unconfirmed touchdowns) I wanted to get a view of the top tornadic-producing tropical cyclones.
+History of tropical cyclone-spawned tornadoes lists the “Tropical cyclone tornado data set” (xls) as a source. However, this dataset does not include anything post-2015. I am unable to find an updated dataset.
+As of this writing, officially Harvey has only produced two tornadoes. But, as a resident of the greater Houston area I can tell you the warnings are flying!</description>
     </item>
     
     <item>

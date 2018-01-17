@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python on Tim Trice</title>
+    <link>/categories/python/</link>
+    <description>Recent content in Python on Tim Trice</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Connect Python with MySQL</title>
+      <link>/python/connect-python-mysql/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/python/connect-python-mysql/</guid>
+      <description>Access MySQL from Python Notebook using MySQLdb
+import MySQLdb  #Enter the values for you database connection dsn_hostname = &amp;quot;mysql&amp;quot; dsn_port = 3306 dsn_uid = &amp;quot;root&amp;quot; dsn_pwd = &amp;quot;e99rntuUXMGHB6Zt&amp;quot;  conn = MySQLdb.connect(host=dsn_hostname, port=dsn_port, user=dsn_uid, passwd=dsn_pwd)  conn.query(&amp;quot;&amp;quot;&amp;quot;CREATE DATABASE IF NOT EXISTS practice&amp;quot;&amp;quot;&amp;quot;) conn.query(&amp;quot;&amp;quot;&amp;quot;USE Examples&amp;quot;&amp;quot;&amp;quot;) conn.query(&amp;quot;&amp;quot;&amp;quot;DROP TABLE IF NOT EXISTS Cars&amp;quot;&amp;quot;&amp;quot;) conn.query(&amp;quot;&amp;quot;&amp;quot;CREATE TABLE Cars(Id INTEGER PRIMARY KEY, Name VARCHAR(20), Price INT)&amp;quot;&amp;quot;&amp;quot;) conn.query(&amp;quot;&amp;quot;&amp;quot;INSERT INTO Cars VALUES(1,&#39;Audi&#39;,52642)&amp;quot;&amp;quot;&amp;quot;) conn.query(&amp;quot;&amp;quot;&amp;quot;INSERT INTO Cars VALUES(2,&#39;Mercedes&#39;,57127)&amp;quot;&amp;quot;&amp;quot;) conn.query(&amp;quot;&amp;quot;&amp;quot;INSERT INTO Cars VALUES(3,&#39;Skoda&#39;,9000)&amp;quot;&amp;quot;&amp;quot;) conn.</description>
+    </item>
+    
+    <item>
+      <title>Summing Diagonals of a Matrix in Python</title>
+      <link>/python/sum-diagonals/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/python/sum-diagonals/</guid>
+      <description>I want to find the difference of sums for each diagonal of a square matrix.
+from sympy import *  m = Matrix([ [11, 2, 4], [4, 5, 6], [10, 8, -12]]) m  Matrix([ [11, 2, 4], [ 4, 5, 6], [10, 8, -12]])  We&amp;rsquo;ll write a small script that will calculate the absolute value of the difference of diagonals.
+$$ a = n\text{11} + \dots + n\text{nn}$$</description>
+    </item>
+    
+    <item>
+      <title>Two Sum</title>
+      <link>/python/two-sums/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/python/two-sums/</guid>
+      <description>Two Sum (LeetCode)
+Given an array of integers, return indices of the two numbers such that they add up to a specific target.
+You may assume that each input would have exactly one solution, and you may not use the same element twice.
+Example:
+Given nums = [2, 7, 11, 15], target = 9, Because nums[0] + nums[1] = 2 + 7 = 9, return [0, 1].  class Solution(object): def twoSum(self, nums, target): if len(nums) &amp;lt;= 1: return False buff_dict = {} for i in range(len(nums)): if nums[i] in buff_dict: return [buff_dict[nums[i]], i] else: buff_dict[target - nums[i]] = i  Solution().</description>
+    </item>
+    
+  </channel>
+</rss>

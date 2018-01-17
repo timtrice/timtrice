@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Rank on Tim Trice</title>
+    <link>/tags/rank/</link>
+    <description>Recent content in Rank on Tim Trice</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="/tags/rank/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Finding nth salaries</title>
+      <link>/sql/find-nth-salaries/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/sql/find-nth-salaries/</guid>
+      <description>We are asked to find specific salary.salaries values within our employees database.
+USE `employees`; Let’s find who has the highest salaries in our database.
+SELECT * FROM `salaries` ORDER BY `salaries`.`salary` DESC LIMIT 0, 5;  Table 1: 5 records  emp_no salary from_date to_date    43624 158220 2002-03-22 9999-01-01  43624 157821 2001-03-22 2002-03-22  254466 156286 2001-08-04 9999-01-01  47978 155709 2002-07-14 9999-01-01  253939 155513 2002-04-11 9999-01-01     We notice in our query above we have multiple salaries per employee (see emp_no 43624).</description>
+    </item>
+    
+  </channel>
+</rss>

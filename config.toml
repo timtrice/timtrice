@@ -1,12 +1,26 @@
 baseurl = "/"
+
 relativeurls = true
+
 languageCode = "en-us"
+
 title = "Tim Trice"
+
 theme = "ghostwriter"
+
 googleAnalytics = "UA-1507390-26"
+
 disqusShortname = "timtrice"
+
 ignoreFiles = ["\\.Rmd$", "_files$", "_cache$"]
+
 publishDir = "docs"
+
+# This apparently is necessary to prevent Hugo from pluralizing titles (why
+# would you anyway, Hugo? WTF is wrong with you?)
+pluralizeListTitles = "false"
+
+titleCaseStyle = "Chicago"
 
 [Author]
     name = "Tim Trice"
@@ -38,24 +52,29 @@ publishDir = "docs"
     highlightjsTheme = "github"
 
 [[menu.main]]
-    name = "Blog"
-    url = "/"
-    weight = 1
+  name = "Python"
+  url = "/python/"
+  weight = 100
 
 [[menu.main]]
   name = "R"
   url = "/r/"
-  weight = 100
+  weight = 250
 
 [[menu.main]]
-  name = "MySQL"
-  url = "/mysql/"
+  name = "SQL"
+  url = "/sql/"
   weight = 500
 
 [[menu.main]]
     name = "Projects"
     url = "/projects/"
     weight = 10000
+
+[[menu.main]]
+    name = "Blog"
+    url = "/"
+    weight = 100000
 
 [[menu.main]]
     name = "About"

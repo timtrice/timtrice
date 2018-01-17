@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Rs on Tim Trice</title>
+    <title>R on Tim Trice</title>
     <link>/r/</link>
-    <description>Recent content in Rs on Tim Trice</description>
+    <description>Recent content in R on Tim Trice</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
@@ -16,7 +16,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/r/r-basic-aggregation/</guid>
-      <description>Base Maximum Wind Minimum Pressure Count Cyclones per Year Average Wind Sample Standard Deviation Sample Variance  dplyr Maximum Wind Minimum Pressure Count Cyclones per Year Average Wind Sample Standard Deviation Sample Variance  data.table Maximum Wind Minimum Pressure Count Cyclones per Year Average Wind Sample Standard Deviation Sample Variance  Session Info   library(knitr) library(rrricanesdata) str(adv) ## Classes &amp;#39;tbl_df&amp;#39;, &amp;#39;tbl&amp;#39; and &amp;#39;data.frame&amp;#39;: 13185 obs. of 18 variables: ## $ Key : chr &amp;quot;AL062017&amp;quot; &amp;quot;EP102017&amp;quot; &amp;quot;AL062017&amp;quot; &amp;quot;EP102017&amp;quot; .</description>
+      <description>BaseMaximum WindMinimum PressureCount Cyclones per YearAverage WindSample Standard DeviationSample VariancedplyrMaximum WindMinimum PressureCount Cyclones per YearAverage WindSample Standard DeviationSample Variancedata.tableMaximum WindMinimum PressureCount Cyclones per YearAverage WindSample Standard DeviationSample VarianceSession Infolibrary(knitr)library(rrricanesdata)str(adv)## Classes &amp;#39;tbl_df&amp;#39;, &amp;#39;tbl&amp;#39; and &amp;#39;data.frame&amp;#39;: 13036 obs. of 18 variables:## $ Key : chr &amp;quot;EP062017&amp;quot; &amp;quot;EP062017&amp;quot; &amp;quot;EP062017&amp;quot; &amp;quot;EP062017&amp;quot; .</description>
     </item>
     
   </channel>

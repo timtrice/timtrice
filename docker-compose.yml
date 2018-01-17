@@ -1,41 +1,63 @@
-version: '3.1'
+version: '2.0'
 
 services:
 
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8080:8080"
+
+  jupyter:
+    image: timtrice/web:jupyter # docker pull jupyter/datascience-notebook
+    restart: always
+    command: start-notebook.sh --NotebookApp.password=sha1:13a4808aa90c:dbeb882e4fdc7b067a50c4dc53bba7ff7a6b7a40
+    volumes:
+      - .:/home/jovyan/web
+      - ../demos:/home/jovyan/demos
+    ports:
+      - "8888:8888"
+    depends_on:
+      - mariadb
+      - mysql
+      - postgres
+
   mariadb:
-    image: mariadb:10.3.1
+    image: timtrice/web:mariadb # mariadb:10.3.1
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: qNlr0rZtf5VfGQ9m
     volumes:
-      - web_mariadb:/var/lib/mysql
+      - ../data/mariadb:/var/lib/mysql
 
+  mysql:
+    image: timtrice/web:mysql # mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: e99rntuUXMGHB6Zt
+    volumes:
+      - ../data/mysql:/var/lib/mysql
+
+  # As is, does not work through adminer. Shows port 5432 as not being open. 
   postgres:
-    image: postgres:9.6.5
+    image: timtrice/web:postgres # postgres:9.6.5
     restart: always
     environment:
       POSTGRES_PASSWORD: 5aJhjS7g7SAzE56K
     volumes:
-      - web_postgres:/var/lib/postgresql/data
+      - ../data/postgres:/var/lib/postgresql/data
 
-  web:
-    image: timtrice/web
-#    Running the command below works and the notebook will run but RStudio will
-#    not load for some reason.
-#    command: jupyter-notebook --ip="*" --no-browser --allow-root
+  rstudio:
+    image: timtrice/web:rstudio # rocker/rstudio:3.4.2
+    restart: always
     volumes:
+      - ../web/.RProfile:/home/rstudio/.RProfile
       - .:/home/rstudio/web
+      - ../demos:/home/rstudio/demos
       - ../.Renviron:/home/rstudio/.Renviron
     ports:
       - "8787:8787"
-      - "8888:8888"
     depends_on:
       - mariadb
+      - mysql
       - postgres
-
-volumes:
-  web_mariadb:
-    external: true
-  web_postgres:
-    external: true
-

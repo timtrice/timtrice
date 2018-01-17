@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tag on Tim Trice</title>
+    <link>/tags/tag/</link>
+    <description>Recent content in Tag on Tim Trice</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="/tags/tag/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>nth Highest Salary</title>
+      <link>/sql/example-slug/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/sql/example-slug/</guid>
+      <description>Problem LeetCode
+Write a SQL query to get the \(\text{n}^\text{th}\) highest salary from the Employee table.
++----+--------+ | Id | Salary | +----+--------+ | 1 | 100 | | 2 | 200 | | 3 | 300 | +----+--------+ For example, given the above Employee table, the \(\text{n}^\text{th}\) highest salary where n = 2 is 200. If there is no \(\text{n}^\text{th}\) highest salary, then the query should return null.
++------------------------+ | getNthHighestSalary(2) | +------------------------+ | 200 | +------------------------+  Build Database CREATE DATABASE IF NOT EXISTS `Leet`; USE `Leet`; CREATE TABLE `Employee` ( `Id` TINYINT(1) UNSIGNED NOT NULL PRIMARY KEY, `Salary` SMALLINT(3) UNSIGNED ); INSERT INTO `Employee` VALUES (1, 100), (2, 200), (3, 300);  Analyze DELIMITER $$ CREATE FUNCTION n1(n INT) RETURNS INT BEGIN DECLARE x TINYINT(1); SET x = n - 1; RETURN ( -- Write your MySQL query statement below.</description>
+    </item>
+    
+  </channel>
+</rss>

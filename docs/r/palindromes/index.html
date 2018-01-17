@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Finding Palindromes in R &middot; Tim Trice</title>
+        <meta name="description" content="How to Identify Pallindromes Using R">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="generator" content="Hugo 0.30.2" />
+        <meta name="robots" content="index,follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta property="og:title" content="Finding Palindromes in R">
+<meta property="og:description" content="How to Identify Pallindromes Using R">
+<meta property="og:type" content="article">
+<meta property="og:url" content="/r/palindromes/">
+        <link rel="stylesheet" href="../../dist/styles.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+    </head>
+    <body>
+        
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-1507390-26', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+        <div id="wrapper">
+            <header class="site-header">
+                <div class="container">
+                    <div class="site-title-wrapper">
+                        
+                            <h1 class="site-title">
+                                <a title="Tim Trice" href="../../">Tim Trice</a>
+                            </h1>
+                        
+                        <a class="button-square" href="../../index.xml"><i class="fa fa-rss"></i></a>
+                        
+                            <a class="button-square button-social hint--top" data-hint="Twitter" title="Twitter" href="https://twitter.com/timtrice">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" title="Github" href="https://github.com/timtrice">
+                                <i class="fa fa-github-alt"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Stack Overflow" title="Stack Overflow" href="http://stackoverflow.com/users/2576935/timtrice">
+                                <i class="fa fa-stack-overflow"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="LinkedIn" title="LinkedIn" href="https://www.linkedin.com/in/timtrice/">
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Email" title="Email" href="mailto:tim.trice@gmail.com">
+                                <i class="fa fa-envelope"></i>
+                            </a>
+                        
+                    </div>
+
+                    <ul class="site-nav">
+                        
+    <li class="site-nav-item">
+        <a title="Python" href="../../python/">Python</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="R" href="../../r/">R</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="SQL" href="../../sql/">SQL</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="Projects" href="../../projects/">Projects</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="Blog" href="../../">Blog</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="About" href="../../about/">About</a>
+    </li>
+
+                    </ul>
+                </div>
+            </header>
+
+            <div id="container">
+
+
+<div class="container">
+    <article class="post-container">
+        <header class="post-header">
+    <h1 class="post-title">Finding Palindromes in R</h1>
+    
+        <p class="post-description">How to Identify Pallindromes Using R</p>
+    
+</header>
+
+        <div class="post-content clearfix">
+    
+
+    <div id="TOC">
+<ul>
+<li><a href="#r-session-info">R Session Info</a></li>
+</ul>
+</div>
+
+<p>Let’s show some examples of palindromes:</p>
+<ul>
+<li>1001</li>
+<li>101</li>
+<li>kayak</li>
+<li>abcba</li>
+</ul>
+<p>This types of data are easy to identify visuall if they are palindromes or not. But, how can we do this computationally? One way is with a pattern recognition function such as <code>grepl</code>.</p>
+<pre class="r"><code>x &lt;- 1001
+y &lt;- 1002
+grepl(&quot;^([[:digit:]])([[:digit:]])\\2\\1$&quot;, x)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>grepl(&quot;^([[:digit:]])([[:digit:]])\\2\\1$&quot;, y)</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<p>So this verifies for us that our number <code>x</code> is a palindrome but <code>y</code> is not. However, that code isn’t efficient. We would need to modify it for the length of various numbers. Additionally, it doesn’t handle strings as it is. How can we handle this?</p>
+<p>R provides several functions for us to work with. In addition to <code>grepl</code>, we also hav another function, <code>charToRaw</code>. <code>charToRaw</code> takes a string and converts each character to bytes. The value of the bytes will depend on your machine’s encoding.</p>
+<p>For example, the value of <code>x</code>, 1001, can be interpreted by our computer as:</p>
+<pre class="r"><code>charToRaw(as.character(x))</code></pre>
+<pre><code>## [1] 31 30 30 31</code></pre>
+<p>Notice I had to convert the number to a string. This is fine (we’re not modifying data; only testing if it is palindromic). We can do the same for <code>y</code>:</p>
+<pre class="r"><code>charToRaw(as.character(y))</code></pre>
+<pre><code>## [1] 31 30 30 32</code></pre>
+<p>Next, we can use another build-in function, <code>rev</code>. <code>rev</code> simply reverses a string:</p>
+<pre class="r"><code>rev(charToRaw(as.character(x)))</code></pre>
+<pre><code>## [1] 31 30 30 31</code></pre>
+<pre class="r"><code>rev(charToRaw(as.character(y)))</code></pre>
+<pre><code>## [1] 32 30 30 31</code></pre>
+<p>And lastly we have <code>identical</code> which takes two objects and returns TRUE if they are <em>exactly</em> equal. We can now test our two variables with the three built-in functions:</p>
+<pre class="r"><code>identical(charToRaw(as.character(x)), rev(charToRaw(as.character(x))))</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>identical(charToRaw(as.character(y)), rev(charToRaw(as.character(y))))</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<p>This may seem more complicated than then original use of <code>grepl</code>, but we now have more freedom to use any value.</p>
+<pre class="r"><code>x &lt;- &quot;madam&quot;
+identical(charToRaw(as.character(x)), rev(charToRaw(as.character(x))))</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>y &lt;- &quot;daddy&quot;
+identical(charToRaw(as.character(y)), rev(charToRaw(as.character(y))))</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<p>We can still make this code more efficient. I don’t really want to type out <code>identical(charToRaw(as.character(y)), rev(charToRaw(as.character(y))))</code> every time I want to test if a sequence is palindromic. A function would be much better:</p>
+<pre class="r"><code>is.palindromic &lt;- function(x) {
+  
+  if(is.numeric(x))
+    x &lt;- as.character(x)
+
+  x &lt;- tolower(x) # lower case all letters
+  y &lt;- charToRaw(x)
+  z &lt;- rev(charToRaw(x))
+  
+  if(identical(y, z)) {
+    return(TRUE)
+  } else {
+    return(FALSE)
+  }
+  
+}</code></pre>
+<p>Now we can write some damn pretty R code to find palindromes:</p>
+<pre class="r"><code>is.palindromic(1001)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>is.palindromic(1002)</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code>is.palindromic(&quot;madam&quot;)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>is.palindromic(&quot;kayak&quot;)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>is.palindromic(&quot;test&quot;)</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code>is.palindromic(100000000001)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>But, remember, we can use phrases and sentences as well. Let’s try out some:</p>
+<pre class="r"><code>is.palindromic(&quot;Sore was I ere I saw Eros&quot;)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>is.palindromic(&quot;Never a foot too far even&quot;)</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code>is.palindromic(&quot;Noel sees Leon&quot;)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>is.palindromic(&quot;No &#39;x&#39; in Nixon&quot;)</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<p>Oops! Our second entry, “Never a foot too far even” and “No ‘x’ in Nixon” failed! It looks right if we read it backwards; minus the punctuation and such. Punctuation and spaces are allowed to be ignored in phrases and sentences much the same way we already ignored if a letter was capitalized or not. So we have to modify our function somewhat to ignore this or, even better, just strip it from our input <code>x</code>.</p>
+<pre class="r"><code>is.palindromic &lt;- function(x) {
+  
+  if(is.numeric(x))
+    x &lt;- as.character(x)
+
+  x &lt;- tolower(x) # lower case all letters
+  x &lt;- stringr::str_replace_all(x, &quot;[[:punct:][:space:]]&quot;, &quot;&quot;) # clean
+  y &lt;- charToRaw(x)
+  z &lt;- rev(charToRaw(x))
+  
+  if(identical(y, z)) {
+    return(TRUE)
+  } else {
+    return(FALSE)
+  }
+  
+}</code></pre>
+<p>I’ve added the <code>stringr::str_replace_all</code> function to replace any punctuation and space characters with an empty value.</p>
+<p>panel_info(helement = “h3”, htitle = “Remember”, body = “[:space:] includes characters such as a space, tab or newline.”)</p>
+<pre class="r"><code>is.palindromic(&quot;Sore was I ere I saw Eros&quot;)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>is.palindromic(&quot;Never a foot too far even&quot;)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>is.palindromic(&quot;Noel sees Leon&quot;)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>is.palindromic(&quot;No &#39;x&#39; in Nixon&quot;)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>is.palindromic(&quot;Marge, let&#39;s &#39;went.&#39; I await news telegram&quot;)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>is.palindromic(&quot;Top step -- Sara&#39;s pet spot.&quot;) # With trailing period</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>So I’m feeling pretty confident the function works. But can we put it through a more rigorous test? Let’s create a 100 x 100 matrix for a total of 10,000 values.</p>
+<pre class="r"><code>set.seed(1)
+m &lt;- matrix(sample.int(1000000, 1000000), 100, 100)</code></pre>
+<p>Then we run the <code>apply</code> function to build a replica matrix but only with TRUE or FALSE values if <code>is.palindromic</code>:</p>
+<pre class="r"><code>n &lt;- apply(m, 1:2, is.palindromic)</code></pre>
+<p>Now, the moment of truth. Let’s see our palindromes!</p>
+<pre class="r"><code>m[n == TRUE]</code></pre>
+<pre><code>##  [1] 866668 963369 790097  34943  14141 102201 167761  87678  30303 635536
+## [11]  78187  47474 850058 349943</code></pre>
+<p>We can visually confirm that to the best of our knowledge we have a solution.</p>
+<p>Now let’s change it up a bit. Passing numbers and phrases is easy. But what if we have a matrix and we want to know if the diagonal values make up a palindrome? Let’s define a square matrix of 10x10:</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+    n_{1,1} &amp; n_{1,2} &amp; \dots  &amp; n_{1,10} \\
+    n_{2,1} &amp; n_{2,2} &amp; \dots  &amp; n_{2,10} \\
+    \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+    n_{10,1} &amp; n_{10,2} &amp; \dots  &amp; n_{10,10}
+\end{bmatrix}
+\]</span></p>
+<pre class="r"><code>m &lt;- matrix(c(1:10, 10:1), 10, 10)
+m</code></pre>
+<pre><code>##       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+##  [1,]    1   10    1   10    1   10    1   10    1    10
+##  [2,]    2    9    2    9    2    9    2    9    2     9
+##  [3,]    3    8    3    8    3    8    3    8    3     8
+##  [4,]    4    7    4    7    4    7    4    7    4     7
+##  [5,]    5    6    5    6    5    6    5    6    5     6
+##  [6,]    6    5    6    5    6    5    6    5    6     5
+##  [7,]    7    4    7    4    7    4    7    4    7     4
+##  [8,]    8    3    8    3    8    3    8    3    8     3
+##  [9,]    9    2    9    2    9    2    9    2    9     2
+## [10,]   10    1   10    1   10    1   10    1   10     1</code></pre>
+<p>Here I’ll use <code>diag</code> to extract the diagonal from <span class="math inline">\(n_{1,1}\)</span> to <span class="math inline">\(n_{10,10}\)</span> and <code>paste</code> the vector together as a string.</p>
+<pre class="r"><code>x &lt;- paste(diag(m), collapse = &#39;&#39;)
+x</code></pre>
+<pre><code>## [1] &quot;1937557391&quot;</code></pre>
+<p>And now I can send to <code>is.palindromic</code>.</p>
+<pre class="r"><code>is.palindromic(x)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>If you examine <code>m</code> closely you can find several palindromes. Can you write code that finds every palindrome in <code>m</code>?</p>
+<div id="r-session-info" class="section level2">
+<h2>R Session Info</h2>
+<pre class="r"><code>pander::pander(sessionInfo(), compact = FALSE)</code></pre>
+<p><strong>R version 3.4.1 (2017-06-30)</strong></p>
+<p>**<a href="Platform:**" class="uri">Platform:**</a> x86_64-pc-linux-gnu (64-bit)</p>
+<p><strong>locale:</strong> <em>LC_CTYPE=en_US.UTF-8</em>, <em>LC_NUMERIC=C</em>, <em>LC_TIME=en_US.UTF-8</em>, <em>LC_COLLATE=en_US.UTF-8</em>, <em>LC_MONETARY=en_US.UTF-8</em>, <em>LC_MESSAGES=C</em>, <em>LC_PAPER=en_US.UTF-8</em>, <em>LC_NAME=C</em>, <em>LC_ADDRESS=C</em>, <em>LC_TELEPHONE=C</em>, <em>LC_MEASUREMENT=en_US.UTF-8</em> and <em>LC_IDENTIFICATION=C</em></p>
+<p><strong>attached base packages:</strong></p>
+<ul>
+<li>methods</li>
+<li>stats</li>
+<li>graphics</li>
+<li>grDevices</li>
+<li>utils</li>
+<li>datasets</li>
+<li>base</li>
+</ul>
+<p><strong>loaded via a namespace (and not attached):</strong></p>
+<ul>
+<li>compiler(v.3.4.1)</li>
+<li>backports(v.1.1.1)</li>
+<li>bookdown(v.0.5)</li>
+<li>magrittr(v.1.5)</li>
+<li>rprojroot(v.1.2)</li>
+<li>tools(v.3.4.1)</li>
+<li>htmltools(v.0.3.6)</li>
+<li>yaml(v.2.1.14)</li>
+<li>Rcpp(v.0.12.13)</li>
+<li>pander(v.0.6.1)</li>
+<li>stringi(v.1.1.5)</li>
+<li>rmarkdown(v.1.6)</li>
+<li>blogdown(v.0.1)</li>
+<li>knitr(v.1.17)</li>
+<li>stringr(v.1.2.0)</li>
+<li>digest(v.0.6.12)</li>
+<li>evaluate(v.0.10.1)</li>
+</ul>
+</div>
+
+</div>
+
+        <footer class="post-footer clearfix">
+    
+        <p class="post-tags">
+            <span>Tagged:</span>
+            
+            
+                <a href="../../tags/math/">math</a>, 
+            
+                <a href="../../tags/palindromes/">palindromes</a>
+            
+        </p>
+    
+
+    <div class="share">
+        
+            <a class="icon-twitter" href="https://twitter.com/share?text=Finding%20Palindromes%20in%20R&url=%2fr%2fpalindromes%2f"
+                onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fa fa-twitter"></i>
+                <span class="hidden">Twitter</span>
+            </a>
+        
+
+        
+            <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=%2fr%2fpalindromes%2f"
+                onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                <i class="fa fa-facebook"></i>
+                <span class="hidden">Facebook</span>
+            </a>
+        
+
+        
+            <a class="icon-google-plus" href="https://plus.google.com/share?url=%2fr%2fpalindromes%2f"
+              onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+              <i class="fa fa-google-plus"></i>
+                <span class="hidden">Google+</span>
+            </a>
+        
+        
+            <a class="icon-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&title=Finding%20Palindromes%20in%20R&url=%2fr%2fpalindromes%2f&summary=How%20to%20Identify%20Pallindromes%20Using%20R"
+               onclick="window.open(this.href, 'linkedin-share', 'width=554,height=481');return false;">
+               <i class="fa fa-linkedin"></i>
+               <span class="hidden">LinkedIn</span>
+            </a>
+        
+    </div>
+</footer>
+    </article>
+</div>
+
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="site-title-wrapper">
+                    <h1 class="site-title">
+                        <a title="Tim Trice" href="../../">Tim Trice</a>
+                    </h1>
+                    <a class="button-square button-jump-top js-jump-top" href="#">
+                        <i class="fa fa-angle-up"></i>
+                    </a>
+                </div>
+
+                <p class="footer-copyright">
+                    <span>&copy; 2017 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
+                </p>
+                <p class="footer-copyright">
+                    <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
+                    <span>/ <a href="https://github.com/jbub/ghostwriter">Ported</a> to Hugo By <a href="https://github.com/jbub">jbub</a></span>
+                </p>
+            </div>
+        </footer>
+
+        <script src="../../js/jquery-1.11.3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+        <script src="../../js/jquery.fitvids.js"></script>
+        <script src="../../js/scripts.js"></script>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    });
+    </script>
+    <script type="text/javascript"
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    </body>
+</html>
+

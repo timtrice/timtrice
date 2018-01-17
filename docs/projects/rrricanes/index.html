@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>rrricanes 0.1.0 &middot; Tim Trice</title>
+        <meta name="description" content="Access real-time hurricane text products">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="generator" content="Hugo 0.30.2" />
+        <meta name="robots" content="index,follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta property="og:title" content="rrricanes 0.1.0">
+<meta property="og:description" content="Access real-time hurricane text products">
+<meta property="og:type" content="article">
+<meta property="og:url" content="/projects/rrricanes/">
+        <link rel="stylesheet" href="../../dist/styles.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+    </head>
+    <body>
+        
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-1507390-26', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+        <div id="wrapper">
+            <header class="site-header">
+                <div class="container">
+                    <div class="site-title-wrapper">
+                        
+                            <h1 class="site-title">
+                                <a title="Tim Trice" href="../../">Tim Trice</a>
+                            </h1>
+                        
+                        <a class="button-square" href="../../index.xml"><i class="fa fa-rss"></i></a>
+                        
+                            <a class="button-square button-social hint--top" data-hint="Twitter" title="Twitter" href="https://twitter.com/timtrice">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" title="Github" href="https://github.com/timtrice">
+                                <i class="fa fa-github-alt"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Stack Overflow" title="Stack Overflow" href="http://stackoverflow.com/users/2576935/timtrice">
+                                <i class="fa fa-stack-overflow"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="LinkedIn" title="LinkedIn" href="https://www.linkedin.com/in/timtrice/">
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Email" title="Email" href="mailto:tim.trice@gmail.com">
+                                <i class="fa fa-envelope"></i>
+                            </a>
+                        
+                    </div>
+
+                    <ul class="site-nav">
+                        
+    <li class="site-nav-item">
+        <a title="Python" href="../../python/">Python</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="R" href="../../r/">R</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="SQL" href="../../sql/">SQL</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="Projects" href="../../projects/">Projects</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="Blog" href="../../">Blog</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="About" href="../../about/">About</a>
+    </li>
+
+                    </ul>
+                </div>
+            </header>
+
+            <div id="container">
+
+
+<div class="container">
+    <article class="post-container">
+        <header class="post-header">
+    <h1 class="post-title">rrricanes 0.1.0</h1>
+    
+        <p class="post-description">Access real-time hurricane text products</p>
+    
+</header>
+
+        <div class="post-content clearfix">
+    
+
+    <div id="TOC">
+<ul>
+<li><a href="#what-is-rrricanes">What is <code>rrricanes</code></a></li>
+<li><a href="#installing-rrricanes">Installing <code>rrricanes</code></a></li>
+<li><a href="#about-the-data">About the Data</a></li>
+<li><a href="#getting-data">Getting Data</a></li>
+<li><a href="#basic-data">Basic Data</a><ul>
+<li><a href="#track">Track</a></li>
+<li><a href="#wind-and-gust">Wind and Gust</a></li>
+<li><a href="#pressure">Pressure</a></li>
+<li><a href="#seas">Seas</a></li>
+</ul></li>
+<li><a href="#wind-radius">Wind Radius</a><ul>
+<li><a href="#hurricane-ike-wind-radius">Hurricane Ike Wind Radius</a></li>
+</ul></li>
+<li><a href="#forecast-positions">Forecast Positions</a></li>
+<li><a href="#forecast-wind-radius">Forecast Wind Radius</a></li>
+<li><a href="#future-plans">Future Plans</a></li>
+<li><a href="#issues">Issues</a></li>
+</ul>
+</div>
+
+<p>To go along with my <a href="http://timtrice.net/projects/%60HURDAT%60/">HURDAT</a> package I’m releasing <a href="https://github.com/timtrice/rrricanes">rrricanes</a>, version 0.1.0. This library is <em>not</em> in cran and will not be submitted until release 0.2.0.</p>
+<div id="what-is-rrricanes" class="section level2">
+<h2>What is <code>rrricanes</code></h2>
+<p>I’ve had a fascination with hurricanes since I was a very little kid. Watching The Weather Channel’s John Hope talk about Hurricane Gilbert captured me instantly. So, part of my efforts while learning R has been working with what I already know.</p>
+<p><code>rrricanes</code> access and parses real-time data and returns it in dataframe format. Unlike <code>HURDAT</code>,<code>rrricanes</code> can get the the latest data available for any cyclone in the Atlanic or northeastern Pacific ocean.</p>
+<p>Keep in mind <code>HURDAT</code> is a re-analysis dataset and is meant as a compliment to <code>rrricanes</code>. <code>rrricanes</code>, at this time, can only access it’s set of data back to 1998. But, the data is much more comprehensive than <code>HURDAT</code> which goes back to 1851.</p>
+<p>Additionally, some data in <code>rrricanes</code> may not match up with that for <code>HURDAT</code>. For example, you may find an observation for a specific storm at a specific time has different values for latitude. This is because originally the National Hurricane Center (NHC) believed the center of the hurricane to be in one location. But, after re-analysis, determined it was somewhere else.</p>
+</div>
+<div id="installing-rrricanes" class="section level2">
+<h2>Installing <code>rrricanes</code></h2>
+<p>With all of that said, let’s examine <code>rrricanes</code>. First, install the library using <code>devtools</code>.</p>
+<pre class="r"><code>devtools::install_github(&quot;timtrice/rrricanes&quot;)</code></pre>
+<pre class="r"><code>library(rrricanes)
+
+# Additional packages used for this document
+library(dplyr)
+library(ggplot2)
+library(knitr)
+library(purrr)
+library(tidyr)</code></pre>
+<p><code>rrricanes</code> should work with any R version &gt;= 3.2.3.</p>
+</div>
+<div id="about-the-data" class="section level2">
+<h2>About the Data</h2>
+<p>You can view the vignette “Getting Started” with the following command:</p>
+<pre class="r"><code>vignette(&quot;getting-started&quot;, package = &quot;rrricanes&quot;)</code></pre>
+<p>I’ve tried to be as detailed as possible while keeping the vignette short. Here, I want to focus on what I think the best aspect of <code>rrricanes</code> is so far.</p>
+<p>Hurricane text products are generally issued at the same time. But there are two products that, at this time, contain the meat of data for a particular storm: Forecast/Advisory Products and Wind Speed Probability Products (formerly Strike Probability).</p>
+<p>Hurricanes in both the Atlantic and Pacific ocean will always have Forecast/Advisory products; the widest dataset. Functions related to this product always contain <code>fstadv</code> which is the shorthand term used by the NHC.</p>
+<p>Wind Speed Probabilities are the longest dataset. This product is issued for every Atlantic hurricane. However, Pacific hurricanes only have this product if they are a threat to land.</p>
+<p>Wind Speed Probabilities were issued beginning in 2006; prior to that they were called Strike Probabilities. Those products are also available. Strike Probabilities focused on the probability of the center of a hurricane passing within 65 nautical miles of a location within a given period of time. The Wind Speed Probabilities focus on the probability of one-minute sustained winds of a certain threshold (34, 50 and 64 knots) affecting an area within a given period of time.</p>
+<p>Wind Speed Probability functions are identified by the term <code>wndprb</code>; Strike Probabilities use the term <code>prblty</code>.</p>
+</div>
+<div id="getting-data" class="section level2">
+<h2>Getting Data</h2>
+<p>We start off by getting a list of storms that have developed in a specified year. You can pass multiple years. But, for this example, we’ll stick to the current year.</p>
+<pre class="r"><code>(al2017 &lt;- get_storms(year = 2017))</code></pre>
+<pre><code>## # A tibble: 3 x 4
+##    Year                   Name Basin
+##   &lt;dbl&gt;                  &lt;chr&gt; &lt;chr&gt;
+## 1  2017  Tropical Storm Arlene    AL
+## 2  2017  Tropical Storm Adrian    EP
+## 3  2017 Tropical Storm Beatriz    EP
+## # ... with 1 more variables: Link &lt;chr&gt;</code></pre>
+<p>So far we’ve had one cyclone for each basin. Let’s get the <code>fstadv</code> data for Tropical Storm Arlene.</p>
+<pre class="r"><code>url &lt;- al2017 %&gt;% filter(Name == &quot;Tropical Storm Arlene&quot;) %&gt;% .$Link
+al012017.fstadv &lt;- get_fstadv(link = url)
+dim(al012017.fstadv)</code></pre>
+<pre><code>## [1]   9 125</code></pre>
+<p>You’ll notice it’s a pretty wide dataframe. As I would imagine many people (myself included) would want something a bit better formatted, I wrote a tidyr function to split the dataframe into four. <code>fstadv_split</code> takes the name of our original dataframe and tidy’s it up.</p>
+<pre class="r"><code>fstadv_split(&quot;al012017.fstadv&quot;)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>Each of the datasets contains three variables: <code>Key</code>, <code>Adv</code> and <code>DateTime</code>. You can use these to join back datasets as you see fit. While you probably do not need <code>DateTime</code> for joins, I would encourage it anyway in case multiple observations share the same <code>Adv</code>. I haven’t seen it. But that doesn’t mean it can’t happen.</p>
+<p>Let’s look at the datasets and the variables within.</p>
+</div>
+<div id="basic-data" class="section level2">
+<h2>Basic Data</h2>
+<pre class="r"><code>str(al012017.fstadv)</code></pre>
+<pre><code>## Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:    9 obs. of  18 variables:
+##  $ Key     : chr  &quot;AL012017&quot; &quot;AL012017&quot; &quot;AL012017&quot; &quot;AL012017&quot; ...
+##  $ Adv     : chr  &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot; ...
+##  $ Date    : POSIXct, format: &quot;2017-04-19 15:00:00&quot; &quot;2017-04-19 21:00:00&quot; ...
+##  $ Name    : chr  &quot;One&quot; &quot;One&quot; &quot;One&quot; &quot;One&quot; ...
+##  $ Status  : chr  &quot;Tropical Depression&quot; &quot;Tropical Depression&quot; &quot;Tropical Depression&quot; &quot;Tropical Depression&quot; ...
+##  $ Lat     : num  31.9 32.4 33.2 34.4 36.1 37.7 39.4 40 39.3
+##  $ Lon     : num  -40.9 -40 -39.3 -39.3 -40 -42 -44.2 -48 -49.9
+##  $ Wind    : num  30 30 30 30 30 40 45 45 45
+##  $ Gust    : num  40 40 40 40 40 50 55 55 55
+##  $ Pressure: num  995 996 996 996 996 993 993 993 995
+##  $ PosAcc  : num  25 25 30 30 30 30 30 30 30
+##  $ FwdDir  : num  30 10 45 350 320 290 305 270 220
+##  $ FwdSpeed: num  7 10 10 12 12 22 24 27 20
+##  $ Eye     : num  NA NA NA NA NA NA NA NA NA
+##  $ SeasNE  : num  0 0 0 0 NA 180 240 300 300
+##  $ SeasSE  : num  0 0 0 210 NA 90 90 240 220
+##  $ SeasSW  : num  240 240 210 0 NA 0 60 90 100
+##  $ SeasNW  : num  0 0 0 0 NA 0 240 180 170</code></pre>
+<p><code>Key</code> through <code>PosAcc</code> should all have values. I’m not aware of a situation where there wouldn’t be.</p>
+<p><code>FwdDir</code> and <code>FwdSpeed</code> should be NA only if the system is stationary or barely moving.</p>
+<p><code>Eye</code> will only be available for hurricanes and only if there is an eye present. For this storm’s case, there is no valid data.</p>
+<p>The Seas variables are, in nautical miles, the distance of 12 foot seas from the center of circulation.</p>
+<p>A couple of points:</p>
+<ul>
+<li><p>Do not use <code>Name</code> as any join key; notice above the <code>Name</code> values of “One”. Any tropical depression that has not yet become a tropical storm is given a cardinal number as a name. Once they become tropical storms, then they are given the next name available from <a href="http://www.nhc.noaa.gov/aboutnames.shtml">the list</a>.</p></li>
+<li><p><code>Adv</code> is a character string. Advisory products (<code>public</code>) may have intermediate advsories such as 1A, 2A, 2B. <code>fstadv</code> products are not issued in this fashion. Be cautious if you change the format.</p></li>
+</ul>
+<div id="track" class="section level3">
+<h3>Track</h3>
+<pre class="r"><code>ggplot(data = map_data(&quot;world&quot;), aes(long, lat, group = group), color = &quot;grey10&quot;) + 
+    geom_path() + 
+    geom_point(data = al012017.fstadv, aes(x = Lon, y = Lat), group = NA, 
+               color = &quot;red&quot;, size = 0.5) + 
+    scale_x_continuous(limits = c(-100, 0), expand = c(0, 0)) + 
+    scale_y_continuous(limits = c(0, 60), expand = c(0, 0)) + 
+    theme_bw() + 
+    labs(x = &quot;Longitude&quot;, 
+         y = &quot;Latitude&quot;) + 
+    ggtitle(&quot;Track of Tropical Storm Arlene&quot;)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;maps&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:purrr&#39;:
+## 
+##     map</code></pre>
+<pre><code>## Warning: Removed 3031 rows containing missing values (geom_path).</code></pre>
+<p><img src="../../projects/rrricanes/index_files/figure-html/al012017.track-1.png" width="672" /></p>
+</div>
+<div id="wind-and-gust" class="section level3">
+<h3>Wind and Gust</h3>
+<pre class="r"><code>al012017.fstadv %&gt;% 
+    gather(Var, Val, Wind, Gust) %&gt;% 
+    select(Date, Var, Val) %&gt;% 
+    ggplot(aes(x = Date, y = Val, color = Var)) + 
+    geom_line() + 
+    theme(legend.title = element_blank()) + 
+    labs(title = &quot;Tropical Storm Arlene Wind/Gust (kts)&quot;, 
+         y = &quot;knots&quot;)</code></pre>
+<p><img src="../../projects/rrricanes/index_files/figure-html/al012017.wind-1.png" width="672" /></p>
+</div>
+<div id="pressure" class="section level3">
+<h3>Pressure</h3>
+<pre class="r"><code>al012017.fstadv %&gt;% 
+    ggplot(aes(x = Date, y = Pressure)) + 
+    geom_line() + 
+    labs(title = &quot;Tropical Storm Arlene Pressure (mb)&quot;, 
+         y = &quot;Pressure (mb)&quot;)</code></pre>
+<p><img src="../../projects/rrricanes/index_files/figure-html/al012017.pressure-1.png" width="672" /></p>
+</div>
+<div id="seas" class="section level3">
+<h3>Seas</h3>
+<p>In this example we’ll plot the radius of 12 foot seas for the last advisory, #9.</p>
+<pre class="r"><code>quads &lt;- c(&quot;NE&quot;, &quot;SE&quot;, &quot;SW&quot;, &quot;NW&quot;)
+al012017.fstadv %&gt;% 
+    select(SeasNE:SeasNW) %&gt;% 
+    slice(n()) %&gt;% 
+    rename(NE = SeasNE, SE = SeasSE, SW = SeasSW, NW = SeasNW) %&gt;% 
+    gather(Quadrant, Distance, NE:NW) %&gt;% 
+    ggplot(aes(x = factor(Quadrant, levels = quads), 
+               y = Distance, 
+               fill = factor(Quadrant, levels = quads))) + 
+    geom_col(width = 1) + 
+    coord_polar() + 
+    theme_bw() + 
+    labs(title = &quot;Tropical Storm Arlene Sea Radius, Adv 9&quot;, 
+         subtitle = &quot;Distance of 12ft seas from center of circulation&quot;, 
+         x = &quot;Quadrant&quot;, 
+         y = &quot;Distance (nm)&quot;) + 
+    guides(fill = guide_legend(title = &quot;Quadrant&quot;))</code></pre>
+<p><img src="../../projects/rrricanes/index_files/figure-html/al012017.seas-1.png" width="672" /></p>
+</div>
+</div>
+<div id="wind-radius" class="section level2">
+<h2>Wind Radius</h2>
+<pre class="r"><code>dim(al012017.fstadv.wr)</code></pre>
+<pre><code>## [1] 4 8</code></pre>
+<p>For storms greater than tropical storm strength (wind &gt;= 34 knots), a wind radius profile is included. They are issued for three values: 34, 50 and 64, and for the four quadrants: northeast, southeast, southwest and northwest. So a minimal tropical storm will have a 34 knot wind profile while a hurricane will have all three.</p>
+<p>These values show how far from the center in nautical miles those wind values can be obtained. It’s a great way to watch how the structure of a storm changes over time. Most often newborn storms have a very assymetric structure; strongest winds are generally in the northeastern quadrant while weaker winds (if any at all) can be found in the other quadrants. If the cyclone becomes better organized it’s structure becomes more symmetric.</p>
+<p>The current storm we were working on has no wind radius values greater than 34 knots. Let’s pull Hurricane Ike and look at the advisory just prior to landfall.</p>
+<div id="hurricane-ike-wind-radius" class="section level3">
+<h3>Hurricane Ike Wind Radius</h3>
+<pre class="r"><code># Get storms for 2008
+al2008 &lt;- get_storms(year = 2008, basin = &quot;AL&quot;)
+
+# Load Hurricane Ike data
+al092008 &lt;- al2008 %&gt;% 
+    filter(Name == &quot;Hurricane Ike&quot;) %&gt;% 
+    .$Link %&gt;% 
+    get_fstadv()</code></pre>
+<p>Instead of using fstadv_split, I’ll show an alternative to work with the original dataframe.</p>
+<pre class="r"><code># Extract wind radius values
+al092008.49.wr &lt;- al092008 %&gt;% 
+    filter(Adv == &quot;49&quot;) %&gt;% # Remember, Adv is character string
+    select(NE34:NW64)
+
+# Rearrange to long dataframe with variables WindField, NE:NW
+# i.e., 34, 50, 64
+wr &lt;- purrr::map_df(
+    .x = c(34, 50, 64),
+    .f = function(y) {
+        select_(al092008.49.wr,
+                .dots = c(paste0(quads, y))) %&gt;%
+            rename_(
+                .dots = list(&quot;NE&quot; = paste0(&quot;NE&quot;, y),
+                             &quot;SE&quot; = paste0(&quot;SE&quot;, y),
+                             &quot;SW&quot; = paste0(&quot;SW&quot;, y),
+                             &quot;NW&quot; = paste0(&quot;NW&quot;, y))) %&gt;%
+            mutate_(&quot;WindField&quot; = y)
+    }) %&gt;% 
+    gather(Quadrant, Distance, NE:NW)</code></pre>
+<pre class="r"><code># Plot wind radius
+ggplot(wr, aes(x = factor(Quadrant, levels = quads), 
+               y = Distance, fill = factor(WindField), 
+               group = factor(Quadrant, levels = quads))) + 
+    geom_col(width = 1, position = position_dodge()) + 
+    coord_polar() + 
+    theme_bw() + 
+    labs(title = &quot;Hurricane Ike Wind Radius, Adv 49&quot;, 
+         subtitle = &quot;Distance of 34, 50, 64kt winds from center of circulation&quot;, 
+         x = &quot;Quadrant&quot;, 
+         y = &quot;Distance (nm)&quot;) + 
+    guides(fill = guide_legend(title = &quot;Max Wind (kts)&quot;))</code></pre>
+<p><img src="../../projects/rrricanes/index_files/figure-html/al092008.wr.plot-1.png" width="672" /></p>
+</div>
+</div>
+<div id="forecast-positions" class="section level2">
+<h2>Forecast Positions</h2>
+<pre class="r"><code>dim(al012017.fstadv.fst)</code></pre>
+<pre><code>## [1] 11  8</code></pre>
+<p>Most storms will have a set of forecast positions up to five days out. These variables begin with HrN where N is 12, 24, 36, 48, 72 (and, for the more recent years, 96 and 120).</p>
+<p>This data contains similar data to that of the basics: latitude, longitude, wind, and and gustForward movement, eye and seas data are not forecast.</p>
+<p>If a storm is not expected to survive after a given period of time, there will be no forecasts available.</p>
+<pre class="r"><code>kable(al012017.fstadv.fst, format = &quot;markdown&quot;)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Key</th>
+<th align="left">Adv</th>
+<th align="left">Date</th>
+<th align="left">FcstDate</th>
+<th align="right">Lat</th>
+<th align="right">Lon</th>
+<th align="right">Wind</th>
+<th align="right">Gust</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">AL012017</td>
+<td align="left">1</td>
+<td align="left">2017-04-19 15:00:00</td>
+<td align="left">2017-04-20 00:00:00</td>
+<td align="right">32.8</td>
+<td align="right">-40.2</td>
+<td align="right">30</td>
+<td align="right">40</td>
+</tr>
+<tr class="even">
+<td align="left">AL012017</td>
+<td align="left">1</td>
+<td align="left">2017-04-19 15:00:00</td>
+<td align="left">2017-04-20 12:00:00</td>
+<td align="right">35.0</td>
+<td align="right">-40.5</td>
+<td align="right">30</td>
+<td align="right">40</td>
+</tr>
+<tr class="odd">
+<td align="left">AL012017</td>
+<td align="left">2</td>
+<td align="left">2017-04-19 21:00:00</td>
+<td align="left">2017-04-20 06:00:00</td>
+<td align="right">34.0</td>
+<td align="right">-40.5</td>
+<td align="right">30</td>
+<td align="right">40</td>
+</tr>
+<tr class="even">
+<td align="left">AL012017</td>
+<td align="left">3</td>
+<td align="left">2017-04-20 03:00:00</td>
+<td align="left">2017-04-20 12:00:00</td>
+<td align="right">35.3</td>
+<td align="right">-39.9</td>
+<td align="right">30</td>
+<td align="right">40</td>
+</tr>
+<tr class="odd">
+<td align="left">AL012017</td>
+<td align="left">4</td>
+<td align="left">2017-04-20 09:00:00</td>
+<td align="left">2017-04-20 18:00:00</td>
+<td align="right">36.7</td>
+<td align="right">-41.6</td>
+<td align="right">30</td>
+<td align="right">40</td>
+</tr>
+<tr class="even">
+<td align="left">AL012017</td>
+<td align="left">4</td>
+<td align="left">2017-04-20 09:00:00</td>
+<td align="left">2017-04-21 06:00:00</td>
+<td align="right">38.0</td>
+<td align="right">-46.5</td>
+<td align="right">30</td>
+<td align="right">40</td>
+</tr>
+<tr class="odd">
+<td align="left">AL012017</td>
+<td align="left">5</td>
+<td align="left">2017-04-20 15:00:00</td>
+<td align="left">2017-04-21 00:00:00</td>
+<td align="right">38.0</td>
+<td align="right">-43.5</td>
+<td align="right">30</td>
+<td align="right">40</td>
+</tr>
+<tr class="even">
+<td align="left">AL012017</td>
+<td align="left">6</td>
+<td align="left">2017-04-20 21:00:00</td>
+<td align="left">2017-04-21 06:00:00</td>
+<td align="right">38.7</td>
+<td align="right">-45.9</td>
+<td align="right">35</td>
+<td align="right">45</td>
+</tr>
+<tr class="odd">
+<td align="left">AL012017</td>
+<td align="left">7</td>
+<td align="left">2017-04-21 03:00:00</td>
+<td align="left">2017-04-21 12:00:00</td>
+<td align="right">40.0</td>
+<td align="right">-48.0</td>
+<td align="right">40</td>
+<td align="right">50</td>
+</tr>
+<tr class="even">
+<td align="left">AL012017</td>
+<td align="left">8</td>
+<td align="left">2017-04-21 09:00:00</td>
+<td align="left">2017-04-21 18:00:00</td>
+<td align="right">39.5</td>
+<td align="right">-50.4</td>
+<td align="right">40</td>
+<td align="right">50</td>
+</tr>
+<tr class="odd">
+<td align="left">AL012017</td>
+<td align="left">9</td>
+<td align="left">2017-04-21 15:00:00</td>
+<td align="left">2017-04-22 00:00:00</td>
+<td align="right">37.5</td>
+<td align="right">-51.5</td>
+<td align="right">40</td>
+<td align="right">50</td>
+</tr>
+</tbody>
+</table>
+<p>What we see from the output is that the NHC had very low confidence the storm would last long. There were two forecast positions issued for advisory #1 and #4. The remaining advisories only had one forecast position. So this storm was expected to weaken within 24 hours twice (#1 and #4) and within 12 hours the remaining advisories.</p>
+<p>One important note regarding the <code>FcstDate</code> variable. When forecast/advisory products are issued, forecast dates and times are not exactly from issuance of the product. For example, take a look at the first <a href="http://www.nhc.noaa.gov/archive/2017/al01/al012017.fstadv.001.shtml?">forecast/advisory</a> for Arlene. Note the following segment:</p>
+<blockquote>
+<p>REPEAT…CENTER LOCATED NEAR 31.9N 40.9W AT 19/1500Z</p>
+<p>AT 19/1200Z CENTER WAS LOCATED NEAR 31.6N 41.1W</p>
+</blockquote>
+<p>The first line is regarding the date and time the product was issued: April 19, 15:00 UTC. The second line lists where the center was located three hours prior: April 19, 12:00 UTC. This is done in all forecast/advisory products (I’ve not taken the time to find out why).</p>
+<p>So forecast positions are based off the earlier time. Note the first forecast position in that advisory:</p>
+<blockquote>
+<p>FORECAST VALID 20/0000Z 32.8N 40.2W</p>
+<p>MAX WIND 30 KT…GUSTS 40 KT.</p>
+</blockquote>
+<p>As I mentioned earlier you <em>probably</em> do not need to join dataframes using <code>DateTime</code> as a key. But I’m nearly positive at some point you will because a storm may have the same advisory number but for different dates/times. It happens. Most often these advisories will be reissued with some note somewhere the advisory was corrected.</p>
+<p>With that being said, I chose to stick with the date and time the product was issued as that value ties in the other products: public advisories, storm discussions, probabilities, etc.</p>
+<p>So, really, the <code>FcstDate</code> variable isn’t 12, 24, 36, 48, 72, 96 and 120 hours from <code>DateTime</code>, but rather 12 - 3, 24 - 3, 36 - 3, etc. This is why the actual <code>FcstDate</code> variable is POSIXct instead of just having values of c(12, 24, 36, …).</p>
+<p>Hope that makes sense…</p>
+</div>
+<div id="forecast-wind-radius" class="section level2">
+<h2>Forecast Wind Radius</h2>
+<p>For forecast wind radius:</p>
+<pre class="r"><code>dim(al012017.fstadv.fst.wr)</code></pre>
+<pre><code>## [1] 4 9</code></pre>
+<p>Each forecast position (with the exception of 96 and 120 hours) will have associated wind radius if the storm is expected to be at least tropical storm strength.</p>
+<pre class="r"><code>kable(al012017.fstadv.fst.wr, format = &quot;markdown&quot;)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Key</th>
+<th align="left">Adv</th>
+<th align="left">Date</th>
+<th align="left">FcstDate</th>
+<th align="right">WindField</th>
+<th align="right">NE</th>
+<th align="right">SE</th>
+<th align="right">SW</th>
+<th align="right">NW</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">AL012017</td>
+<td align="left">6</td>
+<td align="left">2017-04-20 21:00:00</td>
+<td align="left">2017-04-21 06:00:00</td>
+<td align="right">34</td>
+<td align="right">90</td>
+<td align="right">90</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">AL012017</td>
+<td align="left">7</td>
+<td align="left">2017-04-21 03:00:00</td>
+<td align="left">2017-04-21 12:00:00</td>
+<td align="right">34</td>
+<td align="right">180</td>
+<td align="right">60</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">AL012017</td>
+<td align="left">8</td>
+<td align="left">2017-04-21 09:00:00</td>
+<td align="left">2017-04-21 18:00:00</td>
+<td align="right">34</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">90</td>
+<td align="right">150</td>
+</tr>
+<tr class="even">
+<td align="left">AL012017</td>
+<td align="left">9</td>
+<td align="left">2017-04-21 15:00:00</td>
+<td align="left">2017-04-22 00:00:00</td>
+<td align="right">34</td>
+<td align="right">90</td>
+<td align="right">90</td>
+<td align="right">90</td>
+<td align="right">150</td>
+</tr>
+</tbody>
+</table>
+<p>Here we see only four forecast positions where Arlene was expected to have winds of at least 34 knots, and the forecast radius of those winds. Wind radius values will exist, when appropriate, for forecast positions up to 72 hours. Forecasts at 96 and 120 hours will not have associated wind radius values.</p>
+</div>
+<div id="future-plans" class="section level2">
+<h2>Future Plans</h2>
+<p>There is a ton of data available for tropical cyclones and not just in the northwestern hemisphere. Here are some things I’m hoping to add in future releases:</p>
+<ul>
+<li><p>reconnaissance: there is a vast amount of this data out there waiting to be claimed. However, the products and formats of those products have changed considerably over the years. This will be a major product (<a href="https://gist.github.com/timtrice/f2a4c2a020c87669178dad27e73bfce1">would you like to help</a>?) to add in though pattern-matching on this will be significantly easier than that of the advisory data.</p></li>
+<li><p>gis data: I do not know how far back this data goes but it is readily avaiable for past and current storms. There is an <a href="https://github.com/timtrice/rrricanes/issues/47">issue</a> opened for this to be added; but, no milestone as of yet.</p></li>
+<li><p>daily products (outlook, weather discussion): these products are in GIS format and text as well. GIS is the priorirty as I think it would be better; I’m not sure there’s much value in parsing the text. But, I haven’t made a decision one way or another.</p></li>
+<li><p>computer forecast models: this may be a little more complicated. Some of the forecast models are readily available (<a href="http://rammb.cira.colostate.edu/research/tropical_cyclones/ships/index.asp">SHIPS</a>, for one). Some forecast models are proprietary. Resources will need to be gathered and planned out accordingly before being added.</p></li>
+</ul>
+</div>
+<div id="issues" class="section level2">
+<h2>Issues</h2>
+<p>I have done my best to ensure the data matches the products exactly. Unfortunately, the product formats have changed over time. And, there is no clear-set structure for some of the variables. If I could guarantee 100% accuracy this product would be in CRAN.</p>
+<p>Needless to say, this is beta. I will spend a great deal of time doing QA/QC on every storm, each basin to be sure.</p>
+<p>That being said, if you notice anything unusual, I ask you to do two things:</p>
+<ol style="list-style-type: decimal">
+<li><p>Check the <a href="http://www.nhc.noaa.gov/archive/2017/">hurricane archives</a> first to verify if the error is in the package itself or in the original product.</p></li>
+<li><p><a href="https://github.com/timtrice/rrricanes/issues">Submit an issue</a>. Errors in data will be given top priority and hotfixes will be created to address any corrections that can be made.</p></li>
+</ol>
+<p>Optionally,</p>
+<ol start="3" style="list-style-type: decimal">
+<li><a href="https://gist.github.com/timtrice/f2a4c2a020c87669178dad27e73bfce1">Contribute</a>. I would love to have some help with this package as I do have a couple of other products I am working on or plan on working on. With hurricane season underway, the quicker some of the features can be implemented, the better. Any contributors will receive acknowledgements in the repo and package documentation.</li>
+</ol>
+<p>Thank you for taking the time to check out <code>rrricanes</code>. Please feel free to check out <a href="http://timtrice.net/projects/hurdat/">HURDAT</a> as well.</p>
+<p><small><code>Hurricanes</code> was renamed to <code>rrricanes</code>. This page is updated to reflect this change.</small></p>
+</div>
+
+</div>
+
+        <footer class="post-footer clearfix">
+    
+        <p class="post-tags">
+            <span>Tagged:</span>
+            
+            
+                <a href="../../tags/r/">R</a>, 
+            
+                <a href="../../tags/rrricanes/">rrricanes</a>
+            
+        </p>
+    
+
+    <div class="share">
+        
+            <a class="icon-twitter" href="https://twitter.com/share?text=rrricanes%200.1.0&url=%2fprojects%2frrricanes%2f"
+                onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fa fa-twitter"></i>
+                <span class="hidden">Twitter</span>
+            </a>
+        
+
+        
+            <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=%2fprojects%2frrricanes%2f"
+                onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                <i class="fa fa-facebook"></i>
+                <span class="hidden">Facebook</span>
+            </a>
+        
+
+        
+            <a class="icon-google-plus" href="https://plus.google.com/share?url=%2fprojects%2frrricanes%2f"
+              onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+              <i class="fa fa-google-plus"></i>
+                <span class="hidden">Google+</span>
+            </a>
+        
+        
+            <a class="icon-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&title=rrricanes%200.1.0&url=%2fprojects%2frrricanes%2f&summary=Access%20real-time%20hurricane%20text%20products"
+               onclick="window.open(this.href, 'linkedin-share', 'width=554,height=481');return false;">
+               <i class="fa fa-linkedin"></i>
+               <span class="hidden">LinkedIn</span>
+            </a>
+        
+    </div>
+</footer>
+    </article>
+</div>
+
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="site-title-wrapper">
+                    <h1 class="site-title">
+                        <a title="Tim Trice" href="../../">Tim Trice</a>
+                    </h1>
+                    <a class="button-square button-jump-top js-jump-top" href="#">
+                        <i class="fa fa-angle-up"></i>
+                    </a>
+                </div>
+
+                <p class="footer-copyright">
+                    <span>&copy; 2017 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
+                </p>
+                <p class="footer-copyright">
+                    <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
+                    <span>/ <a href="https://github.com/jbub/ghostwriter">Ported</a> to Hugo By <a href="https://github.com/jbub">jbub</a></span>
+                </p>
+            </div>
+        </footer>
+
+        <script src="../../js/jquery-1.11.3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+        <script src="../../js/jquery.fitvids.js"></script>
+        <script src="../../js/scripts.js"></script>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    });
+    </script>
+    <script type="text/javascript"
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    </body>
+</html>
+

@@ -22,6 +22,17 @@ Harvey was the first major hurricane to strike the Texas coast since Hurricane R
     </item>
     
     <item>
+      <title>Top Tornadic Tropical Cyclones</title>
+      <link>/2017-08-26-top-tornadic-tropical-cyclones/</link>
+      <pubDate>Sat, 26 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017-08-26-top-tornadic-tropical-cyclones/</guid>
+      <description>With Hurricane Harvey seemingly producing numerous tornadoes (many unconfirmed touchdowns) I wanted to get a view of the top tornadic-producing tropical cyclones.
+History of tropical cyclone-spawned tornadoes lists the “Tropical cyclone tornado data set” (xls) as a source. However, this dataset does not include anything post-2015. I am unable to find an updated dataset.
+As of this writing, officially Harvey has only produced two tornadoes. But, as a resident of the greater Houston area I can tell you the warnings are flying!</description>
+    </item>
+    
+    <item>
       <title>RStudio in Docker</title>
       <link>/2017-05-17-rstudio-in-docker/</link>
       <pubDate>Wed, 17 May 2017 00:00:00 +0000</pubDate>
@@ -47,7 +58,28 @@ HURDAT is a dataset of tropical cyclones that have developed in the Atlantic and
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/r/r-basic-aggregation/</guid>
-      <description>Base Maximum Wind Minimum Pressure Count Cyclones per Year Average Wind Sample Standard Deviation Sample Variance  dplyr Maximum Wind Minimum Pressure Count Cyclones per Year Average Wind Sample Standard Deviation Sample Variance  data.table Maximum Wind Minimum Pressure Count Cyclones per Year Average Wind Sample Standard Deviation Sample Variance  Session Info   library(knitr) library(rrricanesdata) str(adv) ## Classes &amp;#39;tbl_df&amp;#39;, &amp;#39;tbl&amp;#39; and &amp;#39;data.frame&amp;#39;: 13185 obs. of 18 variables: ## $ Key : chr &amp;quot;AL062017&amp;quot; &amp;quot;EP102017&amp;quot; &amp;quot;AL062017&amp;quot; &amp;quot;EP102017&amp;quot; .</description>
+      <description>BaseMaximum WindMinimum PressureCount Cyclones per YearAverage WindSample Standard DeviationSample VariancedplyrMaximum WindMinimum PressureCount Cyclones per YearAverage WindSample Standard DeviationSample Variancedata.tableMaximum WindMinimum PressureCount Cyclones per YearAverage WindSample Standard DeviationSample VarianceSession Infolibrary(knitr)library(rrricanesdata)str(adv)## Classes &amp;#39;tbl_df&amp;#39;, &amp;#39;tbl&amp;#39; and &amp;#39;data.frame&amp;#39;: 13036 obs. of 18 variables:## $ Key : chr &amp;quot;EP062017&amp;quot; &amp;quot;EP062017&amp;quot; &amp;quot;EP062017&amp;quot; &amp;quot;EP062017&amp;quot; .</description>
+    </item>
+    
+    <item>
+      <title>HURDAT 0.1.0</title>
+      <link>/projects/hurdat/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/projects/hurdat/</guid>
+      <description>Installation Included Datasets Atlantic (AL) Northeast Pacific (EP)  Variables Data Quality   HURDAT is a R package based off the Hurricane Re-Analysis Project by the Hurricane Research Division. The package contains two datasets; one for Atlantic Ocean cyclones and one for northeastern Pacific cyclones.
+Installation HURDAT requires R version 3.4.0 or greater.
+install.packages(&amp;quot;HURDAT&amp;quot;) library(HURDAT) # Additional libraries used for this document library(dplyr) library(ggplot2) library(Hmisc) library(knitr) library(purrr) library(readr)  Included Datasets The raw dataset is updated annually; typically during late winter or spring.</description>
+    </item>
+    
+    <item>
+      <title>rrricanes 0.1.0</title>
+      <link>/projects/rrricanes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/projects/rrricanes/</guid>
+      <description>What is rrricanes Installing rrricanes About the Data Getting Data Basic Data Track Wind and Gust Pressure Seas  Wind Radius Hurricane Ike Wind Radius  Forecast Positions Forecast Wind Radius Future Plans Issues   To go along with my HURDAT package I’m releasing rrricanes, version 0.1.0. This library is not in cran and will not be submitted until release 0.2.0.
+What is rrricanes I’ve had a fascination with hurricanes since I was a very little kid.</description>
     </item>
     
   </channel>

@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Summing Diagonals of a Matrix in Python &middot; Tim Trice</title>
+        <meta name="description" content="Using Python, Sum the Diagonals of a Matrix">
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="generator" content="Hugo 0.30.2" />
+        <meta name="robots" content="index,follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta property="og:title" content="Summing Diagonals of a Matrix in Python">
+<meta property="og:description" content="Using Python, Sum the Diagonals of a Matrix">
+<meta property="og:type" content="article">
+<meta property="og:url" content="/python/sum-diagonals/">
+        <link rel="stylesheet" href="../../dist/styles.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin,cyrillic-ext,latin-ext,cyrillic">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+    </head>
+    <body>
+        
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-1507390-26', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+        <div id="wrapper">
+            <header class="site-header">
+                <div class="container">
+                    <div class="site-title-wrapper">
+                        
+                            <h1 class="site-title">
+                                <a title="Tim Trice" href="../../">Tim Trice</a>
+                            </h1>
+                        
+                        <a class="button-square" href="../../index.xml"><i class="fa fa-rss"></i></a>
+                        
+                            <a class="button-square button-social hint--top" data-hint="Twitter" title="Twitter" href="https://twitter.com/timtrice">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Github" title="Github" href="https://github.com/timtrice">
+                                <i class="fa fa-github-alt"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Stack Overflow" title="Stack Overflow" href="http://stackoverflow.com/users/2576935/timtrice">
+                                <i class="fa fa-stack-overflow"></i>
+                            </a>
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="LinkedIn" title="LinkedIn" href="https://www.linkedin.com/in/timtrice/">
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                        
+                        
+                        
+                            <a class="button-square button-social hint--top" data-hint="Email" title="Email" href="mailto:tim.trice@gmail.com">
+                                <i class="fa fa-envelope"></i>
+                            </a>
+                        
+                    </div>
+
+                    <ul class="site-nav">
+                        
+    <li class="site-nav-item">
+        <a title="Python" href="../../python/">Python</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="R" href="../../r/">R</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="SQL" href="../../sql/">SQL</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="Projects" href="../../projects/">Projects</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="Blog" href="../../">Blog</a>
+    </li>
+
+    <li class="site-nav-item">
+        <a title="About" href="../../about/">About</a>
+    </li>
+
+                    </ul>
+                </div>
+            </header>
+
+            <div id="container">
+
+
+<div class="container">
+    <article class="post-container">
+        <header class="post-header">
+    <h1 class="post-title">Summing Diagonals of a Matrix in Python</h1>
+    
+        <p class="post-description">Using Python, Sum the Diagonals of a Matrix</p>
+    
+</header>
+
+        <div class="post-content clearfix">
+    
+
+    <p>I want to find the difference of sums for each diagonal of a square matrix.</p>
+
+<pre><code class="language-python">from sympy import *
+</code></pre>
+
+<pre><code class="language-python">m = Matrix([
+[11, 2, 4],
+[4, 5, 6],
+[10, 8, -12]])
+
+m
+</code></pre>
+
+<pre><code>Matrix([
+[11, 2,   4],
+[ 4, 5,   6],
+[10, 8, -12]])
+</code></pre>
+
+<p>We&rsquo;ll write a small script that will calculate the absolute value of the difference of diagonals.</p>
+
+<p>$$ a = n<em>\text{11} + \dots + n</em>\text{nn}$$</p>
+
+<p>$n<em>\text{11}$ refers to the value of the first row of the first column. $n</em>\text{12}$ would refer to the value in the first row, second column. And $n<em>\text{21}$ refers to the value in the second row, first column. $n</em>\text{nn}$ refers to the value in the last row of the last column.</p>
+
+<p>$$
+\begin{bmatrix}
+    n<em>{11} &amp; n</em>{12} &amp; \dots  &amp; n<em>{1n} <br />
+    n</em>{21} &amp; n<em>{22} &amp; \dots  &amp; n</em>{2n} <br />
+    \vdots &amp; \vdots &amp; \ddots &amp; \vdots <br />
+    n<em>{n1} &amp; n</em>{n2} &amp; \dots  &amp; n_{nn}
+\end{bmatrix}
+$$</p>
+
+<p>So, in the example above we want to add $n<em>\text{n11} + \ddots + n</em>\text{nn}$; we&rsquo;ll assign this to $a$. Then we&rsquo;ll add $n<em>\text{1n} \dots n</em>\text{n1}$ and assign it to $b$ and calculate $\lvert a - b \rvert$.</p>
+
+<p>Let&rsquo;s write out our problem solving first.</p>
+
+<p>$$
+\begin{bmatrix}
+    11 &amp; 2 &amp; 4 <br />
+    4 &amp; 5 &amp; 6 <br />
+    10 &amp; 8 &amp; -12
+\end{bmatrix}
+$$</p>
+
+<p>$$ \lvert\left(11 + 5 - 12\right) - \left(4 + 5 + 10\right) \rvert$$</p>
+
+<p>Working out the problem we can find the solution is 15. So, if we wanted to solve this programmatically we could do something like this:</p>
+
+<pre><code class="language-python"># With a square matrix we can get either the 0 or 1 index of shape
+n = m.shape[0]
+
+# Set our sum variables
+a = 0; b = 0
+
+for _ in range(n):
+    a += m[_, _]
+    b += m[_, n - 1]
+    # We'll decrement n by 1 to keep track of where we're at.
+    n -= 1
+
+print(abs(a - b))
+</code></pre>
+
+<pre><code>15
+</code></pre>
+
+<p><code>_</code> is my counter in the for loop that begins at 0 and ends at $n - 1$. So, basically as we iterate through each row of the matrix I&rsquo;m taking $n_\text{__}$ and adding it to $a$.</p>
+
+<p>$$ a = n[0, 0] + n [1, 1] + n[2, 2]$$</p>
+
+<p>$$ a = 11 + 5 + (-12) $$</p>
+
+<p>$$ a =4 $$</p>
+
+<p>For $b$ we do the same but for the column value we&rsquo;re taking $n - 1$. This works because to access $n_\text{12}$, 4, we need the value of <code>m[0, 2]</code>.</p>
+
+<p>On our second iteration through $\text{<em>}$ is decremented by 1 which becomes 2. So $b$ then gets summed with the value of $n</em>\text{22}$ which is 5. The final iteration decrements $n$ to 1 so now we&rsquo;re accessing $n_\text{31}$ which is 10.</p>
+
+<p>At this point you may be confused with the labeling. Remember, in Python indexes are 0-based. Mathematically, matrixes are 1-based. So when I reference the Python matrix, for example, <code>m[0, 0]</code>, the first value in the matrix, this corresponds to $n<em>\text{11}$ in the mathematical matrix. And <code>m[2, 2]</code> is the same as $n</em>\text{33}$. I hope that clears it up.</p>
+
+<p>Let&rsquo;s make another square matrix, this one 10x10. We&rsquo;ll make each row sequential from 0 - 9.</p>
+
+<pre><code class="language-python">m = Matrix([
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]])
+
+m
+</code></pre>
+
+<pre><code>Matrix([
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]])
+</code></pre>
+
+<p>$$
+\begin{bmatrix}
+    0 &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 &amp; 6 &amp; 7 &amp; 8 &amp; 9 <br />
+    0 &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 &amp; 6 &amp; 7 &amp; 8 &amp; 9 <br />
+    0 &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 &amp; 6 &amp; 7 &amp; 8 &amp; 9 <br />
+    0 &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 &amp; 6 &amp; 7 &amp; 8 &amp; 9 <br />
+    0 &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 &amp; 6 &amp; 7 &amp; 8 &amp; 9 <br />
+    0 &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 &amp; 6 &amp; 7 &amp; 8 &amp; 9 <br />
+    0 &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 &amp; 6 &amp; 7 &amp; 8 &amp; 9 <br />
+    0 &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 &amp; 6 &amp; 7 &amp; 8 &amp; 9 <br />
+    0 &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 &amp; 6 &amp; 7 &amp; 8 &amp; 9 <br />
+    0 &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 &amp; 6 &amp; 7 &amp; 8 &amp; 9
+\end{bmatrix}
+$$</p>
+
+<p>At first glance, this may seem daunting. But, our formula will still work:</p>
+
+<pre><code class="language-python"># With a square matrix we can get the first value of shape
+n = m.shape[0]
+
+# Set our sum variables
+a = 0; b = 0
+
+for _ in range(n):
+    a += m[_, _]
+    b += m[_, n - 1]
+    # We'll decrement n by 1 to keep track of where we're at.
+    n -= 1
+
+print(abs(a - b))
+</code></pre>
+
+<pre><code>0
+</code></pre>
+
+<p>Let&rsquo;s write it out:</p>
+
+<p>$$ \lvert\left( 0 + 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 \right) - \left( 9 + 8 + 7 + 6 + 5 + 4 + 3 + 2 + 1 + 0 \right)\rvert $$</p>
+
+<p>$$ \lvert\left( 45 \right) - \left( 45 \right)\rvert $$</p>
+
+<p>$$ \lvert 0 \rvert $$</p>
+
+<p>$$ 0 $$</p>
+
+<p>So it seems our little script will work. But, can we simplify this some? Let&rsquo;s go back to our simpler matrix:</p>
+
+<p>$$
+\begin{bmatrix}
+    11 &amp; 2 &amp; 4 <br />
+    4 &amp; 5 &amp; 6 <br />
+    10 &amp; 8 &amp; -12
+\end{bmatrix}
+$$</p>
+
+<pre><code class="language-python">m = Matrix([
+[11, 2, 4],
+[4, 5, 6],
+[10, 8, -12]])
+
+m
+</code></pre>
+
+<pre><code>Matrix([
+[11, 2,   4],
+[ 4, 5,   6],
+[10, 8, -12]])
+</code></pre>
+
+<p>Our original formula was:</p>
+
+<p>$$ \lvert\left(11 + 5 - 12\right) - \left(4 + 5 + 10\right) \rvert$$</p>
+
+<p>But, this is the same as:</p>
+
+<p>$$ \lvert\left(11 - 4\right) + \left(5 - 5\right) + \left(-12 - 10\right) \rvert $$</p>
+
+<p>$$ \lvert 9 + 0 + -22 \rvert $$</p>
+
+<p>$$ \lvert -15 \rvert $$</p>
+
+<p>$$ 15 $$</p>
+
+<p>So we&rsquo;re taking the absolute value of the sum of $n<em>\text{13} \dots n</em>\text{31}$. In Python, this is the same as <code>m[0, 2]</code>, <code>m[1, 1]</code> and <code>m[2, 0]</code>. As our x-axis (rows) increments by 1 our y-axis (columns) decrements by 1.</p>
+
+<p>You may or may not realize that we can access the y-axis with negative integers. For example, if the dimensions of <code>m</code> are $3$ then we can access the last value of the first row, <code>m[0, 2]</code> another way: <code>m[0, -1]</code>:</p>
+
+<pre><code class="language-python">m[0, -1]
+</code></pre>
+
+<pre><code>4
+</code></pre>
+
+<pre><code class="language-python">m[1, -2]
+</code></pre>
+
+<pre><code>5
+</code></pre>
+
+<pre><code class="language-python">m[2, -3]
+</code></pre>
+
+<pre><code>10
+</code></pre>
+
+<p>Again, as our x-axis increments our y-axis decrements. With that we can use the counter to our advantage:</p>
+
+<pre><code class="language-python">for _ in range(m.shape[0]):
+    print(_, -(1 + _))
+</code></pre>
+
+<pre><code>0 -1
+1 -2
+2 -3
+</code></pre>
+
+<p>We&rsquo;re using <code>_</code> to keep track of our x-axis. To keep track of our y-axis we simply add 1 to <code>_</code> then multiply it by -1. As you can see we have the same indexes that we just referenced prior. Now we can expand on the for loop.</p>
+
+<pre><code class="language-python">ans = 0;
+for _ in range(m.shape[0]):
+    ans += m[_, _] - m[_, -(1 + _)]
+
+print(abs(ans))
+</code></pre>
+
+<pre><code>15
+</code></pre>
+
+<p>We took what originally was seven lines of code and dropped it to four. That may not seem like much but it does make the code more legible and saves some computing power by reducing variables.</p>
+
+</div>
+
+        <footer class="post-footer clearfix">
+    
+        <p class="post-tags">
+            <span>Tagged:</span>
+            
+            
+                <a href="../../tags/matrix/">matrix</a>
+            
+        </p>
+    
+
+    <div class="share">
+        
+            <a class="icon-twitter" href="https://twitter.com/share?text=Summing%20Diagonals%20of%20a%20Matrix%20in%20Python&url=%2fpython%2fsum-diagonals%2f"
+                onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fa fa-twitter"></i>
+                <span class="hidden">Twitter</span>
+            </a>
+        
+
+        
+            <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=%2fpython%2fsum-diagonals%2f"
+                onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                <i class="fa fa-facebook"></i>
+                <span class="hidden">Facebook</span>
+            </a>
+        
+
+        
+            <a class="icon-google-plus" href="https://plus.google.com/share?url=%2fpython%2fsum-diagonals%2f"
+              onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+              <i class="fa fa-google-plus"></i>
+                <span class="hidden">Google+</span>
+            </a>
+        
+        
+            <a class="icon-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&title=Summing%20Diagonals%20of%20a%20Matrix%20in%20Python&url=%2fpython%2fsum-diagonals%2f&summary=Using%20Python%2c%20Sum%20the%20Diagonals%20of%20a%20Matrix"
+               onclick="window.open(this.href, 'linkedin-share', 'width=554,height=481');return false;">
+               <i class="fa fa-linkedin"></i>
+               <span class="hidden">LinkedIn</span>
+            </a>
+        
+    </div>
+</footer>
+    </article>
+</div>
+
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="site-title-wrapper">
+                    <h1 class="site-title">
+                        <a title="Tim Trice" href="../../">Tim Trice</a>
+                    </h1>
+                    <a class="button-square button-jump-top js-jump-top" href="#">
+                        <i class="fa fa-angle-up"></i>
+                    </a>
+                </div>
+
+                <p class="footer-copyright">
+                    <span>&copy; 2017 / Powered by <a href="https://gohugo.io/">Hugo</a></span>
+                </p>
+                <p class="footer-copyright">
+                    <span><a href="https://github.com/roryg/ghostwriter">Ghostwriter theme</a> By <a href="http://jollygoodthemes.com">JollyGoodThemes</a></span>
+                    <span>/ <a href="https://github.com/jbub/ghostwriter">Ported</a> to Hugo By <a href="https://github.com/jbub">jbub</a></span>
+                </p>
+            </div>
+        </footer>
+
+        <script src="../../js/jquery-1.11.3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+        <script src="../../js/jquery.fitvids.js"></script>
+        <script src="../../js/scripts.js"></script>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    });
+    </script>
+    <script type="text/javascript"
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    </body>
+</html>
+

@@ -1,0 +1,13 @@
+### MySQL Server Info
+
+```{sql mysql-version, connection = mysql_con, tab.cap = "MySQL Server Info"}
+SELECT @@version_comment AS `Version`, 
+  @@version_compile_machine AS `Version Compile Machine`, 
+  @@innodb_version AS `InnoDB Version`, 
+  @@version_compile_os AS `Version Compile OS`;
+```
+
+```{r close-mysql, include = FALSE}
+# Disconnect MySQL
+dbDisconnect(mysql_con)
+```
