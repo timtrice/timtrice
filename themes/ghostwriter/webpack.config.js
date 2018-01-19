@@ -12,7 +12,7 @@ module.exports = {
     modules: [
       'node_modules'
     ],
-    extensions: ['.scss'],
+    extensions: ['.js', '.scss'],
   },
   output: {
     path: path.join(__dirname, 'static', 'dist'),

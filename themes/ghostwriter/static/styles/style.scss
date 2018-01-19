@@ -1,5 +1,5 @@
-// ============================================================ //
 // Colours //
+// ============================================================ //
 // ============================================================ //
 
 $primary: #F03838;
@@ -73,6 +73,20 @@ img {
     margin: 40px 0;
     width: auto;
     max-width: 100%;
+
+    &[src$="align-center"] {
+        margin: auto;
+    }
+
+    &[src$="align-left"] {
+        float: left;
+        margin-right: 40px;
+    }
+    
+    &[src$="align-right"] {
+        float: right;
+        margin-left: 40px;
+    }
 }
 
 pre {
