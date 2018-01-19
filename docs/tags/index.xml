@@ -12,15 +12,6 @@
     
     
     <item>
-      <title>Basic Aggregation</title>
-      <link>/tags/basic-aggregation/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/basic-aggregation/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Docker</title>
       <link>/tags/docker/</link>
       <pubDate>Wed, 17 May 2017 00:00:00 +0000</pubDate>
@@ -39,29 +30,11 @@
     </item>
     
     <item>
-      <title>Hurdat</title>
-      <link>/tags/hurdat/</link>
-      <pubDate>Tue, 16 May 2017 10:47:00 -0500</pubDate>
-      
-      <guid>/tags/hurdat/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Hurricanes</title>
       <link>/tags/hurricanes/</link>
       <pubDate>Wed, 06 Sep 2017 00:00:00 +0000</pubDate>
       
       <guid>/tags/hurricanes/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Mysql</title>
-      <link>/tags/mysql/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/mysql/</guid>
       <description></description>
     </item>
     
@@ -80,24 +53,6 @@
       <pubDate>Wed, 06 Sep 2017 00:00:00 +0000</pubDate>
       
       <guid>/tags/r/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Rrricanes</title>
-      <link>/tags/rrricanes/</link>
-      <pubDate>Tue, 16 May 2017 10:47:00 -0500</pubDate>
-      
-      <guid>/tags/rrricanes/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Weather</title>
-      <link>/tags/weather/</link>
-      <pubDate>Sat, 26 Aug 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/weather/</guid>
       <description></description>
     </item>
     

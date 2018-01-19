@@ -11,15 +11,6 @@
     
     
     <item>
-      <title>Basic Aggregation</title>
-      <link>/categories/basic-aggregation/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/categories/basic-aggregation/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Harvey</title>
       <link>/categories/harvey/</link>
       <pubDate>Wed, 06 Sep 2017 00:00:00 +0000</pubDate>
@@ -34,15 +25,6 @@
       <pubDate>Wed, 06 Sep 2017 00:00:00 +0000</pubDate>
       
       <guid>/categories/hurricanes/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Mysql</title>
-      <link>/categories/mysql/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/categories/mysql/</guid>
       <description></description>
     </item>
     
