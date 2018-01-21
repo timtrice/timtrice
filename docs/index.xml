@@ -41,6 +41,20 @@ I began programming shortly after my son&amp;rsquo;s birth in 2003. I had alread
     </item>
     
     <item>
+      <title>Highest Paid Employee</title>
+      <link>/sql/highest_paid_employee/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/sql/highest_paid_employee/</guid>
+      <description>Using employees database, we need to find the highest-paid employee in our database.
+With this particular database we have to be careful about making assumptions of our data, some of which would be:
+ Only one salary record per employee
+ All salary records are current
+ Maximum salary is the current salary
+  If our salaries table only consists of current employees and current salary information, then we can do a simple SELECT MAX query and be done.</description>
+    </item>
+    
+    <item>
       <title>Projects</title>
       <link>/projects/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

@@ -28,25 +28,29 @@
   </url>
   
   <url>
-    <loc>/categories/harvey/</loc>
-    <lastmod>2017-09-06T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/tags/harvey/</loc>
     <lastmod>2017-09-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/categories/hurricanes/</loc>
+    <loc>/categories/harvey/</loc>
     <lastmod>2017-09-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
+    <loc>/sql/highest_paid_employee/</loc>
+  </url>
+  
+  <url>
     <loc>/tags/hurricanes/</loc>
+    <lastmod>2017-09-06T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/hurricanes/</loc>
     <lastmod>2017-09-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -67,14 +71,19 @@
   </url>
   
   <url>
+    <loc>/tags/r/</loc>
+    <lastmod>2017-09-06T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/categories/r/</loc>
     <lastmod>2017-09-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/r/</loc>
-    <lastmod>2017-09-06T00:00:00+00:00</lastmod>
+    <loc>/sql/</loc>
     <priority>0</priority>
   </url>
   
