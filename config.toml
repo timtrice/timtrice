@@ -52,11 +52,6 @@ titleCaseStyle = "Chicago"
     highlightjsTheme = "github"
 
 [[menu.main]]
-  name = "Python"
-  url = "/python/"
-  weight = 100
-
-[[menu.main]]
   name = "R"
   url = "/r/"
   weight = 250
