@@ -1,0 +1,237 @@
+---
+title: Analysis of Beer Reviews
+description: >
+  Test description
+subtitle: > 
+  Test subtitle
+abstract: > 
+  Test abstract
+draft: TRUE
+output:
+  blogdown::html_page:
+    toc: true
+    fig_align: center
+---
+
+```{r libraries}
+library(dplyr)
+library(ggplot2)
+library(Hmisc)
+```
+
+[One-Size-Fits-All Interview Kit](https://www.linkedin.com/pulse/how-hire-test-data-skills-one-size-fits-all-interview-tanya-cashorali/)
+
+### Data Download
+
+Data courtesy of [Beer Advocate](http://www.beeradvocate.com/).
+
+```{r}
+#' Path to download csv
+data_dir <- "~/Downloads"
+
+local_file <- sprintf("%s/beer_reviews.csv", data_dir)
+
+if (file.exists(local_file)) {
+  df <- readr::read_csv(local_file)
+  
+} else {
+
+  url <- "https://github.com/timtrice/datasets/blob/master/beer_reviews/beer_reviews.tar.gz?raw=true"
+  destdir <- tempdir()
+  utils::download.file(file.path(url), zip_file <- tempfile())
+  utils::untar(zip_file, exdir = destdir)
+  df <- readr::read_csv(sprintf("%s/beer_reviews/beer_reviews.csv", destdir))
+  
+  if (!dir.exists(data_dir)) 
+    dir.create(data_dir)
+  
+  readr::write_csv(df, file.path(local_file))
+
+}
+```
+
+### The Variables
+
+```{r}
+str(df)
+```
+
+#### brewery_id
+
+```{r}
+describe(df$brewery_id)
+```
+
+  * continuous variable
+
+  * There are no missing `brewer_id` values.
+  
+  * The mean is higher than 75% of the values so there is a heavy skew along the lower values for some reason. Question: *Why is this? Is this relevant?*
+
+```{r}
+ggplot(df, aes(x = brewery_id)) + geom_histogram(bins = 50)
+```
+
+#### brewery_name
+
+```{r}
+describe(df$brewery_name)
+```
+
+  * Categorical variables
+
+My expectation was for the numbers `n`, `missing` and `distinct` to match up with `brewery_id`, but they don't. While the `missing` count is only slightly off (-15), the `distinct` count is way off (-98). 
+
+```{r}
+unique(df$brewery_id[is.na(df$brewery_name)])
+```
+
+There are, in fact, only 2 missing unique `brewer_id`.
+
+The discrepancy suggests some brewery's may have multiple names for the same id. 
+```{r}
+df %>% 
+  group_by(brewery_id) %>% 
+  summarise(n = length(unique(brewery_name)))
+```
+
+My instinct is wrong. Let's flip it. 
+
+```{r}
+df %>% 
+  group_by(brewery_name) %>% 
+  summarise(n = length(unique(brewery_id))) %>% 
+  filter(n > 1) %>% 
+  arrange(brewery_name)
+```
+
+Ok, so 60 `brewery_name` have multiple `brewery_id`. There are also spelling discrepancies, e.g., BJ's Restaurant & Brewery, BJ's Restaurant & Brewhouse, BJ's Restaurant And Brewhouse. These discrepancies will need to be cleaned. 
+
+#### review_time
+
+```{r}
+describe(df$review_time)
+```
+
+```{r}
+ggplot(df, aes(x = review_time)) + geom_histogram(bins = 10000)
+```
+
+#### review_overall
+
+```{r}
+describe(df$review_overall)
+```
+
+```{r}
+ggplot(df, aes(x = review_overall)) + geom_bar()
+```
+
+  * Categorical
+
+#### review_aroma
+
+```{r}
+describe(df$review_aroma)
+```
+
+```{r}
+ggplot(df, aes(x = review_aroma)) + geom_bar()
+```
+
+  * Categorical
+  
+#### review_appearance
+
+```{r}
+describe(df$review_appearance)
+```
+
+```{r}
+ggplot(df, aes(x = review_appearance)) + geom_bar()
+```
+
+  * Categorical
+
+#### review_profilename
+
+```{r}
+describe(df$review_profilename)
+```
+
+  * Categorical
+
+#### beer_style
+
+```{r}
+describe(df$beer_style)
+```
+
+  * Categorical
+
+#### review_palate
+
+```{r}
+describe(df$review_palate)
+```
+
+```{r}
+ggplot(df, aes(x = review_palate)) + geom_bar()
+```
+
+  * Categorical
+
+#### review_taste
+
+```{r}
+describe(df$review_taste)
+```
+
+```{r}
+ggplot(df, aes(x = review_taste)) + geom_bar()
+```
+
+  * Categorical
+  
+#### beer_abv
+
+```{r}
+describe(df$beer_abv)
+```
+
+```{r}
+df %>% 
+  filter(!is.na(beer_abv)) %>% 
+  ggplot(aes(x = beer_abv)) + 
+  geom_freqpoly(bins = 10)
+```
+
+  * Continuous
+
+#### beer_name
+
+```{r}
+describe(df$beer_name)
+```
+
+#### beer_beerid
+
+```{r}
+describe(df$beer_beerid)
+```
+
+```{r}
+ggplot(df, aes(x = beer_beerid)) + geom_histogram(bins = 50)
+```
+
+### Data Cleaning
+
+There are four variables I'm most concerned about that will need to be cleaned: `brewer_id`, `brewer_name`, `beer_name` and `beer_beerid`.
+
+Recall that we have a number of discrepancies in `brewer_name` that need to be resolved. 
+
+## R Session Info
+
+```{r r-session-info}
+pander::pander(sessionInfo())
+```
