@@ -1,4 +1,4 @@
-baseurl = "/"
+baseurl = "http://timtrice.net"
 
 relativeurls = true
 
