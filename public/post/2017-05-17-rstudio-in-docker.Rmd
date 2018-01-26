@@ -1,0 +1,329 @@
+---
+title: RStudio in Docker
+description: "Running RStudio from a Docker image"
+author: Tim Trice
+date: '2017-05-17'
+slug: rstudio-in-docker
+categories: ["R"]
+tags: ["R", "Docker"]
+output:
+    blogdown::html_page:
+        toc: true
+---
+
+[Docker](https://docs.docker.com/get-started/) is a container platform that helps replicate setups for testing and production from any system. It gives you the ability to set up a mini-operating system to meet specific criteria.
+
+When developing some of my applications I wanted the ability to test these applications on different versions of R. But setting this up on Linux proved to be more difficult than on my Windows machine. Docker makes it significantly easier. 
+
+You do not need a Linux system to run Docker; Windows and macOS are supported as well as several other platforms. Once you get into the docker application, the language is the same.
+
+## Brief Overview of Docker
+
+Docker sets up images with rules defined from a Dockerfile. The Dockerfile is basically a set of instructions to install and set up a mini-operating system. 
+
+```
+FROM ubuntu:latest
+
+# Update apt-get sources
+RUN apt-get update && apt-get install -y r-base
+```
+
+When you build the image off of that Dockerfile you get the latest version of Ubuntu and the latest version of R for that setup. 
+
+(As of this writing, that latest version of R is still 3.2.3.)
+
+Once the image is built you run it from within a container. Inside that container you can execute R and begin working with R from within the terminal. 
+
+You can use it for things other than R as well: python, MySQL, MongoDB, etc. If you can access it from a terminal or online through a port, you can use Docker.
+
+When you exit a container, your data still remains. If you're familiar with Amazon Web Service's EC2's, think of a container as an instance. The image is how you initially set up the instance. But once you run that instance, anything you do from within stays inside that instance. Only when you've deleted the instance do you have to start over again from your original image. 
+
+So, this gives significant flexibility to play around from a base setup and manipulate different settings for different purposes.
+
+If you have not yet [installed Docker](https://docs.docker.com/engine/installation/), do so now if you want to play along.
+
+## RStudio Server
+
+I wanted a RStudio server setup with R 3.2.3. Unfortunately, I didn't have much luck setting this up myself. Online searches didn't seem to help me make progress. 
+
+We need RStudio Server to access RStudio through a web browser. You cannot install RStudio and run it as an application as if you were still on your local computer.
+
+Thankfully, a group of people have made most of this much easier. 
+
+[rocker](https://github.com/rocker-org/rocker) is a set of images for various R and RStudio setups. When we run the base image we get the latest version of RStudio (1.0.143) and R (3.4.0). However, we can also use R versions 3.3.1 to 3.3.3. Originally I wanted 3.2.3 but 3.3.1 will be fine.
+
+From this point forward I will be referring to two different repositories: Docker Hub and GitHub. Docker Hub is where we obtain base images that future images will be built from. You can also use Docker Hub just as you would GitHub to serve as a repository to your own images. 
+
+GitHub is where the code is stored to build the images. 
+
+## Pull rocker/rstudio from Docker Hub
+
+Before we can start building images we have to load the rocker/rstudio [Docker Hub repository](https://hub.docker.com/r/rocker/rstudio/). 
+
+```
+sudo docker pull rocker/rstudio
+```
+
+This process may take several minutes as it downloads various images that are needed to continue. When done we can view the images downloaded with 
+
+```
+sudo docker images
+```
+
+You should see output similar to this:
+
+```
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+rocker/rstudio      latest              7a807646f0be        13 days ago         993 MB
+```
+
+## Pull rocker from GitHub
+
+Clone the [rocker](https://github.com/rocker-org/rocker) GitHub repo into your projects directory. When finished, fire up a terminal or console and go to the cloned directory.
+
+Your directory contents should be similar to this:
+
+```
+total 76
+drwxrwxr-x  9 timtrice timtrice  4096 May 17 07:08 .
+drwxrwxr-x 49 timtrice timtrice  4096 May 17 07:08 ..
+-rw-rw-r--  1 timtrice timtrice   206 May 17 07:08 circle.yml
+-rw-rw-r--  1 timtrice timtrice  1209 May 17 07:08 CONTRIBUTING.md
+drwxrwxr-x  2 timtrice timtrice  4096 May 17 07:08 doc
+drwxrwxr-x  5 timtrice timtrice  4096 May 17 08:07 .git
+drwxrwxr-x  2 timtrice timtrice  4096 May 17 07:08 icon
+-rw-rw-r--  1 timtrice timtrice 18092 May 17 07:08 LICENSE
+drwxrwxr-x  7 timtrice timtrice  4096 May 17 07:08 r-apt
+drwxrwxr-x  2 timtrice timtrice  4096 May 17 07:08 r-base
+drwxrwxr-x  2 timtrice timtrice  4096 May 17 07:08 r-devel
+-rw-rw-r--  1 timtrice timtrice  4916 May 17 07:08 README.md
+drwxrwxr-x  8 timtrice timtrice  4096 May 17 08:50 rstudio
+-rw-rw-r--  1 timtrice timtrice   549 May 17 07:08 .travis.yml
+```
+
+## Run r-base
+
+Once we've downloaded the images we can start off right away with R from within the terminal. Run the following code: 
+
+```
+sudo docker run --rm -ti rocker/r-base
+```
+
+The `-rm` flag tells docker to clean up the container after we exit. In other words, it will no longer exist once we exit the container. 
+
+The `-ti` flag tells STDIN to stay open so that we can work within R. 
+
+When you run the code for the first time Docker will download associated images needed to run r-base. You will then be greeted with the standard R terminal:
+
+```
+R version 3.4.0 (2017-04-21) -- "You Stupid Darkness"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+...
+```
+
+Exit R with the `q()` function. Once back at the command line when you run the docker images command again you'll see the new image, `rocker/r-base` has been added. 
+
+```
+sudo docker images
+```
+
+```
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+rocker/r-base       latest              6999257c71ed        8 days ago          636 MB
+rocker/rstudio      latest              7a807646f0be        13 days ago         993 MB
+
+```
+
+## Build RStudio Image
+
+To run RStudio we need to build another image based off the RStudio Docker file. This file is located in the rstudio directory. 
+
+```
+sudo docker build -t rstudio-3.4.0 rstudio
+```
+
+The `-t` flag gives the image a tag name. I use `rstudio-3.4.0` so I know this image is for RStudio using R version 3.4.0. 
+
+The `rstudio` at the end is the directory location of the Dockerfile. 
+
+Building this image only takes a second or two. 
+
+```
+sudo docker images
+```
+
+```
+REPOSITORY              TAG                 IMAGE ID            CREATED             SIZE
+rocker/r-base           latest              6999257c71ed        8 days ago          636 MB
+rocker/rstudio-stable   latest              7a807646f0be        13 days ago         993 MB
+rocker/rstudio          latest              7a807646f0be        13 days ago         993 MB
+rstudio-3.4.0           latest              7a807646f0be        13 days ago         993 MB
+```
+
+## Run RStudio with R 3.4.0
+
+Now we're set up for fun. We want to start up our `rstudio-3.4.0` image to a container. From our command line, run
+
+```
+sudo docker run -d -p 8787:8787 rstudio-3.4.0
+```
+
+In our terminal, a hash will appear and then our command line will pop back up. This is fine. 
+
+In a web browser, point to localhost:8787. You will log into RStudio with the same username and password: **rstudio**. 
+
+You will then be greeted by that big beautiful 4-panel suite.
+
+At this point of time you are in a container built off the rstudio-3.4.0 image. Again, in AWS terms, think of this as a running instance. Whatever you do in this container remains so as long as the container is active.
+
+If you only want to practice but want the container removed when you're finished, use the `-rm` flag in your run call. 
+
+When you're finished working, you can't just log out of RStudio and expect the container to shut down. It's still running in the background. We can view this when we view our list of containers:
+
+```
+sudo docker ps -a
+```
+
+```
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                              NAMES
+77010cde66fa        rstudio-3.4.0       "/init"             13 minutes ago      Up 13 minutes       3838/tcp, 0.0.0.0:8787->8787/tcp   angry_volhard
+```
+
+Notice the `STATUS` says "Up 13 minutes". 
+
+To shut down the container, we use the `stop` command along with `CONTAINER_ID`:
+
+```
+sudo docker stop 77010cde66fa
+```
+
+The container will close down. 
+
+```
+sudo docker ps -a
+```
+
+```
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                     PORTS               NAMES
+77010cde66fa        rstudio-3.4.0       "/init"             14 minutes ago      Exited (0) 3 seconds ago                       angry_volhard
+```
+
+When we want to start it back up again use the `start` command:
+
+```
+sudo docker start 77010cde66fa
+```
+
+```
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                              NAMES
+77010cde66fa        rstudio-3.4.0       "/init"             22 minutes ago      Up 9 seconds        3838/tcp, 0.0.0.0:8787->8787/tcp   angry_volhard
+```
+
+Go back to localhost:8787, log into RStudio and you will find it just as you left it.
+
+If you wish to delete the container, use the `rm` command:
+
+```
+sudo docker rm 77010cde66fa
+```
+
+The container will be removed and you can start over again from your image.
+
+## Build and Run Rstudio with R 3.3.1
+
+Now, for my purposes I don't want R 3.4.0; I already have that on my local machine. I want to test some packages with R 3.3.1. 
+
+What we need to do in this case is build a new image using R 3.3.1. RStudio will keep the same version.
+
+In our rocker directory there is a path to a Dockerfile for R 3.3.1 in rstudio/3.3.1. I modify the tag of the image to `rstudio-3.3.1` and change the directory path to build the new image.
+
+```
+sudo docker build -t rstudio-3.3.1 rstudio/3.3.1
+```
+
+Again, we will need to download and pull some new images doing this for the first time. This should only take a couple of minutes tops.
+
+When finished, we can run a new container:
+
+```
+sudo docker run -d -p 8787:8787 rstudio-3.3.1
+```
+
+When we log into localhost:8787 we see we are using R 3.3.1:
+
+```
+
+R version 3.3.1 (2016-06-21) -- "Bug in Your Hair"
+Copyright (C) 2016 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+...
+```
+
+## Commit Your Changes
+
+When you get a container set up just the way you like it, you can commit that container to a new image. 
+
+First, make sure you have stopped the container (or `exit` if running from a terminal). 
+
+You need a [Docker Hub](https://cloud.docker.com) account to use their online repository. The Free Plan gives you unlimited public repositories and one private repository. 
+
+Log in from your terminal or console, 
+
+```
+sudo docker login
+```
+
+Get the CONTAINER ID you want to commit
+
+```
+sudo docker ps -a
+```
+
+```
+7826d7faad16        rstudio-3.3.1       "/init"             20 minutes ago      Exited (0) 4 seconds ago                        kickass_swartz
+77010cde66fa        rstudio-3.4.0       "/init"             50 minutes ago      Exited (0) 23 minutes ago                       angry_volhard
+```
+
+In my case, I want to save 7826d7faad16.
+
+Then commit the changes:
+
+```
+sudo docker commit -m "Verified setup" -a "Tim Trice" 7826d7faad16 <REPOSITORY>/<NEW IMAGE NAME>
+```
+
+Use your login name as REPOSITORY and whatever value you want for NEW IMAGE NAME. 
+
+Notice also the slash in between, just like referencing a GitHub repo. So my command would be
+
+```
+sudo docker commit -m "Verified setup" -a "Tim Trice" 7826d7faad16 timtrice/rstudio-3.3.1
+```
+
+When we list the images we see our new image has been saved:
+
+```
+sudo docker images
+```
+
+```
+REPOSITORY               TAG                 IMAGE ID            CREATED             SIZE
+timtrice/rstudio-3.3.1   latest              cf53aaad96d7        2 minutes ago       991 MB
+...
+```
+
+Then push the image to your Docker Hub repository.
+
+```
+# Replace timtrice/rstudio-3.3.1 with your image REPOSITORY
+sudo docker push timtrice/rstudio-3.3.1
+```
+
+Now, in [Docker Hub](https://cloud.docker.com) you will find your image has been added. Click on the link to the image and add in some extra details so you document well what your image is and what it does.
+
+## Conclusion
+
+Setting up Docker with R and RStudio is great for testing and debugging. The last thing I would recommend is that, before you start cloning your repos or starting new projects, install and use [Packrat](http://rstudio.github.io/packrat/). Packrat isolates your packages to your project effectively making them invisible to other projects. This adds an additional layer to customize your setup.
+
+You could, of course, keep this information in different containers. For example, say you save a container using dplyr version 0.5.0 and another container using a developer version. But I don't think this is feasible. Packrat will document all of your package changes and you can easily reset to an earlier snapshot if things break. So set up Packrat for your projects before you start going crazy with the `install.package` function.
