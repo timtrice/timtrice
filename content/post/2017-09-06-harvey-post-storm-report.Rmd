@@ -9,6 +9,7 @@ output:
   blogdown::html_page:
     toc: true
     fig_align: center
+    cache: TRUE
 ---
 
 On August 26, 2017, Hurricane Harvey made landfall along the central Texas gulf coast as a category four hurricane. The storm weakened but remained stationary in southeast Texas spawing dozens of tornadoes and dropping over 30 inches of rain in many locations with isolated amounts of over 50 inches.
