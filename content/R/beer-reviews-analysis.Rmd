@@ -13,7 +13,13 @@ output:
     fig_align: center
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, 
+                      error = TRUE)
+```
+
 ```{r libraries}
+library(corrplot)
 library(dplyr)
 library(ggplot2)
 library(Hmisc)
@@ -393,6 +399,61 @@ I'll update those with `brewery_id` 13094 to 12984.
 
 ```{r}
 df$brewery_id[df$brewery_id == 13094] <- 12984
+```
+
+### Exploratory
+
+```{r}
+cc <- df[complete.cases(df),] %>% 
+  select(starts_with("review"), -review_time, -review_profilename, beer_abv)
+```
+
+```{r}
+cor(cc)
+```
+
+Most positive relationship seems to be between `review_overall` and `review_taste`. I want to take the mean `review_overall` and `review_taste` per `beer_beerid` and draw a scatterplot.
+
+```{r}
+df %>% 
+  group_by(beer_beerid) %>% 
+  summarise(mean_review_overall = mean(review_overall, na.rm = TRUE), 
+            mean_review_taste = mean(review_taste, na.rm = TRUE)) %>% 
+  ggplot(aes(x = mean_review_overall, y = mean_review_taste)) + 
+  geom_point() + 
+  geom_smooth()
+```
+
+Is this really surprising?
+
+Next to taste is `review_palate`; let's check that out.
+
+```{r}
+df %>% 
+  group_by(beer_beerid) %>% 
+  summarise(mean_review_overall = mean(review_overall, na.rm = TRUE), 
+            mean_review_aroma = mean(review_aroma, na.rm = TRUE)) %>% 
+  ggplot(aes(x = mean_review_overall, y = mean_review_aroma)) + 
+  geom_point() + 
+  geom_smooth()
+```
+
+I'm curious what type of 
+
+```{r}
+df %>% 
+  select(beer_beerid, review_overall, review_aroma, review_taste) %>% 
+  mutate(
+    review_class = case_when(
+      review_overall < 1 ~ "A", 
+      review_overall < 2 ~ "B", 
+      review_overall < 3 ~ "C", 
+      review_overall < 4 ~ "D", 
+      TRUE ~ "E")) %>% 
+  group_by(beer_beerid) %>% 
+  summarise(mean_review_aroma = mean(review_aroma, na.rm = TRUE)) %>% 
+  ggplot(aes(x = review_class, y = mean_review_aroma)) %>% 
+  geom_boxplot()
 ```
 
 ## R Session Info
