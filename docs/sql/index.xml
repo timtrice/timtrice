@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>SQL on Tim Trice</title>
+    <title>SQLs on Tim Trice</title>
     <link>/sql/</link>
-    <description>Recent content in SQL on Tim Trice</description>
+    <description>Recent content in SQLs on Tim Trice</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    
-	<atom:link href="/sql/index.xml" rel="self" type="application/rss+xml" />
-    
+    <copyright>&amp;copy; 2018</copyright>
+    <atom:link href="/sql/" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Highest Paid Employee</title>
@@ -16,12 +15,230 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/sql/highest_paid_employee/</guid>
-      <description>Using employees database, we need to find the highest-paid employee in our database.
-With this particular database we have to be careful about making assumptions of our data, some of which would be:
- Only one salary record per employee
- All salary records are current
- Maximum salary is the current salary
-  If our salaries table only consists of current employees and current salary information, then we can do a simple SELECT MAX query and be done.</description>
+      <description>&lt;p&gt;Using &lt;a href=&#34;https://dev.mysql.com/doc/employee/en/&#34;&gt;employees&lt;/a&gt; database, we need to find the highest-paid employee in our database.&lt;/p&gt;
+&lt;p&gt;With this particular database we have to be careful about making assumptions of our data, some of which would be:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Only one salary record per employee&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;All salary records are current&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Maximum salary is the current salary&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If our &lt;code&gt;salaries&lt;/code&gt; table only consists of current employees and current salary information, then we can do a simple SELECT MAX query and be done. Our &lt;code&gt;salaries&lt;/code&gt; table is a historical table; we have multiple salary records per employee.&lt;/p&gt;
+&lt;p&gt;Additionally, there is no guarantee every employee is an active employee.&lt;/p&gt;
+&lt;p&gt;We also cannot assume that the maximum salary is the current salary.&lt;/p&gt;
+&lt;p&gt;Let’s look at employee 10001 to start:&lt;/p&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;USE `employees`;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;SELECT *
+FROM `salaries`
+WHERE `emp_no` = 10001;&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;knitsql-table&#34;&gt;
+&lt;table&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:select-salaries-10001&#34;&gt;Table 1: &lt;/span&gt;17 records&lt;/caption&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;right&#34;&gt;emp_no&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;salary&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;from_date&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;to_date&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;10001&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;60117&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1986-06-26&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1987-06-26&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;10001&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;62102&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1987-06-26&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1988-06-25&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;10001&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;66074&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1988-06-25&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1989-06-25&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;10001&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;66596&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1989-06-25&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1990-06-25&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;10001&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;66961&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1990-06-25&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1991-06-25&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;10001&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;71046&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1991-06-25&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1992-06-24&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;10001&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;74333&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1992-06-24&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1993-06-24&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;10001&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;75286&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1993-06-24&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1994-06-24&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;10001&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;75994&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1994-06-24&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1995-06-24&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;10001&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;76884&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1995-06-24&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1996-06-23&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;10001&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;80013&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1996-06-23&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1997-06-23&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;10001&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;81025&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1997-06-23&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1998-06-23&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;10001&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;81097&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1998-06-23&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1999-06-23&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;10001&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;84917&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1999-06-23&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2000-06-22&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;10001&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;85112&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2000-06-22&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2001-06-22&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;10001&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;85097&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2001-06-22&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2002-06-22&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;10001&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;88958&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2002-06-22&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;9999-01-01&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;p&gt;By and large, &lt;code&gt;salary&lt;/code&gt; seems to increase over time. This is incorrect. Notice the salary from dates 2000-06-22 and 2001-06-22; there is a slight decrease. The assumption the max salary would also be the latest salary would be incorrect in this case.&lt;/p&gt;
+&lt;p&gt;Let’s therefore assume that when asked to get the highest salary in our table that&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;The employee must be active&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;The maximum salary applies to current values only&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;We can resolve both of these by finding where &lt;code&gt;to_date&lt;/code&gt; is “9999-01-01”.&lt;/p&gt;
+&lt;p&gt;With that and ordering on &lt;code&gt;salary&lt;/code&gt; descending, we can find our current maximum salary in the table.&lt;/p&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;SELECT `emp_no`, 
+  `salary`
+FROM `salaries`
+WHERE `to_date` = &amp;quot;9999-01-01&amp;quot;
+ORDER BY `salary` DESC 
+LIMIT 1;&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;knitsql-table&#34;&gt;
+&lt;table&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:max-salary&#34;&gt;Table 2: &lt;/span&gt;1 records&lt;/caption&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;emp_no&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;salary&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;43624&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;158220&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;p&gt;I’m asked to find employee but have only returned &lt;code&gt;emp_no&lt;/code&gt;. I’ll JOIN &lt;code&gt;employees&lt;/code&gt; to get the employees first and last name.&lt;/p&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;SELECT `salaries`.`emp_no`, 
+  `salaries`.`salary`, 
+  `employees`.`first_name`, 
+  `employees`.`last_name`
+FROM `salaries` 
+LEFT JOIN `employees`
+ON `employees`.`emp_no` = `salaries`.`emp_no`
+WHERE `to_date` = &amp;quot;9999-01-01&amp;quot;
+ORDER BY `salary` DESC 
+LIMIT 1;&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;knitsql-table&#34;&gt;
+&lt;table&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:max-salary-with-employees&#34;&gt;Table 3: &lt;/span&gt;1 records&lt;/caption&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;emp_no&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;salary&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;first_name&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;last_name&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;43624&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;158220&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Tokuyasu&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Pesch&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;div id=&#34;mariadb-server-info&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;MariaDB Server Info&lt;/h3&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;SELECT @@version_comment AS `Version`, 
+  @@version_compile_machine AS `Version Compile Machine`, 
+  @@innodb_version AS `InnoDB Version`, 
+  @@version_compile_os AS `Version Compile OS`;&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;knitsql-table&#34;&gt;
+&lt;table&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:mariadb-version&#34;&gt;Table 4: &lt;/span&gt;MariaDB Server Info&lt;/caption&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;Version&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Version Compile Machine&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;InnoDB Version&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Version Compile OS&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;mariadb.org binary distribution&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;x86_64&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;5.7.20&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;debian-linux-gnu&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
     </item>
     
   </channel>

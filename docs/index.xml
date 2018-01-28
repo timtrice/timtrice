@@ -1,33 +1,1015 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tim Trice</title>
+    <title>Tim Trice on Tim Trice</title>
     <link>/</link>
-    <description>Recent content on Tim Trice</description>
+    <description>Recent content in Tim Trice on Tim Trice</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 06 Sep 2017 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
-    
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Wed, 20 Apr 2016 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Hurricane Harvey Post Storm Report</title>
-      <link>/2017-09-06-hurricane-harvey-report/</link>
+      <link>/post/hurricane-harvey-report/</link>
       <pubDate>Wed, 06 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017-09-06-hurricane-harvey-report/</guid>
-      <description>Hurricane Harvey Barometric Pressure Wind Rain Tornadoes  Code Libraries Data  Previous Versions Session Info   On August 26, 2017, Hurricane Harvey made landfall along the central Texas gulf coast as a category four hurricane. The storm weakened but remained stationary in southeast Texas spawing dozens of tornadoes and dropping over 30 inches of rain in many locations with isolated amounts of over 50 inches.
-Harvey was the first major hurricane to strike the Texas coast since Hurricane Rita in 2005; the first category four hurricane to make landfall since Hurricane Bret in 1999.</description>
+      <guid>/post/hurricane-harvey-report/</guid>
+      <description>&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#hurricane-harvey&#34;&gt;Hurricane Harvey&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#barometric-pressure&#34;&gt;Barometric Pressure&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#wind&#34;&gt;Wind&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#rain&#34;&gt;Rain&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#tornadoes&#34;&gt;Tornadoes&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#code&#34;&gt;Code&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#libraries&#34;&gt;Libraries&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#data&#34;&gt;Data&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#previous-versions&#34;&gt;Previous Versions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#session-info&#34;&gt;Session Info&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;p&gt;On August 26, 2017, Hurricane Harvey made landfall along the central Texas gulf coast as a category four hurricane. The storm weakened but remained stationary in southeast Texas spawing dozens of tornadoes and dropping over 30 inches of rain in many locations with isolated amounts of over 50 inches.&lt;/p&gt;
+&lt;p&gt;Harvey was the first major hurricane to strike the Texas coast since Hurricane Rita in 2005; the first category four hurricane to make landfall since Hurricane Bret in 1999.&lt;/p&gt;
+&lt;p&gt;In early September, National Weather Service (NWS) offices in Brownsville, Corpus Christi, San Antonio, and Houston, Texas, and Lake Charles, Louisiana released preliminary data reports on Hurricane Harvey. The following data has been extracted from those reports.&lt;/p&gt;
+&lt;div id=&#34;hurricane-harvey&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Hurricane Harvey&lt;/h2&gt;
+&lt;p&gt;Advisories were initiated on Potential Tropical Cyclone Nine on the morning of August 17. Shortly thereafter, the cyclone was upgraded to a tropical storm but would not see additional strengthening as it moved into the eastern Caribbean Sea.&lt;/p&gt;
+&lt;p&gt;By the evening of August 19, Harvey had degenerated from a cyclone to a tropical wave (no closed center of circulation) and the National Hurricane Center discontinued issuing advisories on the system.&lt;/p&gt;
+&lt;p&gt;The full track of Hurricane Harvey is shown in &lt;a href=&#34;#fig:plot-al092017&#34;&gt;Figure 1&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:plot-al092017&#34;&gt;&lt;/span&gt;
+&lt;img src=&#34;./post/2017-09-06-harvey-post-storm-report_files/figure-html/plot-al092017-1.png&#34; alt=&#34;Hurricane Harvey had two life cycles as a tropical cyclone; the first in the western Atlantic and eastern Caribbean, and the second in the Gulf of Mexico.&#34; width=&#34;672&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+Figure 1: Hurricane Harvey had two life cycles as a tropical cyclone; the first in the western Atlantic and eastern Caribbean, and the second in the Gulf of Mexico.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;By midday August 23, the remnants of Harvey had regenerated back into a tropical depression while in the southern Gulf of Mexico. The NHC began reissuing advisories on the system.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;#fig:plot-al092017-gulf&#34;&gt;Figure 2&lt;/a&gt; shows the track of Hurricane Harvey after regeneration in the Gulf of Mexico. Once the cyclone redeveloped, it quickly began strengthening as it moved north and north-northwest towards the central Texas coastline. &lt;a href=&#34;#fig:plot-al092017-pres&#34;&gt;Figure 3&lt;/a&gt; and &lt;a href=&#34;#fig:plot-al092017-wind&#34;&gt;Figure 5&lt;/a&gt; show how the pressure and wind of Harvey changed rapidly as the storm intensified.&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:plot-al092017-gulf&#34;&gt;&lt;/span&gt;
+&lt;img src=&#34;./post/2017-09-06-harvey-post-storm-report_files/figure-html/plot-al092017-gulf-1.png&#34; alt=&#34;Hurricane Harvey track in the Gulf of Mexico where the system intensified quickly into a category four hurricane.&#34; width=&#34;672&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+Figure 2: Hurricane Harvey track in the Gulf of Mexico where the system intensified quickly into a category four hurricane.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;barometric-pressure&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Barometric Pressure&lt;/h3&gt;
+&lt;p&gt;Barometric pressure is the lowest atmospheric pressure either estimated or recorded in the center of a tropical cyclone. Generally speaking, the lower the barometric pressure, the stronger the cyclone.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;#fig:plot-al092017-pres&#34;&gt;Figure 3&lt;/a&gt; shows the barometric pressure observations over 6-hour intervals during the life cycle of the cyclone. The gap from August 21 to August 23 is due to the system temporarily losing cyclone characteristics in the Caribbean Sea.&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:plot-al092017-pres&#34;&gt;&lt;/span&gt;
+&lt;img src=&#34;./post/2017-09-06-harvey-post-storm-report_files/figure-html/plot-al092017-pres-1.png&#34; alt=&#34;Hurricane Harvey central barometric pressure observations during the life cycle of the tropical cyclone.&#34; width=&#34;672&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+Figure 3: Hurricane Harvey central barometric pressure observations during the life cycle of the tropical cyclone.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a href=&#34;#fig:plot-pres&#34;&gt;Figure 4&lt;/a&gt; shows the lowest pressure observations as reported by the respective local NWS offices. As expected, the lowest values were recorded just north of Corpus Christi, Texas near the Rockport area where some locations reported pressure in the 940’s (mb). &lt;a href=&#34;#tbl:tbl-pres&#34;&gt;Table 1&lt;/a&gt; shows the five lowest pressure observations recorded.&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:plot-pres&#34;&gt;&lt;/span&gt;
+&lt;img src=&#34;./post/2017-09-06-harvey-post-storm-report_files/figure-html/plot-pres-1.png&#34; alt=&#34;Rockport, Texas recorded the lowest pressure observations. Many observations are incomplete due to weather stations losing power or equipment during the storm.&#34; width=&#34;672&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+Figure 4: Rockport, Texas recorded the lowest pressure observations. Many observations are incomplete due to weather stations losing power or equipment during the storm.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;The minimum pressure observed was 941.8mb at RCPT in Rockport, TX. Official landfall occurred at 06:00 UTC on the morning of August 26, 2017; 2 1/2 hours after the RCPT observation. This is approximately the same reported minimum central pressure listed by the National Hurricane Center (NHC) in &lt;a href=&#34;http://www.nhc.noaa.gov/archive/2017/al09/al092017.public_a.023.shtml?&#34;&gt;Public Advisory 23A&lt;/a&gt; which suggests pressure values may have been lower as the storm made passed over the station.&lt;/p&gt;
+&lt;table&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:tbl-pres&#34;&gt;Table 1: &lt;/span&gt;Five lowest pressure observations (mb).&lt;/caption&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;ID&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Station&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Lat&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Lon&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Pres&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;PresDT&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;PresRmks&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;RCPT2&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;ROCKPORT&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;28.02&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-97.05&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;941.8&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-08-26 03:36:00&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;I&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;CPNT2&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;COPANO BAY&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;28.11&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-97.02&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;944.0&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-08-26 04:00:00&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;I&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;RTAT2&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;PORT ARANSAS&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;27.84&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-97.07&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;959.3&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-08-26 02:24:00&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;NA&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PTAT2&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;PORT ARANSAS CMAN&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;27.82&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-97.05&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;961.7&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-08-26 02:00:00&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;NA&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;ANPT2&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;PORT ARANSAS SENTINEL&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;27.83&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-97.04&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;964.0&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-08-26 02:02:00&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;I&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;The “I” in &lt;code&gt;PresRmks&lt;/code&gt; denotes the observation is incomplete.&lt;/p&gt;
+&lt;p&gt;Many stations lost equipment during the height of the storm, leading to many incomplete data observations (at least 70).&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;wind&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Wind&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;#fig:plot-al092017-wind&#34;&gt;Figure 5&lt;/a&gt; shows the quick increase in wind during Harvey’s track over the Gulf of Mexico. It strengthened from a tropical depression to a category four hurricane in 60 hours; not record-breaking but quite impressive nonetheless.&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:plot-al092017-wind&#34;&gt;&lt;/span&gt;
+&lt;img src=&#34;./post/2017-09-06-harvey-post-storm-report_files/figure-html/plot-al092017-wind-1.png&#34; alt=&#34;Harvey strengthened from a tropical depression to category four hurricane in just over two days once in the Gulf of Mexico.&#34; width=&#34;672&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+Figure 5: Harvey strengthened from a tropical depression to category four hurricane in just over two days once in the Gulf of Mexico.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a href=&#34;#fig:plot-slp-df-wind&#34;&gt;Figure 6&lt;/a&gt; shows the plot of all maximum wind values during Hurricane Harvey. As with barometric pressure, the highest wind values were recorded where Harvey made landfall but drop significantly at nearby locations.&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:plot-slp-df-wind&#34;&gt;&lt;/span&gt;
+&lt;img src=&#34;./post/2017-09-06-harvey-post-storm-report_files/figure-html/plot-slp-df-wind-1.png&#34; alt=&#34;Maximum sustained wind observations as reported by weather stations during Hurricane Harvey.&#34; width=&#34;672&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+Figure 6: Maximum sustained wind observations as reported by weather stations during Hurricane Harvey.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;The highest wind value was recorded at ANPT2 several hours prior to the center of the hurricane moving ashore. NWS CRP (Corpus Christi) reports,&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ANPT2 SENTINEL STOPPED REPORTING AND MAY NOT HAVE RECORDED MAXIMUM EVENT VALUES&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;table&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:tbl-wind&#34;&gt;Table 2: &lt;/span&gt;Five highest wind observations (kts).&lt;/caption&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;ID&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Station&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Lat&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Lon&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Wind&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;WindDT&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;ANPT2&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;PORT ARANSAS SENTINEL&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;27.83&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-97.04&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;96&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-08-26 01:42:00&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;NSFDOW&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;28.08&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-97.04&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;90&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;NA&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;CPNT2&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;COPANO BAY&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;28.11&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-97.02&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;89&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-08-26 03:06:00&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;FCMP&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;28.08&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-97.05&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;88&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;NA&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;PTAT2&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;PORT ARANSAS CMAN&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;27.82&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-97.05&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;83&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-08-26 02:20:00&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;In addition to ANPT2, RCPT2 (Rockport), MAXT2, RTAT2, MIST2 and MIRT2 all failed prior to the peak of the hurricane. XWLD failed when the pier housing the sensor was swept away.&lt;/p&gt;
+&lt;table&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:tbl-wind-select&#34;&gt;Table 3: &lt;/span&gt;Select Wind observations.&lt;/caption&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;ID&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Station&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Lat&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Lon&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Wind&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;WindDir&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;WindDT&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;WindRmks&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;ANPT2&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;PORT ARANSAS SENTINEL&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;27.83&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-97.04&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;96&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;264&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-08-26 01:42:00&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;I&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;MAXT2&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;COPANO EAST&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;28.13&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-97.03&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;73&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;20&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-08-26 02:00:00&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;I&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;RCPT2&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;ROCKPORT&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;28.02&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-97.05&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;59&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;17&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-08-26 01:54:00&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;I&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;MIST2&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;ARANSAS SHIP CHANNEL&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;27.83&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-97.05&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;57&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;20&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-08-25 22:00:00&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;I&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;RTAT2&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;PORT ARANSAS&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;27.84&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-97.07&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;50&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;354&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-08-25 22:42:00&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;I&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;XWLD&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;WEATHERFLOW WILDCAT PORTLAND&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;27.86&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-97.32&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;48&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;298&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-08-26 03:55:00&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;I&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;MIRT2&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;MATAGORDA ISLAND RAWS&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;28.12&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-96.80&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;44&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;59&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-08-25 23:12:00&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;I&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;div id=&#34;rain&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Rain&lt;/h3&gt;
+&lt;p&gt;The story of Hurricane Harvey will always center around the significant flooding that took place as the hurricane weakened and stalled in southeast Texas. Harvey dropped record rainfall amounts across broad areas of southeast Texas turning highways into rivers and neighborhoods into lakes.&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:plot-rain&#34;&gt;&lt;/span&gt;
+&lt;img src=&#34;./post/2017-09-06-harvey-post-storm-report_files/figure-html/plot-rain-1.png&#34; alt=&#34;Several locations across southeast Texas recorded over 30&amp;quot; of rain with many isolated amounts of 40-50 inches.&#34; width=&#34;672&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+Figure 7: Several locations across southeast Texas recorded over 30&amp;quot; of rain with many isolated amounts of 40-50 inches.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;Though the news focus of the flooding was centered in the Houston area (Harris County), the largest rainfall amounts were recorded in Chambers, Brazoria, Liberty and Jefferson counties.&lt;/p&gt;
+&lt;table&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:tbl-rain&#34;&gt;Table 4: &lt;/span&gt;Top 5 Rainfall Amounts&lt;/caption&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;Location&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;County&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Station&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Lat&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Lon&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Rain&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;FRIENDSWOOD&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;GALVESTON&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;29.50&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-95.20&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;56.00&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;3 ENE SANTA FE&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;GALVESTON&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;29.39&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-95.05&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;54.77&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;2 W FRIENDSWOOD&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;GALVESTON&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;29.51&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-95.22&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;54.00&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;3 S LEAGUE CITY&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;GALVESTON&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;29.43&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-95.11&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;52.87&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;2 NW WEBSTER&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;HARRIS&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;29.55&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-95.14&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;52.30&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;The text reports contain a Section D for Inland Flooding. Unfortunately at this time only the San Antonion/Austin NWS office have provided more info; generally river flooding and low water crossings.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;tornadoes&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Tornadoes&lt;/h3&gt;
+&lt;p&gt;There are 24 tornado observations for Hurricane Harvey. However, some observations may be for the same tornado. For example, there are two observations for a tornado in Fort Bend county with the same &lt;code&gt;Lat&lt;/code&gt;, &lt;code&gt;Lat&lt;/code&gt; and &lt;code&gt;Date&lt;/code&gt; value; only &lt;code&gt;Details&lt;/code&gt; is different.&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:plot-tors&#34;&gt;&lt;/span&gt;
+&lt;img src=&#34;./post/2017-09-06-harvey-post-storm-report_files/figure-html/plot-tors-1.png&#34; alt=&#34;All tornadoes generated from Hurricane Harvey were relatively weak, as is typical of tropical cyclones.&#34; width=&#34;672&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+Figure 8: All tornadoes generated from Hurricane Harvey were relatively weak, as is typical of tropical cyclones.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;a href=&#34;#tbl:tbl-tors&#34;&gt;Table 5&lt;/a&gt; shows all tornado observations during the event from each of the NWS offices. &lt;a href=&#34;#tab:efs&#34;&gt;Table Six&lt;/a&gt; identifies wind range values for &lt;code&gt;Scale&lt;/code&gt;.&lt;/p&gt;
+&lt;table&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:tbl-tors&#34;&gt;Table 5: &lt;/span&gt;Tornado Remarks, Hurricane Harvey&lt;/caption&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;Location&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;County&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Lat&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Lon&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Date&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Scale&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Details&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;4 NNE SEADRIFT&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;CALHOUN&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;28.43&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-96.67&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-08-25 21:14:00&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;EF0&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;FACEBOOK PHOTOS AND VIDEO SHOWED A BRIEF TORNADO TOUCHED DOWN ON GATES ROAD NEAR SEADRIFT. A SHED AND CARPORT WERE DESTROYED AND A FEW TREES WERE BLOWN DOWN. RATED EF0.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;9 NE GALVESTON&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;GALVESTON&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;29.22&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-94.89&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-08-25 19:23:00&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;EF0&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;PUBLIC REPORTS A FUNNEL CLOUD AND A METAL FENCE DAMAGED NEAR FERRY RD IN GALVESTON&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;2 W LIVERPOOL&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;BRAZORIA&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;29.29&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;-95.31&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2017-08-26 04:28:00&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;EF0&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;AN EF-0 TORNADO TOOK DOWN 4 POWER POLES ON HIGHWAY 35 ALONG WITH SEVERAL TREES NEAR THE GULF COAST SPEEDWAY. THE TORNADO THEN TRAVELED ACROSS GENERALLY OPEN FIELD BEFORE DAMAGING SOME BARNS AND OUTBUILDINGS AS WELL AS TREES ON COUNTY ROAD 511.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;table&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:efs&#34;&gt;Table 6: &lt;/span&gt;Enhanced Fujita Scale&lt;/caption&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;Scale&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;WindMPH&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;WindKTS&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;EF0&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;65-85&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;55-74&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;EF1&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;86-110&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;75-96&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;EF2&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;111-135&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;97-117&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;EF3&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;136-165&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;118-143&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;EF4&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;166-200&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;144-174&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;EF5&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&amp;gt;200&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&amp;gt;175&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;code&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Code&lt;/h2&gt;
+&lt;p&gt;These text products are listed under the header ACUS74. They can be found on the &lt;a href=&#34;ftp://tgftp.nws.noaa.gov/data/raw/ac/&#34;&gt;National Weather Service FTP server&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The following reports were obtained:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;ftp://tgftp.nws.noaa.gov/data/raw/ac/acus74.kbro.psh.bro.txt&#34;&gt;Brownsville, TX (BRO)&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;ftp://tgftp.nws.noaa.gov/data/raw/ac/acus74.kcrp.psh.crp.txt&#34;&gt;Corpus Christi, TX (CRP)&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;ftp://tgftp.nws.noaa.gov/data/raw/ac/acus74.kewx.psh.ewx.txt&#34;&gt;Austin/San Antonion, TX (EWX)&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;ftp://tgftp.nws.noaa.gov/data/raw/ac/acus74.khgx.psh.hgx.txt&#34;&gt;Houston, TX (HGX)&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;ftp://tgftp.nws.noaa.gov/data/raw/ac/acus74.klch.psh.lch.txt&#34;&gt;Lake Charles, LA (LCH)&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;ftp://tgftp.nws.noaa.gov/data/raw/ac/acus74.klix.psh.lix.txt&#34;&gt;New Orleans, LA (LIX)&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The links above point to the latest ACUS74 product issued by the respective NWS office. Therefore, it is possible that by the time you have read this article, the content of the text product has changed. Because of this, the rds data files have been saved to this website’s &lt;a href=&#34;https://github.com/timtrice/web/tree/harvey-report/content/post/data&#34;&gt;GitHub repository&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;All times reported are in UTC. Pressure observations are in millibars. Wind and Gust observations are in knots.&lt;/p&gt;
+&lt;div id=&#34;libraries&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Libraries&lt;/h3&gt;
+&lt;p&gt;The following libraries were used in this article:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(dplyr)
+library(ggplot2)
+library(ggrepel)
+library(knitr)
+library(lubridate)
+library(pander)
+library(purrr)
+library(rrricanes)
+library(rrricanesdata)
+library(stringr)
+library(tibble)
+library(tidyr)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;data&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Data&lt;/h3&gt;
+&lt;p&gt;To load the data, I just put the links into a named list. I originally had considered keeping the data separate by NWS office but determined this was not necessary.&lt;/p&gt;
+&lt;p&gt;The code below looks for the data file mentioned earlier and, if it exists, loads the &lt;code&gt;txt&lt;/code&gt; vector. Otherwise, each of the text products will be collected for parsing.&lt;/p&gt;
+&lt;p&gt;Each text product contains several sections:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Section A. Lowest Sea Level Pressure/Maximum Sustained Winds and Peak Gusts&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Non-METAR Observations&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Section B. Marine Observations&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Section C. Storm Total Rainfall&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Section D. Inland Flooding (not collected)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Section E. Maximum Storm Surge and Storm Tide (not collected)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Section F. Tornadoes&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Section G. Storm Impacts by County (not collected)&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Not all sections will contain data. For this article, all data collected was that which contained a latitude and longitude position.&lt;/p&gt;
+&lt;p&gt;Each section contains a data header:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;A. LOWEST SEA LEVEL PRESSURE/MAXIMUM SUSTAINED WINDS AND PEAK GUSTS
+---------------------------------------------------------------------
+METAR OBSERVATIONS...
+NOTE: ANEMOMETER HEIGHT IS 10 METERS AND WIND AVERAGING IS 2 MINUTES
+---------------------------------------------------------------------
+LOCATION  ID    MIN    DATE/     MAX      DATE/     PEAK    DATE/
+LAT  LON        PRES   TIME      SUST     TIME      GUST    TIME
+DEG DECIMAL     (MB)   (UTC)     (KT)     (UTC)     (KT)    (UTC)
+---------------------------------------------------------------------&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;B. MARINE OBSERVATIONS...
+NOTE: ANEMOMETER HEIGHT IN METERS AND WIND AVERAGING PERIOD IN
+MINUTES INDICATED UNDER MAXIMUM SUSTAINED WIND IF KNOWN
+---------------------------------------------------------------------
+LOCATION  ID    MIN    DATE/     MAX      DATE/     PEAK    DATE/
+LAT  LON        PRES   TIME      SUST     TIME      GUST    TIME
+DEG DECIMAL     (MB)   (UTC)     (KT)     (UTC)     (KT)    (UTC)
+---------------------------------------------------------------------&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Additionally, a subsection of A exists:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;NON-METAR OBSERVATIONS... 
+NOTE: ANEMOMETER HEIGHT IN METERS AND WIND AVERAGING PERIOD IN
+MINUTES INDICATED UNDER MAXIMUM SUSTAINED WIND IF KNOWN
+---------------------------------------------------------------------
+LOCATION  ID    MIN    DATE/     MAX      DATE/     PEAK    DATE/
+LAT  LON        PRES   TIME      SUST     TIME      GUST    TIME
+DEG DECIMAL     (MB)   (UTC)     (KT)     (UTC)     (KT)    (UTC)
+---------------------------------------------------------------------&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This subsection was added in as part of Sectoin A but is indistinguishable in the parsed dataset.&lt;/p&gt;
+&lt;p&gt;Observation examples are inluded in the relevant section below.&lt;/p&gt;
+&lt;p&gt;Numerous observations contain remarks (identified in the dataset by &lt;code&gt;ends_with(&amp;quot;Rmks&amp;quot;)&lt;/code&gt;). Every section contains a Remarks footer; however, this may not be populated and, therefore, not every observation with a &lt;code&gt;.Rmks&lt;/code&gt; variable would have additional Remarks listed in the text product. The additional Remarks were not collected.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;.Rmks&lt;/code&gt; legend is identified in the footer of each text product as:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;“I” - Incomplete data&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;“E” - Estimated&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;All &lt;code&gt;.Rmks&lt;/code&gt; variables in the datasets are either &lt;em&gt;NA&lt;/em&gt; or “I”.&lt;/p&gt;
+&lt;p&gt;Sections A and B may also contain additional anenometer height and wind-averaging period variables on a third line. This data was not collected but could easily have been; I did not feel it was relevant to this article.&lt;/p&gt;
+&lt;div id=&#34;sea-level-pressure-and-marine-observations&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;Sea Level Pressure and Marine Observations&lt;/h4&gt;
+&lt;p&gt;A typical observation in Section A or B will look like the following:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;RCPT2-ROCKPORT                                                      
+28.02  -97.05   941.8 26/0336 I 017/059  26/0154 I 016/094 26/0148 I&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;There are 15 variables in the observation above (in order as they appear, with the example text):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;ID&lt;/code&gt; (RCPT2)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;Station&lt;/code&gt; (ROCKPORT)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;Lat&lt;/code&gt; (28.02)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;Lon&lt;/code&gt; (-97.05)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;Pres&lt;/code&gt; (941.8) [barometric pressure, mb]&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;PresDT&lt;/code&gt; (26/0336) [date/time of &lt;code&gt;Pres&lt;/code&gt; observation, UTC]&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;PresRmks&lt;/code&gt; (I) [incomplete pressure observation]&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;Wind&lt;/code&gt;, &lt;code&gt;WindDir&lt;/code&gt; (017/059) [wind speed, kts, and wind direction]&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;WindDT&lt;/code&gt; (26/0154) [date/time of preceeding wind observation, UTC]&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;WindRmks&lt;/code&gt; (I) [incomplete wind observation]&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;Gust&lt;/code&gt;, &lt;code&gt;GustDir&lt;/code&gt; (016/094) [maximum gust, kts, and direction]&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;GustDT&lt;/code&gt; (26/0148) [date/time of preceeding gust observation, UTC]&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;GustRmks&lt;/code&gt; (I) [incomplete gust observation]&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Every observation has an empty line before and after which can be used as a delimiter to spilt observations.&lt;/p&gt;
+&lt;p&gt;But, first, I need to extract the relevant sections. To do this, I loop through the text products (&lt;code&gt;txt&lt;/code&gt;) and identify where Section A and Section C begins. With these numerical indices, I can extract both sections, assigning the subset to &lt;code&gt;slp_raw&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;slp_raw &amp;lt;- c(map(txt, ~.[grep(&amp;quot;^A\\.&amp;quot;, .):grep(&amp;quot;^C\\.&amp;quot;, .)])) %&amp;gt;% 
+  flatten_chr()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;From there, I identify all vector elements that begin with a latitude and longitude field. I counted these values (&lt;code&gt;slp_n&lt;/code&gt;) so that I know exactly how long my final results will be (and to check progress as I move along, making sure I haven’t inadvertently removed anything).&lt;/p&gt;
+&lt;p&gt;Once I know where the observation indices are (&lt;code&gt;slp_obs_n&lt;/code&gt;) I can find the station identification by calculating &lt;code&gt;slp_obs_n - 1&lt;/code&gt;; this gives me &lt;code&gt;slp_stations_n&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;slp_obs_ptn &amp;lt;- &amp;quot;^\\d\\d\\.\\d\\d\\s*-*\\d\\d\\d*\\.\\d\\d.+&amp;quot;
+slp_n &amp;lt;- sum(str_count(slp_raw, slp_obs_ptn))
+slp_obs_n &amp;lt;- str_which(slp_raw, slp_obs_ptn)
+slp_stations_n &amp;lt;- slp_obs_n - 1&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Before merging the two vectors, I found some station values were not all the same length; I felt this would be beneficial with the regex. I create &lt;code&gt;slp_stations&lt;/code&gt;, first trimming all values then finding the max length value. With the max length, I rounded up to the nearest ten and padded all all values to the right.&lt;/p&gt;
+&lt;p&gt;The last bit of manipulation involved replacing the first “-”, if available, with a “\t” character. This also helped me make it easier to split variables &lt;code&gt;ID&lt;/code&gt; and &lt;code&gt;Station&lt;/code&gt; since &lt;code&gt;Station&lt;/code&gt; would contain additional “-” characters.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;slp_stations &amp;lt;- slp_raw[slp_stations_n] %&amp;gt;% 
+  str_trim() %&amp;gt;% 
+  str_pad(width = round(max(nchar(.)), digits = -1), side = &amp;quot;right&amp;quot;) %&amp;gt;% 
+  # Replace first &amp;quot;-&amp;quot; with &amp;quot;\t&amp;quot; to help split ID and Station
+  str_replace(&amp;quot;\\s*-\\s*&amp;quot;, &amp;quot;\t&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note that the code above split &lt;code&gt;ID&lt;/code&gt; “TXCV-4” which would later be corrected.&lt;/p&gt;
+&lt;p&gt;Finally, I subset &lt;code&gt;slp_obs&lt;/code&gt; and then with &lt;code&gt;slp_stations&lt;/code&gt; make vector &lt;code&gt;slp&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;slp_obs &amp;lt;- slp_raw[slp_obs_n]
+slp &amp;lt;- str_c(slp_stations, slp_obs)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Following is a look at the head of &lt;code&gt;slp&lt;/code&gt;:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;head(slp, n = 5L)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;KBRO\tBROWNSVILLE INTL ARPT                        25.91 -97.42   1002.9 25/1153   300/022  25/1853   290/032 25/1753  &amp;quot;
+## [2] &amp;quot;KHRL\tHARLINGEN VALLEY INTL ARPT                   26.22 -97.66   1003.6 25/1252   310/023  25/1841   310/033 25/1852  &amp;quot;
+## [3] &amp;quot;KPIL\tPORT ISABEL ARPT                             26.15 -97.23   1001.9 25/1253   300/024  25/1553   300/034 25/1453  &amp;quot;
+## [4] &amp;quot;KBKS\tBROOKS COUNTY ARPT                           26.20 -98.12   1002.2 26/0215   290/019  26/0215   290/027 26/0215  &amp;quot;
+## [5] &amp;quot;KTXS33                                            26.13 -97.17   1003.0 25/2240   999/999  99/9999   999/999 99/9999  &amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;id-id-station-station-opt&#34; class=&#34;section level5&#34;&gt;
+&lt;h5&gt;ID [&lt;code&gt;ID&lt;/code&gt;], Station [&lt;code&gt;Station&lt;/code&gt;] (opt)&lt;/h5&gt;
+&lt;p&gt;Matching &lt;code&gt;ID&lt;/code&gt; and &lt;code&gt;Station&lt;/code&gt; is easier after switching the first “-” with a “\t”. &lt;code&gt;Station&lt;/code&gt; is optional. To find the end of the string I simply looked for the latitude pattern that would follow.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;                  # ID-Station
+                  &amp;quot;(\\w+)\t*(?&amp;lt;=\t{0,1})(.+)(?=\\s+\\d{2}\\.\\d{2})&amp;quot;,&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In some cases, for &lt;code&gt;Station&lt;/code&gt;, old data seems to exist from previous instances of this product; particularly, “XDUL”. Notice the text that seems to reference “Tropical Storm Cindy”:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;slp[grep(&amp;quot;^XDUL&amp;quot;, slp)]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;XDUL\tWEATHERFLOW DULAC                            29.34 -90.73   1001.2 08/0054   090/018 07/1754    090/031 07/1754  &amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;For that record, I left as-is.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;latitude-lat&#34; class=&#34;section level5&#34;&gt;
+&lt;h5&gt;Latitude [&lt;code&gt;Lat&lt;/code&gt;]&lt;/h5&gt;
+&lt;p&gt;Latitude was also very easy to extract. The pattern just looks for four digits with a decimal splitting in half.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;                  # Lat
+                  &amp;quot;\\s+(\\d{2}\\.\\d{2})&amp;quot;,&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;longitude-lon&#34; class=&#34;section level5&#34;&gt;
+&lt;h5&gt;Longitude [&lt;code&gt;Lon&lt;/code&gt;]&lt;/h5&gt;
+&lt;p&gt;Extracting Longitude was a little bit more of a challenge. Most observations have a negative longitude value (since occurring in the northwestern hemisphere). This was accurately reflected in the text products; mostly. Some values did not contain the leading “-” such as &lt;code&gt;Station&lt;/code&gt; “KEFD”:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;slp[grep(&amp;quot;^KEFD&amp;quot;, slp)][2]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;KEFD                                              29.62 95.17    1003.4 29/1650   160/027  26/1750   360/036 29/2150  &amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Additionally, “KXPY” just had a bad value:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;slp[grep(&amp;quot;^KXPY&amp;quot;, slp)]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## character(0)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;“KXPY” would later be corrected manually using my best guess.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Correct the Lon for KXPY. Google Maps puts Port Fourchon at 
+# 29.1055584,-90.2119496. Current values are 29.12, -903202.00. 
+# I&amp;#39;ll modify -903202.00 to -90.32
+slp_df$Lon[slp_df$ID == &amp;quot;KXPY&amp;quot; &amp;amp; slp_df$Lon == -903202.00] &amp;lt;- -90.32&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To accomodate the possibilities, I had to be loose with the number of digits expected in addition to making the negative sign optional.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;                  # Lon
+                  &amp;quot;\\s+-*(\\d{2,6}\\.\\d{2})&amp;quot;,&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;minimum-pressure-pres-opt&#34; class=&#34;section level5&#34;&gt;
+&lt;h5&gt;Minimum Pressure [&lt;code&gt;Pres&lt;/code&gt;] &lt;em&gt;opt&lt;/em&gt;&lt;/h5&gt;
+&lt;p&gt;Expected pressure values would have a format like &lt;code&gt;\\d{3,4}\\.\\d{2}&lt;/code&gt;. This would not be the case as there were many “0.0” values such as “FADT2”:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;slp[grep(&amp;quot;^FADT2&amp;quot;, slp)]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## character(0)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Some observations even had values of “9999.0” which clearly were invalid (expected ranges were roughly between 940 and 1010). These would later be cleaned up.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;                  # Pres
+                  &amp;quot;\\s+(\\d{1,4}\\.\\d{1})*&amp;quot;,&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;datetime-of-pressure-observation-presdt-opt&#34; class=&#34;section level5&#34;&gt;
+&lt;h5&gt;Date/time of pressure observation [&lt;code&gt;PresDT&lt;/code&gt;] &lt;em&gt;opt&lt;/em&gt;&lt;/h5&gt;
+&lt;p&gt;&lt;code&gt;PresDT&lt;/code&gt; was initially split to extract the date value first (&lt;code&gt;PresDTd&lt;/code&gt;) followed by the “%h%m” value (&lt;code&gt;PresDThm&lt;/code&gt;). The general format, “\d{2}/\d{4}” would not work primarily because many observations contained the text “MM” or “N/A”.&lt;/p&gt;
+&lt;p&gt;Additionally, some observations also held the value “99/9999”. This would be accepted by the default format but would fail when converting the values to a valid date/time variable. These would later be cleaned.&lt;/p&gt;
+&lt;p&gt;With this, I ended up being very generous with the regex.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;                  # PresDTd, PresDThm
+                  &amp;quot;\\s+(\\w{1,3}|N)*/*(\\w{1,4})*&amp;quot;,&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;pressure-remarks-presrmks-opt&#34; class=&#34;section level5&#34;&gt;
+&lt;h5&gt;Pressure remarks [&lt;code&gt;PresRmks&lt;/code&gt;] &lt;em&gt;opt&lt;/em&gt;&lt;/h5&gt;
+&lt;p&gt;As noted previously, some &lt;code&gt;Pres&lt;/code&gt; variables may be incomplete for unknown reasons. These values would be indicated with the letter “I” as noted in the “RCPT2” example earlier.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;                  # PresRmks
+                  &amp;quot;\\s+(I)*&amp;quot;,&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;maximum-sustained-wind-direction-winddir-maximum-sustained-winds-opt-wind&#34; class=&#34;section level5&#34;&gt;
+&lt;h5&gt;Maximum sustained wind direction [&lt;code&gt;WindDir&lt;/code&gt;], Maximum sustained winds (opt) [&lt;code&gt;Wind&lt;/code&gt;]&lt;/h5&gt;
+&lt;p&gt;Variables &lt;code&gt;WindDir&lt;/code&gt; and &lt;code&gt;Wind&lt;/code&gt; were split with a “/” character. However, again, not all values were numeric as expected, such as “LOPL1”:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;slp[grep(&amp;quot;^LOPL1&amp;quot;, slp)]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;LOPL1\tLA OFFSHORE OIL PORT                        28.88  -90.03   998.1 07/2216   080/029 07/2011    090/037 07/1811  &amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Invalid values such as “999” would later be marked as &lt;code&gt;NA&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;                  # WindDir, Wind
+                  &amp;quot;\\s+(\\w{3})/(\\d{3})&amp;quot;, &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The remaining variables followed generally the same rules as similar variables above (i.e., &lt;code&gt;GustDir&lt;/code&gt; for &lt;code&gt;WindDir&lt;/code&gt;, &lt;code&gt;GustDT&lt;/code&gt; for &lt;code&gt;WindDT&lt;/code&gt;, etc.). The final &lt;code&gt;str_match&lt;/code&gt; call brought all expected observations in order.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Begin extraction. Move to dataframe and rename variables.
+slp_df &amp;lt;- str_match(slp, 
+          sprintf(&amp;quot;^%s%s%s%s%s%s%s%s%s%s%s%s$&amp;quot;, 
+                  # ID-Station
+                  &amp;quot;(\\w+)\t*(?&amp;lt;=\t{0,1})(.+)(?=\\s+\\d{2}\\.\\d{2})&amp;quot;,
+                  # Lat
+                  &amp;quot;\\s+(\\d{2}\\.\\d{2})&amp;quot;,
+                  # Lon
+                  &amp;quot;\\s+-*(\\d{2,6}\\.\\d{2})&amp;quot;,
+                  # Pres
+                  &amp;quot;\\s+(\\d{1,4}\\.\\d{1})*&amp;quot;,
+                  # PresDTd, PresDThm
+                  &amp;quot;\\s+(\\w{1,3}|N)*/*(\\w{1,4})*&amp;quot;,
+                  # PresRmks
+                  &amp;quot;\\s+(I)*&amp;quot;,
+                  # WindDir, Wind
+                  &amp;quot;\\s+(\\w{3})/(\\d{3})&amp;quot;, 
+                  # Wind DTd, WindDThm
+                  &amp;quot;\\s+(\\d{2,3})*/*(\\d{3,4})*&amp;quot;, 
+                  # WindRmks
+                  &amp;quot;\\s+(I)*&amp;quot;, 
+                  # GustDir, Gust
+                  &amp;quot;\\s+(\\w{3})*/*(\\d{3})*&amp;quot;, 
+                  # GustDTd, GustDThm
+                  &amp;quot;\\s+(\\d{2,3})*/*(\\d{3,4})*&amp;quot;, 
+                  # GustRmks
+                  &amp;quot;\\s+(I)*&amp;quot;)) %&amp;gt;% 
+  as_data_frame()&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;rainfall&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;Rainfall&lt;/h4&gt;
+&lt;p&gt;Section C of the text products listed recorded rainfall observations across the Texas and Louisiana area. These observations were similar in format to those of pressure:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;COLETO CREEK                 GOLIAD              CKDT2         9.42 I
+28.73  -97.17&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The following fields were extracted:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;Location&lt;/code&gt; (“COLETO CREEK”)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;Count&lt;/code&gt; (“GOLIAD”)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;Station&lt;/code&gt; (“CKDT2”) &lt;em&gt;opt&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;Rain&lt;/code&gt; (“9.42”)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;RainRmks&lt;/code&gt; (“I”)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;Lat&lt;/code&gt; (“28.73”)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;Lon&lt;/code&gt; (“-97.17”)&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Extracting these observations followed the same premise for that of &lt;code&gt;slp&lt;/code&gt;; identifying the latitude lines then subsetting those indices and the previous indices and combining into a vector.&lt;/p&gt;
+&lt;p&gt;Unlike &lt;code&gt;slp&lt;/code&gt;, there were no surprises in cleaning this data. The regex used:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;rain_df &amp;lt;- str_match(rain,
+                 pattern = sprintf(&amp;quot;^%s%s\\s+%s\\s+%s\\s*%s\\s+%s\\s+%s$&amp;quot;, 
+                                   &amp;quot;(.{29})&amp;quot;, 
+                                   &amp;quot;(.{19})&amp;quot;, 
+                                   &amp;quot;(.{0,12})&amp;quot;,
+                                   &amp;quot;(\\d{1,2}\\.\\d{2})&amp;quot;, 
+                                   &amp;quot;(I)*&amp;quot;, 
+                                   &amp;quot;(\\d{1,2}\\.\\d{2})&amp;quot;,
+                                   &amp;quot;-*(\\d{2,3}\\.\\d{2})&amp;quot;)) %&amp;gt;% 
+  as_data_frame() %&amp;gt;% 
+  rename(txt = V1, Location = V2, County = V3, Station = V4, Rain = V5, 
+         RainRmks = V6, Lat = V7, Lon = V8) %&amp;gt;% 
+  mutate_at(.vars = c(&amp;quot;Rain&amp;quot;, &amp;quot;Lat&amp;quot;, &amp;quot;Lon&amp;quot;), .funs = as.numeric) %&amp;gt;% 
+  mutate(Lon = if_else(Lon &amp;gt; 0, Lon * -1, Lon)) %&amp;gt;% &lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;tornadoes-1&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;Tornadoes&lt;/h4&gt;
+&lt;p&gt;Section F lists reported tornadoes for each region of responsibility. Some NWS offices reported no tornado observations. Others, such as Houston, reported at least a dozen.&lt;/p&gt;
+&lt;p&gt;An example observation is as follows:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;4 NNE SEADRIFT               CALHOUN          25/2114          EF0   
+28.43  -96.67
+
+FACEBOOK PHOTOS AND VIDEO SHOWED A BRIEF TORNADO TOUCHED DOWN ON
+GATES ROAD NEAR SEADRIFT. A SHED AND CARPORT WERE DESTROYED AND A
+FEW TREES WERE BLOWN DOWN. RATED EF0. &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Each observation, again, was preceeded and proceeded by an empty line.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;Location&lt;/code&gt; (“4 NNE SEADRIFT”)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;County&lt;/code&gt; (“CALHOUN”)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;Date&lt;/code&gt; (“25/2114”)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;Scale&lt;/code&gt; (“EFO”)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;Lat&lt;/code&gt; (“28.43”)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;Lon&lt;/code&gt; (“-96.67”)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;Details&lt;/code&gt; (“FACEBOOK PHOTOS…”)&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Extracting the first two lines used the same technique as previous. However, extracting the &lt;code&gt;Details&lt;/code&gt; required a little creativity since many spread over several lines.&lt;/p&gt;
+&lt;p&gt;To do this, I took the values of &lt;code&gt;tor_y_n&lt;/code&gt; which marked the indices of the latitude/longitude positions. Then, I created vector &lt;code&gt;tor_z_n&lt;/code&gt; to identify all “^\s+” elements in the original vector, &lt;code&gt;tor_raw&lt;/code&gt;. With this, I was able to identify the first “^\s+” index following the latitude/longitude line, &lt;code&gt;t_a&lt;/code&gt; and then take the very next index, &lt;code&gt;t_b&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Apologies for the non-descriptive names; I was lacking ingenuity.&lt;/p&gt;
+&lt;p&gt;With &lt;code&gt;t_a&lt;/code&gt; and &lt;code&gt;t_b&lt;/code&gt;, I used &lt;code&gt;map2&lt;/code&gt; through &lt;code&gt;tor_raw&lt;/code&gt; to extract each subset. From that point there was some cleaning to bring the lines together as needed. If you have any better (even if slower, but more creative), I would love to hear them! I may have tried to get too creative with this task.&lt;/p&gt;
+&lt;p&gt;The regex was very similar to the &lt;code&gt;rain&lt;/code&gt; regex as most items were evenly delimited.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;previous-versions&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Previous Versions&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/timtrice/web/blob/15f552b061a7200647cc2e7bfd8174fec631d816/content/post/2017-09-06-hurricane-harvey-post-storm-report-houston.Rmd&#34;&gt;1&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;session-info&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Session Info&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pander::pander(sessionInfo())&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;R version 3.4.1 (2017-06-30)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;**&lt;a href=&#34;Platform:**&#34; class=&#34;uri&#34;&gt;Platform:**&lt;/a&gt; x86_64-pc-linux-gnu (64-bit)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;locale:&lt;/strong&gt; &lt;em&gt;LC_CTYPE=en_US.UTF-8&lt;/em&gt;, &lt;em&gt;LC_NUMERIC=C&lt;/em&gt;, &lt;em&gt;LC_TIME=en_US.UTF-8&lt;/em&gt;, &lt;em&gt;LC_COLLATE=en_US.UTF-8&lt;/em&gt;, &lt;em&gt;LC_MONETARY=en_US.UTF-8&lt;/em&gt;, &lt;em&gt;LC_MESSAGES=C&lt;/em&gt;, &lt;em&gt;LC_PAPER=en_US.UTF-8&lt;/em&gt;, &lt;em&gt;LC_NAME=C&lt;/em&gt;, &lt;em&gt;LC_ADDRESS=C&lt;/em&gt;, &lt;em&gt;LC_TELEPHONE=C&lt;/em&gt;, &lt;em&gt;LC_MEASUREMENT=en_US.UTF-8&lt;/em&gt; and &lt;em&gt;LC_IDENTIFICATION=C&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;attached base packages:&lt;/strong&gt; &lt;em&gt;methods&lt;/em&gt;, &lt;em&gt;stats&lt;/em&gt;, &lt;em&gt;graphics&lt;/em&gt;, &lt;em&gt;grDevices&lt;/em&gt;, &lt;em&gt;utils&lt;/em&gt;, &lt;em&gt;datasets&lt;/em&gt; and &lt;em&gt;base&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;other attached packages:&lt;/strong&gt; &lt;em&gt;bindrcpp(v.0.2)&lt;/em&gt;, &lt;em&gt;tidyr(v.0.7.1)&lt;/em&gt;, &lt;em&gt;tibble(v.1.3.4)&lt;/em&gt;, &lt;em&gt;stringr(v.1.2.0)&lt;/em&gt;, &lt;em&gt;rrricanesdata(v.0.0.1.5)&lt;/em&gt;, &lt;em&gt;rrricanes(v.0.2.0-6)&lt;/em&gt;, &lt;em&gt;purrr(v.0.2.3)&lt;/em&gt;, &lt;em&gt;pander(v.0.6.1)&lt;/em&gt;, &lt;em&gt;lubridate(v.1.6.0)&lt;/em&gt;, &lt;em&gt;knitr(v.1.17)&lt;/em&gt;, &lt;em&gt;ggrepel(v.0.7.0)&lt;/em&gt;, &lt;em&gt;ggplot2(v.2.2.1)&lt;/em&gt; and &lt;em&gt;dplyr(v.0.7.4)&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;loaded via a namespace (and not attached):&lt;/strong&gt; &lt;em&gt;Rcpp(v.0.12.13)&lt;/em&gt;, &lt;em&gt;highr(v.0.6)&lt;/em&gt;, &lt;em&gt;RColorBrewer(v.1.1-2)&lt;/em&gt;, &lt;em&gt;compiler(v.3.4.1)&lt;/em&gt;, &lt;em&gt;plyr(v.1.8.4)&lt;/em&gt;, &lt;em&gt;bindr(v.0.1)&lt;/em&gt;, &lt;em&gt;tools(v.3.4.1)&lt;/em&gt;, &lt;em&gt;digest(v.0.6.12)&lt;/em&gt;, &lt;em&gt;lattice(v.0.20-35)&lt;/em&gt;, &lt;em&gt;evaluate(v.0.10.1)&lt;/em&gt;, &lt;em&gt;gtable(v.0.2.0)&lt;/em&gt;, &lt;em&gt;pkgconfig(v.2.0.1)&lt;/em&gt;, &lt;em&gt;rlang(v.0.1.2)&lt;/em&gt;, &lt;em&gt;yaml(v.2.1.14)&lt;/em&gt;, &lt;em&gt;blogdown(v.0.1)&lt;/em&gt;, &lt;em&gt;rnaturalearthdata(v.0.1.0)&lt;/em&gt;, &lt;em&gt;rprojroot(v.1.2)&lt;/em&gt;, &lt;em&gt;grid(v.3.4.1)&lt;/em&gt;, &lt;em&gt;glue(v.1.1.1)&lt;/em&gt;, &lt;em&gt;R6(v.2.2.2)&lt;/em&gt;, &lt;em&gt;rmarkdown(v.1.6)&lt;/em&gt;, &lt;em&gt;bookdown(v.0.5)&lt;/em&gt;, &lt;em&gt;sp(v.1.2-5)&lt;/em&gt;, &lt;em&gt;magrittr(v.1.5)&lt;/em&gt;, &lt;em&gt;backports(v.1.1.1)&lt;/em&gt;, &lt;em&gt;scales(v.0.5.0)&lt;/em&gt;, &lt;em&gt;htmltools(v.0.3.6)&lt;/em&gt;, &lt;em&gt;assertthat(v.0.2.0)&lt;/em&gt;, &lt;em&gt;colorspace(v.1.3-2)&lt;/em&gt;, &lt;em&gt;labeling(v.0.3)&lt;/em&gt;, &lt;em&gt;stringi(v.1.1.5)&lt;/em&gt;, &lt;em&gt;lazyeval(v.0.2.0)&lt;/em&gt; and &lt;em&gt;munsell(v.0.4.3)&lt;/em&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;warnings()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## NULL&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+</description>
     </item>
     
     <item>
       <title>RStudio in Docker</title>
-      <link>/2017-05-17-rstudio-in-docker/</link>
+      <link>/post/rstudio-in-docker/</link>
       <pubDate>Wed, 17 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017-05-17-rstudio-in-docker/</guid>
-      <description>Brief Overview of Docker RStudio Server Pull rocker/rstudio from Docker Hub Pull rocker from GitHub Run r-base Build RStudio Image Run RStudio with R 3.4.0 Build and Run Rstudio with R 3.3.1 Commit Your Changes Conclusion   Docker is a container platform that helps replicate setups for testing and production from any system. It gives you the ability to set up a mini-operating system to meet specific criteria.</description>
+      <guid>/post/rstudio-in-docker/</guid>
+      <description>&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#brief-overview-of-docker&#34;&gt;Brief Overview of Docker&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#rstudio-server&#34;&gt;RStudio Server&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#pull-rockerrstudio-from-docker-hub&#34;&gt;Pull rocker/rstudio from Docker Hub&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#pull-rocker-from-github&#34;&gt;Pull rocker from GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#run-r-base&#34;&gt;Run r-base&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#build-rstudio-image&#34;&gt;Build RStudio Image&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#run-rstudio-with-r-3.4.0&#34;&gt;Run RStudio with R 3.4.0&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#build-and-run-rstudio-with-r-3.3.1&#34;&gt;Build and Run Rstudio with R 3.3.1&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#commit-your-changes&#34;&gt;Commit Your Changes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#conclusion&#34;&gt;Conclusion&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://docs.docker.com/get-started/&#34;&gt;Docker&lt;/a&gt; is a container platform that helps replicate setups for testing and production from any system. It gives you the ability to set up a mini-operating system to meet specific criteria.&lt;/p&gt;
+&lt;p&gt;When developing some of my applications I wanted the ability to test these applications on different versions of R. But setting this up on Linux proved to be more difficult than on my Windows machine. Docker makes it significantly easier.&lt;/p&gt;
+&lt;p&gt;You do not need a Linux system to run Docker; Windows and macOS are supported as well as several other platforms. Once you get into the docker application, the language is the same.&lt;/p&gt;
+&lt;div id=&#34;brief-overview-of-docker&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Brief Overview of Docker&lt;/h2&gt;
+&lt;p&gt;Docker sets up images with rules defined from a Dockerfile. The Dockerfile is basically a set of instructions to install and set up a mini-operating system.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;FROM ubuntu:latest
+
+# Update apt-get sources
+RUN apt-get update &amp;amp;&amp;amp; apt-get install -y r-base&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;When you build the image off of that Dockerfile you get the latest version of Ubuntu and the latest version of R for that setup.&lt;/p&gt;
+&lt;p&gt;(As of this writing, that latest version of R is still 3.2.3.)&lt;/p&gt;
+&lt;p&gt;Once the image is built you run it from within a container. Inside that container you can execute R and begin working with R from within the terminal.&lt;/p&gt;
+&lt;p&gt;You can use it for things other than R as well: python, MySQL, MongoDB, etc. If you can access it from a terminal or online through a port, you can use Docker.&lt;/p&gt;
+&lt;p&gt;When you exit a container, your data still remains. If you’re familiar with Amazon Web Service’s EC2’s, think of a container as an instance. The image is how you initially set up the instance. But once you run that instance, anything you do from within stays inside that instance. Only when you’ve deleted the instance do you have to start over again from your original image.&lt;/p&gt;
+&lt;p&gt;So, this gives significant flexibility to play around from a base setup and manipulate different settings for different purposes.&lt;/p&gt;
+&lt;p&gt;If you have not yet &lt;a href=&#34;https://docs.docker.com/engine/installation/&#34;&gt;installed Docker&lt;/a&gt;, do so now if you want to play along.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;rstudio-server&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;RStudio Server&lt;/h2&gt;
+&lt;p&gt;I wanted a RStudio server setup with R 3.2.3. Unfortunately, I didn’t have much luck setting this up myself. Online searches didn’t seem to help me make progress.&lt;/p&gt;
+&lt;p&gt;We need RStudio Server to access RStudio through a web browser. You cannot install RStudio and run it as an application as if you were still on your local computer.&lt;/p&gt;
+&lt;p&gt;Thankfully, a group of people have made most of this much easier.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/rocker-org/rocker&#34;&gt;rocker&lt;/a&gt; is a set of images for various R and RStudio setups. When we run the base image we get the latest version of RStudio (1.0.143) and R (3.4.0). However, we can also use R versions 3.3.1 to 3.3.3. Originally I wanted 3.2.3 but 3.3.1 will be fine.&lt;/p&gt;
+&lt;p&gt;From this point forward I will be referring to two different repositories: Docker Hub and GitHub. Docker Hub is where we obtain base images that future images will be built from. You can also use Docker Hub just as you would GitHub to serve as a repository to your own images.&lt;/p&gt;
+&lt;p&gt;GitHub is where the code is stored to build the images.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;pull-rockerrstudio-from-docker-hub&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Pull rocker/rstudio from Docker Hub&lt;/h2&gt;
+&lt;p&gt;Before we can start building images we have to load the rocker/rstudio &lt;a href=&#34;https://hub.docker.com/r/rocker/rstudio/&#34;&gt;Docker Hub repository&lt;/a&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo docker pull rocker/rstudio&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This process may take several minutes as it downloads various images that are needed to continue. When done we can view the images downloaded with&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo docker images&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You should see output similar to this:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+rocker/rstudio      latest              7a807646f0be        13 days ago         993 MB&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;pull-rocker-from-github&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Pull rocker from GitHub&lt;/h2&gt;
+&lt;p&gt;Clone the &lt;a href=&#34;https://github.com/rocker-org/rocker&#34;&gt;rocker&lt;/a&gt; GitHub repo into your projects directory. When finished, fire up a terminal or console and go to the cloned directory.&lt;/p&gt;
+&lt;p&gt;Your directory contents should be similar to this:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;total 76
+drwxrwxr-x  9 timtrice timtrice  4096 May 17 07:08 .
+drwxrwxr-x 49 timtrice timtrice  4096 May 17 07:08 ..
+-rw-rw-r--  1 timtrice timtrice   206 May 17 07:08 circle.yml
+-rw-rw-r--  1 timtrice timtrice  1209 May 17 07:08 CONTRIBUTING.md
+drwxrwxr-x  2 timtrice timtrice  4096 May 17 07:08 doc
+drwxrwxr-x  5 timtrice timtrice  4096 May 17 08:07 .git
+drwxrwxr-x  2 timtrice timtrice  4096 May 17 07:08 icon
+-rw-rw-r--  1 timtrice timtrice 18092 May 17 07:08 LICENSE
+drwxrwxr-x  7 timtrice timtrice  4096 May 17 07:08 r-apt
+drwxrwxr-x  2 timtrice timtrice  4096 May 17 07:08 r-base
+drwxrwxr-x  2 timtrice timtrice  4096 May 17 07:08 r-devel
+-rw-rw-r--  1 timtrice timtrice  4916 May 17 07:08 README.md
+drwxrwxr-x  8 timtrice timtrice  4096 May 17 08:50 rstudio
+-rw-rw-r--  1 timtrice timtrice   549 May 17 07:08 .travis.yml&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;run-r-base&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Run r-base&lt;/h2&gt;
+&lt;p&gt;Once we’ve downloaded the images we can start off right away with R from within the terminal. Run the following code:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo docker run --rm -ti rocker/r-base&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;-rm&lt;/code&gt; flag tells docker to clean up the container after we exit. In other words, it will no longer exist once we exit the container.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;-ti&lt;/code&gt; flag tells STDIN to stay open so that we can work within R.&lt;/p&gt;
+&lt;p&gt;When you run the code for the first time Docker will download associated images needed to run r-base. You will then be greeted with the standard R terminal:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;R version 3.4.0 (2017-04-21) -- &amp;quot;You Stupid Darkness&amp;quot;
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+...&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Exit R with the &lt;code&gt;q()&lt;/code&gt; function. Once back at the command line when you run the docker images command again you’ll see the new image, &lt;code&gt;rocker/r-base&lt;/code&gt; has been added.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo docker images&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+rocker/r-base       latest              6999257c71ed        8 days ago          636 MB
+rocker/rstudio      latest              7a807646f0be        13 days ago         993 MB
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;build-rstudio-image&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Build RStudio Image&lt;/h2&gt;
+&lt;p&gt;To run RStudio we need to build another image based off the RStudio Docker file. This file is located in the rstudio directory.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo docker build -t rstudio-3.4.0 rstudio&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;-t&lt;/code&gt; flag gives the image a tag name. I use &lt;code&gt;rstudio-3.4.0&lt;/code&gt; so I know this image is for RStudio using R version 3.4.0.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;rstudio&lt;/code&gt; at the end is the directory location of the Dockerfile.&lt;/p&gt;
+&lt;p&gt;Building this image only takes a second or two.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo docker images&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;REPOSITORY              TAG                 IMAGE ID            CREATED             SIZE
+rocker/r-base           latest              6999257c71ed        8 days ago          636 MB
+rocker/rstudio-stable   latest              7a807646f0be        13 days ago         993 MB
+rocker/rstudio          latest              7a807646f0be        13 days ago         993 MB
+rstudio-3.4.0           latest              7a807646f0be        13 days ago         993 MB&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;run-rstudio-with-r-3.4.0&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Run RStudio with R 3.4.0&lt;/h2&gt;
+&lt;p&gt;Now we’re set up for fun. We want to start up our &lt;code&gt;rstudio-3.4.0&lt;/code&gt; image to a container. From our command line, run&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo docker run -d -p 8787:8787 rstudio-3.4.0&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In our terminal, a hash will appear and then our command line will pop back up. This is fine.&lt;/p&gt;
+&lt;p&gt;In a web browser, point to localhost:8787. You will log into RStudio with the same username and password: &lt;strong&gt;rstudio&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;You will then be greeted by that big beautiful 4-panel suite.&lt;/p&gt;
+&lt;p&gt;At this point of time you are in a container built off the rstudio-3.4.0 image. Again, in AWS terms, think of this as a running instance. Whatever you do in this container remains so as long as the container is active.&lt;/p&gt;
+&lt;p&gt;If you only want to practice but want the container removed when you’re finished, use the &lt;code&gt;-rm&lt;/code&gt; flag in your run call.&lt;/p&gt;
+&lt;p&gt;When you’re finished working, you can’t just log out of RStudio and expect the container to shut down. It’s still running in the background. We can view this when we view our list of containers:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo docker ps -a&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                              NAMES
+77010cde66fa        rstudio-3.4.0       &amp;quot;/init&amp;quot;             13 minutes ago      Up 13 minutes       3838/tcp, 0.0.0.0:8787-&amp;gt;8787/tcp   angry_volhard&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Notice the &lt;code&gt;STATUS&lt;/code&gt; says “Up 13 minutes”.&lt;/p&gt;
+&lt;p&gt;To shut down the container, we use the &lt;code&gt;stop&lt;/code&gt; command along with &lt;code&gt;CONTAINER_ID&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo docker stop 77010cde66fa&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The container will close down.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo docker ps -a&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                     PORTS               NAMES
+77010cde66fa        rstudio-3.4.0       &amp;quot;/init&amp;quot;             14 minutes ago      Exited (0) 3 seconds ago                       angry_volhard&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;When we want to start it back up again use the &lt;code&gt;start&lt;/code&gt; command:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo docker start 77010cde66fa&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                              NAMES
+77010cde66fa        rstudio-3.4.0       &amp;quot;/init&amp;quot;             22 minutes ago      Up 9 seconds        3838/tcp, 0.0.0.0:8787-&amp;gt;8787/tcp   angry_volhard&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Go back to localhost:8787, log into RStudio and you will find it just as you left it.&lt;/p&gt;
+&lt;p&gt;If you wish to delete the container, use the &lt;code&gt;rm&lt;/code&gt; command:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo docker rm 77010cde66fa&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The container will be removed and you can start over again from your image.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;build-and-run-rstudio-with-r-3.3.1&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Build and Run Rstudio with R 3.3.1&lt;/h2&gt;
+&lt;p&gt;Now, for my purposes I don’t want R 3.4.0; I already have that on my local machine. I want to test some packages with R 3.3.1.&lt;/p&gt;
+&lt;p&gt;What we need to do in this case is build a new image using R 3.3.1. RStudio will keep the same version.&lt;/p&gt;
+&lt;p&gt;In our rocker directory there is a path to a Dockerfile for R 3.3.1 in rstudio/3.3.1. I modify the tag of the image to &lt;code&gt;rstudio-3.3.1&lt;/code&gt; and change the directory path to build the new image.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo docker build -t rstudio-3.3.1 rstudio/3.3.1&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Again, we will need to download and pull some new images doing this for the first time. This should only take a couple of minutes tops.&lt;/p&gt;
+&lt;p&gt;When finished, we can run a new container:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo docker run -d -p 8787:8787 rstudio-3.3.1&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;When we log into localhost:8787 we see we are using R 3.3.1:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+R version 3.3.1 (2016-06-21) -- &amp;quot;Bug in Your Hair&amp;quot;
+Copyright (C) 2016 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+...&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;commit-your-changes&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Commit Your Changes&lt;/h2&gt;
+&lt;p&gt;When you get a container set up just the way you like it, you can commit that container to a new image.&lt;/p&gt;
+&lt;p&gt;First, make sure you have stopped the container (or &lt;code&gt;exit&lt;/code&gt; if running from a terminal).&lt;/p&gt;
+&lt;p&gt;You need a &lt;a href=&#34;https://cloud.docker.com&#34;&gt;Docker Hub&lt;/a&gt; account to use their online repository. The Free Plan gives you unlimited public repositories and one private repository.&lt;/p&gt;
+&lt;p&gt;Log in from your terminal or console,&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo docker login&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Get the CONTAINER ID you want to commit&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo docker ps -a&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;7826d7faad16        rstudio-3.3.1       &amp;quot;/init&amp;quot;             20 minutes ago      Exited (0) 4 seconds ago                        kickass_swartz
+77010cde66fa        rstudio-3.4.0       &amp;quot;/init&amp;quot;             50 minutes ago      Exited (0) 23 minutes ago                       angry_volhard&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In my case, I want to save 7826d7faad16.&lt;/p&gt;
+&lt;p&gt;Then commit the changes:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo docker commit -m &amp;quot;Verified setup&amp;quot; -a &amp;quot;Tim Trice&amp;quot; 7826d7faad16 &amp;lt;REPOSITORY&amp;gt;/&amp;lt;NEW IMAGE NAME&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Use your login name as REPOSITORY and whatever value you want for NEW IMAGE NAME.&lt;/p&gt;
+&lt;p&gt;Notice also the slash in between, just like referencing a GitHub repo. So my command would be&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo docker commit -m &amp;quot;Verified setup&amp;quot; -a &amp;quot;Tim Trice&amp;quot; 7826d7faad16 timtrice/rstudio-3.3.1&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;When we list the images we see our new image has been saved:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo docker images&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;REPOSITORY               TAG                 IMAGE ID            CREATED             SIZE
+timtrice/rstudio-3.3.1   latest              cf53aaad96d7        2 minutes ago       991 MB
+...&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then push the image to your Docker Hub repository.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# Replace timtrice/rstudio-3.3.1 with your image REPOSITORY
+sudo docker push timtrice/rstudio-3.3.1&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now, in &lt;a href=&#34;https://cloud.docker.com&#34;&gt;Docker Hub&lt;/a&gt; you will find your image has been added. Click on the link to the image and add in some extra details so you document well what your image is and what it does.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;conclusion&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;Setting up Docker with R and RStudio is great for testing and debugging. The last thing I would recommend is that, before you start cloning your repos or starting new projects, install and use &lt;a href=&#34;http://rstudio.github.io/packrat/&#34;&gt;Packrat&lt;/a&gt;. Packrat isolates your packages to your project effectively making them invisible to other projects. This adds an additional layer to customize your setup.&lt;/p&gt;
+&lt;p&gt;You could, of course, keep this information in different containers. For example, say you save a container using dplyr version 0.5.0 and another container using a developer version. But I don’t think this is feasible. Packrat will document all of your package changes and you can easily reset to an earlier snapshot if things break. So set up Packrat for your projects before you start going crazy with the &lt;code&gt;install.package&lt;/code&gt; function.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Deep Learning</title>
+      <link>/project/deep-learning/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/project/deep-learning/</guid>
+      <description>&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus. Vestibulum sit amet erat at nulla eleifend gravida.&lt;/p&gt;
+
+&lt;p&gt;Nullam vel molestie justo. Curabitur vitae efficitur leo. In hac habitasse platea dictumst. Sed pulvinar mauris dui, eget varius purus congue ac. Nulla euismod, lorem vel elementum dapibus, nunc justo porta mi, sed tempus est est vel tellus. Nam et enim eleifend, laoreet sem sit amet, elementum sem. Morbi ut leo congue, maximus velit ut, finibus arcu. In et libero cursus, rutrum risus non, molestie leo. Nullam congue quam et volutpat malesuada. Sed risus tortor, pulvinar et dictum nec, sodales non mi. Phasellus lacinia commodo laoreet. Nam mollis, erat in feugiat consectetur, purus eros egestas tellus, in auctor urna odio at nibh. Mauris imperdiet nisi ac magna convallis, at rhoncus ligula cursus.&lt;/p&gt;
+
+&lt;p&gt;Cras aliquam rhoncus ipsum, in hendrerit nunc mattis vitae. Duis vitae efficitur metus, ac tempus leo. Cras nec fringilla lacus. Quisque sit amet risus at ipsum pharetra commodo. Sed aliquam mauris at consequat eleifend. Praesent porta, augue sed viverra bibendum, neque ante euismod ante, in vehicula justo lorem ac eros. Suspendisse augue libero, venenatis eget tincidunt ut, malesuada at lorem. Donec vitae bibendum arcu. Aenean maximus nulla non pretium iaculis. Quisque imperdiet, nulla in pulvinar aliquet, velit quam ultrices quam, sit amet fringilla leo sem vel nunc. Mauris in lacinia lacus.&lt;/p&gt;
+
+&lt;p&gt;Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.&lt;/p&gt;
+
+&lt;p&gt;Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>External Project</title>
+      <link>/project/example-external-project/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/project/example-external-project/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>A Person Re-Identification System For Mobile Devices</title>
+      <link>/publication/person-re-identification/</link>
+      <pubDate>Tue, 01 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/person-re-identification/</guid>
+      <description>&lt;p&gt;More detail can easily be written here using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Mobile visual clothing search</title>
+      <link>/publication/clothing-search/</link>
+      <pubDate>Mon, 01 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/clothing-search/</guid>
+      <description>&lt;p&gt;More detail can easily be written here using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
+</description>
     </item>
     
     <item>
@@ -36,8 +1018,22 @@ Harvey was the first major hurricane to strike the Texas coast since Hurricane R
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/about/</guid>
-      <description>I have a huge love of data and finding better solutions to known and unknown issues. For example, when I learned a team was manually entering information into their software, I developed a way to make it point-and-click saving several hours worth of work per week.
-I began programming shortly after my son&amp;rsquo;s birth in 2003. I had already been somewhat exposed to MS Access when a company I worked for needed me to help clean their vendor data registers.</description>
+      <description>&lt;p&gt;I have a huge love of data and finding better solutions to known and unknown issues. For example, when I learned a team was manually entering information into their software, I developed a way to make it point-and-click saving several hours worth of work per week.&lt;/p&gt;
+
+&lt;p&gt;I began programming shortly after my son&amp;rsquo;s birth in 2003. I had already been somewhat exposed to MS Access when a company I worked for needed me to help clean their vendor data registers. This helped expose me to some VBA and SQL.&lt;/p&gt;
+
+&lt;p&gt;Shortly after I bought my first laptop and began writing a hurricane tracking program. After all, what better way to learn to do something than to apply it to what you know.&lt;/p&gt;
+
+&lt;p&gt;I quickly learned pattern matching, creating maps and scheduling scripts to keep the program up-to-date. At one point, Personal Hurricane Center was one of the top-selling hurricane tracking programs available.&lt;/p&gt;
+
+&lt;p&gt;Soon after I moved it online and made the information free. This meant learning PHP and MySQL and, at some point, the CakePHP framework. I developed other projects as well; web scrapers, custom WordPress-like blogs, HTML, etc. But, none of it kept my interest. Eventually I let all of the projects disappear or handed them off to whoever wanted them.&lt;/p&gt;
+
+&lt;p&gt;In 2009 I began trading the stock market finding cheap stocks looking for some returns and moving onto the next. It took a couple of years before someone had pointed me in the direction of not only analyzing the results; i.e., the data, but using what I knew to examine potentially new opportunities.&lt;/p&gt;
+
+&lt;p&gt;In essence, data science.&lt;/p&gt;
+
+&lt;p&gt;I am not a data scientist; I do not have a college degree. I do consider myself a data enthusiast. I have seen firsthand how data clarity can lead to better decisions in all aspects of life. And my hope with this site is to help others who are on a similar path.&lt;/p&gt;
+</description>
     </item>
     
     <item>
@@ -46,7 +1042,618 @@ I began programming shortly after my son&amp;rsquo;s birth in 2003. I had alread
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/r/beer-reviews-analysis/</guid>
-      <description>Data Download The Variables Data Cleaning Exploratory R Session Info   library(corrplot) library(dplyr) ## ## Attaching package: &amp;#39;dplyr&amp;#39; ## The following objects are masked from &amp;#39;package:stats&amp;#39;: ## ## filter, lag ## The following objects are masked from &amp;#39;package:base&amp;#39;: ## ## intersect, setdiff, setequal, union library(ggplot2) library(Hmisc) ## Loading required package: lattice ## Loading required package: survival ## Loading required package: Formula ## ## Attaching package: &amp;#39;Hmisc&amp;#39; ## The following objects are masked from &amp;#39;package:dplyr&amp;#39;: ## ## combine, src, summarize ## The following objects are masked from &amp;#39;package:base&amp;#39;: ## ## format.</description>
+      <description>&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#data-download&#34;&gt;Data Download&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#the-variables&#34;&gt;The Variables&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#data-cleaning&#34;&gt;Data Cleaning&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#exploratory&#34;&gt;Exploratory&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#r-session-info&#34;&gt;R Session Info&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(corrplot)
+library(dplyr)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+## Attaching package: &amp;#39;dplyr&amp;#39;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## The following objects are masked from &amp;#39;package:stats&amp;#39;:
+## 
+##     filter, lag&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## The following objects are masked from &amp;#39;package:base&amp;#39;:
+## 
+##     intersect, setdiff, setequal, union&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(ggplot2)
+library(Hmisc)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Loading required package: lattice&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Loading required package: survival&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Loading required package: Formula&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+## Attaching package: &amp;#39;Hmisc&amp;#39;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## The following objects are masked from &amp;#39;package:dplyr&amp;#39;:
+## 
+##     combine, src, summarize&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## The following objects are masked from &amp;#39;package:base&amp;#39;:
+## 
+##     format.pval, round.POSIXt, trunc.POSIXt, units&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(purrr)
+library(rvest)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Loading required package: xml2&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+## Attaching package: &amp;#39;rvest&amp;#39;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## The following object is masked from &amp;#39;package:purrr&amp;#39;:
+## 
+##     pluck&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## The following object is masked from &amp;#39;package:Hmisc&amp;#39;:
+## 
+##     html&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(stringr)
+library(xml2)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.linkedin.com/pulse/how-hire-test-data-skills-one-size-fits-all-interview-tanya-cashorali/&#34;&gt;One-Size-Fits-All Interview Kit&lt;/a&gt;&lt;/p&gt;
+&lt;div id=&#34;data-download&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Data Download&lt;/h3&gt;
+&lt;p&gt;Data courtesy of &lt;a href=&#34;http://www.beeradvocate.com/&#34;&gt;Beer Advocate&lt;/a&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#&amp;#39; Path to download csv
+data_dir &amp;lt;- &amp;quot;~/Downloads&amp;quot;
+
+local_file &amp;lt;- sprintf(&amp;quot;%s/beer_reviews.csv&amp;quot;, data_dir)
+
+if (file.exists(local_file)) {
+  df &amp;lt;- readr::read_csv(local_file)
+  
+} else {
+
+  url &amp;lt;- &amp;quot;https://github.com/timtrice/datasets/blob/master/beer_reviews/beer_reviews.tar.gz?raw=true&amp;quot;
+  destdir &amp;lt;- tempdir()
+  utils::download.file(file.path(url), zip_file &amp;lt;- tempfile())
+  utils::untar(zip_file, exdir = destdir)
+  df &amp;lt;- readr::read_csv(sprintf(&amp;quot;%s/beer_reviews/beer_reviews.csv&amp;quot;, destdir))
+  
+  if (!dir.exists(data_dir)) 
+    dir.create(data_dir)
+  
+  readr::write_csv(df, file.path(local_file))
+
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Parsed with column specification:
+## cols(
+##   brewery_id = col_integer(),
+##   brewery_name = col_character(),
+##   review_time = col_integer(),
+##   review_overall = col_double(),
+##   review_aroma = col_double(),
+##   review_appearance = col_double(),
+##   review_profilename = col_character(),
+##   beer_style = col_character(),
+##   review_palate = col_double(),
+##   review_taste = col_double(),
+##   beer_name = col_character(),
+##   beer_abv = col_double(),
+##   beer_beerid = col_integer()
+## )&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;the-variables&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;The Variables&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;str(df)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Classes &amp;#39;tbl_df&amp;#39;, &amp;#39;tbl&amp;#39; and &amp;#39;data.frame&amp;#39;:    1586614 obs. of  13 variables:
+##  $ brewery_id        : int  10325 10325 10325 10325 1075 1075 1075 1075 1075 1075 ...
+##  $ brewery_name      : chr  &amp;quot;Vecchio Birraio&amp;quot; &amp;quot;Vecchio Birraio&amp;quot; &amp;quot;Vecchio Birraio&amp;quot; &amp;quot;Vecchio Birraio&amp;quot; ...
+##  $ review_time       : int  1234817823 1235915097 1235916604 1234725145 1293735206 1325524659 1318991115 1306276018 1290454503 1285632924 ...
+##  $ review_overall    : num  1.5 3 3 3 4 3 3.5 3 4 4.5 ...
+##  $ review_aroma      : num  2 2.5 2.5 3 4.5 3.5 3.5 2.5 3 3.5 ...
+##  $ review_appearance : num  2.5 3 3 3.5 4 3.5 3.5 3.5 3.5 5 ...
+##  $ review_profilename: chr  &amp;quot;stcules&amp;quot; &amp;quot;stcules&amp;quot; &amp;quot;stcules&amp;quot; &amp;quot;stcules&amp;quot; ...
+##  $ beer_style        : chr  &amp;quot;Hefeweizen&amp;quot; &amp;quot;English Strong Ale&amp;quot; &amp;quot;Foreign / Export Stout&amp;quot; &amp;quot;German Pilsener&amp;quot; ...
+##  $ review_palate     : num  1.5 3 3 2.5 4 3 4 2 3.5 4 ...
+##  $ review_taste      : num  1.5 3 3 3 4.5 3.5 4 3.5 4 4 ...
+##  $ beer_name         : chr  &amp;quot;Sausa Weizen&amp;quot; &amp;quot;Red Moon&amp;quot; &amp;quot;Black Horse Black Beer&amp;quot; &amp;quot;Sausa Pils&amp;quot; ...
+##  $ beer_abv          : num  5 6.2 6.5 5 7.7 4.7 4.7 4.7 4.7 4.7 ...
+##  $ beer_beerid       : int  47986 48213 48215 47969 64883 52159 52159 52159 52159 52159 ...
+##  - attr(*, &amp;quot;spec&amp;quot;)=List of 2
+##   ..$ cols   :List of 13
+##   .. ..$ brewery_id        : list()
+##   .. .. ..- attr(*, &amp;quot;class&amp;quot;)= chr  &amp;quot;collector_integer&amp;quot; &amp;quot;collector&amp;quot;
+##   .. ..$ brewery_name      : list()
+##   .. .. ..- attr(*, &amp;quot;class&amp;quot;)= chr  &amp;quot;collector_character&amp;quot; &amp;quot;collector&amp;quot;
+##   .. ..$ review_time       : list()
+##   .. .. ..- attr(*, &amp;quot;class&amp;quot;)= chr  &amp;quot;collector_integer&amp;quot; &amp;quot;collector&amp;quot;
+##   .. ..$ review_overall    : list()
+##   .. .. ..- attr(*, &amp;quot;class&amp;quot;)= chr  &amp;quot;collector_double&amp;quot; &amp;quot;collector&amp;quot;
+##   .. ..$ review_aroma      : list()
+##   .. .. ..- attr(*, &amp;quot;class&amp;quot;)= chr  &amp;quot;collector_double&amp;quot; &amp;quot;collector&amp;quot;
+##   .. ..$ review_appearance : list()
+##   .. .. ..- attr(*, &amp;quot;class&amp;quot;)= chr  &amp;quot;collector_double&amp;quot; &amp;quot;collector&amp;quot;
+##   .. ..$ review_profilename: list()
+##   .. .. ..- attr(*, &amp;quot;class&amp;quot;)= chr  &amp;quot;collector_character&amp;quot; &amp;quot;collector&amp;quot;
+##   .. ..$ beer_style        : list()
+##   .. .. ..- attr(*, &amp;quot;class&amp;quot;)= chr  &amp;quot;collector_character&amp;quot; &amp;quot;collector&amp;quot;
+##   .. ..$ review_palate     : list()
+##   .. .. ..- attr(*, &amp;quot;class&amp;quot;)= chr  &amp;quot;collector_double&amp;quot; &amp;quot;collector&amp;quot;
+##   .. ..$ review_taste      : list()
+##   .. .. ..- attr(*, &amp;quot;class&amp;quot;)= chr  &amp;quot;collector_double&amp;quot; &amp;quot;collector&amp;quot;
+##   .. ..$ beer_name         : list()
+##   .. .. ..- attr(*, &amp;quot;class&amp;quot;)= chr  &amp;quot;collector_character&amp;quot; &amp;quot;collector&amp;quot;
+##   .. ..$ beer_abv          : list()
+##   .. .. ..- attr(*, &amp;quot;class&amp;quot;)= chr  &amp;quot;collector_double&amp;quot; &amp;quot;collector&amp;quot;
+##   .. ..$ beer_beerid       : list()
+##   .. .. ..- attr(*, &amp;quot;class&amp;quot;)= chr  &amp;quot;collector_integer&amp;quot; &amp;quot;collector&amp;quot;
+##   ..$ default: list()
+##   .. ..- attr(*, &amp;quot;class&amp;quot;)= chr  &amp;quot;collector_guess&amp;quot; &amp;quot;collector&amp;quot;
+##   ..- attr(*, &amp;quot;class&amp;quot;)= chr &amp;quot;col_spec&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;brewery_id&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;brewery_id&lt;/h4&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;describe(df$brewery_id)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## df$brewery_id 
+##        n  missing distinct     Info     Mean      Gmd      .05      .10 
+##  1586614        0     5840        1     3130     4731       30       45 
+##      .25      .50      .75      .90      .95 
+##      143      429     2372    12516    16866 
+## 
+## lowest :     1     2     3     4     5, highest: 27945 27980 27984 28000 28003&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;continuous variable&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;There are no missing &lt;code&gt;brewer_id&lt;/code&gt; values.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;The mean is higher than 75% of the values so there is a heavy skew along the lower values for some reason. Question: &lt;em&gt;Why is this? Is this relevant?&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(df, aes(x = brewery_id)) + geom_histogram(bins = 50)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./R/beer-reviews-analysis_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;brewery_name&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;brewery_name&lt;/h4&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;describe(df$brewery_name)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## df$brewery_name 
+##        n  missing distinct 
+##  1586599       15     5742 
+## 
+## lowest : &amp;#39;t Hofbrouwerijke                 (512) Brewing Company             10 Barrel Brewing Co.             1516 Brewing Company              16 Mile Brewing Company          
+## highest: Zum Löwenbräu                     Zum Stiefel                       Zuma Brewing Company              Zweite Schweriner Schlossbrauerei Zywiec Breweries PLC (Heineken)&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;Categorical variables&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;My expectation was for the numbers &lt;code&gt;n&lt;/code&gt;, &lt;code&gt;missing&lt;/code&gt; and &lt;code&gt;distinct&lt;/code&gt; to match up with &lt;code&gt;brewery_id&lt;/code&gt;, but they don’t. While the &lt;code&gt;missing&lt;/code&gt; count is only slightly off (-15), the &lt;code&gt;distinct&lt;/code&gt; count is way off (-98).&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;unique(df$brewery_id[is.na(df$brewery_name)])&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 1193   27&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;There are only 2 missing unique &lt;code&gt;brewer_id&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The discrepancy suggests some brewery’s may have multiple names for the same id.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% 
+  group_by(brewery_id) %&amp;gt;% 
+  summarise(n = length(unique(brewery_name))) %&amp;gt;% 
+  filter(n &amp;gt; 1)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 0 x 2
+## # ... with 2 variables: brewery_id &amp;lt;int&amp;gt;, n &amp;lt;int&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;My instinct is wrong. I’ll flip it.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% 
+  group_by(brewery_name) %&amp;gt;% 
+  summarise(n = length(unique(brewery_id))) %&amp;gt;% 
+  filter(n &amp;gt; 1) %&amp;gt;% 
+  arrange(brewery_name)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 60 x 2
+##                           brewery_name     n
+##                                  &amp;lt;chr&amp;gt; &amp;lt;int&amp;gt;
+##  1                 Back Street Brewery     4
+##  2                Baja Brewing Company     2
+##  3          Bare Bones Grill &amp;amp; Brewery     2
+##  4    Big River Grille &amp;amp; Brewing Works     3
+##  5           BJ&amp;#39;s Restaurant &amp;amp; Brewery     4
+##  6         BJ&amp;#39;s Restaurant &amp;amp; Brewhouse     3
+##  7       BJ&amp;#39;s Restaurant And Brewhouse     2
+##  8 Brew Moon Restaurant &amp;amp; Microbrewery     2
+##  9                        C.B. &amp;amp; Potts     3
+## 10                Capitol City Brewing     3
+## # ... with 50 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Ok, so 60 &lt;code&gt;brewery_name&lt;/code&gt; have multiple &lt;code&gt;brewery_id&lt;/code&gt;. There are also spelling discrepancies, e.g., BJ’s Restaurant &amp;amp; Brewery, BJ’s Restaurant &amp;amp; Brewhouse, BJ’s Restaurant And Brewhouse. These discrepancies will need to be cleaned.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;review_time&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;review_time&lt;/h4&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;describe(df$review_time)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## df$review_time 
+##         n   missing  distinct      Info      Mean       Gmd       .05 
+##   1586614         0   1577960         1 1.224e+09  85515630 1.071e+09 
+##       .10       .25       .50       .75       .90       .95 
+## 1.107e+09 1.173e+09 1.239e+09 1.289e+09 1.311e+09 1.318e+09 
+## 
+## lowest :  840672001  884390401  884649601  885340801  885427201
+## highest: 1326274454 1326275049 1326276656 1326284970 1326285348&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(df, aes(x = review_time)) + geom_histogram(bins = 10000)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./R/beer-reviews-analysis_files/figure-html/unnamed-chunk-10-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;review_overall&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;review_overall&lt;/h4&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;describe(df$review_overall)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## df$review_overall 
+##        n  missing distinct     Info     Mean      Gmd      .05      .10 
+##  1586614        0       10    0.934    3.816   0.7584      2.5      3.0 
+##      .25      .50      .75      .90      .95 
+##      3.5      4.0      4.5      4.5      5.0 
+##                                                                          
+## Value         0.0    1.0    1.5    2.0    2.5    3.0    3.5    4.0    4.5
+## Frequency       7  10954  12975  38225  58523 165644 301817 582764 324385
+## Proportion  0.000  0.007  0.008  0.024  0.037  0.104  0.190  0.367  0.204
+##                  
+## Value         5.0
+## Frequency   91320
+## Proportion  0.058&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(df, aes(x = review_overall)) + geom_bar()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./R/beer-reviews-analysis_files/figure-html/unnamed-chunk-12-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Categorical&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;review_aroma&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;review_aroma&lt;/h4&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;describe(df$review_aroma)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## df$review_aroma 
+##        n  missing distinct     Info     Mean      Gmd 
+##  1586614        0        9    0.937    3.736    0.744 
+##                                                                          
+## Value         1.0    1.5    2.0    2.5    3.0    3.5    4.0    4.5    5.0
+## Frequency    6873  12524  42566  66359 200030 365312 557383 271450  64117
+## Proportion  0.004  0.008  0.027  0.042  0.126  0.230  0.351  0.171  0.040&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(df, aes(x = review_aroma)) + geom_bar()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./R/beer-reviews-analysis_files/figure-html/unnamed-chunk-14-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Categorical&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;review_appearance&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;review_appearance&lt;/h4&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;describe(df$review_appearance)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## df$review_appearance 
+##        n  missing distinct     Info     Mean      Gmd      .05      .10 
+##  1586614        0       10    0.908    3.842   0.6436      3.0      3.0 
+##      .25      .50      .75      .90      .95 
+##      3.5      4.0      4.0      4.5      4.5 
+##                                                                          
+## Value         0.0    1.0    1.5    2.0    2.5    3.0    3.5    4.0    4.5
+## Frequency       7   3323   6147  25414  39493 166009 318529 674186 288108
+## Proportion  0.000  0.002  0.004  0.016  0.025  0.105  0.201  0.425  0.182
+##                  
+## Value         5.0
+## Frequency   65398
+## Proportion  0.041&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(df, aes(x = review_appearance)) + geom_bar()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./R/beer-reviews-analysis_files/figure-html/unnamed-chunk-16-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Categorical&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;review_profilename&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;review_profilename&lt;/h4&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;describe(df$review_profilename)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## df$review_profilename 
+##        n  missing distinct 
+##  1586266      348    33387 
+## 
+## lowest : 0110x011    01Ryan10    02maxima    03SVTCobra  04101Brewer
+## highest: zythus      Zywiec06    zyzygy      zzajjber    Zzyzx&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;Categorical&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;beer_style&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;beer_style&lt;/h4&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;describe(df$beer_style)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## df$beer_style 
+##        n  missing distinct 
+##  1586614        0      104 
+## 
+## lowest : Altbier                    American Adjunct Lager     American Amber / Red Ale   American Amber / Red Lager American Barleywine       
+## highest: Vienna Lager               Weizenbock                 Wheatwine                  Winter Warmer              Witbier&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;Categorical&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;review_palate&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;review_palate&lt;/h4&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;describe(df$review_palate)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## df$review_palate 
+##        n  missing distinct     Info     Mean      Gmd 
+##  1586614        0        9    0.928    3.744   0.7227 
+##                                                                          
+## Value         1.0    1.5    2.0    2.5    3.0    3.5    4.0    4.5    5.0
+## Frequency    6874  11045  38333  62842 206932 338585 606711 253102  62190
+## Proportion  0.004  0.007  0.024  0.040  0.130  0.213  0.382  0.160  0.039&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(df, aes(x = review_palate)) + geom_bar()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./R/beer-reviews-analysis_files/figure-html/unnamed-chunk-20-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Categorical&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;review_taste&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;review_taste&lt;/h4&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;describe(df$review_taste)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## df$review_taste 
+##        n  missing distinct     Info     Mean      Gmd 
+##  1586614        0        9    0.941    3.793   0.7766 
+##                                                                          
+## Value         1.0    1.5    2.0    2.5    3.0    3.5    4.0    4.5    5.0
+## Frequency    9991  15128  41992  66534 166860 324541 541429 336162  83977
+## Proportion  0.006  0.010  0.026  0.042  0.105  0.205  0.341  0.212  0.053&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(df, aes(x = review_taste)) + geom_bar()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./R/beer-reviews-analysis_files/figure-html/unnamed-chunk-22-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Categorical&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;beer_abv&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;beer_abv&lt;/h4&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;describe(df$beer_abv)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## df$beer_abv 
+##        n  missing distinct     Info     Mean      Gmd      .05      .10 
+##  1518829    67785      530    0.999    7.042     2.47      4.5      4.8 
+##      .25      .50      .75      .90      .95 
+##      5.2      6.5      8.5     10.0     11.0 
+## 
+## lowest :  0.01  0.05  0.08  0.10  0.25, highest: 39.00 39.44 41.00 43.00 57.70&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% 
+  filter(!is.na(beer_abv)) %&amp;gt;% 
+  ggplot(aes(x = beer_abv)) + 
+  geom_freqpoly(bins = 10)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./R/beer-reviews-analysis_files/figure-html/unnamed-chunk-24-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Continuous&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;beer_name&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;beer_name&lt;/h4&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;describe(df$beer_name)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## df$beer_name 
+##        n  missing distinct 
+##  1586614        0    56857 
+## 
+## lowest : ! (Old Ale)                       ? (Imperial Bitter)               ? The Riddler ?                   ¿Por Que No?                      .357 Imperial Pilsner            
+## highest: ZZ Lager                          Þorrabjór                         Ω-naught (Omeganaught)            横須賀ビアサケ (Yokosuka Biasake) 葉山ビール (Hayama Beer)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;beer_beerid&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;beer_beerid&lt;/h4&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;describe(df$beer_beerid)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## df$beer_beerid 
+##        n  missing distinct     Info     Mean      Gmd      .05      .10 
+##  1586614        0    66055        1    21713    23983      213      577 
+##      .25      .50      .75      .90      .95 
+##     1717    13906    39441    55183    62653 
+## 
+## lowest :     3     4     5     6     7, highest: 77313 77314 77315 77316 77317&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(df, aes(x = beer_beerid)) + geom_histogram(bins = 50)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./R/beer-reviews-analysis_files/figure-html/unnamed-chunk-27-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;data-cleaning&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Data Cleaning&lt;/h3&gt;
+&lt;p&gt;There are four variables I’m most concerned about that will need to be cleaned: &lt;code&gt;brewery_id&lt;/code&gt;, &lt;code&gt;brewery_name&lt;/code&gt;, &lt;code&gt;beer_name&lt;/code&gt; and &lt;code&gt;beer_beerid&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Recall again the list of brewery names that had more than one brewery id:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% 
+  group_by(brewery_name) %&amp;gt;% 
+  summarise(n = length(unique(brewery_id))) %&amp;gt;% 
+  filter(n &amp;gt; 1) %&amp;gt;% 
+  arrange(brewery_name)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 60 x 2
+##                           brewery_name     n
+##                                  &amp;lt;chr&amp;gt; &amp;lt;int&amp;gt;
+##  1                 Back Street Brewery     4
+##  2                Baja Brewing Company     2
+##  3          Bare Bones Grill &amp;amp; Brewery     2
+##  4    Big River Grille &amp;amp; Brewing Works     3
+##  5           BJ&amp;#39;s Restaurant &amp;amp; Brewery     4
+##  6         BJ&amp;#39;s Restaurant &amp;amp; Brewhouse     3
+##  7       BJ&amp;#39;s Restaurant And Brewhouse     2
+##  8 Brew Moon Restaurant &amp;amp; Microbrewery     2
+##  9                        C.B. &amp;amp; Potts     3
+## 10                Capitol City Brewing     3
+## # ... with 50 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I established earlier that brewery id’s only have one unique brewery name. I’ll go through each name on this list and try to iron out the discrepancies.&lt;/p&gt;
+&lt;div id=&#34;brewery-name-data-validation&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;Brewery Name Data Validation&lt;/h4&gt;
+&lt;p&gt;I’ll start first with “Back Street Brewery”. I want to list all distinct &lt;code&gt;brewery_name&lt;/code&gt; values that begin with “Back St” (use the common St abbreviation to capture both St and Street).&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% 
+  filter(grepl(&amp;quot;^Back St&amp;quot;, brewery_name)) %&amp;gt;% 
+  select(starts_with(&amp;quot;b&amp;quot;)) %&amp;gt;% 
+  distinct(brewery_name, .keep_all = TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 1 x 6
+##   brewery_id        brewery_name beer_style beer_name beer_abv beer_beerid
+##        &amp;lt;int&amp;gt;               &amp;lt;chr&amp;gt;      &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt;    &amp;lt;dbl&amp;gt;       &amp;lt;int&amp;gt;
+## 1       4410 Back Street Brewery    Altbier       Alt       NA       58971&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;There is only one Back St. What about distinct &lt;code&gt;brewery_id&lt;/code&gt; values?&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% 
+  filter(grepl(&amp;quot;^Back St&amp;quot;, brewery_name)) %&amp;gt;% 
+  select(starts_with(&amp;quot;b&amp;quot;)) %&amp;gt;% 
+  distinct(brewery_id, .keep_all = TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 4 x 6
+##   brewery_id        brewery_name               beer_style
+##        &amp;lt;int&amp;gt;               &amp;lt;chr&amp;gt;                    &amp;lt;chr&amp;gt;
+## 1       4410 Back Street Brewery                  Altbier
+## 2      15327 Back Street Brewery               Hefeweizen
+## 3      12164 Back Street Brewery American Amber / Red Ale
+## 4      10012 Back Street Brewery  Belgian Strong Dark Ale
+## # ... with 3 more variables: beer_name &amp;lt;chr&amp;gt;, beer_abv &amp;lt;dbl&amp;gt;,
+## #   beer_beerid &amp;lt;int&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Ok, there are a few different &lt;code&gt;brewery_id&lt;/code&gt; values for this brewery. I’m a bit stuck on how I can validate the legitimacy (or lack thereof) on these values.&lt;/p&gt;
+&lt;p&gt;Are there multiple “Back Street Brewery”? Or, is this a crowd-sourcing error (Yelp is bad with this, too).&lt;/p&gt;
+&lt;p&gt;Thankfully, the Beer Advocate website happens to have addresses. We can plug &lt;code&gt;brewery_id&lt;/code&gt; into a URL and scrape the address info.&lt;/p&gt;
+&lt;p&gt;Let me go grab the brewery ids.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;brewery_ids &amp;lt;- df %&amp;gt;% 
+  filter(grepl(&amp;quot;^Back St&amp;quot;, brewery_name)) %&amp;gt;% 
+  select(starts_with(&amp;quot;brew&amp;quot;)) %&amp;gt;% 
+  distinct() %&amp;gt;% 
+  pull(brewery_id)
+
+brewery_ids&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1]  4410 15327 12164 10012&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now I’ll write a little scraping function that will return the addresses for each of the breweries.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;get_addresses &amp;lt;- function(brewery_id) {
+
+  url &amp;lt;- glue::glue(&amp;quot;https://www.beeradvocate.com/beer/profile/{brewery_id}/&amp;quot;)
+  
+  xml2::read_html(url) %&amp;gt;% 
+    rvest::html_nodes(xpath = &amp;quot;//*[(@id = &amp;#39;info_box&amp;#39;)]&amp;quot;) %&amp;gt;% 
+    rvest::html_text()
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Get the addresses.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;addresses &amp;lt;- map(brewery_ids, get_addresses) %&amp;gt;% 
+  trimws() %&amp;gt;% 
+  str_split(pattern = &amp;quot;[:cntrl:]+&amp;quot;) %&amp;gt;% 
+  # All address info seems to be in the 3rd element so just grab those.
+  map(`[`, 3)
+
+addresses&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [[1]]
+## [1] &amp;quot;14450 Culver DriveIrvine, California, 92604United States(949) 857-0160 | maplamppostpizza.com&amp;quot;
+## 
+## [[2]]
+## [1] &amp;quot;78-772 Highway 111La Quinta, California, 92253United States(760) 564-4568 | maplamppostpizza.com&amp;quot;
+## 
+## [[3]]
+## [1] &amp;quot;15 Main Street, Suite #100Vista, California, 92084United States(760) 407-7600 | maplamppostpizza.com&amp;quot;
+## 
+## [[4]]
+## [1] &amp;quot;27702 Crown Valley ParkwayLadera Ranch, California, 92691United States(949) 388-7260 // CLOSED //&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I can do a visual analysis and see none of these are a match. In other words, it looks like we’re dealing with a franchise. With that said, “Back Street Brewery” should not be corrected.&lt;/p&gt;
+&lt;p&gt;I’m going to modify &lt;code&gt;get_addresses()&lt;/code&gt; to take the pattern I’m searching (in the example above, “^Back St”) and just return the results. I don’t want to keep typing all of that code.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#&amp;#39; @title get_addresses
+#&amp;#39; @description Given a dataframe (x) and a pattern for brewery_name, will 
+#&amp;#39;    return all addresses for breweries that match that pattern.
+#&amp;#39; @param x Dataframe object
+#&amp;#39; @pattern regex pattern for brewery names to find
+get_addresses &amp;lt;- function(x, pattern) {
+  x %&amp;gt;% 
+  filter(grepl(pattern, brewery_name)) %&amp;gt;% 
+  select(starts_with(&amp;quot;brew&amp;quot;)) %&amp;gt;% 
+  distinct() %&amp;gt;% 
+  pull(brewery_id) %&amp;gt;% 
+  sprintf(&amp;quot;https://www.beeradvocate.com/beer/profile/%s/&amp;quot;, .) %&amp;gt;% 
+  map(read_html) %&amp;gt;% 
+  map(html_nodes, xpath = &amp;quot;//*[(@id = &amp;#39;info_box&amp;#39;)]&amp;quot;) %&amp;gt;% 
+  map(html_text) %&amp;gt;% 
+  str_split(pattern = &amp;quot;[:cntrl:]+&amp;quot;) %&amp;gt;% 
+  map(`[`, 4)
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I’ll test it.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;get_addresses(df, &amp;quot;^Back St&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [[1]]
+## [1] &amp;quot;14450 Culver DriveIrvine, California, 92604United States(949) 857-0160 | maplamppostpizza.com&amp;quot;
+## 
+## [[2]]
+## [1] &amp;quot;78-772 Highway 111La Quinta, California, 92253United States(760) 564-4568 | maplamppostpizza.com&amp;quot;
+## 
+## [[3]]
+## [1] &amp;quot;15 Main Street, Suite #100Vista, California, 92084United States(760) 407-7600 | maplamppostpizza.com&amp;quot;
+## 
+## [[4]]
+## [1] &amp;quot;27702 Crown Valley ParkwayLadera Ranch, California, 92691United States(949) 388-7260 // CLOSED //&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;[[satisfied face meme]]&lt;/p&gt;
+&lt;p&gt;Ok, now I just need to go through our discrepancies. It would be nice to write a function to do this as well. But the pattern requires human involvement; oh, well.&lt;/p&gt;
+&lt;p&gt;Of the known items with possible issues, only those that immediately follow had true issues.&lt;/p&gt;
+&lt;div id=&#34;bare-bones-grill-brewery&#34; class=&#34;section level5&#34;&gt;
+&lt;h5&gt;Bare Bones Grill &amp;amp; Brewery&lt;/h5&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ptn &amp;lt;- &amp;quot;^Bare\\s&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#&amp;#39; Find all possible matches
+df %&amp;gt;% filter(grepl(ptn, brewery_name)) %&amp;gt;% 
+  select(starts_with(&amp;quot;brew&amp;quot;)) %&amp;gt;% 
+  distinct(brewery_id, .keep_all = TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 2 x 2
+##   brewery_id               brewery_name
+##        &amp;lt;int&amp;gt;                      &amp;lt;chr&amp;gt;
+## 1       1953 Bare Bones Grill &amp;amp; Brewery
+## 2       1954 Bare Bones Grill &amp;amp; Brewery&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#&amp;#39; List addresses
+get_addresses(df, ptn)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Error in open.connection(x, &amp;quot;rb&amp;quot;): HTTP error 404.&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In this case, the page for id 1953 no longer exists. So, there is no way to validate the discrepancy. In this case I will update all 1953 &lt;code&gt;brewery_id&lt;/code&gt; values to 1954.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df$brewery_id[df$brewery_id == 1953] &amp;lt;- 1954&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: closing unused connection 5 (https://www.beeradvocate.com/beer/
+## profile/1953/)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;rocky-coulee-brewing-co.&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;Rocky Coulee Brewing Co.&lt;/h4&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ptn &amp;lt;- &amp;quot;^Rocky\\sC&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#&amp;#39; Find all possible matches
+df %&amp;gt;% filter(grepl(ptn, brewery_name)) %&amp;gt;% 
+  select(starts_with(&amp;quot;brew&amp;quot;)) %&amp;gt;% 
+  distinct(brewery_id, .keep_all = TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 2 x 2
+##   brewery_id             brewery_name
+##        &amp;lt;dbl&amp;gt;                    &amp;lt;chr&amp;gt;
+## 1      13094 Rocky Coulee Brewing Co.
+## 2      12984 Rocky Coulee Brewing Co.&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#&amp;#39; List addresses
+get_addresses(df, ptn)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [[1]]
+## [1] &amp;quot;205 N. First StreetOdessa, Washington, 99159United States(509) 345-2216 | maprockycouleebrewingco.com&amp;quot;
+## 
+## [[2]]
+## [1] &amp;quot;205 N. First StreetOdessa, Washington, 99159United States(509) 346-2216 // CLOSED //&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;“Rocky Coulee Brewing Co.” has two identical entries in the database. The only difference in the address listings is one digit in the phone number.&lt;/p&gt;
+&lt;p&gt;I’ll update those with &lt;code&gt;brewery_id&lt;/code&gt; 13094 to 12984.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df$brewery_id[df$brewery_id == 13094] &amp;lt;- 12984&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;exploratory&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Exploratory&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;cc &amp;lt;- df[complete.cases(df),] %&amp;gt;% 
+  select(starts_with(&amp;quot;review&amp;quot;), -review_time, -review_profilename, beer_abv)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;cor(cc)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##                   review_overall review_aroma review_appearance
+## review_overall         1.0000000    0.6127926         0.4985565
+## review_aroma           0.6127926    1.0000000         0.5590771
+## review_appearance      0.4985565    0.5590771         1.0000000
+## review_palate          0.6990197    0.6149238         0.5645551
+## review_taste           0.7871712    0.7147773         0.5445794
+## beer_abv               0.1384574    0.3325362         0.2638906
+##                   review_palate review_taste  beer_abv
+## review_overall        0.6990197    0.7871712 0.1384574
+## review_aroma          0.6149238    0.7147773 0.3325362
+## review_appearance     0.5645551    0.5445794 0.2638906
+## review_palate         1.0000000    0.7322005 0.2866673
+## review_taste          0.7322005    1.0000000 0.2907817
+## beer_abv              0.2866673    0.2907817 1.0000000&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Most positive relationship seems to be between &lt;code&gt;review_overall&lt;/code&gt; and &lt;code&gt;review_taste&lt;/code&gt;. I want to take the mean &lt;code&gt;review_overall&lt;/code&gt; and &lt;code&gt;review_taste&lt;/code&gt; per &lt;code&gt;beer_beerid&lt;/code&gt; and draw a scatterplot.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% 
+  group_by(beer_beerid) %&amp;gt;% 
+  summarise(mean_review_overall = mean(review_overall, na.rm = TRUE), 
+            mean_review_taste = mean(review_taste, na.rm = TRUE)) %&amp;gt;% 
+  ggplot(aes(x = mean_review_overall, y = mean_review_taste)) + 
+  geom_point() + 
+  geom_smooth()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## `geom_smooth()` using method = &amp;#39;gam&amp;#39;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./R/beer-reviews-analysis_files/figure-html/unnamed-chunk-46-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Is this really surprising?&lt;/p&gt;
+&lt;p&gt;Next to taste is &lt;code&gt;review_palate&lt;/code&gt;; let’s check that out.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% 
+  group_by(beer_beerid) %&amp;gt;% 
+  summarise(mean_review_overall = mean(review_overall, na.rm = TRUE), 
+            mean_review_aroma = mean(review_aroma, na.rm = TRUE)) %&amp;gt;% 
+  ggplot(aes(x = mean_review_overall, y = mean_review_aroma)) + 
+  geom_point() + 
+  geom_smooth()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## `geom_smooth()` using method = &amp;#39;gam&amp;#39;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;./R/beer-reviews-analysis_files/figure-html/unnamed-chunk-47-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;I’m curious what type of&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% 
+  select(beer_beerid, review_overall, review_aroma, review_taste) %&amp;gt;% 
+  mutate(
+    review_class = case_when(
+      review_overall &amp;lt; 1 ~ &amp;quot;A&amp;quot;, 
+      review_overall &amp;lt; 2 ~ &amp;quot;B&amp;quot;, 
+      review_overall &amp;lt; 3 ~ &amp;quot;C&amp;quot;, 
+      review_overall &amp;lt; 4 ~ &amp;quot;D&amp;quot;, 
+      TRUE ~ &amp;quot;E&amp;quot;)) %&amp;gt;% 
+  group_by(beer_beerid) %&amp;gt;% 
+  summarise(mean_review_aroma = mean(review_aroma, na.rm = TRUE)) %&amp;gt;% 
+  ggplot(aes(x = review_class, y = mean_review_aroma)) %&amp;gt;% 
+  geom_boxplot()&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Error: Mapping must be created by `aes()` or `aes_()`&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;r-session-info&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;R Session Info&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pander::pander(sessionInfo())&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;R version 3.4.1 (2017-06-30)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;**&lt;a href=&#34;Platform:**&#34; class=&#34;uri&#34;&gt;Platform:**&lt;/a&gt; x86_64-pc-linux-gnu (64-bit)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;locale:&lt;/strong&gt; &lt;em&gt;LC_CTYPE=en_US.UTF-8&lt;/em&gt;, &lt;em&gt;LC_NUMERIC=C&lt;/em&gt;, &lt;em&gt;LC_TIME=en_US.UTF-8&lt;/em&gt;, &lt;em&gt;LC_COLLATE=en_US.UTF-8&lt;/em&gt;, &lt;em&gt;LC_MONETARY=en_US.UTF-8&lt;/em&gt;, &lt;em&gt;LC_MESSAGES=C&lt;/em&gt;, &lt;em&gt;LC_PAPER=en_US.UTF-8&lt;/em&gt;, &lt;em&gt;LC_NAME=C&lt;/em&gt;, &lt;em&gt;LC_ADDRESS=C&lt;/em&gt;, &lt;em&gt;LC_TELEPHONE=C&lt;/em&gt;, &lt;em&gt;LC_MEASUREMENT=en_US.UTF-8&lt;/em&gt; and &lt;em&gt;LC_IDENTIFICATION=C&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;attached base packages:&lt;/strong&gt; &lt;em&gt;methods&lt;/em&gt;, &lt;em&gt;stats&lt;/em&gt;, &lt;em&gt;graphics&lt;/em&gt;, &lt;em&gt;grDevices&lt;/em&gt;, &lt;em&gt;utils&lt;/em&gt;, &lt;em&gt;datasets&lt;/em&gt; and &lt;em&gt;base&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;other attached packages:&lt;/strong&gt; &lt;em&gt;bindrcpp(v.0.2)&lt;/em&gt;, &lt;em&gt;stringr(v.1.2.0)&lt;/em&gt;, &lt;em&gt;rvest(v.0.3.2)&lt;/em&gt;, &lt;em&gt;xml2(v.1.1.1)&lt;/em&gt;, &lt;em&gt;purrr(v.0.2.3)&lt;/em&gt;, &lt;em&gt;Hmisc(v.4.0-3)&lt;/em&gt;, &lt;em&gt;Formula(v.1.2-2)&lt;/em&gt;, &lt;em&gt;survival(v.2.41-3)&lt;/em&gt;, &lt;em&gt;lattice(v.0.20-35)&lt;/em&gt;, &lt;em&gt;ggplot2(v.2.2.1)&lt;/em&gt;, &lt;em&gt;dplyr(v.0.7.4)&lt;/em&gt; and &lt;em&gt;corrplot(v.0.77)&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;loaded via a namespace (and not attached):&lt;/strong&gt; &lt;em&gt;pander(v.0.6.1)&lt;/em&gt;, &lt;em&gt;splines(v.3.4.1)&lt;/em&gt;, &lt;em&gt;colorspace(v.1.3-2)&lt;/em&gt;, &lt;em&gt;htmltools(v.0.3.6)&lt;/em&gt;, &lt;em&gt;mgcv(v.1.8-22)&lt;/em&gt;, &lt;em&gt;yaml(v.2.1.14)&lt;/em&gt;, &lt;em&gt;base64enc(v.0.1-3)&lt;/em&gt;, &lt;em&gt;rlang(v.0.1.2)&lt;/em&gt;, &lt;em&gt;foreign(v.0.8-69)&lt;/em&gt;, &lt;em&gt;glue(v.1.1.1)&lt;/em&gt;, &lt;em&gt;RColorBrewer(v.1.1-2)&lt;/em&gt;, &lt;em&gt;bindr(v.0.1)&lt;/em&gt;, &lt;em&gt;plyr(v.1.8.4)&lt;/em&gt;, &lt;em&gt;munsell(v.0.4.3)&lt;/em&gt;, &lt;em&gt;blogdown(v.0.1)&lt;/em&gt;, &lt;em&gt;gtable(v.0.2.0)&lt;/em&gt;, &lt;em&gt;htmlwidgets(v.0.9)&lt;/em&gt;, &lt;em&gt;evaluate(v.0.10.1)&lt;/em&gt;, &lt;em&gt;labeling(v.0.3)&lt;/em&gt;, &lt;em&gt;latticeExtra(v.0.6-28)&lt;/em&gt;, &lt;em&gt;knitr(v.1.17)&lt;/em&gt;, &lt;em&gt;curl(v.2.8.1)&lt;/em&gt;, &lt;em&gt;htmlTable(v.1.9)&lt;/em&gt;, &lt;em&gt;Rcpp(v.0.12.13)&lt;/em&gt;, &lt;em&gt;acepack(v.1.4.1)&lt;/em&gt;, &lt;em&gt;readr(v.1.1.1)&lt;/em&gt;, &lt;em&gt;scales(v.0.5.0)&lt;/em&gt;, &lt;em&gt;backports(v.1.1.1)&lt;/em&gt;, &lt;em&gt;checkmate(v.1.8.4)&lt;/em&gt;, &lt;em&gt;gridExtra(v.2.3)&lt;/em&gt;, &lt;em&gt;hms(v.0.3)&lt;/em&gt;, &lt;em&gt;digest(v.0.6.12)&lt;/em&gt;, &lt;em&gt;stringi(v.1.1.5)&lt;/em&gt;, &lt;em&gt;bookdown(v.0.5)&lt;/em&gt;, &lt;em&gt;grid(v.3.4.1)&lt;/em&gt;, &lt;em&gt;rprojroot(v.1.2)&lt;/em&gt;, &lt;em&gt;tools(v.3.4.1)&lt;/em&gt;, &lt;em&gt;magrittr(v.1.5)&lt;/em&gt;, &lt;em&gt;lazyeval(v.0.2.0)&lt;/em&gt;, &lt;em&gt;tibble(v.1.3.4)&lt;/em&gt;, &lt;em&gt;cluster(v.2.0.6)&lt;/em&gt;, &lt;em&gt;pkgconfig(v.2.0.1)&lt;/em&gt;, &lt;em&gt;Matrix(v.1.2-11)&lt;/em&gt;, &lt;em&gt;data.table(v.1.10.4)&lt;/em&gt;, &lt;em&gt;assertthat(v.0.2.0)&lt;/em&gt;, &lt;em&gt;rmarkdown(v.1.6)&lt;/em&gt;, &lt;em&gt;httr(v.1.3.1)&lt;/em&gt;, &lt;em&gt;R6(v.2.2.2)&lt;/em&gt;, &lt;em&gt;rpart(v.4.1-11)&lt;/em&gt;, &lt;em&gt;nlme(v.3.1-131)&lt;/em&gt;, &lt;em&gt;nnet(v.7.3-12)&lt;/em&gt; and &lt;em&gt;compiler(v.3.4.1)&lt;/em&gt;&lt;/p&gt;
+&lt;/div&gt;
+</description>
     </item>
     
     <item>
@@ -55,12 +1662,230 @@ I began programming shortly after my son&amp;rsquo;s birth in 2003. I had alread
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/sql/highest_paid_employee/</guid>
-      <description>Using employees database, we need to find the highest-paid employee in our database.
-With this particular database we have to be careful about making assumptions of our data, some of which would be:
- Only one salary record per employee
- All salary records are current
- Maximum salary is the current salary
-  If our salaries table only consists of current employees and current salary information, then we can do a simple SELECT MAX query and be done.</description>
+      <description>&lt;p&gt;Using &lt;a href=&#34;https://dev.mysql.com/doc/employee/en/&#34;&gt;employees&lt;/a&gt; database, we need to find the highest-paid employee in our database.&lt;/p&gt;
+&lt;p&gt;With this particular database we have to be careful about making assumptions of our data, some of which would be:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Only one salary record per employee&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;All salary records are current&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Maximum salary is the current salary&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If our &lt;code&gt;salaries&lt;/code&gt; table only consists of current employees and current salary information, then we can do a simple SELECT MAX query and be done. Our &lt;code&gt;salaries&lt;/code&gt; table is a historical table; we have multiple salary records per employee.&lt;/p&gt;
+&lt;p&gt;Additionally, there is no guarantee every employee is an active employee.&lt;/p&gt;
+&lt;p&gt;We also cannot assume that the maximum salary is the current salary.&lt;/p&gt;
+&lt;p&gt;Let’s look at employee 10001 to start:&lt;/p&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;USE `employees`;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;SELECT *
+FROM `salaries`
+WHERE `emp_no` = 10001;&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;knitsql-table&#34;&gt;
+&lt;table&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:select-salaries-10001&#34;&gt;Table 1: &lt;/span&gt;17 records&lt;/caption&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;right&#34;&gt;emp_no&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;salary&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;from_date&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;to_date&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;10001&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;60117&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1986-06-26&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1987-06-26&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;10001&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;62102&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1987-06-26&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1988-06-25&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;10001&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;66074&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1988-06-25&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1989-06-25&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;10001&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;66596&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1989-06-25&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1990-06-25&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;10001&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;66961&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1990-06-25&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1991-06-25&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;10001&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;71046&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1991-06-25&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1992-06-24&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;10001&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;74333&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1992-06-24&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1993-06-24&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;10001&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;75286&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1993-06-24&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1994-06-24&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;10001&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;75994&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1994-06-24&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1995-06-24&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;10001&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;76884&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1995-06-24&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1996-06-23&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;10001&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;80013&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1996-06-23&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1997-06-23&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;10001&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;81025&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1997-06-23&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1998-06-23&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;10001&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;81097&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1998-06-23&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1999-06-23&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;10001&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;84917&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;1999-06-23&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2000-06-22&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;10001&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;85112&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2000-06-22&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2001-06-22&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;10001&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;85097&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2001-06-22&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2002-06-22&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;10001&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;88958&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;2002-06-22&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;9999-01-01&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;p&gt;By and large, &lt;code&gt;salary&lt;/code&gt; seems to increase over time. This is incorrect. Notice the salary from dates 2000-06-22 and 2001-06-22; there is a slight decrease. The assumption the max salary would also be the latest salary would be incorrect in this case.&lt;/p&gt;
+&lt;p&gt;Let’s therefore assume that when asked to get the highest salary in our table that&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;The employee must be active&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;The maximum salary applies to current values only&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;We can resolve both of these by finding where &lt;code&gt;to_date&lt;/code&gt; is “9999-01-01”.&lt;/p&gt;
+&lt;p&gt;With that and ordering on &lt;code&gt;salary&lt;/code&gt; descending, we can find our current maximum salary in the table.&lt;/p&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;SELECT `emp_no`, 
+  `salary`
+FROM `salaries`
+WHERE `to_date` = &amp;quot;9999-01-01&amp;quot;
+ORDER BY `salary` DESC 
+LIMIT 1;&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;knitsql-table&#34;&gt;
+&lt;table&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:max-salary&#34;&gt;Table 2: &lt;/span&gt;1 records&lt;/caption&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;emp_no&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;salary&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;43624&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;158220&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;p&gt;I’m asked to find employee but have only returned &lt;code&gt;emp_no&lt;/code&gt;. I’ll JOIN &lt;code&gt;employees&lt;/code&gt; to get the employees first and last name.&lt;/p&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;SELECT `salaries`.`emp_no`, 
+  `salaries`.`salary`, 
+  `employees`.`first_name`, 
+  `employees`.`last_name`
+FROM `salaries` 
+LEFT JOIN `employees`
+ON `employees`.`emp_no` = `salaries`.`emp_no`
+WHERE `to_date` = &amp;quot;9999-01-01&amp;quot;
+ORDER BY `salary` DESC 
+LIMIT 1;&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;knitsql-table&#34;&gt;
+&lt;table&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:max-salary-with-employees&#34;&gt;Table 3: &lt;/span&gt;1 records&lt;/caption&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;emp_no&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;salary&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;first_name&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;last_name&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;43624&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;158220&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Tokuyasu&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Pesch&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;div id=&#34;mariadb-server-info&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;MariaDB Server Info&lt;/h3&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;SELECT @@version_comment AS `Version`, 
+  @@version_compile_machine AS `Version Compile Machine`, 
+  @@innodb_version AS `InnoDB Version`, 
+  @@version_compile_os AS `Version Compile OS`;&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;knitsql-table&#34;&gt;
+&lt;table&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:mariadb-version&#34;&gt;Table 4: &lt;/span&gt;MariaDB Server Info&lt;/caption&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;Version&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Version Compile Machine&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;InnoDB Version&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Version Compile OS&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;mariadb.org binary distribution&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;x86_64&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;5.7.20&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;debian-linux-gnu&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
     </item>
     
     <item>
@@ -69,9 +1894,16 @@ With this particular database we have to be careful about making assumptions of 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/projects/</guid>
-      <description> R  HURDAT is a dataset from the Hurricane Re-Analysis project. It contains storm data for hundreds of cyclones for storms that have developed in the northwestern hemisphere (Atlantic and Pacific) since 1851.
- rrricanes is a more comprehensive dataset of Atlantic and Pacific cyclones but only those since 1998. It gives access to as-issued text products for past and current cyclones including forecast and structure data.
-  </description>
+      <description>
+
+&lt;h2 id=&#34;r&#34;&gt;R&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://timtrice.github.io/HURDAT/&#34; target=&#34;_blank&#34;&gt;HURDAT&lt;/a&gt; is a dataset from the Hurricane Re-Analysis project. It contains storm data for hundreds of cyclones for storms that have developed in the northwestern hemisphere (Atlantic and Pacific) since 1851.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://ropensci.github.io/rrricanes/&#34; target=&#34;_blank&#34;&gt;rrricanes&lt;/a&gt; is a more comprehensive dataset of Atlantic and Pacific cyclones but only those since 1998. It gives access to as-issued text products for past and current cyclones including forecast and structure data.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
   </channel>
