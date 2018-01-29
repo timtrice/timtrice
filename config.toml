@@ -56,7 +56,10 @@ defaultContentLanguageInSubdir = false
 
   # Your details.
   name = "Tim Trice"
-  role = "Data Analytics, Information Management, Document Control"
+  description = "Data Analytics, Information Management, Document Control"
+
+  # Seperator between site title and page titles
+  title_sep = " - "
 
   # Organizations/Affiliations.
   #   Separate multiple entries with a comma, using the form: `[ {name="Org1", url=""}, {name="Org2", url=""} ]`.
