@@ -256,11 +256,6 @@ defaultContentLanguageInSubdir = false
   align_right = true
 
 [[menu.main]]
-  name = "Home"
-  url = "#about"
-  weight = 1
-
-[[menu.main]]
   name = "Publications"
   url = "#publications_selected"
   weight = 2

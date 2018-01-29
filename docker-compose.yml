@@ -13,8 +13,7 @@ services:
     restart: always
     command: start-notebook.sh --NotebookApp.password=sha1:13a4808aa90c:dbeb882e4fdc7b067a50c4dc53bba7ff7a6b7a40
     volumes:
-      - .:/home/jovyan/web
-      - ../demos:/home/jovyan/demos
+      - ~/Projects/web:/home/jovyan/web
     ports:
       - "8888:8888"
     depends_on:
@@ -28,7 +27,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: qNlr0rZtf5VfGQ9m
     volumes:
-      - ../data/mariadb:/var/lib/mysql
+      - ~/Projects/data/mariadb:/var/lib/mysql
 
   mysql:
     image: timtrice/web:mysql # mysql:5.7
@@ -36,7 +35,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: e99rntuUXMGHB6Zt
     volumes:
-      - ../data/mysql:/var/lib/mysql
+      - ~/Projects/data/mysql:/var/lib/mysql
 
   # As is, does not work through adminer. Shows port 5432 as not being open. 
   postgres:
@@ -45,19 +44,18 @@ services:
     environment:
       POSTGRES_PASSWORD: 5aJhjS7g7SAzE56K
     volumes:
-      - ../data/postgres:/var/lib/postgresql/data
+      - ~/Projects/data/postgres:/var/lib/postgresql/data
 
   rstudio:
     image: timtrice/web:rstudio # rocker/rstudio:3.4.2
     restart: always
     volumes:
-      - ../web/.RProfile:/home/rstudio/.RProfile
-      - .:/home/rstudio/web
-      - ../demos:/home/rstudio/demos
-      - ../.Renviron:/home/rstudio/.Renviron
+      - ~/Projects/web:/home/rstudio/web
+      - ~/Projects/.Renviron:/home/rstudio/.Renviron
     ports:
       - "8787:8787"
     depends_on:
       - mariadb
       - mysql
       - postgres
+
