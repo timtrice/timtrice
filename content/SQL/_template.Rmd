@@ -15,7 +15,6 @@ knitr::opts_chunk$set(echo = TRUE,
                       connection = "mariadb_con")
 ```
 
-
 ```{r libraries, include = FALSE}
 library(DBI)
 library(knitr)

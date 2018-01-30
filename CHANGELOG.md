@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
   - post: Department Top Three Salaries
   - Add permalinks to config.toml
   - Add `sandbox` to projects
+  - Add SQL template
 
 ### Changed
 - NA
