@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
   - Add summary, modify categories, tags for Hurricane Harvey Post Storm Report.
+  - Relocated rstudio-in-docker to /content/post/r/
 
 ### Removed
 - NA
