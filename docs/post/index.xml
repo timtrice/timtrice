@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Post on Tim Trice</title>
-    <link>/post/</link>
+    <link>http://timtrice.net/post/</link>
     <description>Recent content in Post on Tim Trice</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -12,10 +12,10 @@
     
     <item>
       <title>Hurricane Harvey Post Storm Report</title>
-      <link>/post/hurricane-harvey-report/</link>
+      <link>http://timtrice.net/post/hurricane-harvey-report/</link>
       <pubDate>Wed, 06 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>/post/hurricane-harvey-report/</guid>
+      <guid>http://timtrice.net/post/hurricane-harvey-report/</guid>
       <description>&lt;div id=&#34;TOC&#34;&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#hurricane-harvey&#34;&gt;Hurricane Harvey&lt;/a&gt;&lt;ul&gt;
@@ -777,10 +777,10 @@ FEW TREES WERE BLOWN DOWN. RATED EF0. &lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>RStudio in Docker</title>
-      <link>/post/rstudio-in-docker/</link>
+      <link>http://timtrice.net/post/rstudio-in-docker/</link>
       <pubDate>Wed, 17 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>/post/rstudio-in-docker/</guid>
+      <guid>http://timtrice.net/post/rstudio-in-docker/</guid>
       <description>&lt;div id=&#34;TOC&#34;&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#brief-overview-of-docker&#34;&gt;Brief Overview of Docker&lt;/a&gt;&lt;/li&gt;

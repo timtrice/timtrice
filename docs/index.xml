@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tim Trice on Tim Trice</title>
-    <link>/</link>
+    <link>http://timtrice.net/</link>
     <description>Recent content in Tim Trice on Tim Trice</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -12,46 +12,46 @@
     
     <item>
       <title>Tom Armstrong, Narrative1</title>
-      <link>/testimonials/tom-armstrong/</link>
+      <link>http://timtrice.net/testimonials/tom-armstrong/</link>
       <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>/testimonials/tom-armstrong/</guid>
+      <guid>http://timtrice.net/testimonials/tom-armstrong/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Donald Hatter, DRE Software</title>
-      <link>/testimonials/donald-hatter/</link>
+      <link>http://timtrice.net/testimonials/donald-hatter/</link>
       <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>/testimonials/donald-hatter/</guid>
+      <guid>http://timtrice.net/testimonials/donald-hatter/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Josh Southern, Paradigm Shift Interactive</title>
-      <link>/testimonials/josh-southern/</link>
+      <link>http://timtrice.net/testimonials/josh-southern/</link>
       <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>/testimonials/josh-southern/</guid>
+      <guid>http://timtrice.net/testimonials/josh-southern/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Open Design</title>
-      <link>/testimonials/open-design/</link>
+      <link>http://timtrice.net/testimonials/open-design/</link>
       <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>/testimonials/open-design/</guid>
+      <guid>http://timtrice.net/testimonials/open-design/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Hurricane Harvey Post Storm Report</title>
-      <link>/post/hurricane-harvey-report/</link>
+      <link>http://timtrice.net/post/hurricane-harvey-report/</link>
       <pubDate>Wed, 06 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>/post/hurricane-harvey-report/</guid>
+      <guid>http://timtrice.net/post/hurricane-harvey-report/</guid>
       <description>&lt;div id=&#34;TOC&#34;&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#hurricane-harvey&#34;&gt;Hurricane Harvey&lt;/a&gt;&lt;ul&gt;
@@ -813,19 +813,19 @@ FEW TREES WERE BLOWN DOWN. RATED EF0. &lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>rrricanes</title>
-      <link>/project/rrricanes/</link>
+      <link>http://timtrice.net/project/rrricanes/</link>
       <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>/project/rrricanes/</guid>
+      <guid>http://timtrice.net/project/rrricanes/</guid>
       <description></description>
     </item>
     
     <item>
       <title>RStudio in Docker</title>
-      <link>/post/rstudio-in-docker/</link>
+      <link>http://timtrice.net/post/rstudio-in-docker/</link>
       <pubDate>Wed, 17 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>/post/rstudio-in-docker/</guid>
+      <guid>http://timtrice.net/post/rstudio-in-docker/</guid>
       <description>&lt;div id=&#34;TOC&#34;&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#brief-overview-of-docker&#34;&gt;Brief Overview of Docker&lt;/a&gt;&lt;/li&gt;
@@ -1012,678 +1012,58 @@ sudo docker push timtrice/rstudio-3.3.1&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Example Talk</title>
-      <link>/talk/example-talk/</link>
+      <link>http://timtrice.net/talk/example-talk/</link>
       <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>/talk/example-talk/</guid>
+      <guid>http://timtrice.net/talk/example-talk/</guid>
       <description>&lt;p&gt;Embed your slides or video here using &lt;a href=&#34;https://sourcethemes.com/academic/post/writing-markdown-latex/&#34; target=&#34;_blank&#34;&gt;shortcodes&lt;/a&gt;. Further details can easily be added using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>HURDAT</title>
-      <link>/project/hurdat/</link>
+      <link>http://timtrice.net/project/hurdat/</link>
       <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>/project/hurdat/</guid>
+      <guid>http://timtrice.net/project/hurdat/</guid>
       <description></description>
     </item>
     
     <item>
       <title>A Person Re-Identification System For Mobile Devices</title>
-      <link>/publication/person-re-identification/</link>
+      <link>http://timtrice.net/publication/person-re-identification/</link>
       <pubDate>Tue, 01 Sep 2015 00:00:00 +0000</pubDate>
       
-      <guid>/publication/person-re-identification/</guid>
+      <guid>http://timtrice.net/publication/person-re-identification/</guid>
       <description>&lt;p&gt;More detail can easily be written here using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Backtesting Strategies</title>
-      <link>/project/backtesting-strategies/</link>
+      <link>http://timtrice.net/project/backtesting-strategies/</link>
       <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
       
-      <guid>/project/backtesting-strategies/</guid>
+      <guid>http://timtrice.net/project/backtesting-strategies/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Mobile visual clothing search</title>
-      <link>/publication/clothing-search/</link>
+      <link>http://timtrice.net/publication/clothing-search/</link>
       <pubDate>Mon, 01 Jul 2013 00:00:00 +0000</pubDate>
       
-      <guid>/publication/clothing-search/</guid>
+      <guid>http://timtrice.net/publication/clothing-search/</guid>
       <description>&lt;p&gt;More detail can easily be written here using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
 </description>
     </item>
     
     <item>
-      <title>Analysis of Beer Reviews</title>
-      <link>/r/beer-reviews-analysis/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/r/beer-reviews-analysis/</guid>
-      <description>&lt;div id=&#34;TOC&#34;&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#data-download&#34;&gt;Data Download&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#the-variables&#34;&gt;The Variables&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#data-cleaning&#34;&gt;Data Cleaning&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#exploratory&#34;&gt;Exploratory&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#r-session-info&#34;&gt;R Session Info&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(corrplot)
-library(dplyr)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## 
-## Attaching package: &amp;#39;dplyr&amp;#39;&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## The following objects are masked from &amp;#39;package:stats&amp;#39;:
-## 
-##     filter, lag&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## The following objects are masked from &amp;#39;package:base&amp;#39;:
-## 
-##     intersect, setdiff, setequal, union&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(ggplot2)
-library(Hmisc)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Loading required package: lattice&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Loading required package: survival&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Loading required package: Formula&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## 
-## Attaching package: &amp;#39;Hmisc&amp;#39;&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## The following objects are masked from &amp;#39;package:dplyr&amp;#39;:
-## 
-##     combine, src, summarize&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## The following objects are masked from &amp;#39;package:base&amp;#39;:
-## 
-##     format.pval, round.POSIXt, trunc.POSIXt, units&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(purrr)
-library(rvest)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Loading required package: xml2&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## 
-## Attaching package: &amp;#39;rvest&amp;#39;&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## The following object is masked from &amp;#39;package:purrr&amp;#39;:
-## 
-##     pluck&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## The following object is masked from &amp;#39;package:Hmisc&amp;#39;:
-## 
-##     html&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(stringr)
-library(xml2)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.linkedin.com/pulse/how-hire-test-data-skills-one-size-fits-all-interview-tanya-cashorali/&#34;&gt;One-Size-Fits-All Interview Kit&lt;/a&gt;&lt;/p&gt;
-&lt;div id=&#34;data-download&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Data Download&lt;/h3&gt;
-&lt;p&gt;Data courtesy of &lt;a href=&#34;http://www.beeradvocate.com/&#34;&gt;Beer Advocate&lt;/a&gt;.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#&amp;#39; Path to download csv
-data_dir &amp;lt;- &amp;quot;~/Downloads&amp;quot;
-
-local_file &amp;lt;- sprintf(&amp;quot;%s/beer_reviews.csv&amp;quot;, data_dir)
-
-if (file.exists(local_file)) {
-  df &amp;lt;- readr::read_csv(local_file)
-  
-} else {
-
-  url &amp;lt;- &amp;quot;https://github.com/timtrice/datasets/blob/master/beer_reviews/beer_reviews.tar.gz?raw=true&amp;quot;
-  destdir &amp;lt;- tempdir()
-  utils::download.file(file.path(url), zip_file &amp;lt;- tempfile())
-  utils::untar(zip_file, exdir = destdir)
-  df &amp;lt;- readr::read_csv(sprintf(&amp;quot;%s/beer_reviews/beer_reviews.csv&amp;quot;, destdir))
-  
-  if (!dir.exists(data_dir)) 
-    dir.create(data_dir)
-  
-  readr::write_csv(df, file.path(local_file))
-
-}&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Parsed with column specification:
-## cols(
-##   brewery_id = col_integer(),
-##   brewery_name = col_character(),
-##   review_time = col_integer(),
-##   review_overall = col_double(),
-##   review_aroma = col_double(),
-##   review_appearance = col_double(),
-##   review_profilename = col_character(),
-##   beer_style = col_character(),
-##   review_palate = col_double(),
-##   review_taste = col_double(),
-##   beer_name = col_character(),
-##   beer_abv = col_double(),
-##   beer_beerid = col_integer()
-## )&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div id=&#34;the-variables&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;The Variables&lt;/h3&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;str(df)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Classes &amp;#39;tbl_df&amp;#39;, &amp;#39;tbl&amp;#39; and &amp;#39;data.frame&amp;#39;:    1586614 obs. of  13 variables:
-##  $ brewery_id        : int  10325 10325 10325 10325 1075 1075 1075 1075 1075 1075 ...
-##  $ brewery_name      : chr  &amp;quot;Vecchio Birraio&amp;quot; &amp;quot;Vecchio Birraio&amp;quot; &amp;quot;Vecchio Birraio&amp;quot; &amp;quot;Vecchio Birraio&amp;quot; ...
-##  $ review_time       : int  1234817823 1235915097 1235916604 1234725145 1293735206 1325524659 1318991115 1306276018 1290454503 1285632924 ...
-##  $ review_overall    : num  1.5 3 3 3 4 3 3.5 3 4 4.5 ...
-##  $ review_aroma      : num  2 2.5 2.5 3 4.5 3.5 3.5 2.5 3 3.5 ...
-##  $ review_appearance : num  2.5 3 3 3.5 4 3.5 3.5 3.5 3.5 5 ...
-##  $ review_profilename: chr  &amp;quot;stcules&amp;quot; &amp;quot;stcules&amp;quot; &amp;quot;stcules&amp;quot; &amp;quot;stcules&amp;quot; ...
-##  $ beer_style        : chr  &amp;quot;Hefeweizen&amp;quot; &amp;quot;English Strong Ale&amp;quot; &amp;quot;Foreign / Export Stout&amp;quot; &amp;quot;German Pilsener&amp;quot; ...
-##  $ review_palate     : num  1.5 3 3 2.5 4 3 4 2 3.5 4 ...
-##  $ review_taste      : num  1.5 3 3 3 4.5 3.5 4 3.5 4 4 ...
-##  $ beer_name         : chr  &amp;quot;Sausa Weizen&amp;quot; &amp;quot;Red Moon&amp;quot; &amp;quot;Black Horse Black Beer&amp;quot; &amp;quot;Sausa Pils&amp;quot; ...
-##  $ beer_abv          : num  5 6.2 6.5 5 7.7 4.7 4.7 4.7 4.7 4.7 ...
-##  $ beer_beerid       : int  47986 48213 48215 47969 64883 52159 52159 52159 52159 52159 ...
-##  - attr(*, &amp;quot;spec&amp;quot;)=List of 2
-##   ..$ cols   :List of 13
-##   .. ..$ brewery_id        : list()
-##   .. .. ..- attr(*, &amp;quot;class&amp;quot;)= chr  &amp;quot;collector_integer&amp;quot; &amp;quot;collector&amp;quot;
-##   .. ..$ brewery_name      : list()
-##   .. .. ..- attr(*, &amp;quot;class&amp;quot;)= chr  &amp;quot;collector_character&amp;quot; &amp;quot;collector&amp;quot;
-##   .. ..$ review_time       : list()
-##   .. .. ..- attr(*, &amp;quot;class&amp;quot;)= chr  &amp;quot;collector_integer&amp;quot; &amp;quot;collector&amp;quot;
-##   .. ..$ review_overall    : list()
-##   .. .. ..- attr(*, &amp;quot;class&amp;quot;)= chr  &amp;quot;collector_double&amp;quot; &amp;quot;collector&amp;quot;
-##   .. ..$ review_aroma      : list()
-##   .. .. ..- attr(*, &amp;quot;class&amp;quot;)= chr  &amp;quot;collector_double&amp;quot; &amp;quot;collector&amp;quot;
-##   .. ..$ review_appearance : list()
-##   .. .. ..- attr(*, &amp;quot;class&amp;quot;)= chr  &amp;quot;collector_double&amp;quot; &amp;quot;collector&amp;quot;
-##   .. ..$ review_profilename: list()
-##   .. .. ..- attr(*, &amp;quot;class&amp;quot;)= chr  &amp;quot;collector_character&amp;quot; &amp;quot;collector&amp;quot;
-##   .. ..$ beer_style        : list()
-##   .. .. ..- attr(*, &amp;quot;class&amp;quot;)= chr  &amp;quot;collector_character&amp;quot; &amp;quot;collector&amp;quot;
-##   .. ..$ review_palate     : list()
-##   .. .. ..- attr(*, &amp;quot;class&amp;quot;)= chr  &amp;quot;collector_double&amp;quot; &amp;quot;collector&amp;quot;
-##   .. ..$ review_taste      : list()
-##   .. .. ..- attr(*, &amp;quot;class&amp;quot;)= chr  &amp;quot;collector_double&amp;quot; &amp;quot;collector&amp;quot;
-##   .. ..$ beer_name         : list()
-##   .. .. ..- attr(*, &amp;quot;class&amp;quot;)= chr  &amp;quot;collector_character&amp;quot; &amp;quot;collector&amp;quot;
-##   .. ..$ beer_abv          : list()
-##   .. .. ..- attr(*, &amp;quot;class&amp;quot;)= chr  &amp;quot;collector_double&amp;quot; &amp;quot;collector&amp;quot;
-##   .. ..$ beer_beerid       : list()
-##   .. .. ..- attr(*, &amp;quot;class&amp;quot;)= chr  &amp;quot;collector_integer&amp;quot; &amp;quot;collector&amp;quot;
-##   ..$ default: list()
-##   .. ..- attr(*, &amp;quot;class&amp;quot;)= chr  &amp;quot;collector_guess&amp;quot; &amp;quot;collector&amp;quot;
-##   ..- attr(*, &amp;quot;class&amp;quot;)= chr &amp;quot;col_spec&amp;quot;&lt;/code&gt;&lt;/pre&gt;
-&lt;div id=&#34;brewery_id&#34; class=&#34;section level4&#34;&gt;
-&lt;h4&gt;brewery_id&lt;/h4&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;describe(df$brewery_id)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## df$brewery_id 
-##        n  missing distinct     Info     Mean      Gmd      .05      .10 
-##  1586614        0     5840        1     3130     4731       30       45 
-##      .25      .50      .75      .90      .95 
-##      143      429     2372    12516    16866 
-## 
-## lowest :     1     2     3     4     5, highest: 27945 27980 27984 28000 28003&lt;/code&gt;&lt;/pre&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;continuous variable&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;There are no missing &lt;code&gt;brewer_id&lt;/code&gt; values.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;The mean is higher than 75% of the values so there is a heavy skew along the lower values for some reason. Question: &lt;em&gt;Why is this? Is this relevant?&lt;/em&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(df, aes(x = brewery_id)) + geom_histogram(bins = 50)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;./R/beer-reviews-analysis_files/figure-html/unnamed-chunk-4-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;brewery_name&#34; class=&#34;section level4&#34;&gt;
-&lt;h4&gt;brewery_name&lt;/h4&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;describe(df$brewery_name)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## df$brewery_name 
-##        n  missing distinct 
-##  1586599       15     5742 
-## 
-## lowest : &amp;#39;t Hofbrouwerijke                 (512) Brewing Company             10 Barrel Brewing Co.             1516 Brewing Company              16 Mile Brewing Company          
-## highest: Zum Löwenbräu                     Zum Stiefel                       Zuma Brewing Company              Zweite Schweriner Schlossbrauerei Zywiec Breweries PLC (Heineken)&lt;/code&gt;&lt;/pre&gt;
-&lt;ul&gt;
-&lt;li&gt;Categorical variables&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;My expectation was for the numbers &lt;code&gt;n&lt;/code&gt;, &lt;code&gt;missing&lt;/code&gt; and &lt;code&gt;distinct&lt;/code&gt; to match up with &lt;code&gt;brewery_id&lt;/code&gt;, but they don’t. While the &lt;code&gt;missing&lt;/code&gt; count is only slightly off (-15), the &lt;code&gt;distinct&lt;/code&gt; count is way off (-98).&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;unique(df$brewery_id[is.na(df$brewery_name)])&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 1193   27&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;There are only 2 missing unique &lt;code&gt;brewer_id&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;The discrepancy suggests some brewery’s may have multiple names for the same id.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% 
-  group_by(brewery_id) %&amp;gt;% 
-  summarise(n = length(unique(brewery_name))) %&amp;gt;% 
-  filter(n &amp;gt; 1)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## # A tibble: 0 x 2
-## # ... with 2 variables: brewery_id &amp;lt;int&amp;gt;, n &amp;lt;int&amp;gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;My instinct is wrong. I’ll flip it.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% 
-  group_by(brewery_name) %&amp;gt;% 
-  summarise(n = length(unique(brewery_id))) %&amp;gt;% 
-  filter(n &amp;gt; 1) %&amp;gt;% 
-  arrange(brewery_name)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## # A tibble: 60 x 2
-##                           brewery_name     n
-##                                  &amp;lt;chr&amp;gt; &amp;lt;int&amp;gt;
-##  1                 Back Street Brewery     4
-##  2                Baja Brewing Company     2
-##  3          Bare Bones Grill &amp;amp; Brewery     2
-##  4    Big River Grille &amp;amp; Brewing Works     3
-##  5           BJ&amp;#39;s Restaurant &amp;amp; Brewery     4
-##  6         BJ&amp;#39;s Restaurant &amp;amp; Brewhouse     3
-##  7       BJ&amp;#39;s Restaurant And Brewhouse     2
-##  8 Brew Moon Restaurant &amp;amp; Microbrewery     2
-##  9                        C.B. &amp;amp; Potts     3
-## 10                Capitol City Brewing     3
-## # ... with 50 more rows&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Ok, so 60 &lt;code&gt;brewery_name&lt;/code&gt; have multiple &lt;code&gt;brewery_id&lt;/code&gt;. There are also spelling discrepancies, e.g., BJ’s Restaurant &amp;amp; Brewery, BJ’s Restaurant &amp;amp; Brewhouse, BJ’s Restaurant And Brewhouse. These discrepancies will need to be cleaned.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;review_time&#34; class=&#34;section level4&#34;&gt;
-&lt;h4&gt;review_time&lt;/h4&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;describe(df$review_time)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## df$review_time 
-##         n   missing  distinct      Info      Mean       Gmd       .05 
-##   1586614         0   1577960         1 1.224e+09  85515630 1.071e+09 
-##       .10       .25       .50       .75       .90       .95 
-## 1.107e+09 1.173e+09 1.239e+09 1.289e+09 1.311e+09 1.318e+09 
-## 
-## lowest :  840672001  884390401  884649601  885340801  885427201
-## highest: 1326274454 1326275049 1326276656 1326284970 1326285348&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(df, aes(x = review_time)) + geom_histogram(bins = 10000)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;./R/beer-reviews-analysis_files/figure-html/unnamed-chunk-10-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;review_overall&#34; class=&#34;section level4&#34;&gt;
-&lt;h4&gt;review_overall&lt;/h4&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;describe(df$review_overall)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## df$review_overall 
-##        n  missing distinct     Info     Mean      Gmd      .05      .10 
-##  1586614        0       10    0.934    3.816   0.7584      2.5      3.0 
-##      .25      .50      .75      .90      .95 
-##      3.5      4.0      4.5      4.5      5.0 
-##                                                                          
-## Value         0.0    1.0    1.5    2.0    2.5    3.0    3.5    4.0    4.5
-## Frequency       7  10954  12975  38225  58523 165644 301817 582764 324385
-## Proportion  0.000  0.007  0.008  0.024  0.037  0.104  0.190  0.367  0.204
-##                  
-## Value         5.0
-## Frequency   91320
-## Proportion  0.058&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(df, aes(x = review_overall)) + geom_bar()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;./R/beer-reviews-analysis_files/figure-html/unnamed-chunk-12-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Categorical&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div id=&#34;review_aroma&#34; class=&#34;section level4&#34;&gt;
-&lt;h4&gt;review_aroma&lt;/h4&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;describe(df$review_aroma)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## df$review_aroma 
-##        n  missing distinct     Info     Mean      Gmd 
-##  1586614        0        9    0.937    3.736    0.744 
-##                                                                          
-## Value         1.0    1.5    2.0    2.5    3.0    3.5    4.0    4.5    5.0
-## Frequency    6873  12524  42566  66359 200030 365312 557383 271450  64117
-## Proportion  0.004  0.008  0.027  0.042  0.126  0.230  0.351  0.171  0.040&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(df, aes(x = review_aroma)) + geom_bar()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;./R/beer-reviews-analysis_files/figure-html/unnamed-chunk-14-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Categorical&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div id=&#34;review_appearance&#34; class=&#34;section level4&#34;&gt;
-&lt;h4&gt;review_appearance&lt;/h4&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;describe(df$review_appearance)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## df$review_appearance 
-##        n  missing distinct     Info     Mean      Gmd      .05      .10 
-##  1586614        0       10    0.908    3.842   0.6436      3.0      3.0 
-##      .25      .50      .75      .90      .95 
-##      3.5      4.0      4.0      4.5      4.5 
-##                                                                          
-## Value         0.0    1.0    1.5    2.0    2.5    3.0    3.5    4.0    4.5
-## Frequency       7   3323   6147  25414  39493 166009 318529 674186 288108
-## Proportion  0.000  0.002  0.004  0.016  0.025  0.105  0.201  0.425  0.182
-##                  
-## Value         5.0
-## Frequency   65398
-## Proportion  0.041&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(df, aes(x = review_appearance)) + geom_bar()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;./R/beer-reviews-analysis_files/figure-html/unnamed-chunk-16-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Categorical&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div id=&#34;review_profilename&#34; class=&#34;section level4&#34;&gt;
-&lt;h4&gt;review_profilename&lt;/h4&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;describe(df$review_profilename)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## df$review_profilename 
-##        n  missing distinct 
-##  1586266      348    33387 
-## 
-## lowest : 0110x011    01Ryan10    02maxima    03SVTCobra  04101Brewer
-## highest: zythus      Zywiec06    zyzygy      zzajjber    Zzyzx&lt;/code&gt;&lt;/pre&gt;
-&lt;ul&gt;
-&lt;li&gt;Categorical&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div id=&#34;beer_style&#34; class=&#34;section level4&#34;&gt;
-&lt;h4&gt;beer_style&lt;/h4&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;describe(df$beer_style)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## df$beer_style 
-##        n  missing distinct 
-##  1586614        0      104 
-## 
-## lowest : Altbier                    American Adjunct Lager     American Amber / Red Ale   American Amber / Red Lager American Barleywine       
-## highest: Vienna Lager               Weizenbock                 Wheatwine                  Winter Warmer              Witbier&lt;/code&gt;&lt;/pre&gt;
-&lt;ul&gt;
-&lt;li&gt;Categorical&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div id=&#34;review_palate&#34; class=&#34;section level4&#34;&gt;
-&lt;h4&gt;review_palate&lt;/h4&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;describe(df$review_palate)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## df$review_palate 
-##        n  missing distinct     Info     Mean      Gmd 
-##  1586614        0        9    0.928    3.744   0.7227 
-##                                                                          
-## Value         1.0    1.5    2.0    2.5    3.0    3.5    4.0    4.5    5.0
-## Frequency    6874  11045  38333  62842 206932 338585 606711 253102  62190
-## Proportion  0.004  0.007  0.024  0.040  0.130  0.213  0.382  0.160  0.039&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(df, aes(x = review_palate)) + geom_bar()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;./R/beer-reviews-analysis_files/figure-html/unnamed-chunk-20-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Categorical&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div id=&#34;review_taste&#34; class=&#34;section level4&#34;&gt;
-&lt;h4&gt;review_taste&lt;/h4&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;describe(df$review_taste)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## df$review_taste 
-##        n  missing distinct     Info     Mean      Gmd 
-##  1586614        0        9    0.941    3.793   0.7766 
-##                                                                          
-## Value         1.0    1.5    2.0    2.5    3.0    3.5    4.0    4.5    5.0
-## Frequency    9991  15128  41992  66534 166860 324541 541429 336162  83977
-## Proportion  0.006  0.010  0.026  0.042  0.105  0.205  0.341  0.212  0.053&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(df, aes(x = review_taste)) + geom_bar()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;./R/beer-reviews-analysis_files/figure-html/unnamed-chunk-22-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Categorical&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div id=&#34;beer_abv&#34; class=&#34;section level4&#34;&gt;
-&lt;h4&gt;beer_abv&lt;/h4&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;describe(df$beer_abv)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## df$beer_abv 
-##        n  missing distinct     Info     Mean      Gmd      .05      .10 
-##  1518829    67785      530    0.999    7.042     2.47      4.5      4.8 
-##      .25      .50      .75      .90      .95 
-##      5.2      6.5      8.5     10.0     11.0 
-## 
-## lowest :  0.01  0.05  0.08  0.10  0.25, highest: 39.00 39.44 41.00 43.00 57.70&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% 
-  filter(!is.na(beer_abv)) %&amp;gt;% 
-  ggplot(aes(x = beer_abv)) + 
-  geom_freqpoly(bins = 10)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;./R/beer-reviews-analysis_files/figure-html/unnamed-chunk-24-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Continuous&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div id=&#34;beer_name&#34; class=&#34;section level4&#34;&gt;
-&lt;h4&gt;beer_name&lt;/h4&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;describe(df$beer_name)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## df$beer_name 
-##        n  missing distinct 
-##  1586614        0    56857 
-## 
-## lowest : ! (Old Ale)                       ? (Imperial Bitter)               ? The Riddler ?                   ¿Por Que No?                      .357 Imperial Pilsner            
-## highest: ZZ Lager                          Þorrabjór                         Ω-naught (Omeganaught)            横須賀ビアサケ (Yokosuka Biasake) 葉山ビール (Hayama Beer)&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div id=&#34;beer_beerid&#34; class=&#34;section level4&#34;&gt;
-&lt;h4&gt;beer_beerid&lt;/h4&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;describe(df$beer_beerid)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## df$beer_beerid 
-##        n  missing distinct     Info     Mean      Gmd      .05      .10 
-##  1586614        0    66055        1    21713    23983      213      577 
-##      .25      .50      .75      .90      .95 
-##     1717    13906    39441    55183    62653 
-## 
-## lowest :     3     4     5     6     7, highest: 77313 77314 77315 77316 77317&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(df, aes(x = beer_beerid)) + geom_histogram(bins = 50)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;./R/beer-reviews-analysis_files/figure-html/unnamed-chunk-27-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id=&#34;data-cleaning&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Data Cleaning&lt;/h3&gt;
-&lt;p&gt;There are four variables I’m most concerned about that will need to be cleaned: &lt;code&gt;brewery_id&lt;/code&gt;, &lt;code&gt;brewery_name&lt;/code&gt;, &lt;code&gt;beer_name&lt;/code&gt; and &lt;code&gt;beer_beerid&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Recall again the list of brewery names that had more than one brewery id:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% 
-  group_by(brewery_name) %&amp;gt;% 
-  summarise(n = length(unique(brewery_id))) %&amp;gt;% 
-  filter(n &amp;gt; 1) %&amp;gt;% 
-  arrange(brewery_name)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## # A tibble: 60 x 2
-##                           brewery_name     n
-##                                  &amp;lt;chr&amp;gt; &amp;lt;int&amp;gt;
-##  1                 Back Street Brewery     4
-##  2                Baja Brewing Company     2
-##  3          Bare Bones Grill &amp;amp; Brewery     2
-##  4    Big River Grille &amp;amp; Brewing Works     3
-##  5           BJ&amp;#39;s Restaurant &amp;amp; Brewery     4
-##  6         BJ&amp;#39;s Restaurant &amp;amp; Brewhouse     3
-##  7       BJ&amp;#39;s Restaurant And Brewhouse     2
-##  8 Brew Moon Restaurant &amp;amp; Microbrewery     2
-##  9                        C.B. &amp;amp; Potts     3
-## 10                Capitol City Brewing     3
-## # ... with 50 more rows&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I established earlier that brewery id’s only have one unique brewery name. I’ll go through each name on this list and try to iron out the discrepancies.&lt;/p&gt;
-&lt;div id=&#34;brewery-name-data-validation&#34; class=&#34;section level4&#34;&gt;
-&lt;h4&gt;Brewery Name Data Validation&lt;/h4&gt;
-&lt;p&gt;I’ll start first with “Back Street Brewery”. I want to list all distinct &lt;code&gt;brewery_name&lt;/code&gt; values that begin with “Back St” (use the common St abbreviation to capture both St and Street).&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% 
-  filter(grepl(&amp;quot;^Back St&amp;quot;, brewery_name)) %&amp;gt;% 
-  select(starts_with(&amp;quot;b&amp;quot;)) %&amp;gt;% 
-  distinct(brewery_name, .keep_all = TRUE)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## # A tibble: 1 x 6
-##   brewery_id        brewery_name beer_style beer_name beer_abv beer_beerid
-##        &amp;lt;int&amp;gt;               &amp;lt;chr&amp;gt;      &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt;    &amp;lt;dbl&amp;gt;       &amp;lt;int&amp;gt;
-## 1       4410 Back Street Brewery    Altbier       Alt       NA       58971&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;There is only one Back St. What about distinct &lt;code&gt;brewery_id&lt;/code&gt; values?&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% 
-  filter(grepl(&amp;quot;^Back St&amp;quot;, brewery_name)) %&amp;gt;% 
-  select(starts_with(&amp;quot;b&amp;quot;)) %&amp;gt;% 
-  distinct(brewery_id, .keep_all = TRUE)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## # A tibble: 4 x 6
-##   brewery_id        brewery_name               beer_style
-##        &amp;lt;int&amp;gt;               &amp;lt;chr&amp;gt;                    &amp;lt;chr&amp;gt;
-## 1       4410 Back Street Brewery                  Altbier
-## 2      15327 Back Street Brewery               Hefeweizen
-## 3      12164 Back Street Brewery American Amber / Red Ale
-## 4      10012 Back Street Brewery  Belgian Strong Dark Ale
-## # ... with 3 more variables: beer_name &amp;lt;chr&amp;gt;, beer_abv &amp;lt;dbl&amp;gt;,
-## #   beer_beerid &amp;lt;int&amp;gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Ok, there are a few different &lt;code&gt;brewery_id&lt;/code&gt; values for this brewery. I’m a bit stuck on how I can validate the legitimacy (or lack thereof) on these values.&lt;/p&gt;
-&lt;p&gt;Are there multiple “Back Street Brewery”? Or, is this a crowd-sourcing error (Yelp is bad with this, too).&lt;/p&gt;
-&lt;p&gt;Thankfully, the Beer Advocate website happens to have addresses. We can plug &lt;code&gt;brewery_id&lt;/code&gt; into a URL and scrape the address info.&lt;/p&gt;
-&lt;p&gt;Let me go grab the brewery ids.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;brewery_ids &amp;lt;- df %&amp;gt;% 
-  filter(grepl(&amp;quot;^Back St&amp;quot;, brewery_name)) %&amp;gt;% 
-  select(starts_with(&amp;quot;brew&amp;quot;)) %&amp;gt;% 
-  distinct() %&amp;gt;% 
-  pull(brewery_id)
-
-brewery_ids&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1]  4410 15327 12164 10012&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Now I’ll write a little scraping function that will return the addresses for each of the breweries.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;get_addresses &amp;lt;- function(brewery_id) {
-
-  url &amp;lt;- glue::glue(&amp;quot;https://www.beeradvocate.com/beer/profile/{brewery_id}/&amp;quot;)
-  
-  xml2::read_html(url) %&amp;gt;% 
-    rvest::html_nodes(xpath = &amp;quot;//*[(@id = &amp;#39;info_box&amp;#39;)]&amp;quot;) %&amp;gt;% 
-    rvest::html_text()
-}&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Get the addresses.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;addresses &amp;lt;- map(brewery_ids, get_addresses) %&amp;gt;% 
-  trimws() %&amp;gt;% 
-  str_split(pattern = &amp;quot;[:cntrl:]+&amp;quot;) %&amp;gt;% 
-  # All address info seems to be in the 3rd element so just grab those.
-  map(`[`, 3)
-
-addresses&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [[1]]
-## [1] &amp;quot;14450 Culver DriveIrvine, California, 92604United States(949) 857-0160 | maplamppostpizza.com&amp;quot;
-## 
-## [[2]]
-## [1] &amp;quot;78-772 Highway 111La Quinta, California, 92253United States(760) 564-4568 | maplamppostpizza.com&amp;quot;
-## 
-## [[3]]
-## [1] &amp;quot;15 Main Street, Suite #100Vista, California, 92084United States(760) 407-7600 | maplamppostpizza.com&amp;quot;
-## 
-## [[4]]
-## [1] &amp;quot;27702 Crown Valley ParkwayLadera Ranch, California, 92691United States(949) 388-7260 // CLOSED //&amp;quot;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I can do a visual analysis and see none of these are a match. In other words, it looks like we’re dealing with a franchise. With that said, “Back Street Brewery” should not be corrected.&lt;/p&gt;
-&lt;p&gt;I’m going to modify &lt;code&gt;get_addresses()&lt;/code&gt; to take the pattern I’m searching (in the example above, “^Back St”) and just return the results. I don’t want to keep typing all of that code.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#&amp;#39; @title get_addresses
-#&amp;#39; @description Given a dataframe (x) and a pattern for brewery_name, will 
-#&amp;#39;    return all addresses for breweries that match that pattern.
-#&amp;#39; @param x Dataframe object
-#&amp;#39; @pattern regex pattern for brewery names to find
-get_addresses &amp;lt;- function(x, pattern) {
-  x %&amp;gt;% 
-  filter(grepl(pattern, brewery_name)) %&amp;gt;% 
-  select(starts_with(&amp;quot;brew&amp;quot;)) %&amp;gt;% 
-  distinct() %&amp;gt;% 
-  pull(brewery_id) %&amp;gt;% 
-  sprintf(&amp;quot;https://www.beeradvocate.com/beer/profile/%s/&amp;quot;, .) %&amp;gt;% 
-  map(read_html) %&amp;gt;% 
-  map(html_nodes, xpath = &amp;quot;//*[(@id = &amp;#39;info_box&amp;#39;)]&amp;quot;) %&amp;gt;% 
-  map(html_text) %&amp;gt;% 
-  str_split(pattern = &amp;quot;[:cntrl:]+&amp;quot;) %&amp;gt;% 
-  map(`[`, 4)
-}&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;I’ll test it.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;get_addresses(df, &amp;quot;^Back St&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [[1]]
-## [1] &amp;quot;14450 Culver DriveIrvine, California, 92604United States(949) 857-0160 | maplamppostpizza.com&amp;quot;
-## 
-## [[2]]
-## [1] &amp;quot;78-772 Highway 111La Quinta, California, 92253United States(760) 564-4568 | maplamppostpizza.com&amp;quot;
-## 
-## [[3]]
-## [1] &amp;quot;15 Main Street, Suite #100Vista, California, 92084United States(760) 407-7600 | maplamppostpizza.com&amp;quot;
-## 
-## [[4]]
-## [1] &amp;quot;27702 Crown Valley ParkwayLadera Ranch, California, 92691United States(949) 388-7260 // CLOSED //&amp;quot;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;[[satisfied face meme]]&lt;/p&gt;
-&lt;p&gt;Ok, now I just need to go through our discrepancies. It would be nice to write a function to do this as well. But the pattern requires human involvement; oh, well.&lt;/p&gt;
-&lt;p&gt;Of the known items with possible issues, only those that immediately follow had true issues.&lt;/p&gt;
-&lt;div id=&#34;bare-bones-grill-brewery&#34; class=&#34;section level5&#34;&gt;
-&lt;h5&gt;Bare Bones Grill &amp;amp; Brewery&lt;/h5&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ptn &amp;lt;- &amp;quot;^Bare\\s&amp;quot;&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#&amp;#39; Find all possible matches
-df %&amp;gt;% filter(grepl(ptn, brewery_name)) %&amp;gt;% 
-  select(starts_with(&amp;quot;brew&amp;quot;)) %&amp;gt;% 
-  distinct(brewery_id, .keep_all = TRUE)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## # A tibble: 2 x 2
-##   brewery_id               brewery_name
-##        &amp;lt;int&amp;gt;                      &amp;lt;chr&amp;gt;
-## 1       1953 Bare Bones Grill &amp;amp; Brewery
-## 2       1954 Bare Bones Grill &amp;amp; Brewery&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#&amp;#39; List addresses
-get_addresses(df, ptn)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Error in open.connection(x, &amp;quot;rb&amp;quot;): HTTP error 404.&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;In this case, the page for id 1953 no longer exists. So, there is no way to validate the discrepancy. In this case I will update all 1953 &lt;code&gt;brewery_id&lt;/code&gt; values to 1954.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df$brewery_id[df$brewery_id == 1953] &amp;lt;- 1954&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Warning: closing unused connection 5 (https://www.beeradvocate.com/beer/
-## profile/1953/)&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id=&#34;rocky-coulee-brewing-co.&#34; class=&#34;section level4&#34;&gt;
-&lt;h4&gt;Rocky Coulee Brewing Co.&lt;/h4&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ptn &amp;lt;- &amp;quot;^Rocky\\sC&amp;quot;&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#&amp;#39; Find all possible matches
-df %&amp;gt;% filter(grepl(ptn, brewery_name)) %&amp;gt;% 
-  select(starts_with(&amp;quot;brew&amp;quot;)) %&amp;gt;% 
-  distinct(brewery_id, .keep_all = TRUE)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## # A tibble: 2 x 2
-##   brewery_id             brewery_name
-##        &amp;lt;dbl&amp;gt;                    &amp;lt;chr&amp;gt;
-## 1      13094 Rocky Coulee Brewing Co.
-## 2      12984 Rocky Coulee Brewing Co.&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#&amp;#39; List addresses
-get_addresses(df, ptn)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [[1]]
-## [1] &amp;quot;205 N. First StreetOdessa, Washington, 99159United States(509) 345-2216 | maprockycouleebrewingco.com&amp;quot;
-## 
-## [[2]]
-## [1] &amp;quot;205 N. First StreetOdessa, Washington, 99159United States(509) 346-2216 // CLOSED //&amp;quot;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;“Rocky Coulee Brewing Co.” has two identical entries in the database. The only difference in the address listings is one digit in the phone number.&lt;/p&gt;
-&lt;p&gt;I’ll update those with &lt;code&gt;brewery_id&lt;/code&gt; 13094 to 12984.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df$brewery_id[df$brewery_id == 13094] &amp;lt;- 12984&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id=&#34;exploratory&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Exploratory&lt;/h3&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;cc &amp;lt;- df[complete.cases(df),] %&amp;gt;% 
-  select(starts_with(&amp;quot;review&amp;quot;), -review_time, -review_profilename, beer_abv)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;cor(cc)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##                   review_overall review_aroma review_appearance
-## review_overall         1.0000000    0.6127926         0.4985565
-## review_aroma           0.6127926    1.0000000         0.5590771
-## review_appearance      0.4985565    0.5590771         1.0000000
-## review_palate          0.6990197    0.6149238         0.5645551
-## review_taste           0.7871712    0.7147773         0.5445794
-## beer_abv               0.1384574    0.3325362         0.2638906
-##                   review_palate review_taste  beer_abv
-## review_overall        0.6990197    0.7871712 0.1384574
-## review_aroma          0.6149238    0.7147773 0.3325362
-## review_appearance     0.5645551    0.5445794 0.2638906
-## review_palate         1.0000000    0.7322005 0.2866673
-## review_taste          0.7322005    1.0000000 0.2907817
-## beer_abv              0.2866673    0.2907817 1.0000000&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Most positive relationship seems to be between &lt;code&gt;review_overall&lt;/code&gt; and &lt;code&gt;review_taste&lt;/code&gt;. I want to take the mean &lt;code&gt;review_overall&lt;/code&gt; and &lt;code&gt;review_taste&lt;/code&gt; per &lt;code&gt;beer_beerid&lt;/code&gt; and draw a scatterplot.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% 
-  group_by(beer_beerid) %&amp;gt;% 
-  summarise(mean_review_overall = mean(review_overall, na.rm = TRUE), 
-            mean_review_taste = mean(review_taste, na.rm = TRUE)) %&amp;gt;% 
-  ggplot(aes(x = mean_review_overall, y = mean_review_taste)) + 
-  geom_point() + 
-  geom_smooth()&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## `geom_smooth()` using method = &amp;#39;gam&amp;#39;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;./R/beer-reviews-analysis_files/figure-html/unnamed-chunk-46-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;Is this really surprising?&lt;/p&gt;
-&lt;p&gt;Next to taste is &lt;code&gt;review_palate&lt;/code&gt;; let’s check that out.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% 
-  group_by(beer_beerid) %&amp;gt;% 
-  summarise(mean_review_overall = mean(review_overall, na.rm = TRUE), 
-            mean_review_aroma = mean(review_aroma, na.rm = TRUE)) %&amp;gt;% 
-  ggplot(aes(x = mean_review_overall, y = mean_review_aroma)) + 
-  geom_point() + 
-  geom_smooth()&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## `geom_smooth()` using method = &amp;#39;gam&amp;#39;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;./R/beer-reviews-analysis_files/figure-html/unnamed-chunk-47-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;I’m curious what type of&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df %&amp;gt;% 
-  select(beer_beerid, review_overall, review_aroma, review_taste) %&amp;gt;% 
-  mutate(
-    review_class = case_when(
-      review_overall &amp;lt; 1 ~ &amp;quot;A&amp;quot;, 
-      review_overall &amp;lt; 2 ~ &amp;quot;B&amp;quot;, 
-      review_overall &amp;lt; 3 ~ &amp;quot;C&amp;quot;, 
-      review_overall &amp;lt; 4 ~ &amp;quot;D&amp;quot;, 
-      TRUE ~ &amp;quot;E&amp;quot;)) %&amp;gt;% 
-  group_by(beer_beerid) %&amp;gt;% 
-  summarise(mean_review_aroma = mean(review_aroma, na.rm = TRUE)) %&amp;gt;% 
-  ggplot(aes(x = review_class, y = mean_review_aroma)) %&amp;gt;% 
-  geom_boxplot()&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Error: Mapping must be created by `aes()` or `aes_()`&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div id=&#34;r-session-info&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;R Session Info&lt;/h2&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pander::pander(sessionInfo())&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;strong&gt;R version 3.4.1 (2017-06-30)&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;**&lt;a href=&#34;Platform:**&#34; class=&#34;uri&#34;&gt;Platform:**&lt;/a&gt; x86_64-pc-linux-gnu (64-bit)&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;locale:&lt;/strong&gt; &lt;em&gt;LC_CTYPE=en_US.UTF-8&lt;/em&gt;, &lt;em&gt;LC_NUMERIC=C&lt;/em&gt;, &lt;em&gt;LC_TIME=en_US.UTF-8&lt;/em&gt;, &lt;em&gt;LC_COLLATE=en_US.UTF-8&lt;/em&gt;, &lt;em&gt;LC_MONETARY=en_US.UTF-8&lt;/em&gt;, &lt;em&gt;LC_MESSAGES=C&lt;/em&gt;, &lt;em&gt;LC_PAPER=en_US.UTF-8&lt;/em&gt;, &lt;em&gt;LC_NAME=C&lt;/em&gt;, &lt;em&gt;LC_ADDRESS=C&lt;/em&gt;, &lt;em&gt;LC_TELEPHONE=C&lt;/em&gt;, &lt;em&gt;LC_MEASUREMENT=en_US.UTF-8&lt;/em&gt; and &lt;em&gt;LC_IDENTIFICATION=C&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;attached base packages:&lt;/strong&gt; &lt;em&gt;methods&lt;/em&gt;, &lt;em&gt;stats&lt;/em&gt;, &lt;em&gt;graphics&lt;/em&gt;, &lt;em&gt;grDevices&lt;/em&gt;, &lt;em&gt;utils&lt;/em&gt;, &lt;em&gt;datasets&lt;/em&gt; and &lt;em&gt;base&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;other attached packages:&lt;/strong&gt; &lt;em&gt;bindrcpp(v.0.2)&lt;/em&gt;, &lt;em&gt;stringr(v.1.2.0)&lt;/em&gt;, &lt;em&gt;rvest(v.0.3.2)&lt;/em&gt;, &lt;em&gt;xml2(v.1.1.1)&lt;/em&gt;, &lt;em&gt;purrr(v.0.2.3)&lt;/em&gt;, &lt;em&gt;Hmisc(v.4.0-3)&lt;/em&gt;, &lt;em&gt;Formula(v.1.2-2)&lt;/em&gt;, &lt;em&gt;survival(v.2.41-3)&lt;/em&gt;, &lt;em&gt;lattice(v.0.20-35)&lt;/em&gt;, &lt;em&gt;ggplot2(v.2.2.1)&lt;/em&gt;, &lt;em&gt;dplyr(v.0.7.4)&lt;/em&gt; and &lt;em&gt;corrplot(v.0.77)&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;loaded via a namespace (and not attached):&lt;/strong&gt; &lt;em&gt;pander(v.0.6.1)&lt;/em&gt;, &lt;em&gt;splines(v.3.4.1)&lt;/em&gt;, &lt;em&gt;colorspace(v.1.3-2)&lt;/em&gt;, &lt;em&gt;htmltools(v.0.3.6)&lt;/em&gt;, &lt;em&gt;mgcv(v.1.8-22)&lt;/em&gt;, &lt;em&gt;yaml(v.2.1.14)&lt;/em&gt;, &lt;em&gt;base64enc(v.0.1-3)&lt;/em&gt;, &lt;em&gt;rlang(v.0.1.2)&lt;/em&gt;, &lt;em&gt;foreign(v.0.8-69)&lt;/em&gt;, &lt;em&gt;glue(v.1.1.1)&lt;/em&gt;, &lt;em&gt;RColorBrewer(v.1.1-2)&lt;/em&gt;, &lt;em&gt;bindr(v.0.1)&lt;/em&gt;, &lt;em&gt;plyr(v.1.8.4)&lt;/em&gt;, &lt;em&gt;munsell(v.0.4.3)&lt;/em&gt;, &lt;em&gt;blogdown(v.0.1)&lt;/em&gt;, &lt;em&gt;gtable(v.0.2.0)&lt;/em&gt;, &lt;em&gt;htmlwidgets(v.0.9)&lt;/em&gt;, &lt;em&gt;evaluate(v.0.10.1)&lt;/em&gt;, &lt;em&gt;labeling(v.0.3)&lt;/em&gt;, &lt;em&gt;latticeExtra(v.0.6-28)&lt;/em&gt;, &lt;em&gt;knitr(v.1.17)&lt;/em&gt;, &lt;em&gt;curl(v.2.8.1)&lt;/em&gt;, &lt;em&gt;htmlTable(v.1.9)&lt;/em&gt;, &lt;em&gt;Rcpp(v.0.12.13)&lt;/em&gt;, &lt;em&gt;acepack(v.1.4.1)&lt;/em&gt;, &lt;em&gt;readr(v.1.1.1)&lt;/em&gt;, &lt;em&gt;scales(v.0.5.0)&lt;/em&gt;, &lt;em&gt;backports(v.1.1.1)&lt;/em&gt;, &lt;em&gt;checkmate(v.1.8.4)&lt;/em&gt;, &lt;em&gt;gridExtra(v.2.3)&lt;/em&gt;, &lt;em&gt;hms(v.0.3)&lt;/em&gt;, &lt;em&gt;digest(v.0.6.12)&lt;/em&gt;, &lt;em&gt;stringi(v.1.1.5)&lt;/em&gt;, &lt;em&gt;bookdown(v.0.5)&lt;/em&gt;, &lt;em&gt;grid(v.3.4.1)&lt;/em&gt;, &lt;em&gt;rprojroot(v.1.2)&lt;/em&gt;, &lt;em&gt;tools(v.3.4.1)&lt;/em&gt;, &lt;em&gt;magrittr(v.1.5)&lt;/em&gt;, &lt;em&gt;lazyeval(v.0.2.0)&lt;/em&gt;, &lt;em&gt;tibble(v.1.3.4)&lt;/em&gt;, &lt;em&gt;cluster(v.2.0.6)&lt;/em&gt;, &lt;em&gt;pkgconfig(v.2.0.1)&lt;/em&gt;, &lt;em&gt;Matrix(v.1.2-11)&lt;/em&gt;, &lt;em&gt;data.table(v.1.10.4)&lt;/em&gt;, &lt;em&gt;assertthat(v.0.2.0)&lt;/em&gt;, &lt;em&gt;rmarkdown(v.1.6)&lt;/em&gt;, &lt;em&gt;httr(v.1.3.1)&lt;/em&gt;, &lt;em&gt;R6(v.2.2.2)&lt;/em&gt;, &lt;em&gt;rpart(v.4.1-11)&lt;/em&gt;, &lt;em&gt;nlme(v.3.1-131)&lt;/em&gt;, &lt;em&gt;nnet(v.7.3-12)&lt;/em&gt; and &lt;em&gt;compiler(v.3.4.1)&lt;/em&gt;&lt;/p&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Highest Paid Employee</title>
-      <link>/sql/highest_paid_employee/</link>
+      <link>http://timtrice.net/sql/highest_paid_employee/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/sql/highest_paid_employee/</guid>
+      <guid>http://timtrice.net/sql/highest_paid_employee/</guid>
       <description>&lt;p&gt;Using &lt;a href=&#34;https://dev.mysql.com/doc/employee/en/&#34;&gt;employees&lt;/a&gt; database, we need to find the highest-paid employee in our database.&lt;/p&gt;
 &lt;p&gt;With this particular database we have to be careful about making assumptions of our data, some of which would be:&lt;/p&gt;
 &lt;ul&gt;
@@ -1912,10 +1292,10 @@ LIMIT 1;&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Projects</title>
-      <link>/projects/</link>
+      <link>http://timtrice.net/projects/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/projects/</guid>
+      <guid>http://timtrice.net/projects/</guid>
       <description>
 
 &lt;h2 id=&#34;r&#34;&gt;R&lt;/h2&gt;
