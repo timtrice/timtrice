@@ -1,0 +1,317 @@
+---
+title: Department Top Three Salaries
+summary: > 
+  Given `Employee` and `Department` tables, we are asked to JOIN the tables and bring the top three employees (no ties) of each department. 
+description: description
+abstract: abstract
+author: ''
+date: '2017-11-04'
+slug: department-top-three-salaries
+categories:
+  - SQL
+  - MariaDB
+tags:
+  - SELECT
+  - LEFT JOIN
+  - DISTINCT
+  - ORDER BY
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, 
+                      error = TRUE, 
+                      max.print = NA, 
+                      connection = "mariadb_con")
+```
+
+```{r libraries, include = FALSE}
+library(DBI)
+library(knitr)
+library(RMariaDB)
+```
+
+```{r db-con_params, include = FALSE}
+mariadb.host <- Sys.getenv("mariadb.host")
+mariadb.user <- Sys.getenv("mariadb.user")
+mariadb.password <- Sys.getenv("mariadb.password")
+```
+
+```{r db-con, include = FALSE}
+mariadb_con <- dbConnect(RMariaDB::MariaDB(), 
+                 host = mariadb.host,
+                 user = mariadb.user, 
+                 password = mariadb.password)
+```
+
+### Problem
+
+The `Employee` table holds all employees. Every employee has an Id, and there is also a column for the department Id.
+
+```
++----+-------+--------+--------------+
+| Id | Name  | Salary | DepartmentId |
++----+-------+--------+--------------+
+| 1  | Joe   | 70000  | 1            |
+| 2  | Henry | 80000  | 2            |
+| 3  | Sam   | 60000  | 2            |
+| 4  | Max   | 90000  | 1            |
+| 5  | Janet | 69000  | 1            |
+| 6  | Randy | 85000  | 1            |
++----+-------+--------+--------------+
+```
+
+The `Department` table holds all departments of the company.
+
+```
++----+----------+
+| Id | Name     |
++----+----------+
+| 1  | IT       |
+| 2  | Sales    |
++----+----------+
+```
+
+Write a SQL query to find employees who earn the top three salaries in each of the department. For the above tables, your SQL query should return the following rows.
+
+```
++------------+----------+--------+
+| Department | Employee | Salary |
++------------+----------+--------+
+| IT         | Max      | 90000  |
+| IT         | Randy    | 85000  |
+| IT         | Joe      | 70000  |
+| Sales      | Henry    | 80000  |
+| Sales      | Sam      | 60000  |
++------------+----------+--------+
+```
+
+### Setup
+
+```{sql create-employee}
+CREATE TEMPORARY TABLE IF NOT EXISTS `LeetCode`.`Employee` (
+  `Id` INT,
+  `Name` VARCHAR(255),
+  `Salary` INT,
+  `DepartmentId` INT
+);
+```
+
+```{sql create-department}
+CREATE TEMPORARY TABLE IF NOT EXISTS `LeetCode`.`Department` (
+  `Id` INT,
+  `Name` VARCHAR(255)
+);
+```
+
+```{sql truncate-table-employee}
+TRUNCATE TABLE `LeetCode`.`Employee`;
+```
+
+```{sql truncate-table-department}
+TRUNCATE TABLE `LeetCode`.`Department`;
+```
+
+```{sql insert-employee}
+INSERT INTO `LeetCode`.`Employee` 
+  (`Id`, `Name`, `Salary`, `DepartmentId`) 
+VALUES 
+  (1, "Joe", 70000, 1), 
+  (2, "Henry", 80000, 2), 
+  (3, "Sam", 60000, 2), 
+  (4, "Max", 90000, 1), 
+  (5, "Janet", 69000, 1), 
+  (6, "Randy", 85000, 1);
+```
+
+```{sql insert-department}
+INSERT INTO `LeetCode`.`Department` 
+  (`Id`, `Name`) 
+VALUES 
+  (1, "IT"), 
+  (2, "Sales");
+```
+
+```{sql select-employee}
+SELECT * 
+FROM `LeetCode`.`Employee`;
+```
+
+```{sql select-department}
+SELECT * 
+FROM `LeetCode`.`Department`;
+```
+
+### Failed Attempt #1
+
+```{sql solution-1}
+-- Query #1
+SELECT
+  `Department`.`Name` AS `Department`,
+  `Employee`.`Name` AS `Employee`,
+  `Employee`.`Salary`
+FROM `LeetCode`.`Employee` AS `Employee`
+LEFT JOIN `LeetCode`.`Department` AS `Department`
+ON `Employee`.`DepartmentId` = `Department`.`Id`
+WHERE (
+  SELECT COUNT(*)
+  FROM `LeetCode`.`Employee` AS `t1`
+  WHERE `t1`.`DepartmentId` = `Employee`.`DepartmentId`
+  AND `t1`.`Salary` >= `Employee`.`Salary`) <= 3
+ORDER BY `Employee`.`DepartmentId`, `Employee`.`Salary` DESC;
+```
+
+The solution above brings the expected result set. However, this query fails if `Department` is empty. 
+
+```{sql}
+TRUNCATE TABLE `LeetCode`.`Employee`;
+```
+
+```{sql}
+TRUNCATE TABLE `LeetCode`.`Department`;
+```
+
+```{sql}
+INSERT INTO `LeetCode`.`Employee`
+  (`Id`, `Name`, `Salary`, `DepartmentId`)
+VALUES
+  (1, "Joe", 10000, 1);
+
+-- Department intentionally left empty.
+
+```
+
+```{sql}
+-- Query #1
+SELECT
+  `Department`.`Name` AS `Department`,
+  `Employee`.`Name` AS `Employee`,
+  `Employee`.`Salary`
+FROM `LeetCode`.`Employee` AS `Employee`
+LEFT JOIN `LeetCode`.`Department` AS `Department`
+ON `Employee`.`DepartmentId` = `Department`.`Id`
+WHERE (
+  SELECT COUNT(*)
+  FROM `LeetCode`.`Employee` AS `t1`
+  WHERE `t1`.`DepartmentId` = `Employee`.`DepartmentId`
+  AND `t1`.`Salary` >= `Employee`.`Salary`) <= 3
+ORDER BY `Employee`.`DepartmentId`, `Employee`.`Salary` DESC;
+```
+
+The original problem does not state how to handle NULL results, which is what we have here. However, the answer set shown on failure is empty. The query has to be modified to accomodate no `Department`s. 
+
+### Failed Attempt #2
+
+```{sql solution-2}
+-- Query #2
+SELECT
+  `Department`.`Name` AS `Department`,
+  `Employee`.`Name` AS `Employee`,
+  `Employee`.`Salary`
+FROM `LeetCode`.`Employee` AS `Employee`
+LEFT JOIN `LeetCode`.`Department` AS `Department`
+ON `Employee`.`DepartmentId` = `Department`.`Id`
+WHERE (
+  SELECT COUNT(*)
+  FROM `LeetCode`.`Employee` AS `t1`
+  WHERE `t1`.`DepartmentId` = `Employee`.`DepartmentId`
+  AND `t1`.`Salary` >= `Employee`.`Salary`) <= 3 
+-- Check for NULL
+AND `Department`.`Name` IS NOT NULL
+ORDER BY `Employee`.`DepartmentId`, `Employee`.`Salary` DESC;
+```
+
+Adding the line below to the query above passes the test case.
+
+```{r ref.label = "solution-2", echo = c(14, 15), eval = FALSE}
+```
+
+The last failure came with ties; no mention of how to handle ties. 
+
+```{sql}
+TRUNCATE TABLE `LeetCode`.`Employee`;
+```
+
+```{sql}
+TRUNCATE TABLE `LeetCode`.`Department`;
+```
+
+```{sql}
+INSERT INTO `LeetCode`.`Employee`
+  (`Id`, `Name`, `Salary`, `DepartmentId`)
+VALUES
+  (1, "Joe", 60000, 1),
+  (2, "Ralph", 50000, 1),
+  (3, "Joel", 60000, 1),
+  (4, "Tracy", 75000, 1);
+```
+
+Notice the tie between Joel and Joe; recognize that because of this Ralph is to be included, not excluded.
+
+```{sql}
+INSERT INTO `LeetCode`.`Department`
+  (`Id`, `Name`)
+VALUES
+  (1, "IT");
+```
+
+```{sql}
+-- Query #2
+SELECT
+  `Department`.`Name` AS `Department`,
+  `Employee`.`Name` AS `Employee`,
+  `Employee`.`Salary`
+FROM `LeetCode`.`Employee` AS `Employee`
+LEFT JOIN `LeetCode`.`Department` AS `Department`
+ON `Employee`.`DepartmentId` = `Department`.`Id`
+WHERE (
+  SELECT COUNT(*)
+  FROM `LeetCode`.`Employee` AS `t1`
+  WHERE `t1`.`DepartmentId` = `Employee`.`DepartmentId`
+  AND `t1`.`Salary` >= `Employee`.`Salary`) <= 3 
+AND `Department`.`Name` IS NOT NULL 
+ORDER BY `Employee`.`DepartmentId`, `Employee`.`Salary` DESC;
+```
+
+I have to modify the query again in order to get Ralph into the result set. I do this by modifying the **COUNT** call. Instead of counting all rows, I only count **DISTINCT `Salary`**.
+
+### Solution
+
+```{sql solution-3}
+-- Query #3
+SELECT
+  `Department`.`Name` AS `Department`,
+  `Employee`.`Name` AS `Employee`,
+  `Employee`.`Salary`
+FROM `LeetCode`.`Employee` AS `Employee`
+LEFT JOIN `LeetCode`.`Department` AS `Department`
+ON `Employee`.`DepartmentId` = `Department`.`Id`
+WHERE (
+  SELECT COUNT(DISTINCT `Salary`)
+  FROM `LeetCode`.`Employee` AS `t1`
+  WHERE `t1`.`DepartmentId` = `Employee`.`DepartmentId`
+  AND `t1`.`Salary` >= `Employee`.`Salary`) <= 3
+AND `Department`.`Name` IS NOT NULL
+ORDER BY `Employee`.`DepartmentId`, `Employee`.`Salary` DESC;
+```
+
+```{r ref.label = "solution-2", echo = 10, eval = FALSE}
+```
+
+```{r ref.label = "solution-3", echo = 10, eval = FALSE}
+```
+
+This query passes all test cases and beats out about 89% of all submittals in runtime. 
+
+### MariaDB Server Info
+
+```{sql mariadb-version, connection = mariadb_con, tab.cap = "MariaDB Server Info"}
+SELECT @@version_comment AS `Version`, 
+  @@version_compile_machine AS `Version Compile Machine`, 
+  @@innodb_version AS `InnoDB Version`, 
+  @@version_compile_os AS `Version Compile OS`;
+```
+
+```{r close-mariadb, include = FALSE}
+# Disconnect MariaDB
+dbDisconnect(mariadb_con)
+```
