@@ -5,7 +5,43 @@
     
     <url>
     
-      <loc>/post/hurricane-harvey-report/</loc>
+      <loc>http://timtrice.net/testimonials/tom-armstrong/</loc>
+      <lastmod>2017-06-01T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>http://timtrice.net/testimonials/donald-hatter/</loc>
+      <lastmod>2017-06-01T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>http://timtrice.net/testimonials/josh-southern/</loc>
+      <lastmod>2017-06-01T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>http://timtrice.net/testimonials/open-design/</loc>
+      <lastmod>2017-06-01T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>http://timtrice.net/post/hurricane-harvey-report/</loc>
       <lastmod>2017-09-06T00:00:00+00:00</lastmod>
     </url>
     
@@ -14,7 +50,16 @@
     
     <url>
     
-      <loc>/post/rstudio-in-docker/</loc>
+      <loc>http://timtrice.net/project/rrricanes/</loc>
+      <lastmod>2017-06-01T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>http://timtrice.net/post/rstudio-in-docker/</loc>
       <lastmod>2017-05-17T00:00:00+00:00</lastmod>
     </url>
     
@@ -23,7 +68,7 @@
     
     <url>
     
-      <loc>/tags/academic/</loc>
+      <loc>http://timtrice.net/tags/academic/</loc>
       <lastmod>2017-01-01T00:00:00+00:00</lastmod>
     </url>
     
@@ -32,7 +77,7 @@
     
     <url>
     
-      <loc>/post/</loc>
+      <loc>http://timtrice.net/talk/example-talk/</loc>
       <lastmod>2017-01-01T00:00:00+00:00</lastmod>
     </url>
     
@@ -41,7 +86,7 @@
     
     <url>
     
-      <loc>/publication/</loc>
+      <loc>http://timtrice.net/project/hurdat/</loc>
       <lastmod>2017-01-01T00:00:00+00:00</lastmod>
     </url>
     
@@ -50,8 +95,8 @@
     
     <url>
     
-      <loc>/project/deep-learning/</loc>
-      <lastmod>2016-04-27T00:00:00+00:00</lastmod>
+      <loc>http://timtrice.net/publication/</loc>
+      <lastmod>2017-01-01T00:00:00+00:00</lastmod>
     </url>
     
   
@@ -59,8 +104,8 @@
     
     <url>
     
-      <loc>/project/example-external-project/</loc>
-      <lastmod>2016-04-27T00:00:00+00:00</lastmod>
+      <loc>http://timtrice.net/talk/</loc>
+      <lastmod>2017-01-01T00:00:00+00:00</lastmod>
     </url>
     
   
@@ -68,7 +113,7 @@
     
     <url>
     
-      <loc>/publication/person-re-identification/</loc>
+      <loc>http://timtrice.net/publication/person-re-identification/</loc>
       <lastmod>2015-09-01T00:00:00+00:00</lastmod>
     </url>
     
@@ -77,7 +122,16 @@
     
     <url>
     
-      <loc>/publication/clothing-search/</loc>
+      <loc>http://timtrice.net/project/backtesting-strategies/</loc>
+      <lastmod>2015-01-01T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>http://timtrice.net/publication/clothing-search/</loc>
       <lastmod>2013-07-01T00:00:00+00:00</lastmod>
     </url>
     
@@ -86,7 +140,7 @@
     
     <url>
     
-      <loc>/publication_types/1/</loc>
+      <loc>http://timtrice.net/publication_types/1/</loc>
       <lastmod>2013-07-01T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
@@ -96,7 +150,7 @@
     
     <url>
     
-      <loc>/publication_types/2/</loc>
+      <loc>http://timtrice.net/publication_types/2/</loc>
       <lastmod>2015-09-01T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
@@ -106,23 +160,7 @@
     
     <url>
     
-      <loc>/about/</loc>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>/r/beer-reviews-analysis/</loc>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>/categories/</loc>
+      <loc>http://timtrice.net/categories/</loc>
       <priority>0</priority>
     </url>
     
@@ -131,27 +169,7 @@
     
     <url>
     
-      <loc>/tags/deep-learning/</loc>
-      <lastmod>2016-04-27T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>/tags/demo/</loc>
-      <lastmod>2016-04-27T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>/tags/docker/</loc>
+      <loc>http://timtrice.net/tags/docker/</loc>
       <lastmod>2017-05-17T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
@@ -161,7 +179,17 @@
     
     <url>
     
-      <loc>/tags/harvey/</loc>
+      <loc>http://timtrice.net/categories/docker/</loc>
+      <lastmod>2017-05-17T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>http://timtrice.net/tags/harvey/</loc>
       <lastmod>2017-09-06T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
@@ -171,7 +199,7 @@
     
     <url>
     
-      <loc>/categories/harvey/</loc>
+      <loc>http://timtrice.net/categories/harvey/</loc>
       <lastmod>2017-09-06T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
@@ -181,7 +209,7 @@
     
     <url>
     
-      <loc>/sql/highest_paid_employee/</loc>
+      <loc>http://timtrice.net/sql/highest_paid_employee/</loc>
     </url>
     
   
@@ -189,7 +217,7 @@
     
     <url>
     
-      <loc>/tags/hurricanes/</loc>
+      <loc>http://timtrice.net/tags/hurricanes/</loc>
       <lastmod>2017-09-06T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
@@ -199,7 +227,7 @@
     
     <url>
     
-      <loc>/categories/hurricanes/</loc>
+      <loc>http://timtrice.net/categories/hurricanes/</loc>
       <lastmod>2017-09-06T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
@@ -209,8 +237,8 @@
     
     <url>
     
-      <loc>/project/</loc>
-      <lastmod>2016-04-27T00:00:00+00:00</lastmod>
+      <loc>http://timtrice.net/post/</loc>
+      <lastmod>2017-09-06T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -219,7 +247,8 @@
     
     <url>
     
-      <loc>/tags/projects/</loc>
+      <loc>http://timtrice.net/project/</loc>
+      <lastmod>2017-06-01T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -228,7 +257,8 @@
     
     <url>
     
-      <loc>/projects/</loc>
+      <loc>http://timtrice.net/tags/projects/</loc>
+      <priority>0</priority>
     </url>
     
   
@@ -236,7 +266,15 @@
     
     <url>
     
-      <loc>/publication_types/</loc>
+      <loc>http://timtrice.net/projects/</loc>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>http://timtrice.net/publication_types/</loc>
       <lastmod>2013-07-01T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
@@ -246,7 +284,17 @@
     
     <url>
     
-      <loc>/tags/r/</loc>
+      <loc>http://timtrice.net/tags/r/</loc>
+      <lastmod>2017-09-06T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>http://timtrice.net/tags/r/</loc>
       <lastmod>2017-05-17T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
@@ -256,7 +304,7 @@
     
     <url>
     
-      <loc>/tags/r/</loc>
+      <loc>http://timtrice.net/categories/r/</loc>
       <lastmod>2017-05-17T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
@@ -266,7 +314,7 @@
     
     <url>
     
-      <loc>/categories/r/</loc>
+      <loc>http://timtrice.net/categories/r/</loc>
       <lastmod>2017-05-17T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
@@ -276,8 +324,7 @@
     
     <url>
     
-      <loc>/categories/r/</loc>
-      <lastmod>2017-05-17T00:00:00+00:00</lastmod>
+      <loc>http://timtrice.net/sql/</loc>
       <priority>0</priority>
     </url>
     
@@ -286,25 +333,7 @@
     
     <url>
     
-      <loc>/r/</loc>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>/sql/</loc>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>/tags/</loc>
+      <loc>http://timtrice.net/tags/</loc>
       <lastmod>2017-01-01T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
@@ -314,8 +343,18 @@
     
     <url>
     
-      <loc>/</loc>
-      <lastmod>2016-04-20T00:00:00+00:00</lastmod>
+      <loc>http://timtrice.net/testimonials/</loc>
+      <lastmod>2017-06-01T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>http://timtrice.net/</loc>
+      <lastmod>2017-06-01T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     

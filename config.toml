@@ -34,6 +34,12 @@ googleAnalytics = "UA-1507390-26"
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = false
 
+# This apparently is necessary to prevent Hugo from pluralizing titles (why
+# would you anyway, Hugo? WTF is wrong with you?)
+pluralizeListTitles = "false"
+
+titleCaseStyle = "Chicago"
+
 [outputs]
   home = [ "HTML", "CSS", "RSS" ]
   section = [ "HTML", "RSS" ]
@@ -56,7 +62,7 @@ defaultContentLanguageInSubdir = false
 
   # Your details.
   name = "Tim Trice"
-  description = "Data Analytics, Information Management, Document Control"
+  description = "Data Analytics, Engineering, and Information Management"
 
   # Seperator between site title and page titles
   title_sep = " - "
@@ -256,29 +262,24 @@ defaultContentLanguageInSubdir = false
   align_right = true
 
 [[menu.main]]
-  name = "Publications"
-  url = "#publications_selected"
-  weight = 2
-
-[[menu.main]]
-  name = "Posts"
-  url = "#posts"
-  weight = 3
+  name = "About"
+  url = "#about"
+  weight = 10
 
 [[menu.main]]
   name = "Projects"
   url = "#projects"
-  weight = 4
+  weight = 40
 
 [[menu.main]]
-  name = "Teaching"
-  url = "#teaching"
-  weight = 5
+  name = "Posts"
+  url = "#posts"
+  weight = 60
 
 [[menu.main]]
   name = "Contact"
   url = "#contact"
-  weight = 6
+  weight = 100
 
 # Taxonomies.
 [taxonomies]

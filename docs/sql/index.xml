@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>SQLs on Tim Trice</title>
-    <link>/sql/</link>
-    <description>Recent content in SQLs on Tim Trice</description>
+    <title>SQL on Tim Trice</title>
+    <link>http://timtrice.net/sql/</link>
+    <description>Recent content in SQL on Tim Trice</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
@@ -11,10 +11,10 @@
     
     <item>
       <title>Highest Paid Employee</title>
-      <link>/sql/highest_paid_employee/</link>
+      <link>http://timtrice.net/sql/highest_paid_employee/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/sql/highest_paid_employee/</guid>
+      <guid>http://timtrice.net/sql/highest_paid_employee/</guid>
       <description>&lt;p&gt;Using &lt;a href=&#34;https://dev.mysql.com/doc/employee/en/&#34;&gt;employees&lt;/a&gt; database, we need to find the highest-paid employee in our database.&lt;/p&gt;
 &lt;p&gt;With this particular database we have to be careful about making assumptions of our data, some of which would be:&lt;/p&gt;
 &lt;ul&gt;
