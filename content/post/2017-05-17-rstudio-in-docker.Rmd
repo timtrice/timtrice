@@ -4,7 +4,7 @@ description: "Running RStudio from a Docker image"
 author: Tim Trice
 date: '2017-05-17'
 slug: rstudio-in-docker
-categories: ["R"]
+categories: ["R", "Docker"]
 tags: ["R", "Docker"]
 output:
     blogdown::html_page:
