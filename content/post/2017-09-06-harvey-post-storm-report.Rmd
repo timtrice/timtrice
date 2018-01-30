@@ -1,10 +1,16 @@
 ---
 title: Hurricane Harvey Post Storm Report
-author: ~
+summary: > 
+  A look at the immediate preliminary reports from local National Weather Service offices regarding weather observations from Hurricane Harvey.
+author: 'Tim Trice'
 date: '2017-09-06'
 slug: hurricane-harvey-report
-categories: [r, hurricanes, harvey]
-tags: [r, hurricanes, harvey]
+categories: 
+  - R
+  - tidyverse
+  - rrricanes
+tags: 
+  - regex
 output:
   blogdown::html_page:
     toc: true

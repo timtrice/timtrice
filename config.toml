@@ -51,6 +51,9 @@ titleCaseStyle = "Chicago"
   fractions = true  # `false` disables smart fractions (e.g. 5/12 formatted as a fraction).
   smartypants = true  # `false` disables all smart punctuation substitutions (e.g. smart quotes, dashes, fractions).
 
+[permalinks]
+  post = "/:year-:month-:day-:slug/"
+
 [params]
   # Color theme.
   #   Choose from `default`, `ocean`, `forest`, `coffee`, `dark`, or `1950s`.

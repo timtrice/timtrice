@@ -41,7 +41,16 @@
     
     <url>
     
-      <loc>http://timtrice.net/post/hurricane-harvey-report/</loc>
+      <loc>http://timtrice.net/2017-11-04-department-top-three-salaries/</loc>
+      <lastmod>2017-11-04T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>http://timtrice.net/2017-09-06-hurricane-harvey-report/</loc>
       <lastmod>2017-09-06T00:00:00+00:00</lastmod>
     </url>
     
@@ -59,7 +68,7 @@
     
     <url>
     
-      <loc>http://timtrice.net/post/rstudio-in-docker/</loc>
+      <loc>http://timtrice.net/2017-05-17-rstudio-in-docker/</loc>
       <lastmod>2017-05-17T00:00:00+00:00</lastmod>
     </url>
     
@@ -131,6 +140,15 @@
     
     <url>
     
+      <loc>http://timtrice.net/project/sandbox/</loc>
+      <lastmod>2015-01-01T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>http://timtrice.net/publication/clothing-search/</loc>
       <lastmod>2013-07-01T00:00:00+00:00</lastmod>
     </url>
@@ -160,7 +178,27 @@
     
     <url>
     
+      <loc>http://timtrice.net/tags/bash/</loc>
+      <lastmod>2015-01-01T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>http://timtrice.net/categories/</loc>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>http://timtrice.net/tags/distinct/</loc>
+      <lastmod>2017-11-04T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -179,8 +217,8 @@
     
     <url>
     
-      <loc>http://timtrice.net/tags/docker/</loc>
-      <lastmod>2017-05-17T00:00:00+00:00</lastmod>
+      <loc>http://timtrice.net/tags/left-join/</loc>
+      <lastmod>2017-11-04T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -189,8 +227,8 @@
     
     <url>
     
-      <loc>http://timtrice.net/categories/harvey/</loc>
-      <lastmod>2017-09-06T00:00:00+00:00</lastmod>
+      <loc>http://timtrice.net/categories/mariadb/</loc>
+      <lastmod>2017-11-04T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -199,36 +237,8 @@
     
     <url>
     
-      <loc>http://timtrice.net/tags/harvey/</loc>
-      <lastmod>2017-09-06T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>http://timtrice.net/sql/highest_paid_employee/</loc>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>http://timtrice.net/categories/hurricanes/</loc>
-      <lastmod>2017-09-06T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>http://timtrice.net/tags/hurricanes/</loc>
-      <lastmod>2017-09-06T00:00:00+00:00</lastmod>
+      <loc>http://timtrice.net/tags/order-by/</loc>
+      <lastmod>2017-11-04T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -238,7 +248,7 @@
     <url>
     
       <loc>http://timtrice.net/post/</loc>
-      <lastmod>2017-09-06T00:00:00+00:00</lastmod>
+      <lastmod>2017-11-04T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -257,23 +267,6 @@
     
     <url>
     
-      <loc>http://timtrice.net/tags/projects/</loc>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>http://timtrice.net/projects/</loc>
-    </url>
-    
-  
-    
-    
-    <url>
-    
       <loc>http://timtrice.net/publication_types/</loc>
       <lastmod>2013-07-01T00:00:00+00:00</lastmod>
       <priority>0</priority>
@@ -284,18 +277,8 @@
     
     <url>
     
-      <loc>http://timtrice.net/categories/r/</loc>
-      <lastmod>2017-05-17T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    
-    <url>
-    
-      <loc>http://timtrice.net/categories/r/</loc>
-      <lastmod>2017-05-17T00:00:00+00:00</lastmod>
+      <loc>http://timtrice.net/tags/python/</loc>
+      <lastmod>2015-01-01T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -305,7 +288,7 @@
     <url>
     
       <loc>http://timtrice.net/tags/r/</loc>
-      <lastmod>2017-05-17T00:00:00+00:00</lastmod>
+      <lastmod>2017-06-01T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -314,7 +297,7 @@
     
     <url>
     
-      <loc>http://timtrice.net/tags/r/</loc>
+      <loc>http://timtrice.net/categories/r/</loc>
       <lastmod>2017-09-06T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
@@ -324,7 +307,58 @@
     
     <url>
     
-      <loc>http://timtrice.net/sql/</loc>
+      <loc>http://timtrice.net/categories/rstudio/</loc>
+      <lastmod>2017-05-17T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>http://timtrice.net/tags/regex/</loc>
+      <lastmod>2017-09-06T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>http://timtrice.net/categories/rrricanes/</loc>
+      <lastmod>2017-09-06T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>http://timtrice.net/tags/select/</loc>
+      <lastmod>2017-11-04T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>http://timtrice.net/categories/sql/</loc>
+      <lastmod>2017-11-04T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>http://timtrice.net/tags/sql/</loc>
+      <lastmod>2015-01-01T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -345,6 +379,16 @@
     
       <loc>http://timtrice.net/testimonials/</loc>
       <lastmod>2017-06-01T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>http://timtrice.net/categories/tidyverse/</loc>
+      <lastmod>2017-09-06T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     

@@ -18,7 +18,7 @@
   <meta name="description" content="">
 
   
-  <link rel="alternate" hreflang="en-us" href="../../tags/sql/">
+  <link rel="alternate" hreflang="en-us" href="http://timtrice.net/tags/sql/">
 
   
 
@@ -70,15 +70,15 @@
   
 
   
-  <link rel="alternate" href="../../index.xml" type="application/rss+xml" title="Tim Trice">
-  <link rel="feed" href="../../index.xml" type="application/rss+xml" title="Tim Trice">
+  <link rel="alternate" href="http://timtrice.net/index.xml" type="application/rss+xml" title="Tim Trice">
+  <link rel="feed" href="http://timtrice.net/index.xml" type="application/rss+xml" title="Tim Trice">
   
 
   <link rel="manifest" href="../../site.webmanifest">
   <link rel="icon" type="image/png" href="../../img/icon.png">
   <link rel="apple-touch-icon" type="image/png" href="../../img/icon-192.png">
 
-  <link rel="canonical" href="../../tags/sql/">
+  <link rel="canonical" href="http://timtrice.net/tags/sql/">
 
   <meta property="twitter:card" content="summary_large_image">
   
@@ -86,17 +86,17 @@
   <meta property="twitter:creator" content="@https://twitter.com/timtrice">
   
   <meta property="og:site_name" content="Tim Trice">
-  <meta property="og:url" content="/tags/sql/">
-  <meta property="og:title" content="SQL | Tim Trice">
+  <meta property="og:url" content="http://timtrice.net/tags/sql/">
+  <meta property="og:title" content="Sql | Tim Trice">
   <meta property="og:description" content="">
   <meta property="og:locale" content="en-us">
   
-  <meta property="og:updated_time" content="2018-01-29T00:00:00&#43;00:00">
+  <meta property="og:updated_time" content="2015-01-01T00:00:00&#43;00:00">
   
 
   
 
-  <title>SQL - Tim Trice</title>
+  <title>Sql - Tim Trice</title>
 
 </head>
 <body id="top" data-spy="scroll" data-target="#toc" data-offset="71" >
@@ -216,132 +216,23 @@
 
 <div class="universal-wrapper">
 
-  <h1>SQL</h1>
+  <h1>Sql</h1>
 
   
 
   
   
   <div>
-    <h2><a href="../../post/2018-01-29-swap-salary/">Swap Salary</a></h2>
+    <h2><a href="http://timtrice.net/project/sandbox/">sandbox</a></h2>
     <div class="article-style">
       
-      Given a table salary, such as the one below, that has m=male and f=female values. Swap all f and m values (i.e., change all f values to m and vice versa) with a single update query and no intermediate temp table.
-For example:
-| id | name | sex | salary | |&mdash;-|&mdash;&mdash;|&mdash;&ndash;|&mdash;&mdash;&ndash;| | 1 | A | m | 2500 | | 2 | B | f | 1500 | | 3 | C | m | 5500 | | 4 | D | f | 500 | After running your query, the above salary table should have the following rows:
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="../../post/2018-01-22-exchange-seats/">Exchange Seats</a></h2>
-    <div class="article-style">
-      
-      Mary is a teacher in a middle school and she has a table seat storing students’ names and their corresponding seat ids.
-The column id is continuous increment.
-Mary wants to change seats for the adjacent students.
-Can you write a SQL query to output the result for Mary?
-+&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;+ | id | student | +&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;+ | 1 | Abbot | | 2 | Doris | | 3 | Emerson | | 4 | Green | | 5 | Jeames | +&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;+ For the sample input, the output is:
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="../../post/2018-01-15-not-boring-movies/">Not Boring Movies</a></h2>
-    <div class="article-style">
-      
-      X city opened a new cinema, many people would like to go to this cinema. The cinema also gives out a poster indicating the movies’ ratings and descriptions.
-Please write a SQL query to output movies with an odd numbered ID and a description that is not ‘boring’. Order the result by rating.
-For example, table cinema:
-+&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;&ndash;+ | id | movie | description | rating | +&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;&ndash;+ | 1 | War | great 3D | 8.
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="../../post/2018-01-08-classes-more-than-5-students/">Classes More Than 5 Students</a></h2>
-    <div class="article-style">
-      
-      There is a table courses with columns: student and class.
-Please list out all classes which have more than or equal to 5 students.
-For example, the table:
-+&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;+ | student | class | +&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;+ | A | Math | | B | English | | C | Math | | D | Biology | | E | Math | | F | Computer | | G | Math | | H | Math | | I | Math | +&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;+ Should output:
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="../../post/2018-01-01-big-countries/">Big Countries</a></h2>
-    <div class="article-style">
-      
-      There is a table World
-+&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;&mdash;&mdash;+ | name | continent | area | population | gdp | +&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;&mdash;&mdash;+ | Afghanistan | Asia | 652230 | 25500100 | 20343000 | | Albania | Europe | 28748 | 2831741 | 12960000 | | Algeria | Africa | 2381741 | 37100000 | 188681000 | | Andorra | Europe | 468 | 78115 | 3712000 | | Angola | Africa | 1246700 | 20609294 | 100990000 | +&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;&mdash;&mdash;+ A country is big if it has an area of bigger than 3 million square km or a population of more than 25 million.
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="../../post/2017-12-25-trips-and-users/">Trips and Users</a></h2>
-    <div class="article-style">
-      
-      The Trips table holds all taxi trips. Each trip has a unique Id, while Client_Id and Driver_Id are both foreign keys to the Users_Id at the Users table. Status is an ENUM(&quot;completed&quot;, &quot;cancelled_by_driver&quot;, &quot;cancelled_by_client&quot;).
-+&mdash;-+&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;-+ | Id | Client_Id | Driver_Id | City_Id | Status |Request_at| +&mdash;-+&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;-+ | 1 | 1 | 10 | 1 | completed |2013-10-01| | 2 | 2 | 11 | 1 | cancelled_by_driver|2013-10-01| | 3 | 3 | 12 | 6 | completed |2013-10-01| | 4 | 4 | 13 | 6 | cancelled_by_client|2013-10-01| | 5 | 1 | 10 | 1 | completed |2013-10-02| | 6 | 2 | 11 | 6 | completed |2013-10-02| | 7 | 3 | 12 | 6 | completed |2013-10-02| | 8 | 2 | 12 | 12 | completed |2013-10-03| | 9 | 3 | 10 | 12 | completed |2013-10-03| | 10 | 4 | 13 | 12 | cancelled_by_driver|2013-10-03| +&mdash;-+&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;-+ The Users table holds all users.
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="../../post/2017-12-18-rising-temperature/">Rising Temperature</a></h2>
-    <div class="article-style">
-      
-      Given a Weather table, write a SQL query to find all dates’ Ids with higher temperature compared to its previous (yesterday’s) dates.
-+&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+ | Id(INT) | Date(DATE) | Temperature(INT) | +&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+ | 1 | 2015-01-01 | 10 | | 2 | 2015-01-02 | 25 | | 3 | 2015-01-03 | 20 | | 4 | 2015-01-04 | 30 | +&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+ For example, return the following Ids for the above Weather table:
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="../../post/2017-12-11-delete-duplicate-emails/">Delete Duplicate Emails</a></h2>
-    <div class="article-style">
-      
-      Write a SQL query to delete all duplicate email entries in a table named Person, keeping only unique emails based on its smallest Id.
-+&mdash;-+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+ | Id | Email | +&mdash;-+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+ | 1 | john@example.com | | 2 | bob@example.com | | 3 | john@example.com | +&mdash;-+&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;+ Id is the primary key column for this table.
-For example, after running your query, the above Person table should have the following rows:
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="../../post/2017-12-04-department-top-three-salaries/">Department Top Three Salaries</a></h2>
-    <div class="article-style">
-      
-      The Employee table holds all employees. Every employee has an Id, and there is also a column for the department Id.
-+&mdash;-+&mdash;&mdash;-+&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;&mdash;&ndash;+ | Id | Name | Salary | DepartmentId | +&mdash;-+&mdash;&mdash;-+&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;&mdash;&ndash;+ | 1 | Joe | 70000 | 1 | | 2 | Henry | 80000 | 2 | | 3 | Sam | 60000 | 2 | | 4 | Max | 90000 | 1 | | 5 | Janet | 69000 | 1 | | 6 | Randy | 85000 | 1 | +&mdash;-+&mdash;&mdash;-+&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;&mdash;&ndash;+ The Department table holds all departments of the company.
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="../../post/2017-11-27-department-highest-salary/">Department Highest Salary</a></h2>
-    <div class="article-style">
-      
-      The Employee table holds all employees. Every employee has an Id, a salary, and there is also a column for the department Id.
-+&mdash;-+&mdash;&mdash;-+&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;&mdash;&ndash;+ | Id | Name | Salary | DepartmentId | +&mdash;-+&mdash;&mdash;-+&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;&mdash;&ndash;+ | 1 | Joe | 70000 | 1 | | 2 | Henry | 80000 | 2 | | 3 | Sam | 60000 | 2 | | 4 | Max | 90000 | 1 | +&mdash;-+&mdash;&mdash;-+&mdash;&mdash;&ndash;+&mdash;&mdash;&mdash;&mdash;&ndash;+ The Department table holds all departments of the company.
+      My coding playground. Python, R, SQL and bash scripts for code challenges and just general &ldquo;what does this do?&rdquo;
       
     </div>
   </div>
   
 
   
-<nav>
-  <ul class="pager">
-    
-    
-    <li><a href="../../tags/sql/page/2/">&gt;</a></li>
-    
-  </ul>
-</nav>
-
 
 
 </div>
