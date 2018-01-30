@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
   - post: Department Top Three Salaries
+  - Add permalinks to config.toml
 
 ### Changed
 - NA
