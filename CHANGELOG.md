@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
   - Add SQL template
 
 ### Changed
-- NA
+  - Add summary, modify categories, tags for Hurricane Harvey Post Storm Report.
 
 ### Removed
 - NA
