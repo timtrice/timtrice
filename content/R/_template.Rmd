@@ -1,0 +1,20 @@
+---
+title: R Template
+description: >
+  Test description
+subtitle: > 
+  Test subtitle
+abstract: > 
+  Test abstract
+---
+
+```{r libraries}
+```
+
+### Content
+
+### R Session Info
+
+```{r r-session-info}
+pander::pander(sessionInfo())
+```

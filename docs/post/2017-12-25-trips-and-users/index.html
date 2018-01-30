@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme" content="hugo-academic">
+  <meta name="generator" content="Hugo 0.30.2" />
+  <meta name="author" content="Tim Trice">
+
+  
+  
+  
+  
+    
+      
+    
+  
+  <meta name="description" content="We are asked to perform a calculation on two tables that is dependent upon several variables. To perform the aggregation, we are required to create a subquery that returns the table to which the results will be performed; `t1`. From there, we need to divide the value of requests that meet a criteria by all grouped results. 
+">
+
+  
+  <link rel="alternate" hreflang="en-us" href="../../post/2017-12-25-trips-and-users/">
+
+  
+
+
+  
+
+  
+  
+  <meta name="theme-color" content="#795548">
+  
+  
+  
+  
+    
+  
+  
+    
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha512-6MXa8B6uaO18Hid6blRMetEIoPqHf7Ux1tnyIQdpt9qI5OACx7C+O3IVTr98vwGnlcg0LOLa02i9Y1HpVhlfiw==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.1/css/academicons.min.css" integrity="sha512-NThgw3XKQ1absAahW6to7Ey42uycrVvfNfyjqcFNgCmOCQ5AR4AO0SiXrN+8ZtYeappp56lk1WtvjVmEa+VR6A==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+  
+  
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700%7cRoboto:400,400italic,700%7cRoboto&#43;Mono">
+  
+  <link rel="stylesheet" href="../../styles.css">
+  
+
+  
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-1507390-26', 'auto');
+      ga('require', 'eventTracker');
+      ga('require', 'outboundLinkTracker');
+      ga('require', 'urlChangeTracker');
+      ga('send', 'pageview');
+    </script>
+    <script async src="//www.google-analytics.com/analytics.js"></script>
+    
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js" integrity="sha512-HUmooslVKj4m6OBu0OgzjXXr+QuFYy/k7eLI5jdeEy/F4RSgMn6XRWRGkFi5IFaFgy7uFTkegp3Z0XnJf3Jq+g==" crossorigin="anonymous"></script>
+    
+  
+
+  
+  <link rel="alternate" href="../../index.xml" type="application/rss+xml" title="Tim Trice">
+  <link rel="feed" href="../../index.xml" type="application/rss+xml" title="Tim Trice">
+  
+
+  <link rel="manifest" href="../../site.webmanifest">
+  <link rel="icon" type="image/png" href="../../img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="../../img/icon-192.png">
+
+  <link rel="canonical" href="../../post/2017-12-25-trips-and-users/">
+
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@https://twitter.com/timtrice">
+  <meta property="twitter:creator" content="@https://twitter.com/timtrice">
+  
+  <meta property="og:site_name" content="Tim Trice">
+  <meta property="og:url" content="/post/2017-12-25-trips-and-users/">
+  <meta property="og:title" content="Trips and Users | Tim Trice">
+  <meta property="og:description" content="We are asked to perform a calculation on two tables that is dependent upon several variables. To perform the aggregation, we are required to create a subquery that returns the table to which the results will be performed; `t1`. From there, we need to divide the value of requests that meet a criteria by all grouped results. 
+">
+  <meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2017-12-25T00:00:00&#43;00:00">
+  
+  <meta property="article:modified_time" content="2017-12-25T00:00:00&#43;00:00">
+  
+
+  
+
+  <title>Trips and Users - Tim Trice</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#toc" data-offset="71" >
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="navbar-header">
+      
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target=".navbar-collapse" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+      <a class="navbar-brand" href="../../">Tim Trice</a>
+    </div>
+
+    
+    <div class="collapse navbar-collapse">
+
+      
+      
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="../../#about">
+            
+            <span>About</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="../../#projects">
+            
+            <span>Projects</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="../../#posts">
+            
+            <span>Posts</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="../../#contact">
+            
+            <span>Contact</span>
+            
+          </a>
+        </li>
+
+        
+        
+      
+
+      
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+  <div class="article-container">
+    <h1 itemprop="name">Trips and Users</h1>
+
+    
+
+<div class="article-metadata">
+
+  <span class="article-date">
+    
+    <time datetime="2017-12-25 00:00:00 &#43;0000 UTC" itemprop="datePublished dateModified">
+      Dec 25, 2017
+    </time>
+  </span>
+  <span itemscope itemprop="author publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Tim Trice">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    5 min read
+  </span>
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <a href="../../post/2017-12-25-trips-and-users/#disqus_thread"></a>
+  
+
+  
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fa fa-folder"></i>
+    
+    <a href="../../categories/sql">SQL</a
+    >, 
+    
+    <a href="../../categories/leetcode">LeetCode</a
+    >
+    
+  </span>
+  
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=Trips%20and%20Users&amp;url=%2fpost%2f2017-12-25-trips-and-users%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=%2fpost%2f2017-12-25-trips-and-users%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2f2017-12-25-trips-and-users%2f&amp;title=Trips%20and%20Users"
+         target="_blank" rel="noopener">
+        <i class="fa fa-linkedin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=%2fpost%2f2017-12-25-trips-and-users%2f&amp;title=Trips%20and%20Users"
+         target="_blank" rel="noopener">
+        <i class="fa fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=Trips%20and%20Users&amp;body=%2fpost%2f2017-12-25-trips-and-users%2f">
+        <i class="fa fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+
+    <div class="article-style" itemprop="articleBody">
+      <p>The <code>Trips</code> table holds all taxi trips. Each trip has a unique <code>Id</code>, while <code>Client_Id</code> and <code>Driver_Id</code> are both foreign keys to the Users_Id at the <code>Users</code> table. Status is an <code>ENUM(&quot;completed&quot;, &quot;cancelled_by_driver&quot;, &quot;cancelled_by_client&quot;)</code>.</p>
+<pre><code>+----+-----------+-----------+---------+--------------------+----------+
+| Id | Client_Id | Driver_Id | City_Id |        Status      |Request_at|
++----+-----------+-----------+---------+--------------------+----------+
+| 1  |     1     |    10     |    1    |     completed      |2013-10-01|
+| 2  |     2     |    11     |    1    | cancelled_by_driver|2013-10-01|
+| 3  |     3     |    12     |    6    |     completed      |2013-10-01|
+| 4  |     4     |    13     |    6    | cancelled_by_client|2013-10-01|
+| 5  |     1     |    10     |    1    |     completed      |2013-10-02|
+| 6  |     2     |    11     |    6    |     completed      |2013-10-02|
+| 7  |     3     |    12     |    6    |     completed      |2013-10-02|
+| 8  |     2     |    12     |    12   |     completed      |2013-10-03|
+| 9  |     3     |    10     |    12   |     completed      |2013-10-03| 
+| 10 |     4     |    13     |    12   | cancelled_by_driver|2013-10-03|
++----+-----------+-----------+---------+--------------------+----------+</code></pre>
+<p>The <code>Users</code> table holds all users. Each user has an unique <code>Users_Id</code>, and <code>Role</code> is an <code>ENUM(&quot;client&quot;, &quot;driver&quot;, &quot;partner&quot;)</code>.</p>
+<pre><code>+----------+--------+--------+
+| Users_Id | Banned |  Role  |
++----------+--------+--------+
+|    1     |   No   | client |
+|    2     |   Yes  | client |
+|    3     |   No   | client |
+|    4     |   No   | client |
+|    10    |   No   | driver |
+|    11    |   No   | driver |
+|    12    |   No   | driver |
+|    13    |   No   | driver |
++----------+--------+--------+</code></pre>
+<p>Write a SQL query to find the cancellation rate of requests made by unbanned clients between Oct 1, 2013 and Oct 3, 2013. For the above tables, your SQL query should return the following rows with the cancellation rate being rounded to two decimal places.</p>
+<pre><code>+------------+-------------------+
+|     Day    | Cancellation Rate |
++------------+-------------------+
+| 2013-10-01 |       0.33        |
+| 2013-10-02 |       0.00        |
+| 2013-10-03 |       0.50        |
++------------+-------------------+</code></pre>
+<p><strong>Credits:</strong> Special thanks to <a href="https://leetcode.com/discuss/user/cak1erlizhou">@cak1erlizhou</a> for contributing this question, writing the problem description and adding part of the test cases.</p>
+<div id="table-setup" class="section level3">
+<h3>Table Setup</h3>
+<pre class="sql"><code>CREATE DATABASE IF NOT EXISTS `LeetCode`;</code></pre>
+<pre class="sql"><code>USE `LeetCode`;</code></pre>
+<pre class="sql"><code>CREATE TABLE IF NOT EXISTS `Trips` (
+  `Id` INT, 
+  `Client_Id` INT, 
+  `Driver_Id` INT, 
+  `City_Id` INT, 
+  `Status` ENUM(&quot;completed&quot;, &quot;cancelled_by_driver&quot;, &quot;cancelled_by_client&quot;), 
+  `Request_at` VARCHAR(50)
+);</code></pre>
+<pre class="sql"><code>CREATE TABLE IF NOT EXISTS `Users` (
+  `Users_Id` INT, 
+  `Banned` VARCHAR(50), 
+  `Role` ENUM(&quot;client&quot;, &quot;driver&quot;, &quot;partner&quot;)
+);</code></pre>
+<pre class="sql"><code>TRUNCATE TABLE `Trips`;</code></pre>
+<pre class="sql"><code>TRUNCATE TABLE `Users`;</code></pre>
+<pre class="sql"><code>INSERT INTO `Trips` 
+  (`Id`, `Client_Id`, `Driver_Id`, `City_Id`, `Status`, `Request_at`)
+VALUES 
+  (1, 1, 10, 1, &quot;completed&quot;, &quot;2013-10-01&quot;), 
+  (2, 2, 11, 1, &quot;cancelled_by_driver&quot;, &quot;2013-10-01&quot;), 
+  (3, 3, 12, 6, &quot;completed&quot;, &quot;2013-10-01&quot;), 
+  (4, 4, 13, 6, &quot;cancelled_by_client&quot;, &quot;2013-10-01&quot;), 
+  (5, 1, 10, 1, &quot;completed&quot;, &quot;2013-10-02&quot;), 
+  (6, 2, 11, 6, &quot;completed&quot;, &quot;2013-10-02&quot;), 
+  (7, 3, 12, 6, &quot;completed&quot;, &quot;2013-10-02&quot;), 
+  (8, 2, 12, 12, &quot;completed&quot;, &quot;2013-10-03&quot;), 
+  (9, 3, 10, 12, &quot;completed&quot;, &quot;2013-10-03&quot;), 
+  (10, 4, 13, 12, &quot;cancelled_by_driver&quot;, &quot;2013-10-03&quot;);</code></pre>
+<pre class="sql"><code>INSERT INTO `Users`
+  (`Users_Id`, `Banned`, `Role`)
+VALUES
+  (1, &quot;No&quot;, &quot;client&quot;), 
+  (2, &quot;Yes&quot;, &quot;client&quot;), 
+  (3, &quot;No&quot;, &quot;client&quot;), 
+  (4, &quot;No&quot;, &quot;client&quot;), 
+  (10, &quot;No&quot;, &quot;driver&quot;), 
+  (11, &quot;No&quot;, &quot;driver&quot;), 
+  (12, &quot;No&quot;, &quot;driver&quot;), 
+  (13, &quot;No&quot;, &quot;driver&quot;);</code></pre>
+</div>
+<div id="example-data" class="section level3">
+<h3>Example Data</h3>
+<pre class="sql"><code>SHOW COLUMNS IN `Trips`;</code></pre>
+<div class="knitsql-table">
+<table>
+<caption><span id="tab:explain-table-trips">Table 1: </span>6 records</caption>
+<thead>
+<tr class="header">
+<th align="left">Field</th>
+<th align="left">Type</th>
+<th align="left">Null</th>
+<th align="left">Key</th>
+<th align="left">Default</th>
+<th align="left">Extra</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Id</td>
+<td align="left">int(11)</td>
+<td align="left">YES</td>
+<td align="left"></td>
+<td align="left">NA</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Client_Id</td>
+<td align="left">int(11)</td>
+<td align="left">YES</td>
+<td align="left"></td>
+<td align="left">NA</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Driver_Id</td>
+<td align="left">int(11)</td>
+<td align="left">YES</td>
+<td align="left"></td>
+<td align="left">NA</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">City_Id</td>
+<td align="left">int(11)</td>
+<td align="left">YES</td>
+<td align="left"></td>
+<td align="left">NA</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Status</td>
+<td align="left">enum(‘completed’,‘cancelled_by_driver’,‘cancelled_by_client’)</td>
+<td align="left">YES</td>
+<td align="left"></td>
+<td align="left">NA</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Request_at</td>
+<td align="left">varchar(50)</td>
+<td align="left">YES</td>
+<td align="left"></td>
+<td align="left">NA</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<pre class="sql"><code>SELECT * 
+FROM `Trips`;</code></pre>
+<div class="knitsql-table">
+<table>
+<caption><span id="tab:select-table-trips">Table 2: </span>10 records</caption>
+<thead>
+<tr class="header">
+<th align="left">Id</th>
+<th align="right">Client_Id</th>
+<th align="right">Driver_Id</th>
+<th align="right">City_Id</th>
+<th align="left">Status</th>
+<th align="left">Request_at</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="right">1</td>
+<td align="right">10</td>
+<td align="right">1</td>
+<td align="left">completed</td>
+<td align="left">2013-10-01</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="right">2</td>
+<td align="right">11</td>
+<td align="right">1</td>
+<td align="left">cancelled_by_driver</td>
+<td align="left">2013-10-01</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="right">3</td>
+<td align="right">12</td>
+<td align="right">6</td>
+<td align="left">completed</td>
+<td align="left">2013-10-01</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="right">4</td>
+<td align="right">13</td>
+<td align="right">6</td>
+<td align="left">cancelled_by_client</td>
+<td align="left">2013-10-01</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="right">1</td>
+<td align="right">10</td>
+<td align="right">1</td>
+<td align="left">completed</td>
+<td align="left">2013-10-02</td>
+</tr>
+<tr class="even">
+<td align="left">6</td>
+<td align="right">2</td>
+<td align="right">11</td>
+<td align="right">6</td>
+<td align="left">completed</td>
+<td align="left">2013-10-02</td>
+</tr>
+<tr class="odd">
+<td align="left">7</td>
+<td align="right">3</td>
+<td align="right">12</td>
+<td align="right">6</td>
+<td align="left">completed</td>
+<td align="left">2013-10-02</td>
+</tr>
+<tr class="even">
+<td align="left">8</td>
+<td align="right">2</td>
+<td align="right">12</td>
+<td align="right">12</td>
+<td align="left">completed</td>
+<td align="left">2013-10-03</td>
+</tr>
+<tr class="odd">
+<td align="left">9</td>
+<td align="right">3</td>
+<td align="right">10</td>
+<td align="right">12</td>
+<td align="left">completed</td>
+<td align="left">2013-10-03</td>
+</tr>
+<tr class="even">
+<td align="left">10</td>
+<td align="right">4</td>
+<td align="right">13</td>
+<td align="right">12</td>
+<td align="left">cancelled_by_driver</td>
+<td align="left">2013-10-03</td>
+</tr>
+</tbody>
+</table>
+</div>
+<pre class="sql"><code>SHOW COLUMNS IN `Users`;</code></pre>
+<div class="knitsql-table">
+<table>
+<caption><span id="tab:explain-table-users">Table 3: </span>3 records</caption>
+<thead>
+<tr class="header">
+<th align="left">Field</th>
+<th align="left">Type</th>
+<th align="left">Null</th>
+<th align="left">Key</th>
+<th align="left">Default</th>
+<th align="left">Extra</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Users_Id</td>
+<td align="left">int(11)</td>
+<td align="left">YES</td>
+<td align="left"></td>
+<td align="left">NA</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Banned</td>
+<td align="left">varchar(50)</td>
+<td align="left">YES</td>
+<td align="left"></td>
+<td align="left">NA</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Role</td>
+<td align="left">enum(‘client’,‘driver’,‘partner’)</td>
+<td align="left">YES</td>
+<td align="left"></td>
+<td align="left">NA</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<pre class="sql"><code>SELECT * 
+FROM `Users`;</code></pre>
+<div class="knitsql-table">
+<table>
+<caption><span id="tab:select-table-users">Table 4: </span>8 records</caption>
+<thead>
+<tr class="header">
+<th align="right">Users_Id</th>
+<th align="left">Banned</th>
+<th align="left">Role</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">No</td>
+<td align="left">client</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">Yes</td>
+<td align="left">client</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="left">No</td>
+<td align="left">client</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="left">No</td>
+<td align="left">client</td>
+</tr>
+<tr class="odd">
+<td align="right">10</td>
+<td align="left">No</td>
+<td align="left">driver</td>
+</tr>
+<tr class="even">
+<td align="right">11</td>
+<td align="left">No</td>
+<td align="left">driver</td>
+</tr>
+<tr class="odd">
+<td align="right">12</td>
+<td align="left">No</td>
+<td align="left">driver</td>
+</tr>
+<tr class="even">
+<td align="right">13</td>
+<td align="left">No</td>
+<td align="left">driver</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="solution" class="section level3">
+<h3>Solution</h3>
+<pre class="sql"><code>SELECT
+  `t1`.`Request_at` AS `Day`, 
+  ROUND(SUM(IF(SUBSTR(`t1`.`Status`, 1, 9) = &quot;cancelled&quot;, 1, 0)) / COUNT(*), 2) AS `Cancellation Rate` 
+FROM (
+  SELECT
+    `Trips`.`Status`, 
+    `Trips`.`Request_at` 
+  FROM `Trips`
+  LEFT JOIN `Users`
+  ON `Trips`.`Client_Id` = `Users`.`Users_Id`
+  WHERE `Trips`.`Request_at` &gt;= &quot;2013-10-01&quot;
+  AND `Trips`.`Request_at` &lt;= &quot;2013-10-03&quot;
+  AND `Users`.`Banned` = &quot;No&quot;) AS `t1`
+GROUP BY `t1`.`Request_at`;</code></pre>
+<div class="knitsql-table">
+<table>
+<caption><span id="tab:solution">Table 5: </span>3 records</caption>
+<thead>
+<tr class="header">
+<th align="left">Day</th>
+<th align="right">Cancellation Rate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">2013-10-01</td>
+<td align="right">0.33</td>
+</tr>
+<tr class="even">
+<td align="left">2013-10-02</td>
+<td align="right">0.00</td>
+</tr>
+<tr class="odd">
+<td align="left">2013-10-03</td>
+<td align="right">0.50</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="explanation" class="section level3">
+<h3>Explanation</h3>
+<p>This query seemed liked one of those, I-better-relax-a-minute-before-jumping-in-type deals. There’s quite a bit going on here than others; it can definitely come off as being a little more tedious than it actually is.</p>
+<p>And, like most problems that seem complicated, we start small and simple. From <code>Trips</code>, we know we need <code>Client_Id</code>.</p>
+<blockquote>
+<p>Write a SQL query to find the cancellation rate of requests made by <strong>unbanned clients</strong></p>
+</blockquote>
+<p>We know we also need <code>Status</code> and <code>Request_at</code>. There is no information given that suggests we need <code>Id</code>, <code>Driver_Id</code>, and <code>City_Id</code>.</p>
+<p>Additionally, while we know the range of dates we are seeking is between October 1, 2013 and October 3, 2013 - and these are the only dates in our table, I added the conditional statement anyway.</p>
+<p>Lastly, again notiing the “<strong>unbanned clients</strong>”, I remove anyone from <code>Users</code> who is <code>Banned</code>.</p>
+<p>This is a simple <code>SELECT</code> and <code>LEFT JOIN</code> statement that will serve as the basis for my subquery.</p>
+<pre class="sql"><code>  SELECT
+    `Trips`.`Status`, 
+    `Trips`.`Request_at` 
+  FROM `Trips`
+  LEFT JOIN `Users`
+  ON `Trips`.`Client_Id` = `Users`.`Users_Id`
+  WHERE `Trips`.`Request_at` &gt;= &quot;2013-10-01&quot;
+  AND `Trips`.`Request_at` &lt;= &quot;2013-10-03&quot;
+  AND `Users`.`Banned` = &quot;No&quot;) AS `t1`</code></pre>
+<p>Now comes what may seem like the complicated part; we have to <code>SUM</code> <em>only</em> where <code>Status</code> is “cancelled”. This is inclusive of “cancelled_by_client” and “cancelled_by_driver”. That tell us we need to use the <code>SUBSTR</code> function.</p>
+<p>Once we’ve calculated the <code>SUM</code> of both “cancelled_by_client” and “cancelled_by_driver”, we simply divide that by <code>COUNT(*)</code> and <code>ROUND</code> the result to the nearest digit.</p>
+<pre class="sql"><code>  ROUND(SUM(IF(SUBSTR(`t1`.`Status`, 1, 9) = &quot;cancelled&quot;, 1, 0)) / COUNT(*), 2) AS `Cancellation Rate` </code></pre>
+<p>Don’t forget to <code>GROUP</code> by the <code>Request_at</code> column to get the proper results.</p>
+<pre class="sql"><code>GROUP BY `t1`.`Request_at`;</code></pre>
+<p>This solution placed in the top 2% so there will be no revisions.</p>
+</div>
+<div id="cleanup" class="section level3">
+<h3>Cleanup</h3>
+<pre class="sql"><code>DROP TABLE `Trips`;</code></pre>
+<pre class="sql"><code>DROP TABLE `Users`;</code></pre>
+</div>
+<div id="mariadb-server-info" class="section level3">
+<h3>MariaDB Server Info</h3>
+<pre class="sql"><code>SELECT @@version_comment AS `Version`, 
+  @@version_compile_machine AS `Version Compile Machine`, 
+  @@innodb_version AS `InnoDB Version`, 
+  @@version_compile_os AS `Version Compile OS`;</code></pre>
+<div class="knitsql-table">
+<table>
+<caption><span id="tab:mariadb-version">Table 6: </span>MariaDB Server Info</caption>
+<thead>
+<tr class="header">
+<th align="left">Version</th>
+<th align="left">Version Compile Machine</th>
+<th align="left">InnoDB Version</th>
+<th align="left">Version Compile OS</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">mariadb.org binary distribution</td>
+<td align="left">x86_64</td>
+<td align="left">5.7.20</td>
+<td align="left">debian-linux-gnu</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+    </div>
+
+    
+
+
+<div class="article-tags">
+  
+  <a class="btn btn-primary btn-outline" href="../../tags/sql">SQL</a>
+  
+  <a class="btn btn-primary btn-outline" href="../../tags/leetcode">LeetCode</a>
+  
+</div>
+
+
+
+
+    
+    
+    <div class="article-widget">
+      <div class="hr-light"></div>
+      <h3>Related</h3>
+      <ul>
+        
+        <li><a href="../../post/2017-12-18-rising-temperature/">Rising Temperature</a></li>
+        
+        <li><a href="../../post/2017-12-11-delete-duplicate-emails/">Delete Duplicate Emails</a></li>
+        
+        <li><a href="../../post/2017-12-04-department-top-three-salaries/">Department Top Three Salaries</a></li>
+        
+        <li><a href="../../post/2017-11-27-department-highest-salary/">Department Highest Salary</a></li>
+        
+        <li><a href="../../post/2017-11-20-customers-never-order/">Customers Who Never Order</a></li>
+        
+      </ul>
+    </div>
+    
+
+    
+    <div class="article-widget">
+      <div class="post-nav">
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Next</div>
+    <a href="../../post/2018-01-01-big-countries/" rel="next">Big Countries</a>
+  </div>
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Previous</div>
+    <a href="../../post/2017-12-18-rising-temperature/" rel="prev">Rising Temperature</a>
+  </div>
+  
+</div>
+
+    </div>
+    
+
+    
+<section id="comments">
+  <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "timtrice" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+  </div>
+</article>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">
+
+      &copy; 2018 &middot; 
+
+      Powered by the
+      <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+      <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+      <span class="pull-right" aria-hidden="true">
+        <a href="#" id="back_to_top">
+          <span class="button_icon">
+            <i class="fa fa-chevron-up fa-2x"></i>
+          </span>
+        </a>
+      </span>
+
+    </p>
+  </div>
+</footer>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close btn-large" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Cite</h4>
+      </div>
+      <div>
+        <pre><code class="modal-body tex"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-primary btn-outline js-copy-cite" href="#" target="_blank">
+          <i class="fa fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-primary btn-outline js-download-cite" href="#" target="_blank">
+          <i class="fa fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+    <script id="dsq-count-scr" src="//timtrice.disqus.com/count.js" async></script>
+    
+
+    
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha512-3P8rXCuGJdNZOnUx/03c1jOTnMn3rP63nBip5gOP2qmUh5YAdVAvFZ1E+QLZZbC1rtMrQb+mah3AfYW11RUrWA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha512-iztkobsvnjKfAtTNdHkGVjAYTrrtlC7mGp/54c40wowO7LhURYl3gVzzcEqGl/qKXQltJ2HwMrdLcNUdo+N/RQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+    
+    
+    <script src="../../js/hugo-academic.js"></script>
+    
+
+    
+    
+      
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+      
+
+      
+
+      
+
+      <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+
+  </body>
+</html>
+
