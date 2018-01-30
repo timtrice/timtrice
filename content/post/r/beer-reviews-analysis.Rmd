@@ -1,11 +1,15 @@
 ---
 title: Analysis of Beer Reviews
-description: >
+summary: >
   Test description
-subtitle: > 
-  Test subtitle
-abstract: > 
-  Test abstract
+author: 'Tim Trice'
+date: '2018-12-31'
+slug: rstudio-in-docker
+categories:
+  - R
+  - tidyverse
+tags: 
+  - analysis
 draft: TRUE
 output:
   blogdown::html_page:
