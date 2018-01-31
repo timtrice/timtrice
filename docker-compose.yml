@@ -1,16 +1,18 @@
-version: '2.0'
+version: '3.4'
 
 services:
 
   adminer:
     image: adminer
+    container_name: adminer
     restart: always
     ports:
       - "8080:8080"
 
   jupyter:
-    image: timtrice/web:jupyter # docker pull jupyter/datascience-notebook
-    restart: always
+    image: jupyter/datascience-notebook
+    container_name: jupyter
+    restart: "no"
     command: start-notebook.sh --NotebookApp.password=sha1:13a4808aa90c:dbeb882e4fdc7b067a50c4dc53bba7ff7a6b7a40
     volumes:
       - ~/Projects/web:/home/jovyan/web
@@ -22,7 +24,8 @@ services:
       - postgres
 
   mariadb:
-    image: timtrice/web:mariadb # mariadb:10.3.1
+    image: mariadb:10.3.1
+    container_name: mariadb
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: qNlr0rZtf5VfGQ9m
@@ -30,16 +33,17 @@ services:
       - ~/Projects/data/mariadb:/var/lib/mysql
 
   mysql:
-    image: timtrice/web:mysql # mysql:5.7
+    image: mysql:5.7
+    container_name: mysql
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: e99rntuUXMGHB6Zt
     volumes:
       - ~/Projects/data/mysql:/var/lib/mysql
 
-  # As is, does not work through adminer. Shows port 5432 as not being open. 
   postgres:
-    image: timtrice/web:postgres # postgres:9.6.5
+    image: postgres:9.6.5
+    container_name: postgres
     restart: always
     environment:
       POSTGRES_PASSWORD: 5aJhjS7g7SAzE56K
@@ -47,8 +51,9 @@ services:
       - ~/Projects/data/postgres:/var/lib/postgresql/data
 
   rstudio:
-    image: timtrice/web:rstudio # rocker/rstudio:3.4.2
-    restart: always
+    image: timtrice/web:0.0.1
+    container_name: web
+    restart: "no"
     volumes:
       - ~/Projects/web:/home/rstudio/web
       - ~/Projects/.Renviron:/home/rstudio/.Renviron
