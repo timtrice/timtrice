@@ -16,14 +16,16 @@ update.packages(ask = FALSE)
 
 install.packages(c("blogdown",
                    "data.table",
-                   "HURDAT",
                    "ggrepel",
+                   "Hmisc",
+                   "HURDAT",
                    "knitr",
                    "lubridate",
                    "miniUI",
                    "pander",
                    "rmarkdown",
                    "rnaturalearthdata",
+                   "skimr",
                    "sp"))
 
 ## ---- GitHub packages ----
