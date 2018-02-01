@@ -30,7 +30,7 @@ services:
       - postgres:/var/lib/postgresql/data
 
   adminer:
-    image: adminer
+    image: adminer:4.5.0-standalone
     container_name: adminer
     restart: always
     ports:
