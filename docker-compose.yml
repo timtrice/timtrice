@@ -2,27 +2,6 @@ version: '3.4'
 
 services:
 
-  adminer:
-    image: adminer
-    container_name: adminer
-    restart: always
-    ports:
-      - "8080:8080"
-
-  jupyter:
-    image: jupyter/datascience-notebook
-    container_name: jupyter
-    restart: "no"
-    command: start-notebook.sh --NotebookApp.password=sha1:13a4808aa90c:dbeb882e4fdc7b067a50c4dc53bba7ff7a6b7a40
-    volumes:
-      - .:/home/jovyan/web
-    ports:
-      - "8888:8888"
-    depends_on:
-      - mariadb
-      - mysql
-      - postgres
-
   mariadb:
     image: mariadb:10.3.1
     container_name: mariadb
@@ -50,6 +29,13 @@ services:
     volumes:
       - postgres:/var/lib/postgresql/data
 
+  adminer:
+    image: adminer
+    container_name: adminer
+    restart: always
+    ports:
+      - "8080:8080"
+
   rstudio:
     image: timtrice/web:latest
     container_name: web
@@ -59,6 +45,20 @@ services:
       - ~/.Renviron:/home/rstudio/.Renviron
     ports:
       - "8787:8787"
+    depends_on:
+      - mariadb
+      - mysql
+      - postgres
+
+  jupyter:
+    image: jupyter/datascience-notebook
+    container_name: jupyter
+    restart: "no"
+    command: start-notebook.sh --NotebookApp.password=sha1:13a4808aa90c:dbeb882e4fdc7b067a50c4dc53bba7ff7a6b7a40
+    volumes:
+      - .:/home/jovyan/web
+    ports:
+      - "8888:8888"
     depends_on:
       - mariadb
       - mysql
