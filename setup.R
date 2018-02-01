@@ -15,6 +15,7 @@ update.packages(ask = FALSE)
 ## ---- CRAN (MRAN) packages ----
 
 install.packages(c("blogdown",
+                   "corrplot", 
                    "data.table",
                    "ggrepel",
                    "Hmisc",
