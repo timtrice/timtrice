@@ -24,13 +24,8 @@ knitr::opts_chunk$set(echo = TRUE,
 
 ```{r libraries}
 library(corrplot)
-library(dplyr)
-library(ggplot2)
 library(Hmisc)
-library(purrr)
-library(rvest)
-library(stringr)
-library(xml2)
+library(tidyverse)
 ```
 
 [One-Size-Fits-All Interview Kit](https://www.linkedin.com/pulse/how-hire-test-data-skills-one-size-fits-all-interview-tanya-cashorali/)

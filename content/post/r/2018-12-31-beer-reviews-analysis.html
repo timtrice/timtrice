@@ -2,12 +2,15 @@
 title: Analysis of Beer Reviews
 summary: >
   Test description
-draft: TRUE
+author: 'Tim Trice'
+date: '2018-12-31'
+slug: rstudio-in-docker
 categories:
   - R
   - tidyverse
 tags: 
   - analysis
+draft: TRUE
 output:
   blogdown::html_page:
     toc: true
@@ -27,28 +30,28 @@ output:
 
 <pre class="r"><code>library(corrplot)</code></pre>
 <pre><code>## Error in library(corrplot): there is no package called &#39;corrplot&#39;</code></pre>
-<pre class="r"><code>library(dplyr)</code></pre>
+<pre class="r"><code>library(Hmisc)</code></pre>
+<pre><code>## Loading required package: lattice</code></pre>
+<pre><code>## Loading required package: survival</code></pre>
+<pre><code>## Loading required package: Formula</code></pre>
+<pre><code>## Loading required package: ggplot2</code></pre>
 <pre><code>## 
-## Attaching package: &#39;dplyr&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     filter, lag</code></pre>
+## Attaching package: &#39;Hmisc&#39;</code></pre>
 <pre><code>## The following objects are masked from &#39;package:base&#39;:
 ## 
-##     intersect, setdiff, setequal, union</code></pre>
-<pre class="r"><code>library(ggplot2)
-library(Hmisc)</code></pre>
-<pre><code>## Error in library(Hmisc): there is no package called &#39;Hmisc&#39;</code></pre>
-<pre class="r"><code>library(purrr)
-library(rvest)</code></pre>
-<pre><code>## Loading required package: xml2</code></pre>
-<pre><code>## 
-## Attaching package: &#39;rvest&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:purrr&#39;:
-## 
-##     pluck</code></pre>
-<pre class="r"><code>library(stringr)
-library(xml2)</code></pre>
+##     format.pval, round.POSIXt, trunc.POSIXt, units</code></pre>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## ── Attaching packages ───────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>## ✔ tibble  1.4.1     ✔ purrr   0.2.4
+## ✔ tidyr   0.7.2     ✔ dplyr   0.7.4
+## ✔ readr   1.1.1     ✔ stringr 1.2.0
+## ✔ tibble  1.4.1     ✔ forcats 0.2.0</code></pre>
+<pre><code>## ── Conflicts ──────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::combine()   masks Hmisc::combine()
+## ✖ dplyr::filter()    masks stats::filter()
+## ✖ dplyr::lag()       masks stats::lag()
+## ✖ dplyr::src()       masks Hmisc::src()
+## ✖ dplyr::summarize() masks Hmisc::summarize()</code></pre>
 <p><a href="https://www.linkedin.com/pulse/how-hire-test-data-skills-one-size-fits-all-interview-tanya-cashorali/">One-Size-Fits-All Interview Kit</a></p>
 <div id="data-download" class="section level3">
 <h3>Data Download</h3>
@@ -143,19 +146,30 @@ if (file.exists(local_file)) {
 <div id="brewery_id" class="section level4">
 <h4>brewery_id</h4>
 <pre class="r"><code>describe(df$brewery_id)</code></pre>
-<pre><code>## Error in describe(df$brewery_id): could not find function &quot;describe&quot;</code></pre>
+<pre><code>## df$brewery_id 
+##        n  missing distinct     Info     Mean      Gmd      .05      .10 
+##  1586614        0     5840        1     3130     4731       30       45 
+##      .25      .50      .75      .90      .95 
+##      143      429     2372    12516    16866 
+## 
+## lowest :     1     2     3     4     5, highest: 27945 27980 27984 28000 28003</code></pre>
 <ul>
 <li><p>continuous variable</p></li>
 <li><p>There are no missing <code>brewer_id</code> values.</p></li>
 <li><p>The mean is higher than 75% of the values so there is a heavy skew along the lower values for some reason. Question: <em>Why is this? Is this relevant?</em></p></li>
 </ul>
 <pre class="r"><code>ggplot(df, aes(x = brewery_id)) + geom_histogram(bins = 50)</code></pre>
-<p><img src="/post/r/beer-reviews-analysis_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="/post/r/2018-12-31-beer-reviews-analysis_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 </div>
 <div id="brewery_name" class="section level4">
 <h4>brewery_name</h4>
 <pre class="r"><code>describe(df$brewery_name)</code></pre>
-<pre><code>## Error in describe(df$brewery_name): could not find function &quot;describe&quot;</code></pre>
+<pre><code>## df$brewery_name 
+##        n  missing distinct 
+##  1586599       15     5742 
+## 
+## lowest : &#39;t Hofbrouwerijke                 (512) Brewing Company             10 Barrel Brewing Co.             1516 Brewing Company              16 Mile Brewing Company          
+## highest: Zum Löwenbräu                     Zum Stiefel                       Zuma Brewing Company              Zweite Schweriner Schlossbrauerei Zywiec Breweries PLC (Heineken)</code></pre>
 <ul>
 <li>Categorical variables</li>
 </ul>
@@ -195,16 +209,35 @@ if (file.exists(local_file)) {
 <div id="review_time" class="section level4">
 <h4>review_time</h4>
 <pre class="r"><code>describe(df$review_time)</code></pre>
-<pre><code>## Error in describe(df$review_time): could not find function &quot;describe&quot;</code></pre>
+<pre><code>## df$review_time 
+##         n   missing  distinct      Info      Mean       Gmd       .05 
+##   1586614         0   1577960         1 1.224e+09  85515630 1.071e+09 
+##       .10       .25       .50       .75       .90       .95 
+## 1.107e+09 1.173e+09 1.239e+09 1.289e+09 1.311e+09 1.318e+09 
+## 
+## lowest :  840672001  884390401  884649601  885340801  885427201
+## highest: 1326274454 1326275049 1326276656 1326284970 1326285348</code></pre>
 <pre class="r"><code>ggplot(df, aes(x = review_time)) + geom_histogram(bins = 10000)</code></pre>
-<p><img src="/post/r/beer-reviews-analysis_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="/post/r/2018-12-31-beer-reviews-analysis_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 </div>
 <div id="review_overall" class="section level4">
 <h4>review_overall</h4>
 <pre class="r"><code>describe(df$review_overall)</code></pre>
-<pre><code>## Error in describe(df$review_overall): could not find function &quot;describe&quot;</code></pre>
+<pre><code>## df$review_overall 
+##        n  missing distinct     Info     Mean      Gmd      .05      .10 
+##  1586614        0       10    0.934    3.816   0.7584      2.5      3.0 
+##      .25      .50      .75      .90      .95 
+##      3.5      4.0      4.5      4.5      5.0 
+##                                                                          
+## Value         0.0    1.0    1.5    2.0    2.5    3.0    3.5    4.0    4.5
+## Frequency       7  10954  12975  38225  58523 165644 301817 582764 324385
+## Proportion  0.000  0.007  0.008  0.024  0.037  0.104  0.190  0.367  0.204
+##                  
+## Value         5.0
+## Frequency   91320
+## Proportion  0.058</code></pre>
 <pre class="r"><code>ggplot(df, aes(x = review_overall)) + geom_bar()</code></pre>
-<p><img src="/post/r/beer-reviews-analysis_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="/post/r/2018-12-31-beer-reviews-analysis_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <ul>
 <li>Categorical</li>
 </ul>
@@ -212,9 +245,15 @@ if (file.exists(local_file)) {
 <div id="review_aroma" class="section level4">
 <h4>review_aroma</h4>
 <pre class="r"><code>describe(df$review_aroma)</code></pre>
-<pre><code>## Error in describe(df$review_aroma): could not find function &quot;describe&quot;</code></pre>
+<pre><code>## df$review_aroma 
+##        n  missing distinct     Info     Mean      Gmd 
+##  1586614        0        9    0.937    3.736    0.744 
+##                                                                          
+## Value         1.0    1.5    2.0    2.5    3.0    3.5    4.0    4.5    5.0
+## Frequency    6873  12524  42566  66359 200030 365312 557383 271450  64117
+## Proportion  0.004  0.008  0.027  0.042  0.126  0.230  0.351  0.171  0.040</code></pre>
 <pre class="r"><code>ggplot(df, aes(x = review_aroma)) + geom_bar()</code></pre>
-<p><img src="/post/r/beer-reviews-analysis_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><img src="/post/r/2018-12-31-beer-reviews-analysis_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <ul>
 <li>Categorical</li>
 </ul>
@@ -222,9 +261,21 @@ if (file.exists(local_file)) {
 <div id="review_appearance" class="section level4">
 <h4>review_appearance</h4>
 <pre class="r"><code>describe(df$review_appearance)</code></pre>
-<pre><code>## Error in describe(df$review_appearance): could not find function &quot;describe&quot;</code></pre>
+<pre><code>## df$review_appearance 
+##        n  missing distinct     Info     Mean      Gmd      .05      .10 
+##  1586614        0       10    0.908    3.842   0.6436      3.0      3.0 
+##      .25      .50      .75      .90      .95 
+##      3.5      4.0      4.0      4.5      4.5 
+##                                                                          
+## Value         0.0    1.0    1.5    2.0    2.5    3.0    3.5    4.0    4.5
+## Frequency       7   3323   6147  25414  39493 166009 318529 674186 288108
+## Proportion  0.000  0.002  0.004  0.016  0.025  0.105  0.201  0.425  0.182
+##                  
+## Value         5.0
+## Frequency   65398
+## Proportion  0.041</code></pre>
 <pre class="r"><code>ggplot(df, aes(x = review_appearance)) + geom_bar()</code></pre>
-<p><img src="/post/r/beer-reviews-analysis_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p><img src="/post/r/2018-12-31-beer-reviews-analysis_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <ul>
 <li>Categorical</li>
 </ul>
@@ -232,7 +283,12 @@ if (file.exists(local_file)) {
 <div id="review_profilename" class="section level4">
 <h4>review_profilename</h4>
 <pre class="r"><code>describe(df$review_profilename)</code></pre>
-<pre><code>## Error in describe(df$review_profilename): could not find function &quot;describe&quot;</code></pre>
+<pre><code>## df$review_profilename 
+##        n  missing distinct 
+##  1586266      348    33387 
+## 
+## lowest : 0110x011    01Ryan10    02maxima    03SVTCobra  04101Brewer
+## highest: zythus      Zywiec06    zyzygy      zzajjber    Zzyzx</code></pre>
 <ul>
 <li>Categorical</li>
 </ul>
@@ -240,7 +296,12 @@ if (file.exists(local_file)) {
 <div id="beer_style" class="section level4">
 <h4>beer_style</h4>
 <pre class="r"><code>describe(df$beer_style)</code></pre>
-<pre><code>## Error in describe(df$beer_style): could not find function &quot;describe&quot;</code></pre>
+<pre><code>## df$beer_style 
+##        n  missing distinct 
+##  1586614        0      104 
+## 
+## lowest : Altbier                    American Adjunct Lager     American Amber / Red Ale   American Amber / Red Lager American Barleywine       
+## highest: Vienna Lager               Weizenbock                 Wheatwine                  Winter Warmer              Witbier</code></pre>
 <ul>
 <li>Categorical</li>
 </ul>
@@ -248,9 +309,15 @@ if (file.exists(local_file)) {
 <div id="review_palate" class="section level4">
 <h4>review_palate</h4>
 <pre class="r"><code>describe(df$review_palate)</code></pre>
-<pre><code>## Error in describe(df$review_palate): could not find function &quot;describe&quot;</code></pre>
+<pre><code>## df$review_palate 
+##        n  missing distinct     Info     Mean      Gmd 
+##  1586614        0        9    0.928    3.744   0.7227 
+##                                                                          
+## Value         1.0    1.5    2.0    2.5    3.0    3.5    4.0    4.5    5.0
+## Frequency    6874  11045  38333  62842 206932 338585 606711 253102  62190
+## Proportion  0.004  0.007  0.024  0.040  0.130  0.213  0.382  0.160  0.039</code></pre>
 <pre class="r"><code>ggplot(df, aes(x = review_palate)) + geom_bar()</code></pre>
-<p><img src="/post/r/beer-reviews-analysis_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p><img src="/post/r/2018-12-31-beer-reviews-analysis_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <ul>
 <li>Categorical</li>
 </ul>
@@ -258,9 +325,15 @@ if (file.exists(local_file)) {
 <div id="review_taste" class="section level4">
 <h4>review_taste</h4>
 <pre class="r"><code>describe(df$review_taste)</code></pre>
-<pre><code>## Error in describe(df$review_taste): could not find function &quot;describe&quot;</code></pre>
+<pre><code>## df$review_taste 
+##        n  missing distinct     Info     Mean      Gmd 
+##  1586614        0        9    0.941    3.793   0.7766 
+##                                                                          
+## Value         1.0    1.5    2.0    2.5    3.0    3.5    4.0    4.5    5.0
+## Frequency    9991  15128  41992  66534 166860 324541 541429 336162  83977
+## Proportion  0.006  0.010  0.026  0.042  0.105  0.205  0.341  0.212  0.053</code></pre>
 <pre class="r"><code>ggplot(df, aes(x = review_taste)) + geom_bar()</code></pre>
-<p><img src="/post/r/beer-reviews-analysis_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p><img src="/post/r/2018-12-31-beer-reviews-analysis_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 <ul>
 <li>Categorical</li>
 </ul>
@@ -268,12 +341,18 @@ if (file.exists(local_file)) {
 <div id="beer_abv" class="section level4">
 <h4>beer_abv</h4>
 <pre class="r"><code>describe(df$beer_abv)</code></pre>
-<pre><code>## Error in describe(df$beer_abv): could not find function &quot;describe&quot;</code></pre>
+<pre><code>## df$beer_abv 
+##        n  missing distinct     Info     Mean      Gmd      .05      .10 
+##  1518829    67785      530    0.999    7.042     2.47      4.5      4.8 
+##      .25      .50      .75      .90      .95 
+##      5.2      6.5      8.5     10.0     11.0 
+## 
+## lowest :  0.01  0.05  0.08  0.10  0.25, highest: 39.00 39.44 41.00 43.00 57.70</code></pre>
 <pre class="r"><code>df %&gt;% 
   filter(!is.na(beer_abv)) %&gt;% 
   ggplot(aes(x = beer_abv)) + 
   geom_freqpoly(bins = 10)</code></pre>
-<p><img src="/post/r/beer-reviews-analysis_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p><img src="/post/r/2018-12-31-beer-reviews-analysis_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 <ul>
 <li>Continuous</li>
 </ul>
@@ -281,14 +360,25 @@ if (file.exists(local_file)) {
 <div id="beer_name" class="section level4">
 <h4>beer_name</h4>
 <pre class="r"><code>describe(df$beer_name)</code></pre>
-<pre><code>## Error in describe(df$beer_name): could not find function &quot;describe&quot;</code></pre>
+<pre><code>## df$beer_name 
+##        n  missing distinct 
+##  1586614        0    56857 
+## 
+## lowest : ! (Old Ale)                       ? (Imperial Bitter)               ? The Riddler ?                   ¿Por Que No?                      .357 Imperial Pilsner            
+## highest: ZZ Lager                          Þorrabjór                         Ω-naught (Omeganaught)            横須賀ビアサケ (Yokosuka Biasake) 葉山ビール (Hayama Beer)</code></pre>
 </div>
 <div id="beer_beerid" class="section level4">
 <h4>beer_beerid</h4>
 <pre class="r"><code>describe(df$beer_beerid)</code></pre>
-<pre><code>## Error in describe(df$beer_beerid): could not find function &quot;describe&quot;</code></pre>
+<pre><code>## df$beer_beerid 
+##        n  missing distinct     Info     Mean      Gmd      .05      .10 
+##  1586614        0    66055        1    21713    23983      213      577 
+##      .25      .50      .75      .90      .95 
+##     1717    13906    39441    55183    62653 
+## 
+## lowest :     3     4     5     6     7, highest: 77313 77314 77315 77316 77317</code></pre>
 <pre class="r"><code>ggplot(df, aes(x = beer_beerid)) + geom_histogram(bins = 50)</code></pre>
-<p><img src="/post/r/beer-reviews-analysis_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p><img src="/post/r/2018-12-31-beer-reviews-analysis_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
 </div>
 </div>
 <div id="data-cleaning" class="section level3">
@@ -400,17 +490,7 @@ get_addresses &lt;- function(x, pattern) {
 }</code></pre>
 <p>I’ll test it.</p>
 <pre class="r"><code>get_addresses(df, &quot;^Back St&quot;)</code></pre>
-<pre><code>## [[1]]
-## [1] &quot;14450 Culver DriveIrvine, California, 92604United States(949) 857-0160 | maplamppostpizza.com&quot;
-## 
-## [[2]]
-## [1] &quot;78-772 Highway 111La Quinta, California, 92253United States(760) 564-4568 | maplamppostpizza.com&quot;
-## 
-## [[3]]
-## [1] &quot;15 Main Street, Suite #100Vista, California, 92084United States(760) 407-7600 | maplamppostpizza.com&quot;
-## 
-## [[4]]
-## [1] &quot;27702 Crown Valley ParkwayLadera Ranch, California, 92691United States(949) 388-7260 // CLOSED //&quot;</code></pre>
+<pre><code>## Error in as_mapper(.f, ...): object &#39;read_html&#39; not found</code></pre>
 <p>[[satisfied face meme]]</p>
 <p>Ok, now I just need to go through our discrepancies. It would be nice to write a function to do this as well. But the pattern requires human involvement; oh, well.</p>
 <p>Of the known items with possible issues, only those that immediately follow had true issues.</p>
@@ -428,7 +508,7 @@ df %&gt;% filter(grepl(ptn, brewery_name)) %&gt;%
 ## 2       1954 Bare Bones Grill &amp; Brewery</code></pre>
 <pre class="r"><code>#&#39; List addresses
 get_addresses(df, ptn)</code></pre>
-<pre><code>## Error in open.connection(x, &quot;rb&quot;): HTTP error 404.</code></pre>
+<pre><code>## Error in as_mapper(.f, ...): object &#39;read_html&#39; not found</code></pre>
 <p>In this case, the page for id 1953 no longer exists. So, there is no way to validate the discrepancy. In this case I will update all 1953 <code>brewery_id</code> values to 1954.</p>
 <pre class="r"><code>df$brewery_id[df$brewery_id == 1953] &lt;- 1954</code></pre>
 </div>
@@ -440,8 +520,6 @@ get_addresses(df, ptn)</code></pre>
 df %&gt;% filter(grepl(ptn, brewery_name)) %&gt;% 
   select(starts_with(&quot;brew&quot;)) %&gt;% 
   distinct(brewery_id, .keep_all = TRUE)</code></pre>
-<pre><code>## Warning: closing unused connection 5 (https://www.beeradvocate.com/beer/
-## profile/1953/)</code></pre>
 <pre><code>## # A tibble: 2 x 2
 ##   brewery_id brewery_name            
 ##        &lt;dbl&gt; &lt;chr&gt;                   
@@ -449,11 +527,7 @@ df %&gt;% filter(grepl(ptn, brewery_name)) %&gt;%
 ## 2      12984 Rocky Coulee Brewing Co.</code></pre>
 <pre class="r"><code>#&#39; List addresses
 get_addresses(df, ptn)</code></pre>
-<pre><code>## [[1]]
-## [1] &quot;205 N. First StreetOdessa, Washington, 99159United States(509) 345-2216 | maprockycouleebrewingco.com&quot;
-## 
-## [[2]]
-## [1] &quot;205 N. First StreetOdessa, Washington, 99159United States(509) 346-2216 // CLOSED //&quot;</code></pre>
+<pre><code>## Error in as_mapper(.f, ...): object &#39;read_html&#39; not found</code></pre>
 <p>“Rocky Coulee Brewing Co.” has two identical entries in the database. The only difference in the address listings is one digit in the phone number.</p>
 <p>I’ll update those with <code>brewery_id</code> 13094 to 12984.</p>
 <pre class="r"><code>df$brewery_id[df$brewery_id == 13094] &lt;- 12984</code></pre>
@@ -487,8 +561,11 @@ get_addresses(df, ptn)</code></pre>
   geom_point() + 
   geom_smooth()</code></pre>
 <pre><code>## `geom_smooth()` using method = &#39;gam&#39;</code></pre>
-<pre><code>## Error in loadNamespace(name): there is no package called &#39;mgcv&#39;</code></pre>
-<p><img src="/post/r/beer-reviews-analysis_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
+<pre><code>## Warning in seq.default(0, 1, length = nk): partial argument match of
+## &#39;length&#39; to &#39;length.out&#39;</code></pre>
+<pre><code>## Warning in model.matrix.default(Terms[[i]], mf, contrasts = object
+## $contrasts): partial argument match of &#39;contrasts&#39; to &#39;contrasts.arg&#39;</code></pre>
+<p><img src="/post/r/2018-12-31-beer-reviews-analysis_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
 <p>Is this really surprising?</p>
 <p>Next to taste is <code>review_palate</code>; let’s check that out.</p>
 <pre class="r"><code>df %&gt;% 
@@ -499,8 +576,11 @@ get_addresses(df, ptn)</code></pre>
   geom_point() + 
   geom_smooth()</code></pre>
 <pre><code>## `geom_smooth()` using method = &#39;gam&#39;</code></pre>
-<pre><code>## Error in loadNamespace(name): there is no package called &#39;mgcv&#39;</code></pre>
-<p><img src="/post/r/beer-reviews-analysis_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
+<pre><code>## Warning in seq.default(0, 1, length = nk): partial argument match of
+## &#39;length&#39; to &#39;length.out&#39;</code></pre>
+<pre><code>## Warning in model.matrix.default(Terms[[i]], mf, contrasts = object
+## $contrasts): partial argument match of &#39;contrasts&#39; to &#39;contrasts.arg&#39;</code></pre>
+<p><img src="/post/r/2018-12-31-beer-reviews-analysis_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
 <p>I’m curious what type of</p>
 <pre class="r"><code>df %&gt;% 
   select(beer_beerid, review_overall, review_aroma, review_taste) %&gt;% 
@@ -520,10 +600,10 @@ get_addresses(df, ptn)</code></pre>
 <div id="r-session-info" class="section level2">
 <h2>R Session Info</h2>
 <pre class="r"><code>pander::pander(sessionInfo())</code></pre>
-<p><strong>R version 3.4.1 (2017-06-30)</strong></p>
+<p><strong>R version 3.4.3 (2017-11-30)</strong></p>
 <p>**<a href="Platform:**" class="uri">Platform:**</a> x86_64-pc-linux-gnu (64-bit)</p>
 <p><strong>locale:</strong> <em>LC_CTYPE=en_US.UTF-8</em>, <em>LC_NUMERIC=C</em>, <em>LC_TIME=en_US.UTF-8</em>, <em>LC_COLLATE=en_US.UTF-8</em>, <em>LC_MONETARY=en_US.UTF-8</em>, <em>LC_MESSAGES=C</em>, <em>LC_PAPER=en_US.UTF-8</em>, <em>LC_NAME=C</em>, <em>LC_ADDRESS=C</em>, <em>LC_TELEPHONE=C</em>, <em>LC_MEASUREMENT=en_US.UTF-8</em> and <em>LC_IDENTIFICATION=C</em></p>
 <p><strong>attached base packages:</strong> <em>methods</em>, <em>stats</em>, <em>graphics</em>, <em>grDevices</em>, <em>utils</em>, <em>datasets</em> and <em>base</em></p>
-<p><strong>other attached packages:</strong> <em>bindrcpp(v.0.2)</em>, <em>stringr(v.1.2.0)</em>, <em>rvest(v.0.3.2)</em>, <em>xml2(v.1.1.1)</em>, <em>purrr(v.0.2.4)</em>, <em>ggplot2(v.2.2.1)</em> and <em>dplyr(v.0.7.4)</em></p>
-<p><strong>loaded via a namespace (and not attached):</strong> <em>Rcpp(v.0.12.14)</em>, <em>pillar(v.1.0.1)</em>, <em>compiler(v.3.4.1)</em>, <em>plyr(v.1.8.4)</em>, <em>bindr(v.0.1)</em>, <em>tools(v.3.4.1)</em>, <em>digest(v.0.6.13)</em>, <em>evaluate(v.0.10.1)</em>, <em>tibble(v.1.4.1)</em>, <em>gtable(v.0.2.0)</em>, <em>pkgconfig(v.2.0.1)</em>, <em>rlang(v.0.1.6)</em>, <em>cli(v.1.0.0)</em>, <em>curl(v.3.1)</em>, <em>yaml(v.2.1.16)</em>, <em>blogdown(v.0.4)</em>, <em>httr(v.1.3.1)</em>, <em>knitr(v.1.18)</em>, <em>hms(v.0.4.0)</em>, <em>rprojroot(v.1.3-1)</em>, <em>grid(v.3.4.1)</em>, <em>glue(v.1.2.0)</em>, <em>R6(v.2.2.2)</em>, <em>rmarkdown(v.1.8)</em>, <em>bookdown(v.0.5)</em>, <em>pander(v.0.6.1)</em>, <em>readr(v.1.1.1)</em>, <em>magrittr(v.1.5)</em>, <em>backports(v.1.1.2)</em>, <em>scales(v.0.5.0)</em>, <em>htmltools(v.0.3.6)</em>, <em>assertthat(v.0.2.0)</em>, <em>colorspace(v.1.3-2)</em>, <em>labeling(v.0.3)</em>, <em>utf8(v.1.1.2)</em>, <em>stringi(v.1.1.6)</em>, <em>lazyeval(v.0.2.1)</em>, <em>munsell(v.0.4.3)</em> and <em>crayon(v.1.3.4)</em></p>
+<p><strong>other attached packages:</strong> <em>bindrcpp(v.0.2)</em>, <em>forcats(v.0.2.0)</em>, <em>stringr(v.1.2.0)</em>, <em>dplyr(v.0.7.4)</em>, <em>purrr(v.0.2.4)</em>, <em>readr(v.1.1.1)</em>, <em>tidyr(v.0.7.2)</em>, <em>tibble(v.1.4.1)</em>, <em>tidyverse(v.1.2.1)</em>, <em>Hmisc(v.4.0-3)</em>, <em>ggplot2(v.2.2.1)</em>, <em>Formula(v.1.2-2)</em>, <em>survival(v.2.41-3)</em> and <em>lattice(v.0.20-35)</em></p>
+<p><strong>loaded via a namespace (and not attached):</strong> <em>httr(v.1.3.1)</em>, <em>jsonlite(v.1.5)</em>, <em>splines(v.3.4.3)</em>, <em>modelr(v.0.1.1)</em>, <em>assertthat(v.0.2.0)</em>, <em>latticeExtra(v.0.6-28)</em>, <em>pander(v.0.6.1)</em>, <em>cellranger(v.1.1.0)</em>, <em>yaml(v.2.1.16)</em>, <em>pillar(v.1.0.1)</em>, <em>backports(v.1.1.2)</em>, <em>glue(v.1.2.0)</em>, <em>digest(v.0.6.13)</em>, <em>RColorBrewer(v.1.1-2)</em>, <em>checkmate(v.1.8.5)</em>, <em>rvest(v.0.3.2)</em>, <em>colorspace(v.1.3-2)</em>, <em>htmltools(v.0.3.6)</em>, <em>Matrix(v.1.2-12)</em>, <em>plyr(v.1.8.4)</em>, <em>psych(v.1.7.8)</em>, <em>pkgconfig(v.2.0.1)</em>, <em>broom(v.0.4.3)</em>, <em>haven(v.1.1.0)</em>, <em>bookdown(v.0.5)</em>, <em>scales(v.0.5.0)</em>, <em>htmlTable(v.1.11.1)</em>, <em>mgcv(v.1.8-22)</em>, <em>nnet(v.7.3-12)</em>, <em>lazyeval(v.0.2.1)</em>, <em>cli(v.1.0.0)</em>, <em>mnormt(v.1.5-5)</em>, <em>magrittr(v.1.5)</em>, <em>crayon(v.1.3.4)</em>, <em>readxl(v.1.0.0)</em>, <em>evaluate(v.0.10.1)</em>, <em>nlme(v.3.1-131)</em>, <em>xml2(v.1.1.1)</em>, <em>foreign(v.0.8-69)</em>, <em>blogdown(v.0.4)</em>, <em>tools(v.3.4.3)</em>, <em>data.table(v.1.10.4-3)</em>, <em>hms(v.0.4.0)</em>, <em>munsell(v.0.4.3)</em>, <em>cluster(v.2.0.6)</em>, <em>compiler(v.3.4.3)</em>, <em>rlang(v.0.1.6)</em>, <em>grid(v.3.4.3)</em>, <em>rstudioapi(v.0.7)</em>, <em>htmlwidgets(v.0.9)</em>, <em>base64enc(v.0.1-3)</em>, <em>labeling(v.0.3)</em>, <em>rmarkdown(v.1.8)</em>, <em>gtable(v.0.2.0)</em>, <em>curl(v.3.1)</em>, <em>reshape2(v.1.4.3)</em>, <em>R6(v.2.2.2)</em>, <em>gridExtra(v.2.3)</em>, <em>lubridate(v.1.7.1)</em>, <em>knitr(v.1.18)</em>, <em>utf8(v.1.1.2)</em>, <em>bindr(v.0.1)</em>, <em>rprojroot(v.1.3-1)</em>, <em>stringi(v.1.1.6)</em>, <em>parallel(v.3.4.3)</em>, <em>Rcpp(v.0.12.14)</em>, <em>rpart(v.4.1-11)</em> and <em>acepack(v.1.4.1)</em></p>
 </div>
