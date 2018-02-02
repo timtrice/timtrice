@@ -5,7 +5,8 @@ RUN apt-get update \
   && apt-get install -y \ 
     libgdal-dev \ 
     libproj-dev \
-    r-cran-littler
+    r-cran-littler \ 
+    vim
 
 # Create working directory for image user
 WORKDIR /home/rstudio
