@@ -32,7 +32,11 @@ install.packages(c("blogdown",
                    "rnaturalearthdata",
                    "rsconnect",
                    "skimr",
-                   "sp"))
+                   "sp", 
+                   "sweep", 
+                   "tibbletime", 
+                   "tidyquant", 
+                   "timetk"))
 
 ## ---- GitHub packages ----
 
