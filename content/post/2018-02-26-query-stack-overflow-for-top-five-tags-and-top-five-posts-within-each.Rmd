@@ -1,0 +1,192 @@
+---
+title: Query Stack Overflow for Top Five Tags and Top Five Posts Within Each
+author: Tim Trice
+date: '2018-02-26'
+slug: query-stack-overflow-for-top-five-tags-and-top-five-posts-within-each
+categories:
+  - SQL
+tags:
+  - SELECT
+  - ROW_NUMBER
+  - PARTITION
+  - LEFT JOIN
+  - ORDER BY
+---
+
+```{r setup, echo = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+I want to build a query to find the top 5 tags on Stack Overflow and the top 5 posts within each tag. This is a somewhat simple query that utilizes two subqueries AND `OVER` `PARTITION` statements.
+
+```{r libraries, echo = FALSE}
+library(knitr)
+library(magrittr)
+library(readr)
+library(stringr)
+```
+
+```{r src-sql, echo = FALSE}
+# SQL source
+sql_src <- "https://raw.githubusercontent.com/timtrice/datasets/79fb5f115c03ba856e62cad506a7b2a18a1a0223/stackoverflow/top-5-tags-and-top-5-posts-within.sql"
+
+# Data
+data_src <- "https://media.githubusercontent.com/media/timtrice/datasets/ff98eb5f8b64092925ee1e8df9782476e87e8e94/stackoverflow/top-5-tags-and-top-5-posts-within.csv"
+
+# Read SQL source
+read_chunk(sql_src)
+
+# Import data, replacing open anchor tags (<)
+df <- read_csv(data_src, col_types = cols())
+df$Tags <- purrr::map(df$Tags, str_replace_all, "<", "&lt;")
+```
+
+  * Get the top 5 tags (by post count). 
+  * Get the top 5 posts (by score) for each tag.
+
+I use the [Stack Exchange Data Explorer](http://data.stackexchange.com/). The tables I focus on are:
+
+  * Tags
+  * PostTags
+  * Posts
+
+For this particular dataset, I chose to use all three for simplicity. The `Tags` table has a `Count` value - the number of posts within the tag. The `PostTags` table ties both `Posts` and `Tags` together by `PostId` and `TagId`. 
+
+`Posts` does have a `tags` column, but these contain all tags assigned to the post.
+
+## Query
+
+My final query is:
+
+```{sql ref.label = "top-5-tags", eval = FALSE}
+```
+
+## Results
+
+That produces the dataset:
+
+```{r print-df, echo = FALSE}
+kable(df, caption = "Top 5 Tags and Top 5 Posts Within Each")
+```
+
+[Source](http://data.stackexchange.com/stackoverflow/query/810701/top-5-tags-with-overall-posts-and-top-5-posts-within-each-by-score)
+
+The `Score` values are slightly off as the dataset used is a little outdated. 
+
+## Technique
+
+First I need to get the tags with the most posts per tag. This initial query is very simple as all of the data already exists within `Tags`:
+
+```sql
+SELECT 
+  TOP 5 Tags.Id
+FROM 
+  Tags
+ORDER BY 
+  Tags.Count DESC;
+```
+
+This brings back the values 3, 17, 9, 5, and 1386.
+
+You must add the `ORDER BY` clause, otherwise you just get the first five rows returned by default.
+
+Now that I know the most popular tags, I need to use `PostTags` to bridge the gap between `Tags` and `Posts`. By finding all `PostTags.TagId` values of 3, 17, 9, 5 and 1386, I can return all `PostTags.PostId`. 
+
+With the corresponding `PostTags.PostId` values, I create another query:
+
+```sql
+SELECT
+  Posts.Id,
+  Posts.Score,
+  PostTags.TagId,
+  n = ROW_NUMBER() OVER (
+    PARTITION BY
+      PostTags.TagId
+    ORDER BY
+    Posts.Score DESC)
+FROM
+  PostTags
+LEFT JOIN
+  Posts
+ON
+  PostTags.PostId = Posts.Id
+WHERE
+  PostTags.TagId IN (
+    SELECT
+      TOP 5 Tags.Id
+    FROM
+      Tags
+    ORDER BY
+      Tags.Count DESC);
+```
+
+I created a new variable, `n`, to count every post within each tag ordered by `Score`. This really serves as my ranking variable. You'll see in a minute how much easier it will make modifying our result set. 
+
+Many, including myself occasionally, get tripped up trying to group results by a column where we may have additional columns in our `SELECT` statement.
+
+For example, I want the top 5 posts. So, why not just specifically state to return the `TOP 5 Posts.Score` and have the query `GROUP BY` `PostTags.TagId`.
+
+For example, a query like this:
+
+```sql
+SELECT
+  TOP 5 Posts.Id,
+  Posts.Score,
+  PostTags.TagId,
+  n = ROW_NUMBER() OVER (
+    PARTITION BY
+      PostTags.TagId
+    ORDER BY
+    Posts.Score DESC)
+FROM
+  PostTags
+LEFT JOIN
+  Posts
+ON
+  PostTags.PostId = Posts.Id
+WHERE
+  PostTags.TagId IN (
+    SELECT
+      TOP 5 Tags.Id
+    FROM
+      Tags
+    ORDER BY
+      Tags.Count DESC)
+GROUP BY 
+  PostTags.TagId
+ORDER BY 
+  Posts.Score DESC;
+```
+
+will generate an error like the following:
+
+> Column 'Posts.Id' is invalid in the select list because it is not contained in either an aggregate function or the GROUP BY clause.
+
+What this is telling me is that I have selected more columns than I have specified in my grouping statement. The server recognizes that I'm telling it, "hey, group by tag id and then within each tag id bring me the the post id, post score." And the server doesn't know which value of post id or post score to return. 
+
+Take a look:
+
+|    Id   | Score | TagId | n |
+|:-------:|:-----:|:-----:|:-:|
+|  111102 |  7659 |   3   | 1 |
+|  503093 |  7595 |   3   | 2 |
+| 1789945 |  7283 |   3   | 3 |
+| 1335851 |  6405 |   3   | 4 |
+
+The server says, "Ok, I grouped everything by `TagId`. Now, what value of `Id` and `Score` am I supposed to return?"
+
+The error will be different depending on the database server. But, generally all servers will, by default, throw an error when you send this type of query.
+
+Back to where I left off, now I have a second subquery that has ranked every post within `TagId` by `Score`. The last step is to use this subquery to return my results which was my original query.
+
+```{sql ref.label = "top-5-tags", eval = FALSE}
+```
+
+By setting `WHERE n <= 5` I can get the top five posts per tag or, if I want ten or 20 or whatever, just change my condition.
+
+You can also get more tags by changing the first subquery; here:
+
+```{sql ref.label = "top-5-tags", eval = FALSE, echo = 25:30}
+```
+
+Just make `TOP 5 Tags.Id` to whatever you want.
