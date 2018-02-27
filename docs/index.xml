@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tim Trice on Tim Trice</title>
-    <link>/</link>
+    <link>http://timtrice.net/</link>
     <description>Recent content in Tim Trice on Tim Trice</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -12,46 +12,46 @@
     
     <item>
       <title>Tom Armstrong, Narrative1</title>
-      <link>/testimonials/tom-armstrong/</link>
+      <link>http://timtrice.net/testimonials/tom-armstrong/</link>
       <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>/testimonials/tom-armstrong/</guid>
+      <guid>http://timtrice.net/testimonials/tom-armstrong/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Donald Hatter, DRE Software</title>
-      <link>/testimonials/donald-hatter/</link>
+      <link>http://timtrice.net/testimonials/donald-hatter/</link>
       <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>/testimonials/donald-hatter/</guid>
+      <guid>http://timtrice.net/testimonials/donald-hatter/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Josh Southern, Paradigm Shift Interactive</title>
-      <link>/testimonials/josh-southern/</link>
+      <link>http://timtrice.net/testimonials/josh-southern/</link>
       <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>/testimonials/josh-southern/</guid>
+      <guid>http://timtrice.net/testimonials/josh-southern/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Open Design</title>
-      <link>/testimonials/open-design/</link>
+      <link>http://timtrice.net/testimonials/open-design/</link>
       <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>/testimonials/open-design/</guid>
+      <guid>http://timtrice.net/testimonials/open-design/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Query Stack Overflow for Top 5 Tags and Children Posts</title>
-      <link>/2018-02-26-query-stack-overflow-top-five-tags-top-five-posts-within-each-tag/</link>
+      <link>http://timtrice.net/2018-02-26-query-stack-overflow-top-five-tags-top-five-posts-within-each-tag/</link>
       <pubDate>Mon, 26 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>/2018-02-26-query-stack-overflow-top-five-tags-top-five-posts-within-each-tag/</guid>
+      <guid>http://timtrice.net/2018-02-26-query-stack-overflow-top-five-tags-top-five-posts-within-each-tag/</guid>
       <description>&lt;div id=&#34;TOC&#34;&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#requirements&#34;&gt;Requirements&lt;/a&gt;&lt;/li&gt;
@@ -577,10 +577,10 @@ ORDER BY
     
     <item>
       <title>Department Top Three Salaries</title>
-      <link>/2018-01-30-department-top-three-salaries/</link>
+      <link>http://timtrice.net/2018-01-30-department-top-three-salaries/</link>
       <pubDate>Tue, 30 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>/2018-01-30-department-top-three-salaries/</guid>
+      <guid>http://timtrice.net/2018-01-30-department-top-three-salaries/</guid>
       <description>&lt;div id=&#34;problem&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Problem&lt;/h3&gt;
 &lt;p&gt;The &lt;code&gt;Employee&lt;/code&gt; table holds all employees. Every employee has an Id, and there is also a column for the department Id.&lt;/p&gt;
@@ -991,10 +991,10 @@ ORDER BY `Employee`.`DepartmentId`, `Employee`.`Salary` DESC;&lt;/code&gt;&lt;/p
     
     <item>
       <title>Hurricane Harvey Post Storm Report</title>
-      <link>/2017-09-06-hurricane-harvey-report/</link>
+      <link>http://timtrice.net/2017-09-06-hurricane-harvey-report/</link>
       <pubDate>Wed, 06 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017-09-06-hurricane-harvey-report/</guid>
+      <guid>http://timtrice.net/2017-09-06-hurricane-harvey-report/</guid>
       <description>&lt;div id=&#34;TOC&#34;&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#hurricane-harvey&#34;&gt;Hurricane Harvey&lt;/a&gt;&lt;ul&gt;
@@ -1747,7 +1747,7 @@ FEW TREES WERE BLOWN DOWN. RATED EF0. &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;strong&gt;locale:&lt;/strong&gt; &lt;em&gt;LC_CTYPE=en_US.UTF-8&lt;/em&gt;, &lt;em&gt;LC_NUMERIC=C&lt;/em&gt;, &lt;em&gt;LC_TIME=en_US.UTF-8&lt;/em&gt;, &lt;em&gt;LC_COLLATE=en_US.UTF-8&lt;/em&gt;, &lt;em&gt;LC_MONETARY=en_US.UTF-8&lt;/em&gt;, &lt;em&gt;LC_MESSAGES=C&lt;/em&gt;, &lt;em&gt;LC_PAPER=en_US.UTF-8&lt;/em&gt;, &lt;em&gt;LC_NAME=C&lt;/em&gt;, &lt;em&gt;LC_ADDRESS=C&lt;/em&gt;, &lt;em&gt;LC_TELEPHONE=C&lt;/em&gt;, &lt;em&gt;LC_MEASUREMENT=en_US.UTF-8&lt;/em&gt; and &lt;em&gt;LC_IDENTIFICATION=C&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;attached base packages:&lt;/strong&gt; &lt;em&gt;methods&lt;/em&gt;, &lt;em&gt;stats&lt;/em&gt;, &lt;em&gt;graphics&lt;/em&gt;, &lt;em&gt;grDevices&lt;/em&gt;, &lt;em&gt;utils&lt;/em&gt;, &lt;em&gt;datasets&lt;/em&gt; and &lt;em&gt;base&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;other attached packages:&lt;/strong&gt; &lt;em&gt;bindrcpp(v.0.2)&lt;/em&gt;, &lt;em&gt;tidyr(v.0.8.0)&lt;/em&gt;, &lt;em&gt;tibble(v.1.4.2)&lt;/em&gt;, &lt;em&gt;stringr(v.1.2.0)&lt;/em&gt;, &lt;em&gt;rrricanesdata(v.0.0.1.6)&lt;/em&gt;, &lt;em&gt;rrricanes(v.0.2.0-6)&lt;/em&gt;, &lt;em&gt;purrr(v.0.2.4)&lt;/em&gt;, &lt;em&gt;pander(v.0.6.1)&lt;/em&gt;, &lt;em&gt;lubridate(v.1.7.1)&lt;/em&gt;, &lt;em&gt;knitr(v.1.18)&lt;/em&gt;, &lt;em&gt;ggrepel(v.0.7.0)&lt;/em&gt;, &lt;em&gt;ggplot2(v.2.2.1)&lt;/em&gt; and &lt;em&gt;dplyr(v.0.7.4)&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;loaded via a namespace (and not attached):&lt;/strong&gt; &lt;em&gt;Rcpp(v.0.12.15)&lt;/em&gt;, &lt;em&gt;highr(v.0.6)&lt;/em&gt;, &lt;em&gt;RColorBrewer(v.1.1-2)&lt;/em&gt;, &lt;em&gt;pillar(v.1.1.0)&lt;/em&gt;, &lt;em&gt;compiler(v.3.4.3)&lt;/em&gt;, &lt;em&gt;plyr(v.1.8.4)&lt;/em&gt;, &lt;em&gt;bindr(v.0.1)&lt;/em&gt;, &lt;em&gt;tools(v.3.4.3)&lt;/em&gt;, &lt;em&gt;digest(v.0.6.15)&lt;/em&gt;, &lt;em&gt;lattice(v.0.20-35)&lt;/em&gt;, &lt;em&gt;evaluate(v.0.10.1)&lt;/em&gt;, &lt;em&gt;gtable(v.0.2.0)&lt;/em&gt;, &lt;em&gt;pkgconfig(v.2.0.1)&lt;/em&gt;, &lt;em&gt;rlang(v.0.1.6)&lt;/em&gt;, &lt;em&gt;yaml(v.2.1.16)&lt;/em&gt;, &lt;em&gt;blogdown(v.0.4)&lt;/em&gt;, &lt;em&gt;rnaturalearthdata(v.0.1.0)&lt;/em&gt;, &lt;em&gt;rprojroot(v.1.3-2)&lt;/em&gt;, &lt;em&gt;grid(v.3.4.3)&lt;/em&gt;, &lt;em&gt;glue(v.1.2.0)&lt;/em&gt;, &lt;em&gt;R6(v.2.2.2)&lt;/em&gt;, &lt;em&gt;rmarkdown(v.1.8)&lt;/em&gt;, &lt;em&gt;bookdown(v.0.5)&lt;/em&gt;, &lt;em&gt;sp(v.1.2-5)&lt;/em&gt;, &lt;em&gt;magrittr(v.1.5)&lt;/em&gt;, &lt;em&gt;backports(v.1.1.2)&lt;/em&gt;, &lt;em&gt;scales(v.0.5.0)&lt;/em&gt;, &lt;em&gt;htmltools(v.0.3.6)&lt;/em&gt;, &lt;em&gt;assertthat(v.0.2.0)&lt;/em&gt;, &lt;em&gt;colorspace(v.1.3-2)&lt;/em&gt;, &lt;em&gt;labeling(v.0.3)&lt;/em&gt;, &lt;em&gt;stringi(v.1.1.6)&lt;/em&gt;, &lt;em&gt;lazyeval(v.0.2.1)&lt;/em&gt; and &lt;em&gt;munsell(v.0.4.3)&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;loaded via a namespace (and not attached):&lt;/strong&gt; &lt;em&gt;Rcpp(v.0.12.15)&lt;/em&gt;, &lt;em&gt;highr(v.0.6)&lt;/em&gt;, &lt;em&gt;RColorBrewer(v.1.1-2)&lt;/em&gt;, &lt;em&gt;pillar(v.1.1.0)&lt;/em&gt;, &lt;em&gt;compiler(v.3.4.3)&lt;/em&gt;, &lt;em&gt;plyr(v.1.8.4)&lt;/em&gt;, &lt;em&gt;bindr(v.0.1)&lt;/em&gt;, &lt;em&gt;tools(v.3.4.3)&lt;/em&gt;, &lt;em&gt;digest(v.0.6.15)&lt;/em&gt;, &lt;em&gt;lattice(v.0.20-35)&lt;/em&gt;, &lt;em&gt;evaluate(v.0.10.1)&lt;/em&gt;, &lt;em&gt;gtable(v.0.2.0)&lt;/em&gt;, &lt;em&gt;pkgconfig(v.2.0.1)&lt;/em&gt;, &lt;em&gt;rlang(v.0.1.6)&lt;/em&gt;, &lt;em&gt;yaml(v.2.1.16)&lt;/em&gt;, &lt;em&gt;blogdown(v.0.5)&lt;/em&gt;, &lt;em&gt;xfun(v.0.1)&lt;/em&gt;, &lt;em&gt;rnaturalearthdata(v.0.1.0)&lt;/em&gt;, &lt;em&gt;rprojroot(v.1.3-2)&lt;/em&gt;, &lt;em&gt;grid(v.3.4.3)&lt;/em&gt;, &lt;em&gt;glue(v.1.2.0)&lt;/em&gt;, &lt;em&gt;R6(v.2.2.2)&lt;/em&gt;, &lt;em&gt;rmarkdown(v.1.8)&lt;/em&gt;, &lt;em&gt;bookdown(v.0.5)&lt;/em&gt;, &lt;em&gt;sp(v.1.2-5)&lt;/em&gt;, &lt;em&gt;magrittr(v.1.5)&lt;/em&gt;, &lt;em&gt;backports(v.1.1.2)&lt;/em&gt;, &lt;em&gt;scales(v.0.5.0)&lt;/em&gt;, &lt;em&gt;htmltools(v.0.3.6)&lt;/em&gt;, &lt;em&gt;assertthat(v.0.2.0)&lt;/em&gt;, &lt;em&gt;colorspace(v.1.3-2)&lt;/em&gt;, &lt;em&gt;labeling(v.0.3)&lt;/em&gt;, &lt;em&gt;stringi(v.1.1.6)&lt;/em&gt;, &lt;em&gt;lazyeval(v.0.2.1)&lt;/em&gt; and &lt;em&gt;munsell(v.0.4.3)&lt;/em&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;warnings()&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## NULL&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
@@ -1756,19 +1756,19 @@ FEW TREES WERE BLOWN DOWN. RATED EF0. &lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>rrricanes</title>
-      <link>/project/rrricanes/</link>
+      <link>http://timtrice.net/project/rrricanes/</link>
       <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>/project/rrricanes/</guid>
+      <guid>http://timtrice.net/project/rrricanes/</guid>
       <description></description>
     </item>
     
     <item>
       <title>RStudio in Docker</title>
-      <link>/2017-05-17-rstudio-in-docker/</link>
+      <link>http://timtrice.net/2017-05-17-rstudio-in-docker/</link>
       <pubDate>Wed, 17 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>/2017-05-17-rstudio-in-docker/</guid>
+      <guid>http://timtrice.net/2017-05-17-rstudio-in-docker/</guid>
       <description>&lt;div id=&#34;TOC&#34;&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#brief-overview-of-docker&#34;&gt;Brief Overview of Docker&lt;/a&gt;&lt;/li&gt;
@@ -1955,57 +1955,57 @@ sudo docker push timtrice/rstudio-3.3.1&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Example Talk</title>
-      <link>/talk/example-talk/</link>
+      <link>http://timtrice.net/talk/example-talk/</link>
       <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>/talk/example-talk/</guid>
+      <guid>http://timtrice.net/talk/example-talk/</guid>
       <description>&lt;p&gt;Embed your slides or video here using &lt;a href=&#34;https://sourcethemes.com/academic/post/writing-markdown-latex/&#34; target=&#34;_blank&#34;&gt;shortcodes&lt;/a&gt;. Further details can easily be added using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>HURDAT</title>
-      <link>/project/hurdat/</link>
+      <link>http://timtrice.net/project/hurdat/</link>
       <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>/project/hurdat/</guid>
+      <guid>http://timtrice.net/project/hurdat/</guid>
       <description></description>
     </item>
     
     <item>
       <title>A Person Re-Identification System For Mobile Devices</title>
-      <link>/publication/person-re-identification/</link>
+      <link>http://timtrice.net/publication/person-re-identification/</link>
       <pubDate>Tue, 01 Sep 2015 00:00:00 +0000</pubDate>
       
-      <guid>/publication/person-re-identification/</guid>
+      <guid>http://timtrice.net/publication/person-re-identification/</guid>
       <description>&lt;p&gt;More detail can easily be written here using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Backtesting Strategies</title>
-      <link>/project/backtesting-strategies/</link>
+      <link>http://timtrice.net/project/backtesting-strategies/</link>
       <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
       
-      <guid>/project/backtesting-strategies/</guid>
+      <guid>http://timtrice.net/project/backtesting-strategies/</guid>
       <description></description>
     </item>
     
     <item>
       <title>sandbox</title>
-      <link>/project/sandbox/</link>
+      <link>http://timtrice.net/project/sandbox/</link>
       <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
       
-      <guid>/project/sandbox/</guid>
+      <guid>http://timtrice.net/project/sandbox/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Mobile visual clothing search</title>
-      <link>/publication/clothing-search/</link>
+      <link>http://timtrice.net/publication/clothing-search/</link>
       <pubDate>Mon, 01 Jul 2013 00:00:00 +0000</pubDate>
       
-      <guid>/publication/clothing-search/</guid>
+      <guid>http://timtrice.net/publication/clothing-search/</guid>
       <description>&lt;p&gt;More detail can easily be written here using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
 </description>
     </item>
