@@ -53,7 +53,7 @@ titleCaseStyle = "Chicago"
   smartypants = true  # `false` disables all smart punctuation substitutions (e.g. smart quotes, dashes, fractions).
 
 [permalinks]
-  post = "/:year-:month-:day-:slug/"
+  post = "/:slug/"
 
 [params]
   # Color theme.
