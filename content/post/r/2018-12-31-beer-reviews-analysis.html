@@ -1,0 +1,292 @@
+<!-- BLOGDOWN-HEAD -->
+<!-- /BLOGDOWN-HEAD -->
+
+<div id="TOC">
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#data-download">Data Download</a></li>
+<li><a href="#the-variables">The Variables</a></li>
+<li><a href="#exploratory">Exploratory</a></li>
+<li><a href="#r-session-info">R Session Info</a></li>
+</ul>
+</div>
+
+<div id="introduction" class="section level3">
+<h3>Introduction</h3>
+<pre class="r"><code>library(corrplot)
+library(glue)
+library(Hmisc)
+library(knitr)
+library(skimr)
+library(tidyverse)</code></pre>
+<p><a href="https://www.linkedin.com/pulse/how-hire-test-data-skills-one-size-fits-all-interview-tanya-cashorali/">One-Size-Fits-All Interview Kit</a></p>
+</div>
+<div id="data-download" class="section level3">
+<h3>Data Download</h3>
+<p>Data courtesy of <a href="http://www.beeradvocate.com/">Beer Advocate</a>.</p>
+<pre class="r"><code>#&#39; Path to download csv
+file_name &lt;- &quot;beer_reviews&quot;
+#&#39; Compress data file
+compress &lt;- TRUE
+local_path &lt;- glue(&quot;../../../static/data/{file_name}.RData&quot;)
+if (file.exists(local_path)) {
+  load(local_path)
+} else {
+  df &lt;- readr::read_csv(glue(&quot;https://github.com/timtrice/datasets/&quot;, 
+                             &quot;blob/master/beer_reviews/{file_name}.csv&quot;, 
+                             &quot;?raw=true&quot;))
+  save(df, file = local_path, compress = compress)
+}</code></pre>
+</div>
+<div id="the-variables" class="section level3">
+<h3>The Variables</h3>
+<pre class="r"><code>skim(df) %&gt;% 
+  kable(caption = &quot;Summary of beer review variables&quot;)</code></pre>
+<pre><code>## Skim summary statistics  
+##  n obs: 1586614    
+##  n variables: 13    
+## 
+## Variable type: character
+## 
+## variable             missing   complete   n         min   max   empty   n_unique 
+## -------------------  --------  ---------  --------  ----  ----  ------  ---------
+## beer_name            0         1586614    1586614   1     75    0       56857    
+## beer_style           0         1586614    1586614   4     35    0       104      
+## brewery_name         15        1586599    1586614   3     66    0       5742     
+## review_profilename   348       1586266    1586614   3     16    0       33387    
+## 
+## Variable type: integer
+## 
+## variable      missing   complete   n         mean       sd         min         p25       median    p75       max          hist     
+## ------------  --------  ---------  --------  ---------  ---------  ----------  --------  --------  --------  -----------  ---------
+## beer_beerid   0         1586614    1586614   21712.79   21818.34   3           1717      13906     39441     77317        ▇▂▂▂▂▂▁▁ 
+## brewery_id    0         1586614    1586614   3130.1     5578.1     1           143       429       2372      28003        ▇▁▁▁▁▁▁▁ 
+## review_time   0         1586614    1586614   1.2e+09    7.7e+07    840672001   1.2e+09   1.2e+09   1.3e+09   1326285348   ▁▁▁▂▂▃▆▇ 
+## 
+## Variable type: numeric
+## 
+## variable            missing   complete   n         mean   sd     min    p25   median   p75   max    hist     
+## ------------------  --------  ---------  --------  -----  -----  -----  ----  -------  ----  -----  ---------
+## beer_abv            67785     1518829    1586614   7.04   2.32   0.01   5.2   6.5      8.5   57.7   ▇▅▁▁▁▁▁▁ 
+## review_appearance   0         1586614    1586614   3.84   0.62   0      3.5   4        4     5      ▁▁▁▁▂▃▇▅ 
+## review_aroma        0         1586614    1586614   3.74   0.7    1      3.5   4        4     5      ▁▁▁▃▅▇▃▁ 
+## review_overall      0         1586614    1586614   3.82   0.72   0      3.5   4        4.5   5      ▁▁▁▁▂▅▇▆ 
+## review_palate       0         1586614    1586614   3.74   0.68   1      3.5   4        4     5      ▁▁▁▃▅▇▃▁ 
+## review_taste        0         1586614    1586614   3.79   0.73   1      3.5   4        4.5   5      ▁▁▁▂▅▇▅▁</code></pre>
+<pre class="r"><code>head(df) %&gt;% 
+  kable(caption = &quot;head(df)&quot;)</code></pre>
+<table>
+<caption><span id="tab:head-df">Table 1: </span>head(df)</caption>
+<thead>
+<tr class="header">
+<th align="right">brewery_id</th>
+<th align="left">brewery_name</th>
+<th align="right">review_time</th>
+<th align="right">review_overall</th>
+<th align="right">review_aroma</th>
+<th align="right">review_appearance</th>
+<th align="left">review_profilename</th>
+<th align="left">beer_style</th>
+<th align="right">review_palate</th>
+<th align="right">review_taste</th>
+<th align="left">beer_name</th>
+<th align="right">beer_abv</th>
+<th align="right">beer_beerid</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">10325</td>
+<td align="left">Vecchio Birraio</td>
+<td align="right">1234817823</td>
+<td align="right">1.5</td>
+<td align="right">2.0</td>
+<td align="right">2.5</td>
+<td align="left">stcules</td>
+<td align="left">Hefeweizen</td>
+<td align="right">1.5</td>
+<td align="right">1.5</td>
+<td align="left">Sausa Weizen</td>
+<td align="right">5.0</td>
+<td align="right">47986</td>
+</tr>
+<tr class="even">
+<td align="right">10325</td>
+<td align="left">Vecchio Birraio</td>
+<td align="right">1235915097</td>
+<td align="right">3.0</td>
+<td align="right">2.5</td>
+<td align="right">3.0</td>
+<td align="left">stcules</td>
+<td align="left">English Strong Ale</td>
+<td align="right">3.0</td>
+<td align="right">3.0</td>
+<td align="left">Red Moon</td>
+<td align="right">6.2</td>
+<td align="right">48213</td>
+</tr>
+<tr class="odd">
+<td align="right">10325</td>
+<td align="left">Vecchio Birraio</td>
+<td align="right">1235916604</td>
+<td align="right">3.0</td>
+<td align="right">2.5</td>
+<td align="right">3.0</td>
+<td align="left">stcules</td>
+<td align="left">Foreign / Export Stout</td>
+<td align="right">3.0</td>
+<td align="right">3.0</td>
+<td align="left">Black Horse Black Beer</td>
+<td align="right">6.5</td>
+<td align="right">48215</td>
+</tr>
+<tr class="even">
+<td align="right">10325</td>
+<td align="left">Vecchio Birraio</td>
+<td align="right">1234725145</td>
+<td align="right">3.0</td>
+<td align="right">3.0</td>
+<td align="right">3.5</td>
+<td align="left">stcules</td>
+<td align="left">German Pilsener</td>
+<td align="right">2.5</td>
+<td align="right">3.0</td>
+<td align="left">Sausa Pils</td>
+<td align="right">5.0</td>
+<td align="right">47969</td>
+</tr>
+<tr class="odd">
+<td align="right">1075</td>
+<td align="left">Caldera Brewing Company</td>
+<td align="right">1293735206</td>
+<td align="right">4.0</td>
+<td align="right">4.5</td>
+<td align="right">4.0</td>
+<td align="left">johnmichaelsen</td>
+<td align="left">American Double / Imperial IPA</td>
+<td align="right">4.0</td>
+<td align="right">4.5</td>
+<td align="left">Cauldron DIPA</td>
+<td align="right">7.7</td>
+<td align="right">64883</td>
+</tr>
+<tr class="even">
+<td align="right">1075</td>
+<td align="left">Caldera Brewing Company</td>
+<td align="right">1325524659</td>
+<td align="right">3.0</td>
+<td align="right">3.5</td>
+<td align="right">3.5</td>
+<td align="left">oline73</td>
+<td align="left">Herbed / Spiced Beer</td>
+<td align="right">3.0</td>
+<td align="right">3.5</td>
+<td align="left">Caldera Ginger Beer</td>
+<td align="right">4.7</td>
+<td align="right">52159</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>Categorical</p>
+<ul>
+<li><p><code>beer_name</code></p></li>
+<li><p><code>beer_style</code></p></li>
+<li><p><code>brewery_name</code></p></li>
+<li><p><code>review_appearance</code></p></li>
+<li><p><code>review_aroma</code></p></li>
+<li><p><code>review_overall</code></p></li>
+<li><p><code>review_profilename</code></p></li>
+<li><p><code>review_palate</code></p></li>
+<li><p><code>review_taste</code></p></li>
+</ul></li>
+<li><p>Continuous</p>
+<ul>
+<li><p><code>beer_abv</code></p></li>
+<li><p><code>beer_beerid</code></p></li>
+<li><p><code>brewery_id</code></p></li>
+<li><p><code>review_time</code></p></li>
+</ul></li>
+</ul>
+<p>All <code>review*</code> vars are divisible by 0.5 with a range between zero and five.</p>
+<pre class="r"><code>df %&gt;% 
+  select(starts_with(&quot;review&quot;), -review_profilename, -review_time) %&gt;% 
+  gather(key = &quot;key&quot;, value = &quot;value&quot;) %&gt;% 
+  ggplot(aes(x = key, y = value)) + 
+  geom_point()</code></pre>
+<p><img src="2018-12-31-beer-reviews-analysis_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+</div>
+<div id="exploratory" class="section level3">
+<h3>Exploratory</h3>
+<pre class="r"><code>cc &lt;- df[complete.cases(df),] %&gt;% 
+  select(starts_with(&quot;review&quot;), -review_time, -review_profilename, beer_abv)</code></pre>
+<pre class="r"><code>cor(cc)</code></pre>
+<pre><code>##                   review_overall review_aroma review_appearance
+## review_overall         1.0000000    0.6127926         0.4985565
+## review_aroma           0.6127926    1.0000000         0.5590771
+## review_appearance      0.4985565    0.5590771         1.0000000
+## review_palate          0.6990197    0.6149238         0.5645551
+## review_taste           0.7871712    0.7147773         0.5445794
+## beer_abv               0.1384574    0.3325362         0.2638906
+##                   review_palate review_taste  beer_abv
+## review_overall        0.6990197    0.7871712 0.1384574
+## review_aroma          0.6149238    0.7147773 0.3325362
+## review_appearance     0.5645551    0.5445794 0.2638906
+## review_palate         1.0000000    0.7322005 0.2866673
+## review_taste          0.7322005    1.0000000 0.2907817
+## beer_abv              0.2866673    0.2907817 1.0000000</code></pre>
+<p>Most positive relationship seems to be between <code>review_overall</code> and <code>review_taste</code>. I want to take the mean <code>review_overall</code> and <code>review_taste</code> per <code>beer_beerid</code> and draw a scatterplot.</p>
+<pre class="r"><code>df %&gt;% 
+  group_by(beer_beerid) %&gt;% 
+  summarise(mean_review_overall = mean(review_overall, na.rm = TRUE), 
+            mean_review_taste = mean(review_taste, na.rm = TRUE)) %&gt;% 
+  ggplot(aes(x = mean_review_overall, y = mean_review_taste)) + 
+  geom_point() + 
+  geom_smooth()</code></pre>
+<pre><code>## `geom_smooth()` using method = &#39;gam&#39;</code></pre>
+<pre><code>## Warning in seq.default(0, 1, length = nk): partial argument match of
+## &#39;length&#39; to &#39;length.out&#39;</code></pre>
+<pre><code>## Warning in model.matrix.default(Terms[[i]], mf, contrasts = object
+## $contrasts): partial argument match of &#39;contrasts&#39; to &#39;contrasts.arg&#39;</code></pre>
+<p><img src="2018-12-31-beer-reviews-analysis_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Is this really surprising?</p>
+<p>Next to taste is <code>review_palate</code>; let’s check that out.</p>
+<pre class="r"><code>df %&gt;% 
+  group_by(beer_beerid) %&gt;% 
+  summarise(mean_review_overall = mean(review_overall, na.rm = TRUE), 
+            mean_review_aroma = mean(review_aroma, na.rm = TRUE)) %&gt;% 
+  ggplot(aes(x = mean_review_overall, y = mean_review_aroma)) + 
+  geom_point() + 
+  geom_smooth()</code></pre>
+<pre><code>## `geom_smooth()` using method = &#39;gam&#39;</code></pre>
+<pre><code>## Warning in seq.default(0, 1, length = nk): partial argument match of
+## &#39;length&#39; to &#39;length.out&#39;</code></pre>
+<pre><code>## Warning in model.matrix.default(Terms[[i]], mf, contrasts = object
+## $contrasts): partial argument match of &#39;contrasts&#39; to &#39;contrasts.arg&#39;</code></pre>
+<p><img src="2018-12-31-beer-reviews-analysis_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>I’m curious what type of</p>
+<pre class="r"><code>df %&gt;% 
+  select(beer_beerid, review_overall, review_aroma, review_taste) %&gt;% 
+  mutate(
+    review_class = case_when(
+      review_overall &lt; 1 ~ &quot;A&quot;, 
+      review_overall &lt; 2 ~ &quot;B&quot;, 
+      review_overall &lt; 3 ~ &quot;C&quot;, 
+      review_overall &lt; 4 ~ &quot;D&quot;, 
+      TRUE ~ &quot;E&quot;)) %&gt;% 
+  group_by(beer_beerid) %&gt;% 
+  summarise(mean_review_aroma = mean(review_aroma, na.rm = TRUE)) %&gt;% 
+  ggplot(aes(x = review_class, y = mean_review_aroma)) %&gt;% 
+  geom_boxplot()</code></pre>
+<pre><code>## Error: Mapping must be created by `aes()` or `aes_()`</code></pre>
+</div>
+<div id="r-session-info" class="section level2">
+<h2>R Session Info</h2>
+<pre class="r"><code>pander::pander(sessionInfo())</code></pre>
+<p><strong>R version 3.4.3 (2017-11-30)</strong></p>
+<p>**<a href="Platform:**" class="uri">Platform:**</a> x86_64-pc-linux-gnu (64-bit)</p>
+<p><strong>locale:</strong> <em>LC_CTYPE=en_US.UTF-8</em>, <em>LC_NUMERIC=C</em>, <em>LC_TIME=en_US.UTF-8</em>, <em>LC_COLLATE=en_US.UTF-8</em>, <em>LC_MONETARY=en_US.UTF-8</em>, <em>LC_MESSAGES=C</em>, <em>LC_PAPER=en_US.UTF-8</em>, <em>LC_NAME=C</em>, <em>LC_ADDRESS=C</em>, <em>LC_TELEPHONE=C</em>, <em>LC_MEASUREMENT=en_US.UTF-8</em> and <em>LC_IDENTIFICATION=C</em></p>
+<p><strong>attached base packages:</strong> <em>methods</em>, <em>stats</em>, <em>graphics</em>, <em>grDevices</em>, <em>utils</em>, <em>datasets</em> and <em>base</em></p>
+<p><strong>other attached packages:</strong> <em>bindrcpp(v.0.2)</em>, <em>forcats(v.0.2.0)</em>, <em>stringr(v.1.2.0)</em>, <em>dplyr(v.0.7.4)</em>, <em>purrr(v.0.2.4)</em>, <em>readr(v.1.1.1)</em>, <em>tidyr(v.0.8.0)</em>, <em>tibble(v.1.4.2)</em>, <em>tidyverse(v.1.2.1)</em>, <em>skimr(v.1.0)</em>, <em>knitr(v.1.18)</em>, <em>Hmisc(v.4.0-3)</em>, <em>ggplot2(v.2.2.1)</em>, <em>Formula(v.1.2-2)</em>, <em>survival(v.2.41-3)</em>, <em>lattice(v.0.20-35)</em>, <em>glue(v.1.2.0)</em> and <em>corrplot(v.0.84)</em></p>
+<p><strong>loaded via a namespace (and not attached):</strong> <em>httr(v.1.3.1)</em>, <em>jsonlite(v.1.5)</em>, <em>splines(v.3.4.3)</em>, <em>modelr(v.0.1.1)</em>, <em>assertthat(v.0.2.0)</em>, <em>highr(v.0.6)</em>, <em>latticeExtra(v.0.6-28)</em>, <em>pander(v.0.6.1)</em>, <em>cellranger(v.1.1.0)</em>, <em>yaml(v.2.1.16)</em>, <em>pillar(v.1.1.0)</em>, <em>backports(v.1.1.2)</em>, <em>digest(v.0.6.15)</em>, <em>RColorBrewer(v.1.1-2)</em>, <em>checkmate(v.1.8.5)</em>, <em>rvest(v.0.3.2)</em>, <em>colorspace(v.1.3-2)</em>, <em>htmltools(v.0.3.6)</em>, <em>Matrix(v.1.2-12)</em>, <em>plyr(v.1.8.4)</em>, <em>psych(v.1.7.8)</em>, <em>pkgconfig(v.2.0.1)</em>, <em>broom(v.0.4.3)</em>, <em>haven(v.1.1.1)</em>, <em>bookdown(v.0.5)</em>, <em>scales(v.0.5.0)</em>, <em>htmlTable(v.1.11.2)</em>, <em>mgcv(v.1.8-23)</em>, <em>nnet(v.7.3-12)</em>, <em>lazyeval(v.0.2.1)</em>, <em>cli(v.1.0.0)</em>, <em>mnormt(v.1.5-5)</em>, <em>crayon(v.1.3.4)</em>, <em>magrittr(v.1.5)</em>, <em>readxl(v.1.0.0)</em>, <em>evaluate(v.0.10.1)</em>, <em>nlme(v.3.1-131)</em>, <em>xml2(v.1.2.0)</em>, <em>foreign(v.0.8-69)</em>, <em>blogdown(v.0.4)</em>, <em>tools(v.3.4.3)</em>, <em>data.table(v.1.10.4-3)</em>, <em>hms(v.0.4.1)</em>, <em>munsell(v.0.4.3)</em>, <em>cluster(v.2.0.6)</em>, <em>compiler(v.3.4.3)</em>, <em>rlang(v.0.1.6)</em>, <em>grid(v.3.4.3)</em>, <em>rstudioapi(v.0.7)</em>, <em>htmlwidgets(v.1.0)</em>, <em>labeling(v.0.3)</em>, <em>base64enc(v.0.1-3)</em>, <em>rmarkdown(v.1.8)</em>, <em>gtable(v.0.2.0)</em>, <em>reshape2(v.1.4.3)</em>, <em>R6(v.2.2.2)</em>, <em>gridExtra(v.2.3)</em>, <em>lubridate(v.1.7.1)</em>, <em>bindr(v.0.1)</em>, <em>rprojroot(v.1.3-2)</em>, <em>stringi(v.1.1.6)</em>, <em>parallel(v.3.4.3)</em>, <em>Rcpp(v.0.12.15)</em>, <em>rpart(v.4.1-12)</em>, <em>acepack(v.1.4.1)</em> and <em>tidyselect(v.0.2.3)</em></p>
+</div>

@@ -1,0 +1,426 @@
+---
+title: Department Top Three Salaries
+summary: > 
+  Given `Employee` and `Department` tables, we are asked to JOIN the tables and bring the top three employees (no ties) of each department. 
+description: description
+abstract: abstract
+author: ''
+date: '2017-11-04'
+slug: department-top-three-salaries
+categories:
+  - SQL
+  - MariaDB
+tags:
+  - SELECT
+  - LEFT JOIN
+  - DISTINCT
+  - ORDER BY
+---
+
+
+
+<div id="problem" class="section level3">
+<h3>Problem</h3>
+<p>The <code>Employee</code> table holds all employees. Every employee has an Id, and there is also a column for the department Id.</p>
+<pre><code>+----+-------+--------+--------------+
+| Id | Name  | Salary | DepartmentId |
++----+-------+--------+--------------+
+| 1  | Joe   | 70000  | 1            |
+| 2  | Henry | 80000  | 2            |
+| 3  | Sam   | 60000  | 2            |
+| 4  | Max   | 90000  | 1            |
+| 5  | Janet | 69000  | 1            |
+| 6  | Randy | 85000  | 1            |
++----+-------+--------+--------------+</code></pre>
+<p>The <code>Department</code> table holds all departments of the company.</p>
+<pre><code>+----+----------+
+| Id | Name     |
++----+----------+
+| 1  | IT       |
+| 2  | Sales    |
++----+----------+</code></pre>
+<p>Write a SQL query to find employees who earn the top three salaries in each of the department. For the above tables, your SQL query should return the following rows.</p>
+<pre><code>+------------+----------+--------+
+| Department | Employee | Salary |
++------------+----------+--------+
+| IT         | Max      | 90000  |
+| IT         | Randy    | 85000  |
+| IT         | Joe      | 70000  |
+| Sales      | Henry    | 80000  |
+| Sales      | Sam      | 60000  |
++------------+----------+--------+</code></pre>
+</div>
+<div id="setup" class="section level3">
+<h3>Setup</h3>
+<pre class="sql"><code>CREATE TEMPORARY TABLE IF NOT EXISTS `LeetCode`.`Employee` (
+  `Id` INT,
+  `Name` VARCHAR(255),
+  `Salary` INT,
+  `DepartmentId` INT
+);</code></pre>
+<pre class="sql"><code>CREATE TEMPORARY TABLE IF NOT EXISTS `LeetCode`.`Department` (
+  `Id` INT,
+  `Name` VARCHAR(255)
+);</code></pre>
+<pre class="sql"><code>TRUNCATE TABLE `LeetCode`.`Employee`;</code></pre>
+<pre class="sql"><code>TRUNCATE TABLE `LeetCode`.`Department`;</code></pre>
+<pre class="sql"><code>INSERT INTO `LeetCode`.`Employee` 
+  (`Id`, `Name`, `Salary`, `DepartmentId`) 
+VALUES 
+  (1, &quot;Joe&quot;, 70000, 1), 
+  (2, &quot;Henry&quot;, 80000, 2), 
+  (3, &quot;Sam&quot;, 60000, 2), 
+  (4, &quot;Max&quot;, 90000, 1), 
+  (5, &quot;Janet&quot;, 69000, 1), 
+  (6, &quot;Randy&quot;, 85000, 1);</code></pre>
+<pre class="sql"><code>INSERT INTO `LeetCode`.`Department` 
+  (`Id`, `Name`) 
+VALUES 
+  (1, &quot;IT&quot;), 
+  (2, &quot;Sales&quot;);</code></pre>
+<pre class="sql"><code>SELECT * 
+FROM `LeetCode`.`Employee`;</code></pre>
+<div class="knitsql-table">
+<table>
+<caption><span id="tab:select-employee">Table 1: </span>6 records</caption>
+<thead>
+<tr class="header">
+<th align="left">Id</th>
+<th align="left">Name</th>
+<th align="right">Salary</th>
+<th align="right">DepartmentId</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">Joe</td>
+<td align="right">70000</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">Henry</td>
+<td align="right">80000</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">Sam</td>
+<td align="right">60000</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="left">Max</td>
+<td align="right">90000</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="left">Janet</td>
+<td align="right">69000</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">6</td>
+<td align="left">Randy</td>
+<td align="right">85000</td>
+<td align="right">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<pre class="sql"><code>SELECT * 
+FROM `LeetCode`.`Department`;</code></pre>
+<div class="knitsql-table">
+<table>
+<caption><span id="tab:select-department">Table 2: </span>2 records</caption>
+<thead>
+<tr class="header">
+<th align="left">Id</th>
+<th align="left">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">IT</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">Sales</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="failed-attempt-1" class="section level3">
+<h3>Failed Attempt #1</h3>
+<pre class="sql"><code>-- Query #1
+SELECT
+  `Department`.`Name` AS `Department`,
+  `Employee`.`Name` AS `Employee`,
+  `Employee`.`Salary`
+FROM `LeetCode`.`Employee` AS `Employee`
+LEFT JOIN `LeetCode`.`Department` AS `Department`
+ON `Employee`.`DepartmentId` = `Department`.`Id`
+WHERE (
+  SELECT COUNT(*)
+  FROM `LeetCode`.`Employee` AS `t1`
+  WHERE `t1`.`DepartmentId` = `Employee`.`DepartmentId`
+  AND `t1`.`Salary` &gt;= `Employee`.`Salary`) &lt;= 3
+ORDER BY `Employee`.`DepartmentId`, `Employee`.`Salary` DESC;</code></pre>
+<div class="knitsql-table">
+<table>
+<caption><span id="tab:solution-1">Table 3: </span>5 records</caption>
+<thead>
+<tr class="header">
+<th align="left">Department</th>
+<th align="left">Employee</th>
+<th align="right">Salary</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">IT</td>
+<td align="left">Max</td>
+<td align="right">90000</td>
+</tr>
+<tr class="even">
+<td align="left">IT</td>
+<td align="left">Randy</td>
+<td align="right">85000</td>
+</tr>
+<tr class="odd">
+<td align="left">IT</td>
+<td align="left">Joe</td>
+<td align="right">70000</td>
+</tr>
+<tr class="even">
+<td align="left">Sales</td>
+<td align="left">Henry</td>
+<td align="right">80000</td>
+</tr>
+<tr class="odd">
+<td align="left">Sales</td>
+<td align="left">Sam</td>
+<td align="right">60000</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The solution above brings the expected result set. However, this query fails if <code>Department</code> is empty.</p>
+<pre class="sql"><code>TRUNCATE TABLE `LeetCode`.`Employee`;</code></pre>
+<pre class="sql"><code>TRUNCATE TABLE `LeetCode`.`Department`;</code></pre>
+<pre class="sql"><code>INSERT INTO `LeetCode`.`Employee`
+  (`Id`, `Name`, `Salary`, `DepartmentId`)
+VALUES
+  (1, &quot;Joe&quot;, 10000, 1);
+
+-- Department intentionally left empty.
+</code></pre>
+<pre class="sql"><code>-- Query #1
+SELECT
+  `Department`.`Name` AS `Department`,
+  `Employee`.`Name` AS `Employee`,
+  `Employee`.`Salary`
+FROM `LeetCode`.`Employee` AS `Employee`
+LEFT JOIN `LeetCode`.`Department` AS `Department`
+ON `Employee`.`DepartmentId` = `Department`.`Id`
+WHERE (
+  SELECT COUNT(*)
+  FROM `LeetCode`.`Employee` AS `t1`
+  WHERE `t1`.`DepartmentId` = `Employee`.`DepartmentId`
+  AND `t1`.`Salary` &gt;= `Employee`.`Salary`) &lt;= 3
+ORDER BY `Employee`.`DepartmentId`, `Employee`.`Salary` DESC;</code></pre>
+<div class="knitsql-table">
+<table>
+<caption><span id="tab:unnamed-chunk-4">Table 4: </span>1 records</caption>
+<thead>
+<tr class="header">
+<th align="left">Department</th>
+<th align="left">Employee</th>
+<th align="right">Salary</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">NA</td>
+<td align="left">Joe</td>
+<td align="right">10000</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The original problem does not state how to handle NULL results, which is what we have here. However, the answer set shown on failure is empty. The query has to be modified to accomodate no <code>Department</code>s.</p>
+</div>
+<div id="failed-attempt-2" class="section level3">
+<h3>Failed Attempt #2</h3>
+<pre class="sql"><code>-- Query #2
+SELECT
+  `Department`.`Name` AS `Department`,
+  `Employee`.`Name` AS `Employee`,
+  `Employee`.`Salary`
+FROM `LeetCode`.`Employee` AS `Employee`
+LEFT JOIN `LeetCode`.`Department` AS `Department`
+ON `Employee`.`DepartmentId` = `Department`.`Id`
+WHERE (
+  SELECT COUNT(*)
+  FROM `LeetCode`.`Employee` AS `t1`
+  WHERE `t1`.`DepartmentId` = `Employee`.`DepartmentId`
+  AND `t1`.`Salary` &gt;= `Employee`.`Salary`) &lt;= 3 
+-- Check for NULL
+AND `Department`.`Name` IS NOT NULL
+ORDER BY `Employee`.`DepartmentId`, `Employee`.`Salary` DESC;</code></pre>
+<div class="knitsql-table">
+<p>Table: (#tab:solution-2)0 records</p>
+<p>Department Employee Salary ———– ——— ——-</p>
+</div>
+<p>Adding the line below to the query above passes the test case.</p>
+<pre class="r"><code>-- Check for NULL
+AND `Department`.`Name` IS NOT NULL</code></pre>
+<p>The last failure came with ties; no mention of how to handle ties.</p>
+<pre class="sql"><code>TRUNCATE TABLE `LeetCode`.`Employee`;</code></pre>
+<pre class="sql"><code>TRUNCATE TABLE `LeetCode`.`Department`;</code></pre>
+<pre class="sql"><code>INSERT INTO `LeetCode`.`Employee`
+  (`Id`, `Name`, `Salary`, `DepartmentId`)
+VALUES
+  (1, &quot;Joe&quot;, 60000, 1),
+  (2, &quot;Ralph&quot;, 50000, 1),
+  (3, &quot;Joel&quot;, 60000, 1),
+  (4, &quot;Tracy&quot;, 75000, 1);</code></pre>
+<p>Notice the tie between Joel and Joe; recognize that because of this Ralph is to be included, not excluded.</p>
+<pre class="sql"><code>INSERT INTO `LeetCode`.`Department`
+  (`Id`, `Name`)
+VALUES
+  (1, &quot;IT&quot;);</code></pre>
+<pre class="sql"><code>-- Query #2
+SELECT
+  `Department`.`Name` AS `Department`,
+  `Employee`.`Name` AS `Employee`,
+  `Employee`.`Salary`
+FROM `LeetCode`.`Employee` AS `Employee`
+LEFT JOIN `LeetCode`.`Department` AS `Department`
+ON `Employee`.`DepartmentId` = `Department`.`Id`
+WHERE (
+  SELECT COUNT(*)
+  FROM `LeetCode`.`Employee` AS `t1`
+  WHERE `t1`.`DepartmentId` = `Employee`.`DepartmentId`
+  AND `t1`.`Salary` &gt;= `Employee`.`Salary`) &lt;= 3 
+AND `Department`.`Name` IS NOT NULL 
+ORDER BY `Employee`.`DepartmentId`, `Employee`.`Salary` DESC;</code></pre>
+<div class="knitsql-table">
+<table>
+<caption><span id="tab:unnamed-chunk-10">Table 6: </span>3 records</caption>
+<thead>
+<tr class="header">
+<th align="left">Department</th>
+<th align="left">Employee</th>
+<th align="right">Salary</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">IT</td>
+<td align="left">Tracy</td>
+<td align="right">75000</td>
+</tr>
+<tr class="even">
+<td align="left">IT</td>
+<td align="left">Joe</td>
+<td align="right">60000</td>
+</tr>
+<tr class="odd">
+<td align="left">IT</td>
+<td align="left">Joel</td>
+<td align="right">60000</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>I have to modify the query again in order to get Ralph into the result set. I do this by modifying the <strong>COUNT</strong> call. Instead of counting all rows, I only count <strong>DISTINCT <code>Salary</code></strong>.</p>
+</div>
+<div id="solution" class="section level3">
+<h3>Solution</h3>
+<pre class="sql"><code>-- Query #3
+SELECT
+  `Department`.`Name` AS `Department`,
+  `Employee`.`Name` AS `Employee`,
+  `Employee`.`Salary`
+FROM `LeetCode`.`Employee` AS `Employee`
+LEFT JOIN `LeetCode`.`Department` AS `Department`
+ON `Employee`.`DepartmentId` = `Department`.`Id`
+WHERE (
+  SELECT COUNT(DISTINCT `Salary`)
+  FROM `LeetCode`.`Employee` AS `t1`
+  WHERE `t1`.`DepartmentId` = `Employee`.`DepartmentId`
+  AND `t1`.`Salary` &gt;= `Employee`.`Salary`) &lt;= 3
+AND `Department`.`Name` IS NOT NULL
+ORDER BY `Employee`.`DepartmentId`, `Employee`.`Salary` DESC;</code></pre>
+<div class="knitsql-table">
+<table>
+<caption><span id="tab:solution-3">Table 7: </span>4 records</caption>
+<thead>
+<tr class="header">
+<th align="left">Department</th>
+<th align="left">Employee</th>
+<th align="right">Salary</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">IT</td>
+<td align="left">Tracy</td>
+<td align="right">75000</td>
+</tr>
+<tr class="even">
+<td align="left">IT</td>
+<td align="left">Joe</td>
+<td align="right">60000</td>
+</tr>
+<tr class="odd">
+<td align="left">IT</td>
+<td align="left">Joel</td>
+<td align="right">60000</td>
+</tr>
+<tr class="even">
+<td align="left">IT</td>
+<td align="left">Ralph</td>
+<td align="right">50000</td>
+</tr>
+</tbody>
+</table>
+</div>
+<pre class="r"><code>  SELECT COUNT(*)</code></pre>
+<pre class="r"><code>  SELECT COUNT(DISTINCT `Salary`)</code></pre>
+<p>This query passes all test cases and beats out about 89% of all submittals in runtime.</p>
+</div>
+<div id="mariadb-server-info" class="section level3">
+<h3>MariaDB Server Info</h3>
+<pre class="sql"><code>SELECT @@version_comment AS `Version`, 
+  @@version_compile_machine AS `Version Compile Machine`, 
+  @@innodb_version AS `InnoDB Version`, 
+  @@version_compile_os AS `Version Compile OS`;</code></pre>
+<div class="knitsql-table">
+<table>
+<caption><span id="tab:mariadb-version">Table 8: </span>MariaDB Server Info</caption>
+<thead>
+<tr class="header">
+<th align="left">Version</th>
+<th align="left">Version Compile Machine</th>
+<th align="left">InnoDB Version</th>
+<th align="left">Version Compile OS</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">mariadb.org binary distribution</td>
+<td align="left">x86_64</td>
+<td align="left">5.7.19</td>
+<td align="left">debian-linux-gnu</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
