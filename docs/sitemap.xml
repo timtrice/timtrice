@@ -41,6 +41,15 @@
     
     <url>
     
+      <loc>http://timtrice.net/2018-02-26-query-stack-overflow-top-five-tags-top-five-posts-within-each-tag/</loc>
+      <lastmod>2018-02-26T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>http://timtrice.net/2017-11-04-department-top-three-salaries/</loc>
       <lastmod>2017-11-04T00:00:00+00:00</lastmod>
     </url>
@@ -158,6 +167,14 @@
     
     <url>
     
+      <loc>http://timtrice.net/1-01-01-/</loc>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>http://timtrice.net/publication_types/1/</loc>
       <lastmod>2013-07-01T00:00:00+00:00</lastmod>
       <priority>0</priority>
@@ -218,7 +235,7 @@
     <url>
     
       <loc>http://timtrice.net/tags/left-join/</loc>
-      <lastmod>2017-11-04T00:00:00+00:00</lastmod>
+      <lastmod>2018-02-26T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -238,7 +255,17 @@
     <url>
     
       <loc>http://timtrice.net/tags/order-by/</loc>
-      <lastmod>2017-11-04T00:00:00+00:00</lastmod>
+      <lastmod>2018-02-26T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>http://timtrice.net/tags/partition/</loc>
+      <lastmod>2018-02-26T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -248,7 +275,7 @@
     <url>
     
       <loc>http://timtrice.net/post/</loc>
-      <lastmod>2017-11-04T00:00:00+00:00</lastmod>
+      <lastmod>2018-02-26T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -287,6 +314,16 @@
     
     <url>
     
+      <loc>http://timtrice.net/categories/r/</loc>
+      <lastmod>2017-09-06T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>http://timtrice.net/tags/r/</loc>
       <lastmod>2017-06-01T00:00:00+00:00</lastmod>
       <priority>0</priority>
@@ -297,8 +334,8 @@
     
     <url>
     
-      <loc>http://timtrice.net/categories/r/</loc>
-      <lastmod>2017-09-06T00:00:00+00:00</lastmod>
+      <loc>http://timtrice.net/tags/row_number/</loc>
+      <lastmod>2018-02-26T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -338,7 +375,7 @@
     <url>
     
       <loc>http://timtrice.net/tags/select/</loc>
-      <lastmod>2017-11-04T00:00:00+00:00</lastmod>
+      <lastmod>2018-02-26T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -348,7 +385,7 @@
     <url>
     
       <loc>http://timtrice.net/categories/sql/</loc>
-      <lastmod>2017-11-04T00:00:00+00:00</lastmod>
+      <lastmod>2018-02-26T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
