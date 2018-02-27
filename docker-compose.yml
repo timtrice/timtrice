@@ -2,73 +2,28 @@ version: '3.4'
 
 services:
 
-  mariadb:
-    image: mariadb:10.3.1
-    container_name: mariadb
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: qNlr0rZtf5VfGQ9m
-    volumes:
-      - mariadb:/var/lib/mysql
-
-  mysql:
-    image: mysql:5.7
-    container_name: mysql
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: e99rntuUXMGHB6Zt
-    volumes:
-      - mysql:/var/lib/mysql
-
-  postgres:
-    image: postgres:9.6.5
-    container_name: postgres
-    restart: always
-    environment:
-      POSTGRES_PASSWORD: 5aJhjS7g7SAzE56K
-    volumes:
-      - postgres:/var/lib/postgresql/data
-
-  adminer:
-    image: adminer:4.5.0-standalone
-    container_name: adminer
-    restart: always
-    ports:
-      - "8080:8080"
-
   rstudio:
     image: timtrice/web:latest
-    container_name: web
+    container_name: web_rstudio
     restart: "no"
     volumes:
-      - .:/home/rstudio/web
-      - ~/.Renviron:/home/rstudio/.Renviron
+      - /home/timtrice/Projects/.Renviron:/home/rstudio/.Renviron
+      - /home/timtrice/Projects/web:/home/rstudio/web
     ports:
       - "8787:8787"
-    depends_on:
-      - mariadb
-      - mysql
-      - postgres
 
   jupyter:
     image: jupyter/datascience-notebook
-    container_name: jupyter
+    container_name: web_jupyter
     restart: "no"
     command: start-notebook.sh --NotebookApp.password=sha1:13a4808aa90c:dbeb882e4fdc7b067a50c4dc53bba7ff7a6b7a40
     volumes:
-      - .:/home/jovyan/web
+      - /home/timtrice/Projects/web:/home/jovyan/web
     ports:
       - "8888:8888"
-    depends_on:
-      - mariadb
-      - mysql
-      - postgres
 
-volumes:
-  mariadb:
-    external: true
-  mysql:
-    external: true
-  postgres:
-    external: true
+networks:
+  default:
+    external:
+      name: databases
 

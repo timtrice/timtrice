@@ -1,0 +1,365 @@
+---
+title: Query Stack Overflow for Top 5 Tags and Children Posts
+summary: > 
+  I want to find the top 5 tags (by post count) on Stack Overflow and include 
+  the top 5 posts per tag by score. For this, I will use the Stack Exchange 
+  Data Explorer.
+author: Tim Trice
+date: '2018-02-26'
+slug: query-stack-overflow-top-five-tags-top-five-posts-within-each-tag
+categories:
+  - SQL
+tags:
+  - SELECT
+  - ROW_NUMBER
+  - PARTITION
+  - LEFT JOIN
+  - ORDER BY
+output:
+    blogdown::html_page:
+        toc: true
+        toc_depth: 6
+---
+
+```{r setup, echo = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r libraries, echo = FALSE}
+library(glue)
+library(knitr)
+library(magrittr)
+library(readr)
+library(stringr)
+```
+
+```{r src-sql, echo = FALSE}
+# Can probably use git2r for all this
+
+# GitHub repo
+gh_repo <- "timtrice/datasets"
+
+# SQL source
+sql_path <- "stackoverflow/top-5-tags-and-top-5-posts-within.sql"
+# Modify commit if sql sourc is updated.
+sql_commit <- "49b2b7e2c55ca3598ad523e9b15989ba4a14d677"
+sql_src <- glue("https://raw.githubusercontent.com/{gh_repo}/{sql_commit}/{sql_path}")
+
+# Data
+data_path <- "stackoverflow/top-5-tags-and-top-5-posts-within.csv"
+# Modify commit if dataset is updated.
+data_commit <- "ff98eb5f8b64092925ee1e8df9782476e87e8e94"
+data_src <- glue("https://media.githubusercontent.com/media/{gh_repo}/{data_commit}/{data_path}")
+
+# Read SQL source
+read_chunk(sql_src)
+
+# Import data, replacing open anchor tags (<)
+df <- read_csv(data_src, col_types = cols())
+df$Tags <- purrr::map(df$Tags, str_replace_all, "<", "&lt;")
+```
+
+## Requirements
+
+For this you can use the [Stack Exchange Data Explorer](http://data.stackexchange.com/stackoverflow/) online at no charge. Click the 'Compose Query' button in the top-right. You should see the stack**overflow** image in the top right corner:
+
+![](https://cdn.sstatic.net/Sites/stackoverflow/img/logo.png)
+
+You should give your query a title but it is not necessary. It does help keep track of your edits as you move along.
+
+## Introduction
+
+I want to find the top five tags on Stack Overflow along with the top five posts per tag. The Stack Exchange Data Explorer gives us free access to this data. The data itself is slightly out-of-date, but this is fine.
+
+I will use three subqueries:
+
+  1. Find the top 5 tags
+  
+  2. `LEFT JOIN` those tags to the posts table
+  
+  3. Filter the results per tag. 
+
+The tables I need to focus on are:
+
+  * `Tags`
+
+  * `PostTags`
+
+  * `Posts`
+
+The dataset is denormalized so some of the calculations we need to make have already been done. For example, in `Tags` there is a `Count` column that already tells us how many posts exist for each tag. In `Posts`, the `Tags` column contains a list of tags. Without this, I would need to write a more complicated query to split every tag for every row then run a tally. A challenge, for sure.
+
+`PostTags` is the bridge between `Tags` and `Posts`. Once I know what `Tags` I am searching, I use `PostTags` to find all relevant posts per tag, joining `Posts` to also get all of the tags per post and the score of the post.
+
+Finally, I will close off the query with a simple filter statement using `WHERE`. 
+
+The overall query is very simple to build and keeps the result set small. Additionally, it is very easy to edit. So, if we want the top 10 tags and 10 posts per tag, we just make two small edits. Or, even better, use variables.
+
+## Building the Query
+
+### Select the Top Five Tags by Count
+
+The core of my query are the tags. Everything else is based on knowing what exactly the top five tags are in the Stack Overflow database. 
+
+As mentioned earlier, this information has already been calculated in the `Tags table. Here is the structure:
+
+| Name          | Data Type    |
+|---------------|--------------|
+| Id            | int          |
+| TagName       | nvarchar(35) |
+| Count         | int          |
+| ExcerptPostId | int          |
+| WikiPostId    | int          |
+
+All I care about at this point is `Id`; this is the foreign key that will relate back to `Posts`. I will get `TagName` and `Count` later.
+
+```sql
+DECLARE @n_tags int;
+
+SET @n_tags = 5;
+
+SELECT 
+  TOP (@n_tags) Tags.Id
+FROM 
+  Tags
+ORDER BY 
+  Tags.Count DESC;
+```
+Table: [Select the top five tags by count](http://data.stackexchange.com/stackoverflow/revision/810701/1002057/top-5-tags-with-overall-posts-and-top-5-posts-within-each-by-score)
+
+This gives us the result set, 
+
+| Id   |
+|------|
+| 3    |
+| 17   |
+| 9    |
+| 5    |
+| 1386 |
+
+I create the variable `n_tags` so that if you or I want to expand the query later we can easily do so without editing the query itself.
+
+### Select All Posts for Respective Tags
+
+Now that I know my top five tags, I need to find all posts that belong to each tag. I use `PostTags` for this and return only `PostId` and `TagId`. 
+
+The query I built in the previous step will become my subquery. I am telling the server to only return all posts where the tag id is contained in this list of values.
+
+```sql
+DECLARE @n_tags int;
+
+SET @n_tags = 5;
+
+SELECT
+  PostTags.PostId, 
+  PostTags.TagId
+FROM 
+  PostTags
+WHERE
+  PostTags.TagId IN (
+    SELECT 
+      TOP (@n_tags) Tags.Id
+    FROM 
+      Tags
+    ORDER BY 
+      Tags.Count DESC);
+```
+Table: [Select all posts for each top five tag](http://data.stackexchange.com/stackoverflow/revision/810701/1002067/top-5-tags-with-overall-posts-and-top-5-posts-within-each-by-score)
+
+And a sample of the result set:
+
+| PostId | Id   |
+|--------|------|
+| 13     | 3    |
+| 845    | 3    |
+| 1401   | 3    |
+| 1873   | 3    |
+| 3224   | 3    |
+| ...    | ...  |
+
+There are thousands of results returned so I won't list them all here. 
+
+### Left Join Posts and Parition Over PostTags.TagId, Ordered by Posts.Score Descending
+
+Now I need to get my hands slightly dirtier. 
+
+```sql
+DECLARE @n_tags int;
+
+SET @n_tags = 5;
+
+SELECT
+  PostTags.PostId, 
+  PostTags.TagId, 
+  n = ROW_NUMBER() OVER (
+    PARTITION BY 
+      PostTags.TagId
+    ORDER BY 
+      Posts.Score DESC
+  )
+FROM 
+  PostTags
+LEFT JOIN
+  Posts
+ON 
+  PostTags.PostId = Posts.Id
+WHERE
+  PostTags.TagId IN (
+    SELECT 
+      TOP (@n_tags) Tags.Id
+    FROM 
+      Tags
+    ORDER BY 
+      Tags.Count DESC);
+```
+Table: [Join Posts and number all posts within each tag, ordered by Score](http://data.stackexchange.com/stackoverflow/revision/810701/1002072/top-5-tags-with-overall-posts-and-top-5-posts-within-each-by-score)
+
+I have proceeded to `LEFT JOIN Posts` to my query in order to use `Posts.Score`. By ordering `Posts.Score DESC`, I can assign `ROW_NUMBER()` to each post `PARTITION BY PostTags.TagId`. In other words, this is another way of grouping rows and assigning values to each row within a group. Because I have ordered the results by `Posts.Score` within each `TagId`, the function `ROW_NUMBER()` works as a ranking assignment, thus giving `n`.
+
+```
+| PostId  | TagId | n   |
+|---------|-------|-----|
+| 111102  | 3     | 1   |
+| 503093  | 3     | 2   |
+| 1789945 | 3     | 3   |
+| 1335851 | 3     | 4   |
+| 178325  | 3     | 5   |
+| ...     | ...   | ... |
+```
+
+You don't see it here (nor in the online browser without modifying the query) but for every unique `TagId` exists a range of `n` values from 1 through unknown (however many posts exist within the tag). 
+
+Now I have a ranking for each post within every tag group. This sets me up nicely to use `n` shortly to filter out the result set as intended. 
+
+#### Select the Top Five Posts per Tag Group
+
+To conclude my query, I will use the previous query as a subquery and, again, `LEFT JOIN Posts` to get any additional columns I want. 
+
+```sql
+DECLARE @n_tags int;
+DECLARE @n_posts int;
+
+SET @n_tags = 5;
+SET @n_posts = 5;
+
+SELECT 
+  PostRanks.Id, 
+  PostRanks.Score, 
+  PostRanks.TagId, 
+  Posts.Title, 
+  Posts.Tags
+FROM (
+  SELECT
+    Posts.Id,
+    Posts.Score, 
+    PostTags.TagId, 
+    n = ROW_NUMBER() OVER (
+      PARTITION BY
+        PostTags.TagId
+      ORDER BY 
+      Posts.Score DESC)
+  FROM 
+    PostTags
+  LEFT JOIN
+    Posts
+  ON 
+    PostTags.PostId = Posts.Id 
+  WHERE
+    PostTags.TagId IN (
+      SELECT 
+        TOP (@n_tags) Tags.Id
+      FROM 
+        Tags
+      ORDER BY 
+        Tags.Count DESC)) AS PostRanks
+LEFT JOIN
+  Posts
+ON Posts.Id = PostRanks.Id
+WHERE 
+  n <= @n_posts
+ORDER BY
+  PostRanks.TagId, 
+  PostRanks.Score DESC;
+```
+Table: [Selec the top five posts per tag group](http://data.stackexchange.com/stackoverflow/revision/810701/1002101/top-5-tags-with-overall-posts-and-top-5-posts-within-each-by-score)
+
+I have added a new variable, `n_posts` and assigned to it the number 5; I want to return the top five posts per tag group.
+
+Using my previous query as a subquery (which I assigned the alias `PostRanks`), I joined `Posts` again, this time selecting everything from `PostRanks` in addition to `Posts.Title` and `Posts.Tags`. 
+
+I have also added a filter for all posts where `n` is less than or equal to `n_posts`.
+
+Finally, for cleanliness, I order the result set by `PostRanks.TagId` and `PostRanks.Score DESC`.  This gives me the final dataset:
+
+```{r print-df, echo = FALSE}
+kable(df, caption = "Top 5 Tags and Top 5 Posts Within Each Tag")
+```
+
+### Tips 
+
+#### Avoiding Aggregate Errors when Grouping
+
+[Earlier](/query-stack-overflow-top-five-tags-top-five-posts-within-each-tag/#left-join-posts-and-parition-over-posttags.tagid-ordered-by-posts.score-descending) when I numbered the posts within each tag, I took what may have seemed unnecessary steps. In other words, why did I need create a new variable, `n`, to begin with? Why not just `LEFT JOIN Posts`, `GROUP BY PostTags.TagId`, and `ORDER BY Posts.Score DESC`?
+
+```sql
+DECLARE @n_tags int;
+
+SET @n_tags = 5;
+
+SELECT
+  TOP 5 PostTags.PostId, 
+  PostTags.TagId, 
+  Posts.Score
+FROM 
+  PostTags
+LEFT JOIN
+  Posts
+ON 
+  PostTags.PostId = Posts.Id
+WHERE
+  PostTags.TagId IN (
+    SELECT 
+      TOP (@n_tags) Tags.Id
+    FROM 
+      Tags
+    ORDER BY 
+      Tags.Count DESC)
+GROUP BY 
+  PostTags.TagId
+ORDER BY
+  Posts.Score DESC;
+```
+
+Surely, the query above would have accomplished the same results, right? 
+
+The problem is that when running this type of query the server does not like it. Particularly, Data Exchange will halt execution with the following error:
+
+```
+Column 'PostTags.PostId' is invalid in the select list because it is not contained in either an aggregate function or the GROUP BY clause.
+```
+
+I have asked the server to return the top five post id's per tag id. The server, however, recognizes I'm also asking for tag id and score. The server doesn't know which values of tag id and score to return and, therefore, throws an error.
+
+Many database servers prior would have allowed this query to run without throwing an error. Now, most will halt execution though you can modify a setting to allow it to continue with a warning.
+
+The better alternative is to simply group the result set by the tag id then create a new variable that effectively ranks the posts within each tag based on the posts score. This is the purpose of `n`. 
+
+Then we can filter our result set on the top five (or any `n`) without issue.
+
+### Conclusion
+
+You now have a query that you can easily edit to expand tag groups or include more posts per group. Data Exchange returns 50,000 rows in the result pane so you have plenty of room to work with. 
+
+Some things you may want to try:
+
+  1. Instead of sorting by `Posts.Score`, can you edit the code to sort by `Posts.CreationDate`?
+  
+  2. Examine the execution plan of my query? With that information, modify the code to include `Posts.Title` and `Posts.Tags` on the second subquery (starting at line #19). This removes the need for the outer `LEFT JOIN` statement (line #44) but how does this impact the execution time of the query?
+  
+  3. If you are feeling really brave, instead of relying on `PostTags.Count`, can you split `Posts.Tags` and aggregate posts based on each tag? How does this query compare to the simpler `SELECT` query [used originally](/query-stack-overflow-top-five-tags-top-five-posts-within-each-tag/#select-the-top-five-tags-by-count)?
+
+The raw query and dataset can be found in my [Datasets repo](https://github.com/timtrice/datasets/tree/master/stackoverflow). If you have noticed any errors or simply want to fork the code, please feel free. 
+
+Lastly, please feel free to reach out to me on [twitter](https://twitter.com/timtrice) for any questions or comments.
+
+Thank you for reading!
