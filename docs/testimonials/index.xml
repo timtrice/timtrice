@@ -2,47 +2,49 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Testimonials on Tim Trice</title>
-    <link>http://timtrice.net/testimonials/</link>
+    <link>/testimonials/</link>
     <description>Recent content in Testimonials on Tim Trice</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
     <lastBuildDate>Thu, 01 Jun 2017 00:00:00 +0000</lastBuildDate>
-    <atom:link href="/testimonials/" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="/testimonials/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Tom Armstrong, Narrative1</title>
-      <link>http://timtrice.net/testimonials/tom-armstrong/</link>
+      <link>/testimonials/tom-armstrong/</link>
       <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/testimonials/tom-armstrong/</guid>
+      <guid>/testimonials/tom-armstrong/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Donald Hatter, DRE Software</title>
-      <link>http://timtrice.net/testimonials/donald-hatter/</link>
+      <link>/testimonials/donald-hatter/</link>
       <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/testimonials/donald-hatter/</guid>
+      <guid>/testimonials/donald-hatter/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Josh Southern, Paradigm Shift Interactive</title>
-      <link>http://timtrice.net/testimonials/josh-southern/</link>
+      <link>/testimonials/josh-southern/</link>
       <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/testimonials/josh-southern/</guid>
+      <guid>/testimonials/josh-southern/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Open Design</title>
-      <link>http://timtrice.net/testimonials/open-design/</link>
+      <link>/testimonials/open-design/</link>
       <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/testimonials/open-design/</guid>
+      <guid>/testimonials/open-design/</guid>
       <description></description>
     </item>
     

@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tim Trice on Tim Trice</title>
-    <link>http://timtrice.net/</link>
+    <link>/</link>
     <description>Recent content in Tim Trice on Tim Trice</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -12,46 +12,575 @@
     
     <item>
       <title>Tom Armstrong, Narrative1</title>
-      <link>http://timtrice.net/testimonials/tom-armstrong/</link>
+      <link>/testimonials/tom-armstrong/</link>
       <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/testimonials/tom-armstrong/</guid>
+      <guid>/testimonials/tom-armstrong/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Donald Hatter, DRE Software</title>
-      <link>http://timtrice.net/testimonials/donald-hatter/</link>
+      <link>/testimonials/donald-hatter/</link>
       <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/testimonials/donald-hatter/</guid>
+      <guid>/testimonials/donald-hatter/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Josh Southern, Paradigm Shift Interactive</title>
-      <link>http://timtrice.net/testimonials/josh-southern/</link>
+      <link>/testimonials/josh-southern/</link>
       <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/testimonials/josh-southern/</guid>
+      <guid>/testimonials/josh-southern/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Open Design</title>
-      <link>http://timtrice.net/testimonials/open-design/</link>
+      <link>/testimonials/open-design/</link>
       <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/testimonials/open-design/</guid>
+      <guid>/testimonials/open-design/</guid>
       <description></description>
     </item>
     
     <item>
+      <title>Query Stack Overflow for Top 5 Tags and Children Posts</title>
+      <link>/2018-02-26-query-stack-overflow-top-five-tags-top-five-posts-within-each-tag/</link>
+      <pubDate>Mon, 26 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018-02-26-query-stack-overflow-top-five-tags-top-five-posts-within-each-tag/</guid>
+      <description>&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#requirements&#34;&gt;Requirements&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#introduction&#34;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#building-the-query&#34;&gt;Building the Query&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#select-the-top-five-tags-by-count&#34;&gt;Select the Top Five Tags by Count&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#select-all-posts-for-respective-tags&#34;&gt;Select All Posts for Respective Tags&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#left-join-posts-and-parition-over-posttags.tagid-ordered-by-posts.score-descending&#34;&gt;Left Join Posts and Parition Over PostTags.TagId, Ordered by Posts.Score Descending&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#select-the-top-five-posts-per-tag-group&#34;&gt;Select the Top Five Posts per Tag Group&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#tips&#34;&gt;Tips&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#avoiding-aggregate-errors-when-grouping&#34;&gt;Avoiding Aggregate Errors when Grouping&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#conclusion&#34;&gt;Conclusion&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div id=&#34;requirements&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Requirements&lt;/h2&gt;
+&lt;p&gt;For this you can use the &lt;a href=&#34;http://data.stackexchange.com/stackoverflow/&#34;&gt;Stack Exchange Data Explorer&lt;/a&gt; online at no charge. Click the ‘Compose Query’ button in the top-right. You should see the stack&lt;strong&gt;overflow&lt;/strong&gt; image in the top right corner:&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;https://cdn.sstatic.net/Sites/stackoverflow/img/logo.png&#34; /&gt;
+
+&lt;/div&gt;
+&lt;p&gt;You should give your query a title but it is not necessary. It does help keep track of your edits as you move along.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;introduction&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;I want to find the top five tags on Stack Overflow along with the top five posts per tag. The Stack Exchange Data Explorer gives us free access to this data. The data itself is slightly out-of-date, but this is fine.&lt;/p&gt;
+&lt;p&gt;I will use three subqueries:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;Find the top 5 tags&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;LEFT JOIN&lt;/code&gt; those tags to the posts table&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Filter the results per tag.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The tables I need to focus on are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;Tags&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;PostTags&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;Posts&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The dataset is denormalized so some of the calculations we need to make have already been done. For example, in &lt;code&gt;Tags&lt;/code&gt; there is a &lt;code&gt;Count&lt;/code&gt; column that already tells us how many posts exist for each tag. In &lt;code&gt;Posts&lt;/code&gt;, the &lt;code&gt;Tags&lt;/code&gt; column contains a list of tags. Without this, I would need to write a more complicated query to split every tag for every row then run a tally. A challenge, for sure.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;PostTags&lt;/code&gt; is the bridge between &lt;code&gt;Tags&lt;/code&gt; and &lt;code&gt;Posts&lt;/code&gt;. Once I know what &lt;code&gt;Tags&lt;/code&gt; I am searching, I use &lt;code&gt;PostTags&lt;/code&gt; to find all relevant posts per tag, joining &lt;code&gt;Posts&lt;/code&gt; to also get all of the tags per post and the score of the post.&lt;/p&gt;
+&lt;p&gt;Finally, I will close off the query with a simple filter statement using &lt;code&gt;WHERE&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The overall query is very simple to build and keeps the result set small. Additionally, it is very easy to edit. So, if we want the top 10 tags and 10 posts per tag, we just make two small edits. Or, even better, use variables.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;building-the-query&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Building the Query&lt;/h2&gt;
+&lt;div id=&#34;select-the-top-five-tags-by-count&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Select the Top Five Tags by Count&lt;/h3&gt;
+&lt;p&gt;The core of my query are the tags. Everything else is based on knowing what exactly the top five tags are in the Stack Overflow database.&lt;/p&gt;
+&lt;p&gt;As mentioned earlier, this information has already been calculated in the `Tags table. Here is the structure:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th&gt;Name&lt;/th&gt;
+&lt;th&gt;Data Type&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;Id&lt;/td&gt;
+&lt;td&gt;int&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;TagName&lt;/td&gt;
+&lt;td&gt;nvarchar(35)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;Count&lt;/td&gt;
+&lt;td&gt;int&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;ExcerptPostId&lt;/td&gt;
+&lt;td&gt;int&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;WikiPostId&lt;/td&gt;
+&lt;td&gt;int&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;All I care about at this point is &lt;code&gt;Id&lt;/code&gt;; this is the foreign key that will relate back to &lt;code&gt;Posts&lt;/code&gt;. I will get &lt;code&gt;TagName&lt;/code&gt; and &lt;code&gt;Count&lt;/code&gt; later.&lt;/p&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;DECLARE @n_tags int;
+
+SET @n_tags = 5;
+
+SELECT 
+  TOP (@n_tags) Tags.Id
+FROM 
+  Tags
+ORDER BY 
+  Tags.Count DESC;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Table: &lt;a href=&#34;http://data.stackexchange.com/stackoverflow/revision/810701/1002057/top-5-tags-with-overall-posts-and-top-5-posts-within-each-by-score&#34;&gt;Select the top five tags by count&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;This gives us the result set,&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th&gt;Id&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;17&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;9&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;1386&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;I create the variable &lt;code&gt;n_tags&lt;/code&gt; so that if you or I want to expand the query later we can easily do so without editing the query itself.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;select-all-posts-for-respective-tags&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Select All Posts for Respective Tags&lt;/h3&gt;
+&lt;p&gt;Now that I know my top five tags, I need to find all posts that belong to each tag. I use &lt;code&gt;PostTags&lt;/code&gt; for this and return only &lt;code&gt;PostId&lt;/code&gt; and &lt;code&gt;TagId&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The query I built in the previous step will become my subquery. I am telling the server to only return all posts where the tag id is contained in this list of values.&lt;/p&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;DECLARE @n_tags int;
+
+SET @n_tags = 5;
+
+SELECT
+  PostTags.PostId, 
+  PostTags.TagId
+FROM 
+  PostTags
+WHERE
+  PostTags.TagId IN (
+    SELECT 
+      TOP (@n_tags) Tags.Id
+    FROM 
+      Tags
+    ORDER BY 
+      Tags.Count DESC);&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Table: &lt;a href=&#34;http://data.stackexchange.com/stackoverflow/revision/810701/1002067/top-5-tags-with-overall-posts-and-top-5-posts-within-each-by-score&#34;&gt;Select all posts for each top five tag&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;And a sample of the result set:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th&gt;PostId&lt;/th&gt;
+&lt;th&gt;Id&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;13&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;845&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;1401&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;1873&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;3224&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;There are thousands of results returned so I won’t list them all here.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;left-join-posts-and-parition-over-posttags.tagid-ordered-by-posts.score-descending&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Left Join Posts and Parition Over PostTags.TagId, Ordered by Posts.Score Descending&lt;/h3&gt;
+&lt;p&gt;Now I need to get my hands slightly dirtier.&lt;/p&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;DECLARE @n_tags int;
+
+SET @n_tags = 5;
+
+SELECT
+  PostTags.PostId, 
+  PostTags.TagId, 
+  n = ROW_NUMBER() OVER (
+    PARTITION BY 
+      PostTags.TagId
+    ORDER BY 
+      Posts.Score DESC
+  )
+FROM 
+  PostTags
+LEFT JOIN
+  Posts
+ON 
+  PostTags.PostId = Posts.Id
+WHERE
+  PostTags.TagId IN (
+    SELECT 
+      TOP (@n_tags) Tags.Id
+    FROM 
+      Tags
+    ORDER BY 
+      Tags.Count DESC);&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Table: &lt;a href=&#34;http://data.stackexchange.com/stackoverflow/revision/810701/1002072/top-5-tags-with-overall-posts-and-top-5-posts-within-each-by-score&#34;&gt;Join Posts and number all posts within each tag, ordered by Score&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I have proceeded to &lt;code&gt;LEFT JOIN Posts&lt;/code&gt; to my query in order to use &lt;code&gt;Posts.Score&lt;/code&gt;. By ordering &lt;code&gt;Posts.Score DESC&lt;/code&gt;, I can assign &lt;code&gt;ROW_NUMBER()&lt;/code&gt; to each post &lt;code&gt;PARTITION BY PostTags.TagId&lt;/code&gt;. In other words, this is another way of grouping rows and assigning values to each row within a group. Because I have ordered the results by &lt;code&gt;Posts.Score&lt;/code&gt; within each &lt;code&gt;TagId&lt;/code&gt;, the function &lt;code&gt;ROW_NUMBER()&lt;/code&gt; works as a ranking assignment, thus giving &lt;code&gt;n&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;| PostId  | TagId | n   |
+|---------|-------|-----|
+| 111102  | 3     | 1   |
+| 503093  | 3     | 2   |
+| 1789945 | 3     | 3   |
+| 1335851 | 3     | 4   |
+| 178325  | 3     | 5   |
+| ...     | ...   | ... |&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You don’t see it here (nor in the online browser without modifying the query) but for every unique &lt;code&gt;TagId&lt;/code&gt; exists a range of &lt;code&gt;n&lt;/code&gt; values from 1 through unknown (however many posts exist within the tag).&lt;/p&gt;
+&lt;p&gt;Now I have a ranking for each post within every tag group. This sets me up nicely to use &lt;code&gt;n&lt;/code&gt; shortly to filter out the result set as intended.&lt;/p&gt;
+&lt;div id=&#34;select-the-top-five-posts-per-tag-group&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;Select the Top Five Posts per Tag Group&lt;/h4&gt;
+&lt;p&gt;To conclude my query, I will use the previous query as a subquery and, again, &lt;code&gt;LEFT JOIN Posts&lt;/code&gt; to get any additional columns I want.&lt;/p&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;DECLARE @n_tags int;
+DECLARE @n_posts int;
+
+SET @n_tags = 5;
+SET @n_posts = 5;
+
+SELECT 
+  PostRanks.Id, 
+  PostRanks.Score, 
+  PostRanks.TagId, 
+  Posts.Title, 
+  Posts.Tags
+FROM (
+  SELECT
+    Posts.Id,
+    Posts.Score, 
+    PostTags.TagId, 
+    n = ROW_NUMBER() OVER (
+      PARTITION BY
+        PostTags.TagId
+      ORDER BY 
+      Posts.Score DESC)
+  FROM 
+    PostTags
+  LEFT JOIN
+    Posts
+  ON 
+    PostTags.PostId = Posts.Id 
+  WHERE
+    PostTags.TagId IN (
+      SELECT 
+        TOP (@n_tags) Tags.Id
+      FROM 
+        Tags
+      ORDER BY 
+        Tags.Count DESC)) AS PostRanks
+LEFT JOIN
+  Posts
+ON Posts.Id = PostRanks.Id
+WHERE 
+  n &amp;lt;= @n_posts
+ORDER BY
+  PostRanks.TagId, 
+  PostRanks.Score DESC;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Table: &lt;a href=&#34;http://data.stackexchange.com/stackoverflow/revision/810701/1002101/top-5-tags-with-overall-posts-and-top-5-posts-within-each-by-score&#34;&gt;Selec the top five posts per tag group&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I have added a new variable, &lt;code&gt;n_posts&lt;/code&gt; and assigned to it the number 5; I want to return the top five posts per tag group.&lt;/p&gt;
+&lt;p&gt;Using my previous query as a subquery (which I assigned the alias &lt;code&gt;PostRanks&lt;/code&gt;), I joined &lt;code&gt;Posts&lt;/code&gt; again, this time selecting everything from &lt;code&gt;PostRanks&lt;/code&gt; in addition to &lt;code&gt;Posts.Title&lt;/code&gt; and &lt;code&gt;Posts.Tags&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;I have also added a filter for all posts where &lt;code&gt;n&lt;/code&gt; is less than or equal to &lt;code&gt;n_posts&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Finally, for cleanliness, I order the result set by &lt;code&gt;PostRanks.TagId&lt;/code&gt; and &lt;code&gt;PostRanks.Score DESC&lt;/code&gt;. This gives me the final dataset:&lt;/p&gt;
+&lt;table&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:print-df&#34;&gt;Table 1: &lt;/span&gt;Top 5 Tags and Top 5 Posts Within Each Tag&lt;/caption&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;right&#34;&gt;Id&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Score&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;TagId&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Title&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Tags&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;111102&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;7659&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;How do JavaScript closures work?&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&amp;lt;javascript&amp;gt;&amp;lt;function&amp;gt;&amp;lt;variables&amp;gt;&amp;lt;scope&amp;gt;&amp;lt;closures&amp;gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;503093&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;7595&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;How do I redirect to another webpage?&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&amp;lt;javascript&amp;gt;&amp;lt;jquery&amp;gt;&amp;lt;redirect&amp;gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;1789945&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;7283&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;How to check whether a string contains a substring in JavaScript?&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&amp;lt;javascript&amp;gt;&amp;lt;string&amp;gt;&amp;lt;substring&amp;gt;&amp;lt;contains&amp;gt;&amp;lt;string-matching&amp;gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;1335851&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;6405&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;What does “use strict” do in JavaScript, and what is the reasoning behind it?&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&amp;lt;javascript&amp;gt;&amp;lt;syntax&amp;gt;&amp;lt;jslint&amp;gt;&amp;lt;use-strict&amp;gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;178325&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;6367&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;How do I check if an element is hidden in jQuery?&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&amp;lt;javascript&amp;gt;&amp;lt;jquery&amp;gt;&amp;lt;dom&amp;gt;&amp;lt;visibility&amp;gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;3737139&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3556&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;5&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Reference — What does this symbol mean in PHP?&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&amp;lt;php&amp;gt;&amp;lt;operators&amp;gt;&amp;lt;symbols&amp;gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;60174&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2782&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;5&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;How can I prevent SQL injection in PHP?&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&amp;lt;php&amp;gt;&amp;lt;mysql&amp;gt;&amp;lt;sql&amp;gt;&amp;lt;security&amp;gt;&amp;lt;sql-injection&amp;gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;4366730&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2573&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;5&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;How do I check if a string contains a specific word?&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&amp;lt;php&amp;gt;&amp;lt;string&amp;gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;409286&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2147&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;5&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Should I use the datetime or timestamp data type in MySQL?&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&amp;lt;php&amp;gt;&amp;lt;mysql&amp;gt;&amp;lt;datetime&amp;gt;&amp;lt;timestamp&amp;gt;&amp;lt;sqldatatypes&amp;gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;12859942&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2058&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;5&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Why shouldn’t I use mysql_* functions in PHP?&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&amp;lt;php&amp;gt;&amp;lt;mysql&amp;gt;&amp;lt;database&amp;gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;7074&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4963&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;9&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;What is the difference between String and string in C#?&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&amp;lt;c#&amp;gt;&amp;lt;.net&amp;gt;&amp;lt;string&amp;gt;&amp;lt;types&amp;gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;105372&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2958&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;9&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;How do I enumerate an enum?&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&amp;lt;c#&amp;gt;&amp;lt;.net&amp;gt;&amp;lt;enums&amp;gt;&amp;lt;enumeration&amp;gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;29482&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2395&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;9&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Cast int to enum in C#&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&amp;lt;c#&amp;gt;&amp;lt;enums&amp;gt;&amp;lt;casting&amp;gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;444798&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2261&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;9&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Case insensitive ‘Contains(string)’&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&amp;lt;c#&amp;gt;&amp;lt;string&amp;gt;&amp;lt;contains&amp;gt;&amp;lt;case-insensitive&amp;gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;247621&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1916&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;9&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;What are the correct version numbers for C#?&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&amp;lt;c#&amp;gt;&amp;lt;.net&amp;gt;&amp;lt;visual-studio&amp;gt;&amp;lt;.net-framework-version&amp;gt;&amp;lt;compiler-version&amp;gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;11227809&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;20632&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;17&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Why is it faster to process a sorted array than an unsorted array?&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&amp;lt;java&amp;gt;&amp;lt;c++&amp;gt;&amp;lt;performance&amp;gt;&amp;lt;optimization&amp;gt;&amp;lt;branch-prediction&amp;gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;6841333&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;5753&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;17&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Why is subtracting these two times (in 1927) giving a strange result?&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&amp;lt;java&amp;gt;&amp;lt;date&amp;gt;&amp;lt;timezone&amp;gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;40480&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;5082&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;17&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Is Java “pass-by-reference” or “pass-by-value”?&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&amp;lt;java&amp;gt;&amp;lt;methods&amp;gt;&amp;lt;parameter-passing&amp;gt;&amp;lt;pass-by-reference&amp;gt;&amp;lt;pass-by-value&amp;gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;271526&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3378&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;17&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Avoiding != null statements&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&amp;lt;java&amp;gt;&amp;lt;object&amp;gt;&amp;lt;nullpointerexception&amp;gt;&amp;lt;null&amp;gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;8710619&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3165&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;17&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Java’s +=, -=, *=, /= compound assignment operators&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&amp;lt;java&amp;gt;&amp;lt;casting&amp;gt;&amp;lt;operators&amp;gt;&amp;lt;variable-assignment&amp;gt;&amp;lt;assignment-operator&amp;gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;2025282&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4912&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1386&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;What is the difference between “px”, “dip”, “dp” and “sp”?&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&amp;lt;android&amp;gt;&amp;lt;android-layout&amp;gt;&amp;lt;user-interface&amp;gt;&amp;lt;dimension&amp;gt;&amp;lt;units-of-measurement&amp;gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;1554099&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2982&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1386&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Why is the Android emulator so slow? How can we speed up the Android emulator?&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&amp;lt;android&amp;gt;&amp;lt;performance&amp;gt;&amp;lt;android-emulator&amp;gt;&amp;lt;qemu&amp;gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;13375357&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2970&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1386&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Proper use cases for Android UserManager.isUserAGoat()?&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&amp;lt;java&amp;gt;&amp;lt;android&amp;gt;&amp;lt;usermanager&amp;gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;1109022&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2867&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1386&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Close/hide the Android Soft Keyboard&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&amp;lt;android&amp;gt;&amp;lt;android-layout&amp;gt;&amp;lt;android-softkeyboard&amp;gt;&amp;lt;android-input-method&amp;gt;&amp;lt;soft-keyboard&amp;gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;1555109&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2217&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1386&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Stop EditText from gaining focus at Activity startup&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&amp;lt;android&amp;gt;&amp;lt;listview&amp;gt;&amp;lt;android-edittext&amp;gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;tips&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Tips&lt;/h3&gt;
+&lt;div id=&#34;avoiding-aggregate-errors-when-grouping&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;Avoiding Aggregate Errors when Grouping&lt;/h4&gt;
+&lt;p&gt;&lt;a href=&#34;./query-stack-overflow-top-five-tags-top-five-posts-within-each-tag/#left-join-posts-and-parition-over-posttags.tagid-ordered-by-posts.score-descending&#34;&gt;Earlier&lt;/a&gt; when I numbered the posts within each tag, I took what may have seemed unnecessary steps. In other words, why did I need create a new variable, &lt;code&gt;n&lt;/code&gt;, to begin with? Why not just &lt;code&gt;LEFT JOIN Posts&lt;/code&gt;, &lt;code&gt;GROUP BY PostTags.TagId&lt;/code&gt;, and &lt;code&gt;ORDER BY Posts.Score DESC&lt;/code&gt;?&lt;/p&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;DECLARE @n_tags int;
+
+SET @n_tags = 5;
+
+SELECT
+  TOP 5 PostTags.PostId, 
+  PostTags.TagId, 
+  Posts.Score
+FROM 
+  PostTags
+LEFT JOIN
+  Posts
+ON 
+  PostTags.PostId = Posts.Id
+WHERE
+  PostTags.TagId IN (
+    SELECT 
+      TOP (@n_tags) Tags.Id
+    FROM 
+      Tags
+    ORDER BY 
+      Tags.Count DESC)
+GROUP BY 
+  PostTags.TagId
+ORDER BY
+  Posts.Score DESC;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Surely, the query above would have accomplished the same results, right?&lt;/p&gt;
+&lt;p&gt;The problem is that when running this type of query the server does not like it. Particularly, Data Exchange will halt execution with the following error:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Column &amp;#39;PostTags.PostId&amp;#39; is invalid in the select list because it is not contained in either an aggregate function or the GROUP BY clause.&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I have asked the server to return the top five post id’s per tag id. The server, however, recognizes I’m also asking for tag id and score. The server doesn’t know which values of tag id and score to return and, therefore, throws an error.&lt;/p&gt;
+&lt;p&gt;Many database servers prior would have allowed this query to run without throwing an error. Now, most will halt execution though you can modify a setting to allow it to continue with a warning.&lt;/p&gt;
+&lt;p&gt;The better alternative is to simply group the result set by the tag id then create a new variable that effectively ranks the posts within each tag based on the posts score. This is the purpose of &lt;code&gt;n&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Then we can filter our result set on the top five (or any &lt;code&gt;n&lt;/code&gt;) without issue.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;conclusion&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Conclusion&lt;/h3&gt;
+&lt;p&gt;You now have a query that you can easily edit to expand tag groups or include more posts per group. Data Exchange returns 50,000 rows in the result pane so you have plenty of room to work with.&lt;/p&gt;
+&lt;p&gt;Some things you may want to try:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;Instead of sorting by &lt;code&gt;Posts.Score&lt;/code&gt;, can you edit the code to sort by &lt;code&gt;Posts.CreationDate&lt;/code&gt;?&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Examine the execution plan of my query? With that information, modify the code to include &lt;code&gt;Posts.Title&lt;/code&gt; and &lt;code&gt;Posts.Tags&lt;/code&gt; on the second subquery (starting at line #19). This removes the need for the outer &lt;code&gt;LEFT JOIN&lt;/code&gt; statement (line #44) but how does this impact the execution time of the query?&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;If you are feeling really brave, instead of relying on &lt;code&gt;PostTags.Count&lt;/code&gt;, can you split &lt;code&gt;Posts.Tags&lt;/code&gt; and aggregate posts based on each tag? How does this query compare to the simpler &lt;code&gt;SELECT&lt;/code&gt; query &lt;a href=&#34;./query-stack-overflow-top-five-tags-top-five-posts-within-each-tag/#select-the-top-five-tags-by-count&#34;&gt;used originally&lt;/a&gt;?&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The raw query and dataset can be found in my &lt;a href=&#34;https://github.com/timtrice/datasets/tree/master/stackoverflow&#34;&gt;Datasets repo&lt;/a&gt;. If you have noticed any errors or simply want to fork the code, please feel free.&lt;/p&gt;
+&lt;p&gt;Lastly, please feel free to reach out to me on &lt;a href=&#34;https://twitter.com/timtrice&#34;&gt;twitter&lt;/a&gt; for any questions or comments.&lt;/p&gt;
+&lt;p&gt;Thank you for reading!&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Department Top Three Salaries</title>
-      <link>http://timtrice.net/2017-11-04-department-top-three-salaries/</link>
+      <link>/2017-11-04-department-top-three-salaries/</link>
       <pubDate>Sat, 04 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/2017-11-04-department-top-three-salaries/</guid>
+      <guid>/2017-11-04-department-top-three-salaries/</guid>
       <description>&lt;div id=&#34;problem&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Problem&lt;/h3&gt;
 &lt;p&gt;The &lt;code&gt;Employee&lt;/code&gt; table holds all employees. Every employee has an Id, and there is also a column for the department Id.&lt;/p&gt;
@@ -450,7 +979,7 @@ ORDER BY `Employee`.`DepartmentId`, `Employee`.`Salary` DESC;&lt;/code&gt;&lt;/p
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;mariadb.org binary distribution&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;x86_64&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;5.7.20&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;5.7.19&lt;/td&gt;
 &lt;td align=&#34;left&#34;&gt;debian-linux-gnu&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
@@ -462,10 +991,10 @@ ORDER BY `Employee`.`DepartmentId`, `Employee`.`Salary` DESC;&lt;/code&gt;&lt;/p
     
     <item>
       <title>Hurricane Harvey Post Storm Report</title>
-      <link>http://timtrice.net/2017-09-06-hurricane-harvey-report/</link>
+      <link>/2017-09-06-hurricane-harvey-report/</link>
       <pubDate>Wed, 06 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/2017-09-06-hurricane-harvey-report/</guid>
+      <guid>/2017-09-06-hurricane-harvey-report/</guid>
       <description>&lt;div id=&#34;TOC&#34;&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#hurricane-harvey&#34;&gt;Hurricane Harvey&lt;/a&gt;&lt;ul&gt;
@@ -1213,12 +1742,12 @@ FEW TREES WERE BLOWN DOWN. RATED EF0. &lt;/code&gt;&lt;/pre&gt;
 &lt;div id=&#34;session-info&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Session Info&lt;/h2&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;pander::pander(sessionInfo())&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;strong&gt;R version 3.4.1 (2017-06-30)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;R version 3.4.3 (2017-11-30)&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;**&lt;a href=&#34;Platform:**&#34; class=&#34;uri&#34;&gt;Platform:**&lt;/a&gt; x86_64-pc-linux-gnu (64-bit)&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;locale:&lt;/strong&gt; &lt;em&gt;LC_CTYPE=en_US.UTF-8&lt;/em&gt;, &lt;em&gt;LC_NUMERIC=C&lt;/em&gt;, &lt;em&gt;LC_TIME=en_US.UTF-8&lt;/em&gt;, &lt;em&gt;LC_COLLATE=en_US.UTF-8&lt;/em&gt;, &lt;em&gt;LC_MONETARY=en_US.UTF-8&lt;/em&gt;, &lt;em&gt;LC_MESSAGES=C&lt;/em&gt;, &lt;em&gt;LC_PAPER=en_US.UTF-8&lt;/em&gt;, &lt;em&gt;LC_NAME=C&lt;/em&gt;, &lt;em&gt;LC_ADDRESS=C&lt;/em&gt;, &lt;em&gt;LC_TELEPHONE=C&lt;/em&gt;, &lt;em&gt;LC_MEASUREMENT=en_US.UTF-8&lt;/em&gt; and &lt;em&gt;LC_IDENTIFICATION=C&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;attached base packages:&lt;/strong&gt; &lt;em&gt;methods&lt;/em&gt;, &lt;em&gt;stats&lt;/em&gt;, &lt;em&gt;graphics&lt;/em&gt;, &lt;em&gt;grDevices&lt;/em&gt;, &lt;em&gt;utils&lt;/em&gt;, &lt;em&gt;datasets&lt;/em&gt; and &lt;em&gt;base&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;other attached packages:&lt;/strong&gt; &lt;em&gt;bindrcpp(v.0.2)&lt;/em&gt;, &lt;em&gt;tidyr(v.0.7.2)&lt;/em&gt;, &lt;em&gt;tibble(v.1.4.1)&lt;/em&gt;, &lt;em&gt;stringr(v.1.2.0)&lt;/em&gt;, &lt;em&gt;rrricanesdata(v.0.0.1.6)&lt;/em&gt;, &lt;em&gt;rrricanes(v.0.2.0-6)&lt;/em&gt;, &lt;em&gt;purrr(v.0.2.4)&lt;/em&gt;, &lt;em&gt;pander(v.0.6.1)&lt;/em&gt;, &lt;em&gt;lubridate(v.1.7.1)&lt;/em&gt;, &lt;em&gt;knitr(v.1.18)&lt;/em&gt;, &lt;em&gt;ggrepel(v.0.7.0)&lt;/em&gt;, &lt;em&gt;ggplot2(v.2.2.1)&lt;/em&gt; and &lt;em&gt;dplyr(v.0.7.4)&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;loaded via a namespace (and not attached):&lt;/strong&gt; &lt;em&gt;Rcpp(v.0.12.14)&lt;/em&gt;, &lt;em&gt;highr(v.0.6)&lt;/em&gt;, &lt;em&gt;RColorBrewer(v.1.1-2)&lt;/em&gt;, &lt;em&gt;pillar(v.1.0.1)&lt;/em&gt;, &lt;em&gt;compiler(v.3.4.1)&lt;/em&gt;, &lt;em&gt;plyr(v.1.8.4)&lt;/em&gt;, &lt;em&gt;bindr(v.0.1)&lt;/em&gt;, &lt;em&gt;tools(v.3.4.1)&lt;/em&gt;, &lt;em&gt;digest(v.0.6.13)&lt;/em&gt;, &lt;em&gt;lattice(v.0.20-35)&lt;/em&gt;, &lt;em&gt;evaluate(v.0.10.1)&lt;/em&gt;, &lt;em&gt;gtable(v.0.2.0)&lt;/em&gt;, &lt;em&gt;pkgconfig(v.2.0.1)&lt;/em&gt;, &lt;em&gt;rlang(v.0.1.6)&lt;/em&gt;, &lt;em&gt;yaml(v.2.1.16)&lt;/em&gt;, &lt;em&gt;blogdown(v.0.4)&lt;/em&gt;, &lt;em&gt;rnaturalearthdata(v.0.1.0)&lt;/em&gt;, &lt;em&gt;rprojroot(v.1.3-1)&lt;/em&gt;, &lt;em&gt;grid(v.3.4.1)&lt;/em&gt;, &lt;em&gt;glue(v.1.2.0)&lt;/em&gt;, &lt;em&gt;R6(v.2.2.2)&lt;/em&gt;, &lt;em&gt;rmarkdown(v.1.8)&lt;/em&gt;, &lt;em&gt;bookdown(v.0.5)&lt;/em&gt;, &lt;em&gt;sp(v.1.2-5)&lt;/em&gt;, &lt;em&gt;magrittr(v.1.5)&lt;/em&gt;, &lt;em&gt;backports(v.1.1.2)&lt;/em&gt;, &lt;em&gt;scales(v.0.5.0)&lt;/em&gt;, &lt;em&gt;htmltools(v.0.3.6)&lt;/em&gt;, &lt;em&gt;assertthat(v.0.2.0)&lt;/em&gt;, &lt;em&gt;colorspace(v.1.3-2)&lt;/em&gt;, &lt;em&gt;labeling(v.0.3)&lt;/em&gt;, &lt;em&gt;stringi(v.1.1.6)&lt;/em&gt;, &lt;em&gt;lazyeval(v.0.2.1)&lt;/em&gt; and &lt;em&gt;munsell(v.0.4.3)&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;other attached packages:&lt;/strong&gt; &lt;em&gt;bindrcpp(v.0.2)&lt;/em&gt;, &lt;em&gt;tidyr(v.0.8.0)&lt;/em&gt;, &lt;em&gt;tibble(v.1.4.2)&lt;/em&gt;, &lt;em&gt;stringr(v.1.2.0)&lt;/em&gt;, &lt;em&gt;rrricanesdata(v.0.0.1.6)&lt;/em&gt;, &lt;em&gt;rrricanes(v.0.2.0-6)&lt;/em&gt;, &lt;em&gt;purrr(v.0.2.4)&lt;/em&gt;, &lt;em&gt;pander(v.0.6.1)&lt;/em&gt;, &lt;em&gt;lubridate(v.1.7.1)&lt;/em&gt;, &lt;em&gt;knitr(v.1.18)&lt;/em&gt;, &lt;em&gt;ggrepel(v.0.7.0)&lt;/em&gt;, &lt;em&gt;ggplot2(v.2.2.1)&lt;/em&gt; and &lt;em&gt;dplyr(v.0.7.4)&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;loaded via a namespace (and not attached):&lt;/strong&gt; &lt;em&gt;Rcpp(v.0.12.15)&lt;/em&gt;, &lt;em&gt;highr(v.0.6)&lt;/em&gt;, &lt;em&gt;RColorBrewer(v.1.1-2)&lt;/em&gt;, &lt;em&gt;pillar(v.1.1.0)&lt;/em&gt;, &lt;em&gt;compiler(v.3.4.3)&lt;/em&gt;, &lt;em&gt;plyr(v.1.8.4)&lt;/em&gt;, &lt;em&gt;bindr(v.0.1)&lt;/em&gt;, &lt;em&gt;tools(v.3.4.3)&lt;/em&gt;, &lt;em&gt;digest(v.0.6.15)&lt;/em&gt;, &lt;em&gt;lattice(v.0.20-35)&lt;/em&gt;, &lt;em&gt;evaluate(v.0.10.1)&lt;/em&gt;, &lt;em&gt;gtable(v.0.2.0)&lt;/em&gt;, &lt;em&gt;pkgconfig(v.2.0.1)&lt;/em&gt;, &lt;em&gt;rlang(v.0.1.6)&lt;/em&gt;, &lt;em&gt;yaml(v.2.1.16)&lt;/em&gt;, &lt;em&gt;blogdown(v.0.4)&lt;/em&gt;, &lt;em&gt;rnaturalearthdata(v.0.1.0)&lt;/em&gt;, &lt;em&gt;rprojroot(v.1.3-2)&lt;/em&gt;, &lt;em&gt;grid(v.3.4.3)&lt;/em&gt;, &lt;em&gt;glue(v.1.2.0)&lt;/em&gt;, &lt;em&gt;R6(v.2.2.2)&lt;/em&gt;, &lt;em&gt;rmarkdown(v.1.8)&lt;/em&gt;, &lt;em&gt;bookdown(v.0.5)&lt;/em&gt;, &lt;em&gt;sp(v.1.2-5)&lt;/em&gt;, &lt;em&gt;magrittr(v.1.5)&lt;/em&gt;, &lt;em&gt;backports(v.1.1.2)&lt;/em&gt;, &lt;em&gt;scales(v.0.5.0)&lt;/em&gt;, &lt;em&gt;htmltools(v.0.3.6)&lt;/em&gt;, &lt;em&gt;assertthat(v.0.2.0)&lt;/em&gt;, &lt;em&gt;colorspace(v.1.3-2)&lt;/em&gt;, &lt;em&gt;labeling(v.0.3)&lt;/em&gt;, &lt;em&gt;stringi(v.1.1.6)&lt;/em&gt;, &lt;em&gt;lazyeval(v.0.2.1)&lt;/em&gt; and &lt;em&gt;munsell(v.0.4.3)&lt;/em&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;warnings()&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## NULL&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
@@ -1227,19 +1756,19 @@ FEW TREES WERE BLOWN DOWN. RATED EF0. &lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>rrricanes</title>
-      <link>http://timtrice.net/project/rrricanes/</link>
+      <link>/project/rrricanes/</link>
       <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/project/rrricanes/</guid>
+      <guid>/project/rrricanes/</guid>
       <description></description>
     </item>
     
     <item>
       <title>RStudio in Docker</title>
-      <link>http://timtrice.net/2017-05-17-rstudio-in-docker/</link>
+      <link>/2017-05-17-rstudio-in-docker/</link>
       <pubDate>Wed, 17 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/2017-05-17-rstudio-in-docker/</guid>
+      <guid>/2017-05-17-rstudio-in-docker/</guid>
       <description>&lt;div id=&#34;TOC&#34;&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#brief-overview-of-docker&#34;&gt;Brief Overview of Docker&lt;/a&gt;&lt;/li&gt;
@@ -1426,57 +1955,57 @@ sudo docker push timtrice/rstudio-3.3.1&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Example Talk</title>
-      <link>http://timtrice.net/talk/example-talk/</link>
+      <link>/talk/example-talk/</link>
       <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/talk/example-talk/</guid>
+      <guid>/talk/example-talk/</guid>
       <description>&lt;p&gt;Embed your slides or video here using &lt;a href=&#34;https://sourcethemes.com/academic/post/writing-markdown-latex/&#34; target=&#34;_blank&#34;&gt;shortcodes&lt;/a&gt;. Further details can easily be added using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>HURDAT</title>
-      <link>http://timtrice.net/project/hurdat/</link>
+      <link>/project/hurdat/</link>
       <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/project/hurdat/</guid>
+      <guid>/project/hurdat/</guid>
       <description></description>
     </item>
     
     <item>
       <title>A Person Re-Identification System For Mobile Devices</title>
-      <link>http://timtrice.net/publication/person-re-identification/</link>
+      <link>/publication/person-re-identification/</link>
       <pubDate>Tue, 01 Sep 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/publication/person-re-identification/</guid>
+      <guid>/publication/person-re-identification/</guid>
       <description>&lt;p&gt;More detail can easily be written here using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Backtesting Strategies</title>
-      <link>http://timtrice.net/project/backtesting-strategies/</link>
+      <link>/project/backtesting-strategies/</link>
       <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/project/backtesting-strategies/</guid>
+      <guid>/project/backtesting-strategies/</guid>
       <description></description>
     </item>
     
     <item>
       <title>sandbox</title>
-      <link>http://timtrice.net/project/sandbox/</link>
+      <link>/project/sandbox/</link>
       <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/project/sandbox/</guid>
+      <guid>/project/sandbox/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Mobile visual clothing search</title>
-      <link>http://timtrice.net/publication/clothing-search/</link>
+      <link>/publication/clothing-search/</link>
       <pubDate>Mon, 01 Jul 2013 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/publication/clothing-search/</guid>
+      <guid>/publication/clothing-search/</guid>
       <description>&lt;p&gt;More detail can easily be written here using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
 </description>
     </item>

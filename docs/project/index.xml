@@ -2,47 +2,49 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Project on Tim Trice</title>
-    <link>http://timtrice.net/project/</link>
+    <link>/project/</link>
     <description>Recent content in Project on Tim Trice</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
     <lastBuildDate>Thu, 01 Jun 2017 00:00:00 +0000</lastBuildDate>
-    <atom:link href="/project/" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="/project/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>rrricanes</title>
-      <link>http://timtrice.net/project/rrricanes/</link>
+      <link>/project/rrricanes/</link>
       <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/project/rrricanes/</guid>
+      <guid>/project/rrricanes/</guid>
       <description></description>
     </item>
     
     <item>
       <title>HURDAT</title>
-      <link>http://timtrice.net/project/hurdat/</link>
+      <link>/project/hurdat/</link>
       <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/project/hurdat/</guid>
+      <guid>/project/hurdat/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Backtesting Strategies</title>
-      <link>http://timtrice.net/project/backtesting-strategies/</link>
+      <link>/project/backtesting-strategies/</link>
       <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/project/backtesting-strategies/</guid>
+      <guid>/project/backtesting-strategies/</guid>
       <description></description>
     </item>
     
     <item>
       <title>sandbox</title>
-      <link>http://timtrice.net/project/sandbox/</link>
+      <link>/project/sandbox/</link>
       <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/project/sandbox/</guid>
+      <guid>/project/sandbox/</guid>
       <description></description>
     </item>
     
