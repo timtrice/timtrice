@@ -26,7 +26,7 @@ paginate = 10
 publishDir = "docs"
 
 # Enable comments by entering your Disqus shortname
-disqusShortname = "timtrice"
+disqusShortname = "http-timtrice-net"
 
 # Enable analytics by entering your Google Analytics tracking ID
 googleAnalytics = "UA-1507390-26"
