@@ -577,10 +577,10 @@ ORDER BY
     
     <item>
       <title>Department Top Three Salaries</title>
-      <link>/2017-11-04-department-top-three-salaries/</link>
-      <pubDate>Sat, 04 Nov 2017 00:00:00 +0000</pubDate>
+      <link>/2018-01-30-department-top-three-salaries/</link>
+      <pubDate>Tue, 30 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>/2017-11-04-department-top-three-salaries/</guid>
+      <guid>/2018-01-30-department-top-three-salaries/</guid>
       <description>&lt;div id=&#34;problem&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Problem&lt;/h3&gt;
 &lt;p&gt;The &lt;code&gt;Employee&lt;/code&gt; table holds all employees. Every employee has an Id, and there is also a column for the department Id.&lt;/p&gt;
