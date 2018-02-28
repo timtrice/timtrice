@@ -10,6 +10,9 @@ options(warnPartialMatchArgs = TRUE,
         warnPartialMatchDollar = TRUE,
         warnPartialMatchAttr = TRUE)
 
+# Set directory for blogdown/hugo
+options(blogdown.hugo.dir = "/home/rstudio/bin/")
+
 update.packages(ask = FALSE)
 
 ## ---- CRAN (MRAN) packages ----
@@ -69,6 +72,4 @@ devtools::install_github("yihui/xfun", ref = "v0.1")
 install.packages("rrricanesdata",
                  repos = "https://timtrice.github.io/drat/",
                  type = "source")
-
-blogdown::install_hugo()
 
