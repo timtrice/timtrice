@@ -6,7 +6,8 @@ local({
   options(repos = r)
 })
 
-options(warnPartialMatchArgs = TRUE, warnPartialMatchDollar = TRUE,
+options(warnPartialMatchArgs = TRUE,
+        warnPartialMatchDollar = TRUE,
         warnPartialMatchAttr = TRUE)
 
 update.packages(ask = FALSE)
@@ -59,7 +60,7 @@ devtools::install_github("rstats-db/RSQLite")
 devtools::install_github("ropensci/rrricanes", ref = "v0.2.0-6")
 
 # xfun is a dependency package for blogdown v0.5
-devtools::install_github("yihui/xfun", ref = "v0.1")b
+devtools::install_github("yihui/xfun", ref = "v0.1")
 
 ## ---- Drat ----
 install.packages("rrricanesdata",
