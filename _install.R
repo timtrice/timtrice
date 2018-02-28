@@ -73,3 +73,5 @@ install.packages("rrricanesdata",
                  repos = "https://timtrice.github.io/drat/",
                  type = "source")
 
+blogdown::install_hugo()
+
