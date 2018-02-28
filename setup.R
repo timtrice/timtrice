@@ -44,6 +44,9 @@ install.packages(c("blogdown",
 devtools::install_github("r-dbi/DBI", ref = "v0.7-12",
                          build_vignettes = TRUE)
 
+devtools::install_github("r-dbi/odbc", ref = "v1.1.1",
+                         build_vignettes = TRUE)
+
 devtools::install_github("r-dbi/RMariaDB", ref = "v1.0-2",
                          build_vignettes = TRUE)
 
