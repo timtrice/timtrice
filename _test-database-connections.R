@@ -15,6 +15,18 @@ con <- dbConnect(RMariaDB::MariaDB(),
 
 dbDisconnect(con)
 
+# Microsoft Server 2017
+con <- DBI::dbConnect(odbc::odbc(),
+                      driver = Sys.getenv("mssql.driver"),
+                      database = "test_db",
+                      uid = Sys.getenv("mssql.uid"),
+                      pwd = Sys.getenv("mssql.password"),
+                      server = Sys.getenv("mssql.host"),
+                      port = Sys.getenv("mssql.ip"))
+
+DBI::dbDisconnect(con)
+
+
 #' MySQL
 library(RMySQL)
 
