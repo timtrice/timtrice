@@ -1,10 +1,10 @@
 #' MariaDB
-con <- dbConnect(RMariaDB::MariaDB(),
+con <- DBI::dbConnect(RMariaDB::MariaDB(),
                  host = Sys.getenv("mariadb.host"),
                  username = Sys.getenv("mariadb.user"),
                  password = Sys.getenv("mariadb.password"))
 
-dbDisconnect(con)
+DBI::dbDisconnect(con)
 
 # Microsoft Server 2017
 con <- DBI::dbConnect(odbc::odbc(),
@@ -19,17 +19,17 @@ DBI::dbDisconnect(con)
 
 
 #' MySQL
-con <- dbConnect(RMySQL::MySQL(),
+con <- DBI::dbConnect(RMySQL::MySQL(),
                  host = Sys.getenv("mysql.host"),
                  username = Sys.getenv("mysql.user"),
                  password = Sys.getenv("mysql.password"))
 
-dbDisconnect(con)
+DBI::dbDisconnect(con)
 
 #' Postgres
-con <- dbConnect(RPostgreSQL::PostgreSQL(),
+con <- DBI::dbConnect(RPostgreSQL::PostgreSQL(),
                  host = Sys.getenv("postgres.host"),
                  user = Sys.getenv("postgres.user"),
                  password = Sys.getenv("postgres.password"))
 
-dbDisconnect(con)
+DBI::dbDisconnect(con)
