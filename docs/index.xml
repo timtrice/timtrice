@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tim Trice on Tim Trice</title>
-    <link>http://timtrice.net/</link>
+    <link>/</link>
     <description>Recent content in Tim Trice on Tim Trice</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -11,47 +11,74 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Tom Armstrong, Narrative1</title>
-      <link>http://timtrice.net/testimonials/tom-armstrong/</link>
+      <title>Peter Haas</title>
+      <link>/testimonials/peter-haas/</link>
       <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/testimonials/tom-armstrong/</guid>
+      <guid>/testimonials/peter-haas/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tom Armstrong, Narrative1</title>
+      <link>/testimonials/tom-armstrong/</link>
+      <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/testimonials/tom-armstrong/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Donald Hatter, DRE Software</title>
-      <link>http://timtrice.net/testimonials/donald-hatter/</link>
+      <link>/testimonials/donald-hatter/</link>
       <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/testimonials/donald-hatter/</guid>
+      <guid>/testimonials/donald-hatter/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Josh Southern, Paradigm Shift Interactive</title>
-      <link>http://timtrice.net/testimonials/josh-southern/</link>
+      <link>/testimonials/josh-southern/</link>
       <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/testimonials/josh-southern/</guid>
+      <guid>/testimonials/josh-southern/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Kalie Spears</title>
+      <link>/testimonials/kalie-spears/</link>
+      <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/testimonials/kalie-spears/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Open Design</title>
-      <link>http://timtrice.net/testimonials/open-design/</link>
+      <link>/testimonials/open-design/</link>
       <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/testimonials/open-design/</guid>
+      <guid>/testimonials/open-design/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ritch Wingo</title>
+      <link>/testimonials/ritch-wingo/</link>
+      <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/testimonials/ritch-wingo/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Query Stack Overflow for Top 5 Tags and Children Posts</title>
-      <link>http://timtrice.net/query-stack-overflow-top-five-tags-top-five-posts-within-each-tag/</link>
+      <link>/query-stack-overflow-top-five-tags-top-five-posts-within-each-tag/</link>
       <pubDate>Mon, 26 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/query-stack-overflow-top-five-tags-top-five-posts-within-each-tag/</guid>
+      <guid>/query-stack-overflow-top-five-tags-top-five-posts-within-each-tag/</guid>
       <description>&lt;div id=&#34;TOC&#34;&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#requirements&#34;&gt;Requirements&lt;/a&gt;&lt;/li&gt;
@@ -577,10 +604,10 @@ ORDER BY
     
     <item>
       <title>Department Top Three Salaries</title>
-      <link>http://timtrice.net/department-top-three-salaries/</link>
+      <link>/department-top-three-salaries/</link>
       <pubDate>Tue, 30 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/department-top-three-salaries/</guid>
+      <guid>/department-top-three-salaries/</guid>
       <description>&lt;div id=&#34;problem&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Problem&lt;/h3&gt;
 &lt;p&gt;The &lt;code&gt;Employee&lt;/code&gt; table holds all employees. Every employee has an Id, and there is also a column for the department Id.&lt;/p&gt;
@@ -991,10 +1018,10 @@ ORDER BY `Employee`.`DepartmentId`, `Employee`.`Salary` DESC;&lt;/code&gt;&lt;/p
     
     <item>
       <title>Hurricane Harvey Post Storm Report</title>
-      <link>http://timtrice.net/hurricane-harvey-report/</link>
+      <link>/hurricane-harvey-report/</link>
       <pubDate>Wed, 06 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/hurricane-harvey-report/</guid>
+      <guid>/hurricane-harvey-report/</guid>
       <description>&lt;div id=&#34;TOC&#34;&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#hurricane-harvey&#34;&gt;Hurricane Harvey&lt;/a&gt;&lt;ul&gt;
@@ -1756,19 +1783,19 @@ FEW TREES WERE BLOWN DOWN. RATED EF0. &lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>rrricanes</title>
-      <link>http://timtrice.net/project/rrricanes/</link>
+      <link>/project/rrricanes/</link>
       <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/project/rrricanes/</guid>
+      <guid>/project/rrricanes/</guid>
       <description></description>
     </item>
     
     <item>
       <title>RStudio in Docker</title>
-      <link>http://timtrice.net/rstudio-in-docker/</link>
+      <link>/rstudio-in-docker/</link>
       <pubDate>Wed, 17 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/rstudio-in-docker/</guid>
+      <guid>/rstudio-in-docker/</guid>
       <description>&lt;div id=&#34;TOC&#34;&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#brief-overview-of-docker&#34;&gt;Brief Overview of Docker&lt;/a&gt;&lt;/li&gt;
@@ -1955,57 +1982,29 @@ sudo docker push timtrice/rstudio-3.3.1&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Example Talk</title>
-      <link>http://timtrice.net/talk/example-talk/</link>
+      <link>/talk/example-talk/</link>
       <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/talk/example-talk/</guid>
+      <guid>/talk/example-talk/</guid>
       <description>&lt;p&gt;Embed your slides or video here using &lt;a href=&#34;https://sourcethemes.com/academic/post/writing-markdown-latex/&#34; target=&#34;_blank&#34;&gt;shortcodes&lt;/a&gt;. Further details can easily be added using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>HURDAT</title>
-      <link>http://timtrice.net/project/hurdat/</link>
+      <link>/project/hurdat/</link>
       <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/project/hurdat/</guid>
+      <guid>/project/hurdat/</guid>
       <description></description>
     </item>
     
     <item>
       <title>A Person Re-Identification System For Mobile Devices</title>
-      <link>http://timtrice.net/publication/person-re-identification/</link>
+      <link>/publication/person-re-identification/</link>
       <pubDate>Tue, 01 Sep 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/publication/person-re-identification/</guid>
-      <description>&lt;p&gt;More detail can easily be written here using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Backtesting Strategies</title>
-      <link>http://timtrice.net/project/backtesting-strategies/</link>
-      <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
-      
-      <guid>http://timtrice.net/project/backtesting-strategies/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>sandbox</title>
-      <link>http://timtrice.net/project/sandbox/</link>
-      <pubDate>Thu, 01 Jan 2015 00:00:00 +0000</pubDate>
-      
-      <guid>http://timtrice.net/project/sandbox/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Mobile visual clothing search</title>
-      <link>http://timtrice.net/publication/clothing-search/</link>
-      <pubDate>Mon, 01 Jul 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://timtrice.net/publication/clothing-search/</guid>
+      <guid>/publication/person-re-identification/</guid>
       <description>&lt;p&gt;More detail can easily be written here using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
 </description>
     </item>
