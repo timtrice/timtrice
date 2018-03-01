@@ -280,6 +280,11 @@ titleCaseStyle = "Chicago"
   weight = 60
 
 [[menu.main]]
+  name = "Testimonials"
+  url = "#testimonials"
+  weight = 80
+
+[[menu.main]]
   name = "Contact"
   url = "#contact"
   weight = 100

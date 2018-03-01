@@ -4,10 +4,10 @@ date = "2017-06-01"
 weight = 5
 
 # Project title.
-title = "Donald Hatter, DRE Software"
+title = "Kalie Spears"
 
 # Project summary to display on homepage.
-summary = "Mr. Trice has done a great job for us on several projects. He is very responsive. We literally consider him part of the team."
+summary = "Tim is a hard worker, enjoys a challange and is willing to go the extra mile to get things done. It was a good opportunity to work with someone with so much dedication."
 
 # Tags: can be used for filtering projects.
 # Example: `tags = ["machine-learning", "deep-learning"]`
