@@ -12,8 +12,8 @@ con <- DBI::dbConnect(odbc::odbc(),
                       database = "test_db",
                       uid = Sys.getenv("mssql.uid"),
                       pwd = Sys.getenv("mssql.password"),
-                      server = Sys.getenv("mssql.host"),
-                      port = Sys.getenv("mssql.ip"))
+                      server = Sys.getenv("mssql.server"),
+                      port = Sys.getenv("mssql.port"))
 
 DBI::dbDisconnect(con)
 
