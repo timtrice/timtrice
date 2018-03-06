@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme" content="hugo-academic">
+  <meta name="generator" content="Hugo 0.37" />
+  <meta name="author" content="Tim Trice">
+
+  
+  
+  
+  
+    
+      
+    
+  
+  <meta name="description" content="Requirements Introduction Database Setup Select all data from both tables What team has the most wins? What is the combined salary for each team? What player does not belong to a team? Summary     Requirements Any database server will do. For this instance, MySQL is used.
+SELECT @@version_comment AS `Version`, @@version_compile_machine AS `Version Compile Machine`, @@innodb_version AS `InnoDB Version`, @@version_compile_os AS `Version Compile OS`;  Table 1: Server Info  Version Version Compile Machine InnoDB Version Version Compile OS    MySQL Community Server (GPL) x86_64 5.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="http://timtrice.net/answering-simple-questions-sql-coding-interviews/">
+
+  
+
+
+  
+
+  
+  
+  <meta name="theme-color" content="#0095eb">
+  
+  
+  
+  
+    
+  
+  
+    
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha512-6MXa8B6uaO18Hid6blRMetEIoPqHf7Ux1tnyIQdpt9qI5OACx7C+O3IVTr98vwGnlcg0LOLa02i9Y1HpVhlfiw==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.1/css/academicons.min.css" integrity="sha512-NThgw3XKQ1absAahW6to7Ey42uycrVvfNfyjqcFNgCmOCQ5AR4AO0SiXrN+8ZtYeappp56lk1WtvjVmEa+VR6A==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+  
+  
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700%7cRoboto:400,400italic,700%7cRoboto&#43;Mono">
+  
+  <link rel="stylesheet" href="../styles.css">
+  
+
+  
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-1507390-26', 'auto');
+      ga('require', 'eventTracker');
+      ga('require', 'outboundLinkTracker');
+      ga('require', 'urlChangeTracker');
+      ga('send', 'pageview');
+    </script>
+    <script async src="//www.google-analytics.com/analytics.js"></script>
+    
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/autotrack/2.4.1/autotrack.js" integrity="sha512-HUmooslVKj4m6OBu0OgzjXXr+QuFYy/k7eLI5jdeEy/F4RSgMn6XRWRGkFi5IFaFgy7uFTkegp3Z0XnJf3Jq+g==" crossorigin="anonymous"></script>
+    
+  
+
+  
+  <link rel="alternate" href="http://timtrice.net/index.xml" type="application/rss+xml" title="Tim Trice">
+  <link rel="feed" href="http://timtrice.net/index.xml" type="application/rss+xml" title="Tim Trice">
+  
+
+  <link rel="manifest" href="../site.webmanifest">
+  <link rel="icon" type="image/png" href="../img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="../img/icon-192.png">
+
+  <link rel="canonical" href="http://timtrice.net/answering-simple-questions-sql-coding-interviews/">
+
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@https://twitter.com/timtrice">
+  <meta property="twitter:creator" content="@https://twitter.com/timtrice">
+  
+  <meta property="og:site_name" content="Tim Trice">
+  <meta property="og:url" content="http://timtrice.net/answering-simple-questions-sql-coding-interviews/">
+  <meta property="og:title" content="Answering Simple Questions in SQL Coding Interviews | Tim Trice">
+  <meta property="og:description" content="Requirements Introduction Database Setup Select all data from both tables What team has the most wins? What is the combined salary for each team? What player does not belong to a team? Summary     Requirements Any database server will do. For this instance, MySQL is used.
+SELECT @@version_comment AS `Version`, @@version_compile_machine AS `Version Compile Machine`, @@innodb_version AS `InnoDB Version`, @@version_compile_os AS `Version Compile OS`;  Table 1: Server Info  Version Version Compile Machine InnoDB Version Version Compile OS    MySQL Community Server (GPL) x86_64 5.">
+  <meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2018-03-06T00:00:00&#43;00:00">
+  
+  <meta property="article:modified_time" content="2018-03-06T00:00:00&#43;00:00">
+  
+
+  
+
+  <title>Answering Simple Questions in SQL Coding Interviews - Tim Trice</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#toc" data-offset="71" >
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="navbar-header">
+      
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target=".navbar-collapse" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+      <a class="navbar-brand" href="../">Tim Trice</a>
+    </div>
+
+    
+    <div class="collapse navbar-collapse">
+
+      
+      
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="../#about">
+            
+            <span>About</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="../#projects">
+            
+            <span>Projects</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="../#posts">
+            
+            <span>Posts</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="../#testimonials">
+            
+            <span>Testimonials</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="../#contact">
+            
+            <span>Contact</span>
+            
+          </a>
+        </li>
+
+        
+        
+      
+
+      
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+  <div class="article-container">
+    <h1 itemprop="name">Answering Simple Questions in SQL Coding Interviews</h1>
+
+    
+
+<div class="article-metadata">
+
+  <span class="article-date">
+    
+    <time datetime="2018-03-06 00:00:00 &#43;0000 UTC" itemprop="datePublished dateModified">
+      Mar 6, 2018
+    </time>
+  </span>
+  <span itemscope itemprop="author publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Tim Trice">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    8 min read
+  </span>
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <a href="http://timtrice.net/answering-simple-questions-sql-coding-interviews/#disqus_thread"></a>
+  
+
+  
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fa fa-folder"></i>
+    
+    <a href="../categories/sql">SQL</a
+    >
+    
+  </span>
+  
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=Answering%20Simple%20Questions%20in%20SQL%20Coding%20Interviews&amp;url=http%3a%2f%2ftimtrice.net%2fanswering-simple-questions-sql-coding-interviews%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=http%3a%2f%2ftimtrice.net%2fanswering-simple-questions-sql-coding-interviews%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2ftimtrice.net%2fanswering-simple-questions-sql-coding-interviews%2f&amp;title=Answering%20Simple%20Questions%20in%20SQL%20Coding%20Interviews"
+         target="_blank" rel="noopener">
+        <i class="fa fa-linkedin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=http%3a%2f%2ftimtrice.net%2fanswering-simple-questions-sql-coding-interviews%2f&amp;title=Answering%20Simple%20Questions%20in%20SQL%20Coding%20Interviews"
+         target="_blank" rel="noopener">
+        <i class="fa fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=Answering%20Simple%20Questions%20in%20SQL%20Coding%20Interviews&amp;body=http%3a%2f%2ftimtrice.net%2fanswering-simple-questions-sql-coding-interviews%2f">
+        <i class="fa fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+
+    <div class="article-style" itemprop="articleBody">
+      <div id="TOC">
+<ul>
+<li><a href="#requirements">Requirements</a></li>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#database-setup">Database Setup</a></li>
+<li><a href="#select-all-data-from-both-tables">Select all data from both tables</a></li>
+<li><a href="#what-team-has-the-most-wins">What team has the most wins?</a></li>
+<li><a href="#what-is-the-combined-salary-for-each-team">What is the combined salary for each team?</a></li>
+<li><a href="#what-player-does-not-belong-to-a-team">What player does not belong to a team?</a></li>
+<li><a href="#summary">Summary</a></li>
+</ul>
+</div>
+
+
+<div style="position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;">
+  <iframe src="//www.youtube.com/embed/hFP2pxqz4wM" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" allowfullscreen frameborder="0" title="YouTube Video"></iframe>
+ </div>
+
+<div id="requirements" class="section level3">
+<h3>Requirements</h3>
+<p>Any database server will do. For this instance, MySQL is used.</p>
+<pre class="sql"><code>SELECT @@version_comment AS `Version`, 
+  @@version_compile_machine AS `Version Compile Machine`, 
+  @@innodb_version AS `InnoDB Version`, 
+  @@version_compile_os AS `Version Compile OS`;</code></pre>
+<div class="knitsql-table">
+<table>
+<caption><span id="tab:db-version">Table 1: </span>Server Info</caption>
+<thead>
+<tr class="header">
+<th align="left">Version</th>
+<th align="left">Version Compile Machine</th>
+<th align="left">InnoDB Version</th>
+<th align="left">Version Compile OS</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">MySQL Community Server (GPL)</td>
+<td align="left">x86_64</td>
+<td align="left">5.7.21</td>
+<td align="left">Linux</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="introduction" class="section level3">
+<h3>Introduction</h3>
+<p>In <a href="https://www.reddit.com/r/SQL/comments/7xbzph/ms_sql_interviewing_sql_developers_and_failing/">Interviewing ‘SQL Developers’ (and failling!)</a>, author <a href="https://www.reddit.com/user/pankswork">pankswork</a> frustratingly writes about having interviewers fail what seems to be very simple SQL questions at a rate of about 50%. “Is my test too hard,” they wonder.</p>
+<p>When I read this post I immeidately wondered if they were trick questions I wasn’t picking up on. They all seemed very easy to answer. They were a little tricky, but certainly not unreasonably complicated. Indeed, most commenters to the Reddit post agreed.</p>
+<p>I wanted to use the opportunity to demonstrate how to go about solving the interview problems, which are:</p>
+<ol style="list-style-type: decimal">
+<li><p>Select all data from both tables.</p></li>
+<li><p>What team has the most wins?</p></li>
+<li><p>What is the combined salary for each team?</p></li>
+<li><p>What player does not belong to a team?</p></li>
+</ol>
+<p>I slightly reworded some questions to avoid confusion but the results will still be the same, along with the methods of obtaining them.</p>
+</div>
+<div id="database-setup" class="section level3">
+<h3>Database Setup</h3>
+<p>First, I’ll create the database and build the <code>Players</code> and <code>Teams</code> tables.</p>
+<pre class="sql"><code>DROP DATABASE IF EXISTS `PlayersTeams`;</code></pre>
+<pre class="sql"><code>CREATE DATABASE `PlayersTeams`;</code></pre>
+<pre class="sql"><code>USE `PlayersTeams`;</code></pre>
+<pre class="sql"><code>CREATE TABLE `Players` (
+  `PlayerID` TINYINT(1)  UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+  `Salary`   SMALLINT(4) UNSIGNED NOT NULL, 
+  `TeamID`   TINYINT(1)  UNSIGNED NOT NULL
+  );</code></pre>
+<pre class="sql"><code>INSERT INTO `Players`
+  (`Salary`, `TeamID`)
+VALUES
+  (1500, 1), 
+  (1359, 1),
+  (1070, 1), 
+  (1165, 3), 
+  (1474, 2), 
+  (1411, 1), 
+  (1211, 2), 
+  (1334, 1), 
+  (1486, 4), 
+  (1223, 2);</code></pre>
+<pre class="sql"><code>CREATE TABLE `Teams` (
+  `TeamID`   TINYINT(1)  UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+  `TeamName` VARCHAR(10)          NOT NULL, 
+  `Wins`     TINYINT(2)  UNSIGNED NOT NULL, 
+  `Losses`   TINYINT(2)  UNSIGNED NOT NULL
+);</code></pre>
+<pre class="sql"><code>INSERT INTO `Teams`
+  (`TeamName`, `Wins`, `Losses`)
+VALUES
+  (&quot;Jets&quot;,   10,  4), 
+  (&quot;Giants&quot;,  4, 10), 
+  (&quot;Eagles&quot;,  7,  7);</code></pre>
+</div>
+<div id="select-all-data-from-both-tables" class="section level3">
+<h3>Select all data from both tables</h3>
+<p>What we are being asked to do here is effectly do a <code>SELECT *</code> from both tables which we join on some type of <code>JOIN</code> statement; but, which one? The dataset is small enough for us to easily see we should have 10 rows in final result set.</p>
+<p>If we use a <code>LEFT JOIN</code> with <code>Players</code> as the left table, <code>Teams</code> as the right table and <code>TeamID</code> as the foreign key, then every record within <code>Players</code> will be returned along with associated <code>Teams</code>. If we have an instance of a player that does not have an associated team then that record will be NULL.</p>
+<pre class="sql"><code>SELECT 
+  * 
+FROM 
+  `Players`
+LEFT JOIN 
+  `Teams`
+ON 
+  `Teams`.`TeamID` = `Players`.`TeamID`
+ORDER BY 
+  `Players`.`PlayerID`;</code></pre>
+<div class="knitsql-table">
+<table>
+<caption><span id="tab:query-1">Table 2: </span>10 records</caption>
+<thead>
+<tr class="header">
+<th align="left">PlayerID</th>
+<th align="right">Salary</th>
+<th align="right">TeamID</th>
+<th align="right">TeamID</th>
+<th align="left">TeamName</th>
+<th align="right">Wins</th>
+<th align="right">Losses</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="right">1500</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">Jets</td>
+<td align="right">10</td>
+<td align="right">4</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="right">1359</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">Jets</td>
+<td align="right">10</td>
+<td align="right">4</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="right">1070</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">Jets</td>
+<td align="right">10</td>
+<td align="right">4</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="right">1165</td>
+<td align="right">3</td>
+<td align="right">3</td>
+<td align="left">Eagles</td>
+<td align="right">7</td>
+<td align="right">7</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="right">1474</td>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="left">Giants</td>
+<td align="right">4</td>
+<td align="right">10</td>
+</tr>
+<tr class="even">
+<td align="left">6</td>
+<td align="right">1411</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">Jets</td>
+<td align="right">10</td>
+<td align="right">4</td>
+</tr>
+<tr class="odd">
+<td align="left">7</td>
+<td align="right">1211</td>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="left">Giants</td>
+<td align="right">4</td>
+<td align="right">10</td>
+</tr>
+<tr class="even">
+<td align="left">8</td>
+<td align="right">1334</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">Jets</td>
+<td align="right">10</td>
+<td align="right">4</td>
+</tr>
+<tr class="odd">
+<td align="left">9</td>
+<td align="right">1486</td>
+<td align="right">4</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="left">10</td>
+<td align="right">1223</td>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="left">Giants</td>
+<td align="right">4</td>
+<td align="right">10</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>If we were to use a <code>RIGHT JOIN</code> then our server would instead take all <code>Teams</code>.<code>TeamID</code> and find corresponding <code>Players</code> per id. However, we have a <code>Player</code>.<code>TeamID</code> value of 4 which does not exist in <code>Teams</code>.<code>TeamID</code>. Therefore, our result set would only contain nine records.</p>
+<pre class="sql"><code>SELECT 
+  * 
+FROM 
+  `Players`
+RIGHT JOIN 
+  `Teams`
+ON 
+  `Teams`.`TeamID` = `Players`.`TeamID`
+ORDER BY 
+  `Players`.`PlayerID`;</code></pre>
+<div class="knitsql-table">
+<table>
+<caption><span id="tab:query-2">Table 3: </span>9 records</caption>
+<thead>
+<tr class="header">
+<th align="right">PlayerID</th>
+<th align="right">Salary</th>
+<th align="right">TeamID</th>
+<th align="right">TeamID</th>
+<th align="left">TeamName</th>
+<th align="right">Wins</th>
+<th align="right">Losses</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">1500</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">Jets</td>
+<td align="right">10</td>
+<td align="right">4</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="right">1359</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">Jets</td>
+<td align="right">10</td>
+<td align="right">4</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="right">1070</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">Jets</td>
+<td align="right">10</td>
+<td align="right">4</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="right">1165</td>
+<td align="right">3</td>
+<td align="right">3</td>
+<td align="left">Eagles</td>
+<td align="right">7</td>
+<td align="right">7</td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="right">1474</td>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="left">Giants</td>
+<td align="right">4</td>
+<td align="right">10</td>
+</tr>
+<tr class="even">
+<td align="right">6</td>
+<td align="right">1411</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">Jets</td>
+<td align="right">10</td>
+<td align="right">4</td>
+</tr>
+<tr class="odd">
+<td align="right">7</td>
+<td align="right">1211</td>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="left">Giants</td>
+<td align="right">4</td>
+<td align="right">10</td>
+</tr>
+<tr class="even">
+<td align="right">8</td>
+<td align="right">1334</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">Jets</td>
+<td align="right">10</td>
+<td align="right">4</td>
+</tr>
+<tr class="odd">
+<td align="right">10</td>
+<td align="right">1223</td>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="left">Giants</td>
+<td align="right">4</td>
+<td align="right">10</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>However, if we used <code>RIGHT JOIN</code> <strong>and</strong> reversed the order of our tables (make <code>Teams</code> our primary table, joining <code>Players</code>) then we would get the correct results.</p>
+<pre class="sql"><code>SELECT 
+  * 
+FROM 
+  `Teams`
+RIGHT JOIN
+  `Players`
+ON 
+  `Players`.`TeamID` = `Teams`.`TeamID`
+ORDER BY
+  `Players`.`PlayerID`;</code></pre>
+<div class="knitsql-table">
+<table>
+<caption><span id="tab:query-3">Table 4: </span>10 records</caption>
+<thead>
+<tr class="header">
+<th align="right">TeamID</th>
+<th align="left">TeamName</th>
+<th align="right">Wins</th>
+<th align="right">Losses</th>
+<th align="right">PlayerID</th>
+<th align="right">Salary</th>
+<th align="right">TeamID</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">Jets</td>
+<td align="right">10</td>
+<td align="right">4</td>
+<td align="right">1</td>
+<td align="right">1500</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">Jets</td>
+<td align="right">10</td>
+<td align="right">4</td>
+<td align="right">2</td>
+<td align="right">1359</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">Jets</td>
+<td align="right">10</td>
+<td align="right">4</td>
+<td align="right">3</td>
+<td align="right">1070</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="right">3</td>
+<td align="left">Eagles</td>
+<td align="right">7</td>
+<td align="right">7</td>
+<td align="right">4</td>
+<td align="right">1165</td>
+<td align="right">3</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="left">Giants</td>
+<td align="right">4</td>
+<td align="right">10</td>
+<td align="right">5</td>
+<td align="right">1474</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">Jets</td>
+<td align="right">10</td>
+<td align="right">4</td>
+<td align="right">6</td>
+<td align="right">1411</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="left">Giants</td>
+<td align="right">4</td>
+<td align="right">10</td>
+<td align="right">7</td>
+<td align="right">1211</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">Jets</td>
+<td align="right">10</td>
+<td align="right">4</td>
+<td align="right">8</td>
+<td align="right">1334</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">9</td>
+<td align="right">1486</td>
+<td align="right">4</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">Giants</td>
+<td align="right">4</td>
+<td align="right">10</td>
+<td align="right">10</td>
+<td align="right">1223</td>
+<td align="right">2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Notice also how the column order of our result set changes. In the <a href="#tab:query-2">previous RIGHT JOIN</a>, the associated columns from <code>Teams</code> were on the right side. Now, they are on the left. This is our visual cue of the query we created.</p>
+<p>I suspect what’s happening here is those doing the interview get twisted up on the differences not recognizing they’re missing some data.</p>
+</div>
+<div id="what-team-has-the-most-wins" class="section level3">
+<h3>What team has the most wins?</h3>
+<p>This question does not require us to do fancy joins. All of the data we need is contained within the <code>Teams</code> table. One way some may be going about this problem is simply using <code>MAX()</code>.</p>
+<pre class="sql"><code>SELECT
+  MAX(`Wins`)
+FROM
+  `Teams`;</code></pre>
+<div class="knitsql-table">
+<table>
+<caption><span id="tab:query-4">Table 5: </span>1 records</caption>
+<thead>
+<tr class="header">
+<th align="left">MAX(<code>Wins</code>)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">10</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Notice though our question asked “What team”, not “what is the maximum number of Wins”. We need to return the <code>TeamName</code> (or <code>TeamID</code>). But, you cannot just add this column into the <code>SELECT</code> statement without issue.</p>
+<pre class="sql"><code>SELECT
+  `TeamName`, 
+  MAX(`Wins`)
+FROM
+  `Teams`;</code></pre>
+<p>This query will generate an error on most all newer database servers. In this case, what MySQL is telling us is that we either must remove <code>TeamName</code> from the query or move it to a <code>GROUP BY</code> statement. See <a href="https://dev.mysql.com/doc/refman/5.7/en/group-by-handling.html">MySQL Handling of GROUP BY</a> for more info.</p>
+<p>For our question, all of this is unnecessary anyway. We want to find the maximum <code>Wins</code> and return the corresponding <code>TeamName</code>. Just sort the dataset by <code>Wins</code>, largest to smallest, and return the first record.</p>
+<pre class="sql"><code>SELECT
+  `TeamName`
+FROM
+  `Teams`
+ORDER BY 
+  `Wins` DESC
+LIMIT
+  1;</code></pre>
+<div class="knitsql-table">
+<table>
+<caption><span id="tab:query-5">Table 6: </span>1 records</caption>
+<thead>
+<tr class="header">
+<th align="left">TeamName</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Jets</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="what-is-the-combined-salary-for-each-team" class="section level3">
+<h3>What is the combined salary for each team?</h3>
+<p>In the original post, this question was phrased as “How much does each team make?” The author acknowledged this was intended to be a trick question; the teams do not have a “profit” or “revenue”-type column.</p>
+<p>However, every player does have a <code>Salary</code> and it is reasonable to assume the question is most likely looking to find the total salary of all players per team.</p>
+<p>We can do the first part of this query very simply by summing <code>Salary</code> with a grouping on <code>TeamID</code>.</p>
+<pre class="sql"><code>SELECT
+  SUM(`Salary`), 
+  `TeamID`
+FROM 
+  `Players`
+GROUP BY
+  `TeamID`;</code></pre>
+<div class="knitsql-table">
+<table>
+<caption><span id="tab:query-6">Table 7: </span>4 records</caption>
+<thead>
+<tr class="header">
+<th align="right">SUM(<code>Salary</code>)</th>
+<th align="right">TeamID</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">6674</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="right">3908</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="right">1165</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="right">1486</td>
+<td align="right">4</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Realize we would have recevied the group-by-handling error again had I not used the <code>GROUP BY</code> statement; this applies for <code>SUM</code> as well.</p>
+<p>At this point I now have the total <code>Salary</code> per team. And, yes, I can probably just leave it at that - question answered. But, what fun is that?</p>
+<p>Let’s get the <code>TeamName</code>. To do this I <code>LEFT JOIN</code> <code>Teams</code> again by <code>TeamID</code>. I also modify my original <code>SELECT</code> statement to return <code>TeamName</code> rather than <code>TeamID</code>. Finally, I modify the <code>GROUP BY</code> clause to append the table name. Without this last correction my query will return an Error 1052 that <code>TeamID</code> is ambiguous.</p>
+<pre class="sql"><code>SELECT
+  SUM(`Salary`), 
+  `Teams`.`TeamName`
+FROM 
+  `Players`
+LEFT JOIN
+  `Teams`
+ON 
+  `Teams`.`TeamID` = `Players`.`TeamID`
+GROUP BY
+  `Players`.`TeamID`;</code></pre>
+<div class="knitsql-table">
+<table>
+<caption><span id="tab:query-7">Table 8: </span>4 records</caption>
+<thead>
+<tr class="header">
+<th align="right">SUM(<code>Salary</code>)</th>
+<th align="left">TeamName</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">6674</td>
+<td align="left">Jets</td>
+</tr>
+<tr class="even">
+<td align="right">3908</td>
+<td align="left">Giants</td>
+</tr>
+<tr class="odd">
+<td align="right">1165</td>
+<td align="left">Eagles</td>
+</tr>
+<tr class="even">
+<td align="right">1486</td>
+<td align="left">NA</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="what-player-does-not-belong-to-a-team" class="section level3">
+<h3>What player does not belong to a team?</h3>
+<p>This question, I think, is the easiest of all. Actually, we already answered it when solving our first question (<a href="#tab:query-1">2</a>). Recall we had one record of NULL values; this was for a player in our <code>Players</code> table that did not have a corresponding team in the <code>Teams</code> table.</p>
+<p>This was our query for those results:</p>
+<pre class="r"><code>SELECT 
+  * 
+FROM 
+  `Players`
+LEFT JOIN 
+  `Teams`
+ON 
+  `Teams`.`TeamID` = `Players`.`TeamID`
+ORDER BY 
+  `Players`.`PlayerID`;</code></pre>
+<p>What I need to do here is return only the records where <code>Teams</code>.<code>TeamID</code> IS NULL. And, since the question is asking for “player” and not any additional information, we should only return <code>Players</code>.<code>PlayerID</code>. Our final query is as follows:</p>
+<pre class="sql"><code>SELECT 
+  `Players`.`PlayerID`
+FROM 
+  `Players`
+LEFT JOIN 
+  `Teams`
+ON 
+  `Teams`.`TeamID` = `Players`.`TeamID`
+WHERE
+  `Teams`.`TeamID` IS NULL
+ORDER BY 
+  `Players`.`PlayerID`;</code></pre>
+<div class="knitsql-table">
+<table>
+<caption><span id="tab:query-8">Table 9: </span>1 records</caption>
+<thead>
+<tr class="header">
+<th align="left">PlayerID</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">9</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="summary" class="section level3">
+<h3>Summary</h3>
+<p>I think if 50% of people are failing this first step then they have seriously manipulated their resume or perhaps other screening methods need to be improved. I could understand if occasionally someone tripped up on one of these questions. But, not half of an interview class.</p>
+<p>Most importantly for those doing code interviews, in my opinion, is to not just study code and how to perform certain tasks but also understand the errors generated and how to resolve them. When working on this article I made an error and it took me 30 minutes to figure out what it was; I had written “UNISIGNED”, rather than “UNSIGNED”.</p>
+<p>People will make mistakes and there’s nothing wrong with that. The best we can do on these job interviews is to just try to prepare the best we can.</p>
+<ul>
+<li><p><a href="https://www.reddit.com/r/SQL/comments/7xbzph/ms_sql_interviewing_sql_developers_and_failing/">Interviewing ‘SQL Developers’ (and failling!)</a></p></li>
+<li><p><a href="https://dev.mysql.com/doc/refman/5.7/en/group-by-handling.html">MySQL Handling of GROUP BY</a></p></li>
+</ul>
+</div>
+
+    </div>
+
+    
+
+
+<div class="article-tags">
+  
+  <a class="btn btn-primary btn-outline" href="../tags/select">SELECT</a>
+  
+  <a class="btn btn-primary btn-outline" href="../tags/left-join">LEFT JOIN</a>
+  
+  <a class="btn btn-primary btn-outline" href="../tags/max">MAX</a>
+  
+  <a class="btn btn-primary btn-outline" href="../tags/sum">SUM</a>
+  
+  <a class="btn btn-primary btn-outline" href="../tags/group-by">GROUP BY</a>
+  
+</div>
+
+
+
+
+    
+    
+    <div class="article-widget">
+      <div class="hr-light"></div>
+      <h3>Related</h3>
+      <ul>
+        
+        <li><a href="../query-stack-overflow-top-five-tags-top-five-posts-within-each-tag/">Query Stack Overflow for Top 5 Tags and Children Posts</a></li>
+        
+        <li><a href="../department-top-three-salaries/">Department Top Three Salaries</a></li>
+        
+      </ul>
+    </div>
+    
+
+    
+    <div class="article-widget">
+      <div class="post-nav">
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Previous</div>
+    <a href="http://timtrice.net/query-stack-overflow-top-five-tags-top-five-posts-within-each-tag/" rel="prev">Query Stack Overflow for Top 5 Tags and Children Posts</a>
+  </div>
+  
+</div>
+
+    </div>
+    
+
+    
+<section id="comments">
+  <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "http-timtrice-net" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+
+  </div>
+</article>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">
+
+      &copy; 2018 &middot; 
+
+      Powered by the
+      <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+      <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+      <span class="pull-right" aria-hidden="true">
+        <a href="#" id="back_to_top">
+          <span class="button_icon">
+            <i class="fa fa-chevron-up fa-2x"></i>
+          </span>
+        </a>
+      </span>
+
+    </p>
+  </div>
+</footer>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close btn-large" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Cite</h4>
+      </div>
+      <div>
+        <pre><code class="modal-body tex"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-primary btn-outline js-copy-cite" href="#" target="_blank">
+          <i class="fa fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-primary btn-outline js-download-cite" href="#" target="_blank">
+          <i class="fa fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+    <script id="dsq-count-scr" src="//http-timtrice-net.disqus.com/count.js" async></script>
+    
+
+    
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha512-3P8rXCuGJdNZOnUx/03c1jOTnMn3rP63nBip5gOP2qmUh5YAdVAvFZ1E+QLZZbC1rtMrQb+mah3AfYW11RUrWA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha512-iztkobsvnjKfAtTNdHkGVjAYTrrtlC7mGp/54c40wowO7LhURYl3gVzzcEqGl/qKXQltJ2HwMrdLcNUdo+N/RQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+    
+    
+    <script src="../js/hugo-academic.js"></script>
+    
+
+    
+    
+      
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+      
+
+      
+
+      
+
+      <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+
+  </body>
+</html>
+

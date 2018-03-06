@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tim Trice on Tim Trice</title>
-    <link>/</link>
+    <link>http://timtrice.net/</link>
     <description>Recent content in Tim Trice on Tim Trice</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -12,73 +12,725 @@
     
     <item>
       <title>Peter Haas</title>
-      <link>/testimonials/peter-haas/</link>
+      <link>http://timtrice.net/testimonials/peter-haas/</link>
       <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>/testimonials/peter-haas/</guid>
+      <guid>http://timtrice.net/testimonials/peter-haas/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Tom Armstrong, Narrative1</title>
-      <link>/testimonials/tom-armstrong/</link>
+      <link>http://timtrice.net/testimonials/tom-armstrong/</link>
       <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>/testimonials/tom-armstrong/</guid>
+      <guid>http://timtrice.net/testimonials/tom-armstrong/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Donald Hatter, DRE Software</title>
-      <link>/testimonials/donald-hatter/</link>
+      <link>http://timtrice.net/testimonials/donald-hatter/</link>
       <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>/testimonials/donald-hatter/</guid>
+      <guid>http://timtrice.net/testimonials/donald-hatter/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Josh Southern, Paradigm Shift Interactive</title>
-      <link>/testimonials/josh-southern/</link>
+      <link>http://timtrice.net/testimonials/josh-southern/</link>
       <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>/testimonials/josh-southern/</guid>
+      <guid>http://timtrice.net/testimonials/josh-southern/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Kalie Spears</title>
-      <link>/testimonials/kalie-spears/</link>
+      <link>http://timtrice.net/testimonials/kalie-spears/</link>
       <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>/testimonials/kalie-spears/</guid>
+      <guid>http://timtrice.net/testimonials/kalie-spears/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Open Design</title>
-      <link>/testimonials/open-design/</link>
+      <link>http://timtrice.net/testimonials/open-design/</link>
       <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>/testimonials/open-design/</guid>
+      <guid>http://timtrice.net/testimonials/open-design/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Ritch Wingo</title>
-      <link>/testimonials/ritch-wingo/</link>
+      <link>http://timtrice.net/testimonials/ritch-wingo/</link>
       <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>/testimonials/ritch-wingo/</guid>
+      <guid>http://timtrice.net/testimonials/ritch-wingo/</guid>
       <description></description>
     </item>
     
     <item>
+      <title>Answering Simple Questions in SQL Coding Interviews</title>
+      <link>http://timtrice.net/answering-simple-questions-sql-coding-interviews/</link>
+      <pubDate>Tue, 06 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://timtrice.net/answering-simple-questions-sql-coding-interviews/</guid>
+      <description>&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#requirements&#34;&gt;Requirements&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#introduction&#34;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#database-setup&#34;&gt;Database Setup&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#select-all-data-from-both-tables&#34;&gt;Select all data from both tables&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#what-team-has-the-most-wins&#34;&gt;What team has the most wins?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#what-is-the-combined-salary-for-each-team&#34;&gt;What is the combined salary for each team?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#what-player-does-not-belong-to-a-team&#34;&gt;What player does not belong to a team?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#summary&#34;&gt;Summary&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;//www.youtube.com/embed/hFP2pxqz4wM&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%;&#34; allowfullscreen frameborder=&#34;0&#34; title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+ &lt;/div&gt;
+
+&lt;div id=&#34;requirements&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Requirements&lt;/h3&gt;
+&lt;p&gt;Any database server will do. For this instance, MySQL is used.&lt;/p&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;SELECT @@version_comment AS `Version`, 
+  @@version_compile_machine AS `Version Compile Machine`, 
+  @@innodb_version AS `InnoDB Version`, 
+  @@version_compile_os AS `Version Compile OS`;&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;knitsql-table&#34;&gt;
+&lt;table&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:db-version&#34;&gt;Table 1: &lt;/span&gt;Server Info&lt;/caption&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;Version&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Version Compile Machine&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;InnoDB Version&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Version Compile OS&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;MySQL Community Server (GPL)&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;x86_64&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;5.7.21&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Linux&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;introduction&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Introduction&lt;/h3&gt;
+&lt;p&gt;In &lt;a href=&#34;https://www.reddit.com/r/SQL/comments/7xbzph/ms_sql_interviewing_sql_developers_and_failing/&#34;&gt;Interviewing ‘SQL Developers’ (and failling!)&lt;/a&gt;, author &lt;a href=&#34;https://www.reddit.com/user/pankswork&#34;&gt;pankswork&lt;/a&gt; frustratingly writes about having interviewers fail what seems to be very simple SQL questions at a rate of about 50%. “Is my test too hard,” they wonder.&lt;/p&gt;
+&lt;p&gt;When I read this post I immeidately wondered if they were trick questions I wasn’t picking up on. They all seemed very easy to answer. They were a little tricky, but certainly not unreasonably complicated. Indeed, most commenters to the Reddit post agreed.&lt;/p&gt;
+&lt;p&gt;I wanted to use the opportunity to demonstrate how to go about solving the interview problems, which are:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;Select all data from both tables.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;What team has the most wins?&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;What is the combined salary for each team?&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;What player does not belong to a team?&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;I slightly reworded some questions to avoid confusion but the results will still be the same, along with the methods of obtaining them.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;database-setup&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Database Setup&lt;/h3&gt;
+&lt;p&gt;First, I’ll create the database and build the &lt;code&gt;Players&lt;/code&gt; and &lt;code&gt;Teams&lt;/code&gt; tables.&lt;/p&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;DROP DATABASE IF EXISTS `PlayersTeams`;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;CREATE DATABASE `PlayersTeams`;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;USE `PlayersTeams`;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;CREATE TABLE `Players` (
+  `PlayerID` TINYINT(1)  UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+  `Salary`   SMALLINT(4) UNSIGNED NOT NULL, 
+  `TeamID`   TINYINT(1)  UNSIGNED NOT NULL
+  );&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;INSERT INTO `Players`
+  (`Salary`, `TeamID`)
+VALUES
+  (1500, 1), 
+  (1359, 1),
+  (1070, 1), 
+  (1165, 3), 
+  (1474, 2), 
+  (1411, 1), 
+  (1211, 2), 
+  (1334, 1), 
+  (1486, 4), 
+  (1223, 2);&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;CREATE TABLE `Teams` (
+  `TeamID`   TINYINT(1)  UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+  `TeamName` VARCHAR(10)          NOT NULL, 
+  `Wins`     TINYINT(2)  UNSIGNED NOT NULL, 
+  `Losses`   TINYINT(2)  UNSIGNED NOT NULL
+);&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;INSERT INTO `Teams`
+  (`TeamName`, `Wins`, `Losses`)
+VALUES
+  (&amp;quot;Jets&amp;quot;,   10,  4), 
+  (&amp;quot;Giants&amp;quot;,  4, 10), 
+  (&amp;quot;Eagles&amp;quot;,  7,  7);&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;select-all-data-from-both-tables&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Select all data from both tables&lt;/h3&gt;
+&lt;p&gt;What we are being asked to do here is effectly do a &lt;code&gt;SELECT *&lt;/code&gt; from both tables which we join on some type of &lt;code&gt;JOIN&lt;/code&gt; statement; but, which one? The dataset is small enough for us to easily see we should have 10 rows in final result set.&lt;/p&gt;
+&lt;p&gt;If we use a &lt;code&gt;LEFT JOIN&lt;/code&gt; with &lt;code&gt;Players&lt;/code&gt; as the left table, &lt;code&gt;Teams&lt;/code&gt; as the right table and &lt;code&gt;TeamID&lt;/code&gt; as the foreign key, then every record within &lt;code&gt;Players&lt;/code&gt; will be returned along with associated &lt;code&gt;Teams&lt;/code&gt;. If we have an instance of a player that does not have an associated team then that record will be NULL.&lt;/p&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;SELECT 
+  * 
+FROM 
+  `Players`
+LEFT JOIN 
+  `Teams`
+ON 
+  `Teams`.`TeamID` = `Players`.`TeamID`
+ORDER BY 
+  `Players`.`PlayerID`;&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;knitsql-table&#34;&gt;
+&lt;table&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:query-1&#34;&gt;Table 2: &lt;/span&gt;10 records&lt;/caption&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;PlayerID&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Salary&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;TeamID&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;TeamID&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;TeamName&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Wins&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Losses&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1500&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Jets&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;10&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1359&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Jets&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;10&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1070&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Jets&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;10&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;4&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1165&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Eagles&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;7&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;7&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;5&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1474&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Giants&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;10&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;6&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1411&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Jets&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;10&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;7&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1211&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Giants&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;10&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;8&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1334&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Jets&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;10&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;9&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1486&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;NA&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;NA&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;NA&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;NA&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;10&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1223&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Giants&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;10&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;p&gt;If we were to use a &lt;code&gt;RIGHT JOIN&lt;/code&gt; then our server would instead take all &lt;code&gt;Teams&lt;/code&gt;.&lt;code&gt;TeamID&lt;/code&gt; and find corresponding &lt;code&gt;Players&lt;/code&gt; per id. However, we have a &lt;code&gt;Player&lt;/code&gt;.&lt;code&gt;TeamID&lt;/code&gt; value of 4 which does not exist in &lt;code&gt;Teams&lt;/code&gt;.&lt;code&gt;TeamID&lt;/code&gt;. Therefore, our result set would only contain nine records.&lt;/p&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;SELECT 
+  * 
+FROM 
+  `Players`
+RIGHT JOIN 
+  `Teams`
+ON 
+  `Teams`.`TeamID` = `Players`.`TeamID`
+ORDER BY 
+  `Players`.`PlayerID`;&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;knitsql-table&#34;&gt;
+&lt;table&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:query-2&#34;&gt;Table 3: &lt;/span&gt;9 records&lt;/caption&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;right&#34;&gt;PlayerID&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Salary&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;TeamID&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;TeamID&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;TeamName&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Wins&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Losses&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1500&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Jets&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;10&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1359&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Jets&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;10&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1070&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Jets&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;10&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1165&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Eagles&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;7&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;7&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;5&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1474&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Giants&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;10&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;6&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1411&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Jets&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;10&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;7&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1211&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Giants&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;10&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;8&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1334&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Jets&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;10&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;10&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1223&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Giants&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;10&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;p&gt;However, if we used &lt;code&gt;RIGHT JOIN&lt;/code&gt; &lt;strong&gt;and&lt;/strong&gt; reversed the order of our tables (make &lt;code&gt;Teams&lt;/code&gt; our primary table, joining &lt;code&gt;Players&lt;/code&gt;) then we would get the correct results.&lt;/p&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;SELECT 
+  * 
+FROM 
+  `Teams`
+RIGHT JOIN
+  `Players`
+ON 
+  `Players`.`TeamID` = `Teams`.`TeamID`
+ORDER BY
+  `Players`.`PlayerID`;&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;knitsql-table&#34;&gt;
+&lt;table&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:query-3&#34;&gt;Table 4: &lt;/span&gt;10 records&lt;/caption&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;right&#34;&gt;TeamID&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;TeamName&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Wins&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Losses&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;PlayerID&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;Salary&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;TeamID&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Jets&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;10&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1500&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Jets&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;10&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1359&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Jets&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;10&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1070&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Eagles&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;7&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;7&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1165&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Giants&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;10&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;5&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1474&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Jets&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;10&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;6&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1411&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Giants&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;10&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;7&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1211&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Jets&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;10&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;8&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1334&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;NA&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;NA&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;NA&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;NA&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;9&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1486&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Giants&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;10&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;10&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1223&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;p&gt;Notice also how the column order of our result set changes. In the &lt;a href=&#34;#tab:query-2&#34;&gt;previous RIGHT JOIN&lt;/a&gt;, the associated columns from &lt;code&gt;Teams&lt;/code&gt; were on the right side. Now, they are on the left. This is our visual cue of the query we created.&lt;/p&gt;
+&lt;p&gt;I suspect what’s happening here is those doing the interview get twisted up on the differences not recognizing they’re missing some data.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;what-team-has-the-most-wins&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;What team has the most wins?&lt;/h3&gt;
+&lt;p&gt;This question does not require us to do fancy joins. All of the data we need is contained within the &lt;code&gt;Teams&lt;/code&gt; table. One way some may be going about this problem is simply using &lt;code&gt;MAX()&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;SELECT
+  MAX(`Wins`)
+FROM
+  `Teams`;&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;knitsql-table&#34;&gt;
+&lt;table&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:query-4&#34;&gt;Table 5: &lt;/span&gt;1 records&lt;/caption&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;MAX(&lt;code&gt;Wins&lt;/code&gt;)&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;10&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;p&gt;Notice though our question asked “What team”, not “what is the maximum number of Wins”. We need to return the &lt;code&gt;TeamName&lt;/code&gt; (or &lt;code&gt;TeamID&lt;/code&gt;). But, you cannot just add this column into the &lt;code&gt;SELECT&lt;/code&gt; statement without issue.&lt;/p&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;SELECT
+  `TeamName`, 
+  MAX(`Wins`)
+FROM
+  `Teams`;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This query will generate an error on most all newer database servers. In this case, what MySQL is telling us is that we either must remove &lt;code&gt;TeamName&lt;/code&gt; from the query or move it to a &lt;code&gt;GROUP BY&lt;/code&gt; statement. See &lt;a href=&#34;https://dev.mysql.com/doc/refman/5.7/en/group-by-handling.html&#34;&gt;MySQL Handling of GROUP BY&lt;/a&gt; for more info.&lt;/p&gt;
+&lt;p&gt;For our question, all of this is unnecessary anyway. We want to find the maximum &lt;code&gt;Wins&lt;/code&gt; and return the corresponding &lt;code&gt;TeamName&lt;/code&gt;. Just sort the dataset by &lt;code&gt;Wins&lt;/code&gt;, largest to smallest, and return the first record.&lt;/p&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;SELECT
+  `TeamName`
+FROM
+  `Teams`
+ORDER BY 
+  `Wins` DESC
+LIMIT
+  1;&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;knitsql-table&#34;&gt;
+&lt;table&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:query-5&#34;&gt;Table 6: &lt;/span&gt;1 records&lt;/caption&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;TeamName&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Jets&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;what-is-the-combined-salary-for-each-team&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;What is the combined salary for each team?&lt;/h3&gt;
+&lt;p&gt;In the original post, this question was phrased as “How much does each team make?” The author acknowledged this was intended to be a trick question; the teams do not have a “profit” or “revenue”-type column.&lt;/p&gt;
+&lt;p&gt;However, every player does have a &lt;code&gt;Salary&lt;/code&gt; and it is reasonable to assume the question is most likely looking to find the total salary of all players per team.&lt;/p&gt;
+&lt;p&gt;We can do the first part of this query very simply by summing &lt;code&gt;Salary&lt;/code&gt; with a grouping on &lt;code&gt;TeamID&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;SELECT
+  SUM(`Salary`), 
+  `TeamID`
+FROM 
+  `Players`
+GROUP BY
+  `TeamID`;&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;knitsql-table&#34;&gt;
+&lt;table&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:query-6&#34;&gt;Table 7: &lt;/span&gt;4 records&lt;/caption&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;right&#34;&gt;SUM(&lt;code&gt;Salary&lt;/code&gt;)&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;TeamID&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;6674&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;3908&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;1165&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;1486&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;p&gt;Realize we would have recevied the group-by-handling error again had I not used the &lt;code&gt;GROUP BY&lt;/code&gt; statement; this applies for &lt;code&gt;SUM&lt;/code&gt; as well.&lt;/p&gt;
+&lt;p&gt;At this point I now have the total &lt;code&gt;Salary&lt;/code&gt; per team. And, yes, I can probably just leave it at that - question answered. But, what fun is that?&lt;/p&gt;
+&lt;p&gt;Let’s get the &lt;code&gt;TeamName&lt;/code&gt;. To do this I &lt;code&gt;LEFT JOIN&lt;/code&gt; &lt;code&gt;Teams&lt;/code&gt; again by &lt;code&gt;TeamID&lt;/code&gt;. I also modify my original &lt;code&gt;SELECT&lt;/code&gt; statement to return &lt;code&gt;TeamName&lt;/code&gt; rather than &lt;code&gt;TeamID&lt;/code&gt;. Finally, I modify the &lt;code&gt;GROUP BY&lt;/code&gt; clause to append the table name. Without this last correction my query will return an Error 1052 that &lt;code&gt;TeamID&lt;/code&gt; is ambiguous.&lt;/p&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;SELECT
+  SUM(`Salary`), 
+  `Teams`.`TeamName`
+FROM 
+  `Players`
+LEFT JOIN
+  `Teams`
+ON 
+  `Teams`.`TeamID` = `Players`.`TeamID`
+GROUP BY
+  `Players`.`TeamID`;&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;knitsql-table&#34;&gt;
+&lt;table&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:query-7&#34;&gt;Table 8: &lt;/span&gt;4 records&lt;/caption&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;right&#34;&gt;SUM(&lt;code&gt;Salary&lt;/code&gt;)&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;TeamName&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;6674&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Jets&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;3908&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Giants&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;1165&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Eagles&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;right&#34;&gt;1486&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;NA&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;what-player-does-not-belong-to-a-team&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;What player does not belong to a team?&lt;/h3&gt;
+&lt;p&gt;This question, I think, is the easiest of all. Actually, we already answered it when solving our first question (&lt;a href=&#34;#tab:query-1&#34;&gt;2&lt;/a&gt;). Recall we had one record of NULL values; this was for a player in our &lt;code&gt;Players&lt;/code&gt; table that did not have a corresponding team in the &lt;code&gt;Teams&lt;/code&gt; table.&lt;/p&gt;
+&lt;p&gt;This was our query for those results:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;SELECT 
+  * 
+FROM 
+  `Players`
+LEFT JOIN 
+  `Teams`
+ON 
+  `Teams`.`TeamID` = `Players`.`TeamID`
+ORDER BY 
+  `Players`.`PlayerID`;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;What I need to do here is return only the records where &lt;code&gt;Teams&lt;/code&gt;.&lt;code&gt;TeamID&lt;/code&gt; IS NULL. And, since the question is asking for “player” and not any additional information, we should only return &lt;code&gt;Players&lt;/code&gt;.&lt;code&gt;PlayerID&lt;/code&gt;. Our final query is as follows:&lt;/p&gt;
+&lt;pre class=&#34;sql&#34;&gt;&lt;code&gt;SELECT 
+  `Players`.`PlayerID`
+FROM 
+  `Players`
+LEFT JOIN 
+  `Teams`
+ON 
+  `Teams`.`TeamID` = `Players`.`TeamID`
+WHERE
+  `Teams`.`TeamID` IS NULL
+ORDER BY 
+  `Players`.`PlayerID`;&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;knitsql-table&#34;&gt;
+&lt;table&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:query-8&#34;&gt;Table 9: &lt;/span&gt;1 records&lt;/caption&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;PlayerID&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;9&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;summary&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Summary&lt;/h3&gt;
+&lt;p&gt;I think if 50% of people are failing this first step then they have seriously manipulated their resume or perhaps other screening methods need to be improved. I could understand if occasionally someone tripped up on one of these questions. But, not half of an interview class.&lt;/p&gt;
+&lt;p&gt;Most importantly for those doing code interviews, in my opinion, is to not just study code and how to perform certain tasks but also understand the errors generated and how to resolve them. When working on this article I made an error and it took me 30 minutes to figure out what it was; I had written “UNISIGNED”, rather than “UNSIGNED”.&lt;/p&gt;
+&lt;p&gt;People will make mistakes and there’s nothing wrong with that. The best we can do on these job interviews is to just try to prepare the best we can.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://www.reddit.com/r/SQL/comments/7xbzph/ms_sql_interviewing_sql_developers_and_failing/&#34;&gt;Interviewing ‘SQL Developers’ (and failling!)&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://dev.mysql.com/doc/refman/5.7/en/group-by-handling.html&#34;&gt;MySQL Handling of GROUP BY&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Query Stack Overflow for Top 5 Tags and Children Posts</title>
-      <link>/query-stack-overflow-top-five-tags-top-five-posts-within-each-tag/</link>
+      <link>http://timtrice.net/query-stack-overflow-top-five-tags-top-five-posts-within-each-tag/</link>
       <pubDate>Mon, 26 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>/query-stack-overflow-top-five-tags-top-five-posts-within-each-tag/</guid>
+      <guid>http://timtrice.net/query-stack-overflow-top-five-tags-top-five-posts-within-each-tag/</guid>
       <description>&lt;div id=&#34;TOC&#34;&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#requirements&#34;&gt;Requirements&lt;/a&gt;&lt;/li&gt;
@@ -604,10 +1256,10 @@ ORDER BY
     
     <item>
       <title>Department Top Three Salaries</title>
-      <link>/department-top-three-salaries/</link>
+      <link>http://timtrice.net/department-top-three-salaries/</link>
       <pubDate>Tue, 30 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>/department-top-three-salaries/</guid>
+      <guid>http://timtrice.net/department-top-three-salaries/</guid>
       <description>&lt;div id=&#34;problem&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Problem&lt;/h3&gt;
 &lt;p&gt;The &lt;code&gt;Employee&lt;/code&gt; table holds all employees. Every employee has an Id, and there is also a column for the department Id.&lt;/p&gt;
@@ -965,12 +1617,12 @@ ORDER BY `Employee`.`DepartmentId`, `Employee`.`Salary` DESC;&lt;/code&gt;&lt;/p
 &lt;/tr&gt;
 &lt;tr class=&#34;even&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;IT&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Joe&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Joel&lt;/td&gt;
 &lt;td align=&#34;right&#34;&gt;60000&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&#34;odd&#34;&gt;
 &lt;td align=&#34;left&#34;&gt;IT&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Joel&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Joe&lt;/td&gt;
 &lt;td align=&#34;right&#34;&gt;60000&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&#34;even&#34;&gt;
@@ -1018,10 +1670,10 @@ ORDER BY `Employee`.`DepartmentId`, `Employee`.`Salary` DESC;&lt;/code&gt;&lt;/p
     
     <item>
       <title>Hurricane Harvey Post Storm Report</title>
-      <link>/hurricane-harvey-report/</link>
+      <link>http://timtrice.net/hurricane-harvey-report/</link>
       <pubDate>Wed, 06 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>/hurricane-harvey-report/</guid>
+      <guid>http://timtrice.net/hurricane-harvey-report/</guid>
       <description>&lt;div id=&#34;TOC&#34;&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#hurricane-harvey&#34;&gt;Hurricane Harvey&lt;/a&gt;&lt;ul&gt;
@@ -1774,7 +2426,7 @@ FEW TREES WERE BLOWN DOWN. RATED EF0. &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;strong&gt;locale:&lt;/strong&gt; &lt;em&gt;LC_CTYPE=en_US.UTF-8&lt;/em&gt;, &lt;em&gt;LC_NUMERIC=C&lt;/em&gt;, &lt;em&gt;LC_TIME=en_US.UTF-8&lt;/em&gt;, &lt;em&gt;LC_COLLATE=en_US.UTF-8&lt;/em&gt;, &lt;em&gt;LC_MONETARY=en_US.UTF-8&lt;/em&gt;, &lt;em&gt;LC_MESSAGES=C&lt;/em&gt;, &lt;em&gt;LC_PAPER=en_US.UTF-8&lt;/em&gt;, &lt;em&gt;LC_NAME=C&lt;/em&gt;, &lt;em&gt;LC_ADDRESS=C&lt;/em&gt;, &lt;em&gt;LC_TELEPHONE=C&lt;/em&gt;, &lt;em&gt;LC_MEASUREMENT=en_US.UTF-8&lt;/em&gt; and &lt;em&gt;LC_IDENTIFICATION=C&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;attached base packages:&lt;/strong&gt; &lt;em&gt;methods&lt;/em&gt;, &lt;em&gt;stats&lt;/em&gt;, &lt;em&gt;graphics&lt;/em&gt;, &lt;em&gt;grDevices&lt;/em&gt;, &lt;em&gt;utils&lt;/em&gt;, &lt;em&gt;datasets&lt;/em&gt; and &lt;em&gt;base&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;other attached packages:&lt;/strong&gt; &lt;em&gt;bindrcpp(v.0.2)&lt;/em&gt;, &lt;em&gt;tidyr(v.0.8.0)&lt;/em&gt;, &lt;em&gt;tibble(v.1.4.2)&lt;/em&gt;, &lt;em&gt;stringr(v.1.2.0)&lt;/em&gt;, &lt;em&gt;rrricanesdata(v.0.0.1.6)&lt;/em&gt;, &lt;em&gt;rrricanes(v.0.2.0-6)&lt;/em&gt;, &lt;em&gt;purrr(v.0.2.4)&lt;/em&gt;, &lt;em&gt;pander(v.0.6.1)&lt;/em&gt;, &lt;em&gt;lubridate(v.1.7.1)&lt;/em&gt;, &lt;em&gt;knitr(v.1.18)&lt;/em&gt;, &lt;em&gt;ggrepel(v.0.7.0)&lt;/em&gt;, &lt;em&gt;ggplot2(v.2.2.1)&lt;/em&gt; and &lt;em&gt;dplyr(v.0.7.4)&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;loaded via a namespace (and not attached):&lt;/strong&gt; &lt;em&gt;Rcpp(v.0.12.15)&lt;/em&gt;, &lt;em&gt;highr(v.0.6)&lt;/em&gt;, &lt;em&gt;RColorBrewer(v.1.1-2)&lt;/em&gt;, &lt;em&gt;pillar(v.1.1.0)&lt;/em&gt;, &lt;em&gt;compiler(v.3.4.3)&lt;/em&gt;, &lt;em&gt;plyr(v.1.8.4)&lt;/em&gt;, &lt;em&gt;bindr(v.0.1)&lt;/em&gt;, &lt;em&gt;tools(v.3.4.3)&lt;/em&gt;, &lt;em&gt;digest(v.0.6.15)&lt;/em&gt;, &lt;em&gt;lattice(v.0.20-35)&lt;/em&gt;, &lt;em&gt;evaluate(v.0.10.1)&lt;/em&gt;, &lt;em&gt;gtable(v.0.2.0)&lt;/em&gt;, &lt;em&gt;pkgconfig(v.2.0.1)&lt;/em&gt;, &lt;em&gt;rlang(v.0.1.6)&lt;/em&gt;, &lt;em&gt;yaml(v.2.1.16)&lt;/em&gt;, &lt;em&gt;blogdown(v.0.5)&lt;/em&gt;, &lt;em&gt;xfun(v.0.1)&lt;/em&gt;, &lt;em&gt;rnaturalearthdata(v.0.1.0)&lt;/em&gt;, &lt;em&gt;rprojroot(v.1.3-2)&lt;/em&gt;, &lt;em&gt;grid(v.3.4.3)&lt;/em&gt;, &lt;em&gt;glue(v.1.2.0)&lt;/em&gt;, &lt;em&gt;R6(v.2.2.2)&lt;/em&gt;, &lt;em&gt;rmarkdown(v.1.8)&lt;/em&gt;, &lt;em&gt;bookdown(v.0.5)&lt;/em&gt;, &lt;em&gt;sp(v.1.2-5)&lt;/em&gt;, &lt;em&gt;magrittr(v.1.5)&lt;/em&gt;, &lt;em&gt;backports(v.1.1.2)&lt;/em&gt;, &lt;em&gt;scales(v.0.5.0)&lt;/em&gt;, &lt;em&gt;htmltools(v.0.3.6)&lt;/em&gt;, &lt;em&gt;assertthat(v.0.2.0)&lt;/em&gt;, &lt;em&gt;colorspace(v.1.3-2)&lt;/em&gt;, &lt;em&gt;labeling(v.0.3)&lt;/em&gt;, &lt;em&gt;stringi(v.1.1.6)&lt;/em&gt;, &lt;em&gt;lazyeval(v.0.2.1)&lt;/em&gt; and &lt;em&gt;munsell(v.0.4.3)&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;loaded via a namespace (and not attached):&lt;/strong&gt; &lt;em&gt;Rcpp(v.0.12.15)&lt;/em&gt;, &lt;em&gt;highr(v.0.6)&lt;/em&gt;, &lt;em&gt;RColorBrewer(v.1.1-2)&lt;/em&gt;, &lt;em&gt;pillar(v.1.1.0)&lt;/em&gt;, &lt;em&gt;compiler(v.3.4.3)&lt;/em&gt;, &lt;em&gt;plyr(v.1.8.4)&lt;/em&gt;, &lt;em&gt;bindr(v.0.1)&lt;/em&gt;, &lt;em&gt;tools(v.3.4.3)&lt;/em&gt;, &lt;em&gt;digest(v.0.6.15)&lt;/em&gt;, &lt;em&gt;lattice(v.0.20-35)&lt;/em&gt;, &lt;em&gt;evaluate(v.0.10.1)&lt;/em&gt;, &lt;em&gt;gtable(v.0.2.0)&lt;/em&gt;, &lt;em&gt;pkgconfig(v.2.0.1)&lt;/em&gt;, &lt;em&gt;rlang(v.0.1.6)&lt;/em&gt;, &lt;em&gt;yaml(v.2.1.16)&lt;/em&gt;, &lt;em&gt;blogdown(v.0.4)&lt;/em&gt;, &lt;em&gt;rnaturalearthdata(v.0.1.0)&lt;/em&gt;, &lt;em&gt;rprojroot(v.1.3-2)&lt;/em&gt;, &lt;em&gt;grid(v.3.4.3)&lt;/em&gt;, &lt;em&gt;glue(v.1.2.0)&lt;/em&gt;, &lt;em&gt;R6(v.2.2.2)&lt;/em&gt;, &lt;em&gt;rmarkdown(v.1.8)&lt;/em&gt;, &lt;em&gt;bookdown(v.0.5)&lt;/em&gt;, &lt;em&gt;sp(v.1.2-5)&lt;/em&gt;, &lt;em&gt;magrittr(v.1.5)&lt;/em&gt;, &lt;em&gt;backports(v.1.1.2)&lt;/em&gt;, &lt;em&gt;scales(v.0.5.0)&lt;/em&gt;, &lt;em&gt;htmltools(v.0.3.6)&lt;/em&gt;, &lt;em&gt;assertthat(v.0.2.0)&lt;/em&gt;, &lt;em&gt;colorspace(v.1.3-2)&lt;/em&gt;, &lt;em&gt;labeling(v.0.3)&lt;/em&gt;, &lt;em&gt;stringi(v.1.1.6)&lt;/em&gt;, &lt;em&gt;lazyeval(v.0.2.1)&lt;/em&gt; and &lt;em&gt;munsell(v.0.4.3)&lt;/em&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;warnings()&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## NULL&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
@@ -1783,19 +2435,19 @@ FEW TREES WERE BLOWN DOWN. RATED EF0. &lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>rrricanes</title>
-      <link>/project/rrricanes/</link>
+      <link>http://timtrice.net/project/rrricanes/</link>
       <pubDate>Thu, 01 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>/project/rrricanes/</guid>
+      <guid>http://timtrice.net/project/rrricanes/</guid>
       <description></description>
     </item>
     
     <item>
       <title>RStudio in Docker</title>
-      <link>/rstudio-in-docker/</link>
+      <link>http://timtrice.net/rstudio-in-docker/</link>
       <pubDate>Wed, 17 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>/rstudio-in-docker/</guid>
+      <guid>http://timtrice.net/rstudio-in-docker/</guid>
       <description>&lt;div id=&#34;TOC&#34;&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#brief-overview-of-docker&#34;&gt;Brief Overview of Docker&lt;/a&gt;&lt;/li&gt;
@@ -1982,31 +2634,21 @@ sudo docker push timtrice/rstudio-3.3.1&lt;/code&gt;&lt;/pre&gt;
     
     <item>
       <title>Example Talk</title>
-      <link>/talk/example-talk/</link>
+      <link>http://timtrice.net/talk/example-talk/</link>
       <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>/talk/example-talk/</guid>
+      <guid>http://timtrice.net/talk/example-talk/</guid>
       <description>&lt;p&gt;Embed your slides or video here using &lt;a href=&#34;https://sourcethemes.com/academic/post/writing-markdown-latex/&#34; target=&#34;_blank&#34;&gt;shortcodes&lt;/a&gt;. Further details can easily be added using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>HURDAT</title>
-      <link>/project/hurdat/</link>
+      <link>http://timtrice.net/project/hurdat/</link>
       <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
       
-      <guid>/project/hurdat/</guid>
+      <guid>http://timtrice.net/project/hurdat/</guid>
       <description></description>
-    </item>
-    
-    <item>
-      <title>A Person Re-Identification System For Mobile Devices</title>
-      <link>/publication/person-re-identification/</link>
-      <pubDate>Tue, 01 Sep 2015 00:00:00 +0000</pubDate>
-      
-      <guid>/publication/person-re-identification/</guid>
-      <description>&lt;p&gt;More detail can easily be written here using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
-</description>
     </item>
     
   </channel>

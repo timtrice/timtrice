@@ -1,0 +1,699 @@
+---
+# General format taken from <https://dev.to/yelluw/how-to-do-technical-blogging>
+
+# Title
+#   - Short title, start with verb, provide brief explanation what this is about.
+#   - Examples:
+#     - Writing a $technology $thing
+#     - Developing with $technology
+#     - Testing $techonology with $thing
+title: Answering Simple Questions in SQL Coding Interviews
+
+# Summary
+#   - 2-3 sentences. 
+#   - Summarize what post is about.
+#   - Should be closely related to title
+#   - Should be smooth transition from title
+summary: > 
+  An interviewer recently commented about 50% of initial coding interviews 
+  failing what seemed to be very simple questions. I take a look at the 
+  questions and demonstrate the best way to answer them.
+
+# Description is not used at this time but may be implemented later.
+description: NULL
+
+# Abstract is not used at this time but may be implemented later.
+abstract: NULL
+
+author: Tim Trice
+date: '2018-03-06'
+
+# Slug
+#   - Use title without conjunctions and determiners.
+#   - All lower-case.
+slug: answering-simple-questions-sql-coding-interviews
+
+# Categories
+#   - General classification of post.
+#     - SQL
+#     - R
+#     - Python
+categories:
+  - SQL
+
+# Tags
+#   - Calls specific to category such as functions, or classes.
+#     - In SQL, "SELECT", "ORDER BY", "PARTITION", etc.
+#     - In R, "dplyr", "rattle", "vector", etc."
+tags:
+  - SELECT
+  - LEFT JOIN
+  - MAX
+  - SUM
+  - GROUP BY
+output:
+    blogdown::html_page:
+        toc: true
+        toc_depth: 6
+---
+
+
+<div id="TOC">
+<ul>
+<li><a href="#requirements">Requirements</a></li>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#database-setup">Database Setup</a></li>
+<li><a href="#select-all-data-from-both-tables">Select all data from both tables</a></li>
+<li><a href="#what-team-has-the-most-wins">What team has the most wins?</a></li>
+<li><a href="#what-is-the-combined-salary-for-each-team">What is the combined salary for each team?</a></li>
+<li><a href="#what-player-does-not-belong-to-a-team">What player does not belong to a team?</a></li>
+<li><a href="#summary">Summary</a></li>
+</ul>
+</div>
+
+{{% youtube "hFP2pxqz4wM" %}}
+<div id="requirements" class="section level3">
+<h3>Requirements</h3>
+<p>Any database server will do. For this instance, MySQL is used.</p>
+<pre class="sql"><code>SELECT @@version_comment AS `Version`, 
+  @@version_compile_machine AS `Version Compile Machine`, 
+  @@innodb_version AS `InnoDB Version`, 
+  @@version_compile_os AS `Version Compile OS`;</code></pre>
+<div class="knitsql-table">
+<table>
+<caption><span id="tab:db-version">Table 1: </span>Server Info</caption>
+<thead>
+<tr class="header">
+<th align="left">Version</th>
+<th align="left">Version Compile Machine</th>
+<th align="left">InnoDB Version</th>
+<th align="left">Version Compile OS</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">MySQL Community Server (GPL)</td>
+<td align="left">x86_64</td>
+<td align="left">5.7.21</td>
+<td align="left">Linux</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="introduction" class="section level3">
+<h3>Introduction</h3>
+<p>In <a href="https://www.reddit.com/r/SQL/comments/7xbzph/ms_sql_interviewing_sql_developers_and_failing/">Interviewing ‘SQL Developers’ (and failling!)</a>, author <a href="https://www.reddit.com/user/pankswork">pankswork</a> frustratingly writes about having interviewers fail what seems to be very simple SQL questions at a rate of about 50%. “Is my test too hard,” they wonder.</p>
+<p>When I read this post I immeidately wondered if they were trick questions I wasn’t picking up on. They all seemed very easy to answer. They were a little tricky, but certainly not unreasonably complicated. Indeed, most commenters to the Reddit post agreed.</p>
+<p>I wanted to use the opportunity to demonstrate how to go about solving the interview problems, which are:</p>
+<ol style="list-style-type: decimal">
+<li><p>Select all data from both tables.</p></li>
+<li><p>What team has the most wins?</p></li>
+<li><p>What is the combined salary for each team?</p></li>
+<li><p>What player does not belong to a team?</p></li>
+</ol>
+<p>I slightly reworded some questions to avoid confusion but the results will still be the same, along with the methods of obtaining them.</p>
+</div>
+<div id="database-setup" class="section level3">
+<h3>Database Setup</h3>
+<p>First, I’ll create the database and build the <code>Players</code> and <code>Teams</code> tables.</p>
+<pre class="sql"><code>DROP DATABASE IF EXISTS `PlayersTeams`;</code></pre>
+<pre class="sql"><code>CREATE DATABASE `PlayersTeams`;</code></pre>
+<pre class="sql"><code>USE `PlayersTeams`;</code></pre>
+<pre class="sql"><code>CREATE TABLE `Players` (
+  `PlayerID` TINYINT(1)  UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+  `Salary`   SMALLINT(4) UNSIGNED NOT NULL, 
+  `TeamID`   TINYINT(1)  UNSIGNED NOT NULL
+  );</code></pre>
+<pre class="sql"><code>INSERT INTO `Players`
+  (`Salary`, `TeamID`)
+VALUES
+  (1500, 1), 
+  (1359, 1),
+  (1070, 1), 
+  (1165, 3), 
+  (1474, 2), 
+  (1411, 1), 
+  (1211, 2), 
+  (1334, 1), 
+  (1486, 4), 
+  (1223, 2);</code></pre>
+<pre class="sql"><code>CREATE TABLE `Teams` (
+  `TeamID`   TINYINT(1)  UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+  `TeamName` VARCHAR(10)          NOT NULL, 
+  `Wins`     TINYINT(2)  UNSIGNED NOT NULL, 
+  `Losses`   TINYINT(2)  UNSIGNED NOT NULL
+);</code></pre>
+<pre class="sql"><code>INSERT INTO `Teams`
+  (`TeamName`, `Wins`, `Losses`)
+VALUES
+  (&quot;Jets&quot;,   10,  4), 
+  (&quot;Giants&quot;,  4, 10), 
+  (&quot;Eagles&quot;,  7,  7);</code></pre>
+</div>
+<div id="select-all-data-from-both-tables" class="section level3">
+<h3>Select all data from both tables</h3>
+<p>What we are being asked to do here is effectly do a <code>SELECT *</code> from both tables which we join on some type of <code>JOIN</code> statement; but, which one? The dataset is small enough for us to easily see we should have 10 rows in final result set.</p>
+<p>If we use a <code>LEFT JOIN</code> with <code>Players</code> as the left table, <code>Teams</code> as the right table and <code>TeamID</code> as the foreign key, then every record within <code>Players</code> will be returned along with associated <code>Teams</code>. If we have an instance of a player that does not have an associated team then that record will be NULL.</p>
+<pre class="sql"><code>SELECT 
+  * 
+FROM 
+  `Players`
+LEFT JOIN 
+  `Teams`
+ON 
+  `Teams`.`TeamID` = `Players`.`TeamID`
+ORDER BY 
+  `Players`.`PlayerID`;</code></pre>
+<div class="knitsql-table">
+<table>
+<caption><span id="tab:query-1">Table 2: </span>10 records</caption>
+<thead>
+<tr class="header">
+<th align="left">PlayerID</th>
+<th align="right">Salary</th>
+<th align="right">TeamID</th>
+<th align="right">TeamID</th>
+<th align="left">TeamName</th>
+<th align="right">Wins</th>
+<th align="right">Losses</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="right">1500</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">Jets</td>
+<td align="right">10</td>
+<td align="right">4</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="right">1359</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">Jets</td>
+<td align="right">10</td>
+<td align="right">4</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="right">1070</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">Jets</td>
+<td align="right">10</td>
+<td align="right">4</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="right">1165</td>
+<td align="right">3</td>
+<td align="right">3</td>
+<td align="left">Eagles</td>
+<td align="right">7</td>
+<td align="right">7</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="right">1474</td>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="left">Giants</td>
+<td align="right">4</td>
+<td align="right">10</td>
+</tr>
+<tr class="even">
+<td align="left">6</td>
+<td align="right">1411</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">Jets</td>
+<td align="right">10</td>
+<td align="right">4</td>
+</tr>
+<tr class="odd">
+<td align="left">7</td>
+<td align="right">1211</td>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="left">Giants</td>
+<td align="right">4</td>
+<td align="right">10</td>
+</tr>
+<tr class="even">
+<td align="left">8</td>
+<td align="right">1334</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">Jets</td>
+<td align="right">10</td>
+<td align="right">4</td>
+</tr>
+<tr class="odd">
+<td align="left">9</td>
+<td align="right">1486</td>
+<td align="right">4</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="left">10</td>
+<td align="right">1223</td>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="left">Giants</td>
+<td align="right">4</td>
+<td align="right">10</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>If we were to use a <code>RIGHT JOIN</code> then our server would instead take all <code>Teams</code>.<code>TeamID</code> and find corresponding <code>Players</code> per id. However, we have a <code>Player</code>.<code>TeamID</code> value of 4 which does not exist in <code>Teams</code>.<code>TeamID</code>. Therefore, our result set would only contain nine records.</p>
+<pre class="sql"><code>SELECT 
+  * 
+FROM 
+  `Players`
+RIGHT JOIN 
+  `Teams`
+ON 
+  `Teams`.`TeamID` = `Players`.`TeamID`
+ORDER BY 
+  `Players`.`PlayerID`;</code></pre>
+<div class="knitsql-table">
+<table>
+<caption><span id="tab:query-2">Table 3: </span>9 records</caption>
+<thead>
+<tr class="header">
+<th align="right">PlayerID</th>
+<th align="right">Salary</th>
+<th align="right">TeamID</th>
+<th align="right">TeamID</th>
+<th align="left">TeamName</th>
+<th align="right">Wins</th>
+<th align="right">Losses</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">1500</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">Jets</td>
+<td align="right">10</td>
+<td align="right">4</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="right">1359</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">Jets</td>
+<td align="right">10</td>
+<td align="right">4</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="right">1070</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">Jets</td>
+<td align="right">10</td>
+<td align="right">4</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="right">1165</td>
+<td align="right">3</td>
+<td align="right">3</td>
+<td align="left">Eagles</td>
+<td align="right">7</td>
+<td align="right">7</td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="right">1474</td>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="left">Giants</td>
+<td align="right">4</td>
+<td align="right">10</td>
+</tr>
+<tr class="even">
+<td align="right">6</td>
+<td align="right">1411</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">Jets</td>
+<td align="right">10</td>
+<td align="right">4</td>
+</tr>
+<tr class="odd">
+<td align="right">7</td>
+<td align="right">1211</td>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="left">Giants</td>
+<td align="right">4</td>
+<td align="right">10</td>
+</tr>
+<tr class="even">
+<td align="right">8</td>
+<td align="right">1334</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="left">Jets</td>
+<td align="right">10</td>
+<td align="right">4</td>
+</tr>
+<tr class="odd">
+<td align="right">10</td>
+<td align="right">1223</td>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="left">Giants</td>
+<td align="right">4</td>
+<td align="right">10</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>However, if we used <code>RIGHT JOIN</code> <strong>and</strong> reversed the order of our tables (make <code>Teams</code> our primary table, joining <code>Players</code>) then we would get the correct results.</p>
+<pre class="sql"><code>SELECT 
+  * 
+FROM 
+  `Teams`
+RIGHT JOIN
+  `Players`
+ON 
+  `Players`.`TeamID` = `Teams`.`TeamID`
+ORDER BY
+  `Players`.`PlayerID`;</code></pre>
+<div class="knitsql-table">
+<table>
+<caption><span id="tab:query-3">Table 4: </span>10 records</caption>
+<thead>
+<tr class="header">
+<th align="right">TeamID</th>
+<th align="left">TeamName</th>
+<th align="right">Wins</th>
+<th align="right">Losses</th>
+<th align="right">PlayerID</th>
+<th align="right">Salary</th>
+<th align="right">TeamID</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">Jets</td>
+<td align="right">10</td>
+<td align="right">4</td>
+<td align="right">1</td>
+<td align="right">1500</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">Jets</td>
+<td align="right">10</td>
+<td align="right">4</td>
+<td align="right">2</td>
+<td align="right">1359</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">Jets</td>
+<td align="right">10</td>
+<td align="right">4</td>
+<td align="right">3</td>
+<td align="right">1070</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="right">3</td>
+<td align="left">Eagles</td>
+<td align="right">7</td>
+<td align="right">7</td>
+<td align="right">4</td>
+<td align="right">1165</td>
+<td align="right">3</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="left">Giants</td>
+<td align="right">4</td>
+<td align="right">10</td>
+<td align="right">5</td>
+<td align="right">1474</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">Jets</td>
+<td align="right">10</td>
+<td align="right">4</td>
+<td align="right">6</td>
+<td align="right">1411</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="left">Giants</td>
+<td align="right">4</td>
+<td align="right">10</td>
+<td align="right">7</td>
+<td align="right">1211</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">Jets</td>
+<td align="right">10</td>
+<td align="right">4</td>
+<td align="right">8</td>
+<td align="right">1334</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">9</td>
+<td align="right">1486</td>
+<td align="right">4</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">Giants</td>
+<td align="right">4</td>
+<td align="right">10</td>
+<td align="right">10</td>
+<td align="right">1223</td>
+<td align="right">2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Notice also how the column order of our result set changes. In the <a href="#tab:query-2">previous RIGHT JOIN</a>, the associated columns from <code>Teams</code> were on the right side. Now, they are on the left. This is our visual cue of the query we created.</p>
+<p>I suspect what’s happening here is those doing the interview get twisted up on the differences not recognizing they’re missing some data.</p>
+</div>
+<div id="what-team-has-the-most-wins" class="section level3">
+<h3>What team has the most wins?</h3>
+<p>This question does not require us to do fancy joins. All of the data we need is contained within the <code>Teams</code> table. One way some may be going about this problem is simply using <code>MAX()</code>.</p>
+<pre class="sql"><code>SELECT
+  MAX(`Wins`)
+FROM
+  `Teams`;</code></pre>
+<div class="knitsql-table">
+<table>
+<caption><span id="tab:query-4">Table 5: </span>1 records</caption>
+<thead>
+<tr class="header">
+<th align="left">MAX(<code>Wins</code>)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">10</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Notice though our question asked “What team”, not “what is the maximum number of Wins”. We need to return the <code>TeamName</code> (or <code>TeamID</code>). But, you cannot just add this column into the <code>SELECT</code> statement without issue.</p>
+<pre class="sql"><code>SELECT
+  `TeamName`, 
+  MAX(`Wins`)
+FROM
+  `Teams`;</code></pre>
+<p>This query will generate an error on most all newer database servers. In this case, what MySQL is telling us is that we either must remove <code>TeamName</code> from the query or move it to a <code>GROUP BY</code> statement. See <a href="https://dev.mysql.com/doc/refman/5.7/en/group-by-handling.html">MySQL Handling of GROUP BY</a> for more info.</p>
+<p>For our question, all of this is unnecessary anyway. We want to find the maximum <code>Wins</code> and return the corresponding <code>TeamName</code>. Just sort the dataset by <code>Wins</code>, largest to smallest, and return the first record.</p>
+<pre class="sql"><code>SELECT
+  `TeamName`
+FROM
+  `Teams`
+ORDER BY 
+  `Wins` DESC
+LIMIT
+  1;</code></pre>
+<div class="knitsql-table">
+<table>
+<caption><span id="tab:query-5">Table 6: </span>1 records</caption>
+<thead>
+<tr class="header">
+<th align="left">TeamName</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Jets</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="what-is-the-combined-salary-for-each-team" class="section level3">
+<h3>What is the combined salary for each team?</h3>
+<p>In the original post, this question was phrased as “How much does each team make?” The author acknowledged this was intended to be a trick question; the teams do not have a “profit” or “revenue”-type column.</p>
+<p>However, every player does have a <code>Salary</code> and it is reasonable to assume the question is most likely looking to find the total salary of all players per team.</p>
+<p>We can do the first part of this query very simply by summing <code>Salary</code> with a grouping on <code>TeamID</code>.</p>
+<pre class="sql"><code>SELECT
+  SUM(`Salary`), 
+  `TeamID`
+FROM 
+  `Players`
+GROUP BY
+  `TeamID`;</code></pre>
+<div class="knitsql-table">
+<table>
+<caption><span id="tab:query-6">Table 7: </span>4 records</caption>
+<thead>
+<tr class="header">
+<th align="right">SUM(<code>Salary</code>)</th>
+<th align="right">TeamID</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">6674</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="right">3908</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="right">1165</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="right">1486</td>
+<td align="right">4</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Realize we would have recevied the group-by-handling error again had I not used the <code>GROUP BY</code> statement; this applies for <code>SUM</code> as well.</p>
+<p>At this point I now have the total <code>Salary</code> per team. And, yes, I can probably just leave it at that - question answered. But, what fun is that?</p>
+<p>Let’s get the <code>TeamName</code>. To do this I <code>LEFT JOIN</code> <code>Teams</code> again by <code>TeamID</code>. I also modify my original <code>SELECT</code> statement to return <code>TeamName</code> rather than <code>TeamID</code>. Finally, I modify the <code>GROUP BY</code> clause to append the table name. Without this last correction my query will return an Error 1052 that <code>TeamID</code> is ambiguous.</p>
+<pre class="sql"><code>SELECT
+  SUM(`Salary`), 
+  `Teams`.`TeamName`
+FROM 
+  `Players`
+LEFT JOIN
+  `Teams`
+ON 
+  `Teams`.`TeamID` = `Players`.`TeamID`
+GROUP BY
+  `Players`.`TeamID`;</code></pre>
+<div class="knitsql-table">
+<table>
+<caption><span id="tab:query-7">Table 8: </span>4 records</caption>
+<thead>
+<tr class="header">
+<th align="right">SUM(<code>Salary</code>)</th>
+<th align="left">TeamName</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">6674</td>
+<td align="left">Jets</td>
+</tr>
+<tr class="even">
+<td align="right">3908</td>
+<td align="left">Giants</td>
+</tr>
+<tr class="odd">
+<td align="right">1165</td>
+<td align="left">Eagles</td>
+</tr>
+<tr class="even">
+<td align="right">1486</td>
+<td align="left">NA</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="what-player-does-not-belong-to-a-team" class="section level3">
+<h3>What player does not belong to a team?</h3>
+<p>This question, I think, is the easiest of all. Actually, we already answered it when solving our first question (<a href="#tab:query-1">2</a>). Recall we had one record of NULL values; this was for a player in our <code>Players</code> table that did not have a corresponding team in the <code>Teams</code> table.</p>
+<p>This was our query for those results:</p>
+<pre class="r"><code>SELECT 
+  * 
+FROM 
+  `Players`
+LEFT JOIN 
+  `Teams`
+ON 
+  `Teams`.`TeamID` = `Players`.`TeamID`
+ORDER BY 
+  `Players`.`PlayerID`;</code></pre>
+<p>What I need to do here is return only the records where <code>Teams</code>.<code>TeamID</code> IS NULL. And, since the question is asking for “player” and not any additional information, we should only return <code>Players</code>.<code>PlayerID</code>. Our final query is as follows:</p>
+<pre class="sql"><code>SELECT 
+  `Players`.`PlayerID`
+FROM 
+  `Players`
+LEFT JOIN 
+  `Teams`
+ON 
+  `Teams`.`TeamID` = `Players`.`TeamID`
+WHERE
+  `Teams`.`TeamID` IS NULL
+ORDER BY 
+  `Players`.`PlayerID`;</code></pre>
+<div class="knitsql-table">
+<table>
+<caption><span id="tab:query-8">Table 9: </span>1 records</caption>
+<thead>
+<tr class="header">
+<th align="left">PlayerID</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">9</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="summary" class="section level3">
+<h3>Summary</h3>
+<p>I think if 50% of people are failing this first step then they have seriously manipulated their resume or perhaps other screening methods need to be improved. I could understand if occasionally someone tripped up on one of these questions. But, not half of an interview class.</p>
+<p>Most importantly for those doing code interviews, in my opinion, is to not just study code and how to perform certain tasks but also understand the errors generated and how to resolve them. When working on this article I made an error and it took me 30 minutes to figure out what it was; I had written “UNISIGNED”, rather than “UNSIGNED”.</p>
+<p>People will make mistakes and there’s nothing wrong with that. The best we can do on these job interviews is to just try to prepare the best we can.</p>
+<ul>
+<li><p><a href="https://www.reddit.com/r/SQL/comments/7xbzph/ms_sql_interviewing_sql_developers_and_failing/">Interviewing ‘SQL Developers’ (and failling!)</a></p></li>
+<li><p><a href="https://dev.mysql.com/doc/refman/5.7/en/group-by-handling.html">MySQL Handling of GROUP BY</a></p></li>
+</ul>
+</div>
