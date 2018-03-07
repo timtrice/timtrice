@@ -14,49 +14,49 @@
     
     <item>
       <title>Answering Simple Questions in SQL Coding Interviews</title>
-      <link>http://timtrice.net/2018/03/07/answering-simple-questions-sql-coding-interviews/</link>
+      <link>http://timtrice.net/2018-03-07-answering-simple-questions-sql-coding-interviews/</link>
       <pubDate>Wed, 07 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/2018/03/07/answering-simple-questions-sql-coding-interviews/</guid>
+      <guid>http://timtrice.net/2018-03-07-answering-simple-questions-sql-coding-interviews/</guid>
       <description>Requirements Introduction Database Setup Select all data from both tables What team has the most wins? What is the combined salary for each team? What player does not belong to a team? Summary     Requirements Any database server will do. For this instance, MySQL is used.
 SELECT @@version_comment AS `Version`, @@version_compile_machine AS `Version Compile Machine`, @@innodb_version AS `InnoDB Version`, @@version_compile_os AS `Version Compile OS`;  Table 1: Server Info  Version Version Compile Machine InnoDB Version Version Compile OS    MySQL Community Server (GPL) x86_64 5.</description>
     </item>
     
     <item>
       <title>Query Stack Overflow for Top 5 Tags and Children Posts</title>
-      <link>http://timtrice.net/2018/02/26/query-stack-overflow-top-five-tags-top-five-posts-within-each-tag/</link>
+      <link>http://timtrice.net/2018-02-26-query-stack-overflow-top-five-tags-top-five-posts-within-each-tag/</link>
       <pubDate>Mon, 26 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/2018/02/26/query-stack-overflow-top-five-tags-top-five-posts-within-each-tag/</guid>
+      <guid>http://timtrice.net/2018-02-26-query-stack-overflow-top-five-tags-top-five-posts-within-each-tag/</guid>
       <description>Requirements Introduction Building the Query Select the Top Five Tags by Count Select All Posts for Respective Tags Left Join Posts and Parition Over PostTags.TagId, Ordered by Posts.Score Descending Select the Top Five Posts per Tag Group  Tips Avoiding Aggregate Errors when Grouping  Conclusion    Requirements For this you can use the Stack Exchange Data Explorer online at no charge. Click the ‘Compose Query’ button in the top-right.</description>
     </item>
     
     <item>
       <title>Department Top Three Salaries</title>
-      <link>http://timtrice.net/2018/01/30/department-top-three-salaries/</link>
+      <link>http://timtrice.net/2018-01-30-department-top-three-salaries/</link>
       <pubDate>Tue, 30 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/2018/01/30/department-top-three-salaries/</guid>
+      <guid>http://timtrice.net/2018-01-30-department-top-three-salaries/</guid>
       <description>Problem The Employee table holds all employees. Every employee has an Id, and there is also a column for the department Id.
 +----+-------+--------+--------------+ | Id | Name | Salary | DepartmentId | +----+-------+--------+--------------+ | 1 | Joe | 70000 | 1 | | 2 | Henry | 80000 | 2 | | 3 | Sam | 60000 | 2 | | 4 | Max | 90000 | 1 | | 5 | Janet | 69000 | 1 | | 6 | Randy | 85000 | 1 | +----+-------+--------+--------------+ The Department table holds all departments of the company.</description>
     </item>
     
     <item>
       <title>Hurricane Harvey Post Storm Report</title>
-      <link>http://timtrice.net/2017/09/06/hurricane-harvey-report/</link>
+      <link>http://timtrice.net/2017-09-06-hurricane-harvey-report/</link>
       <pubDate>Wed, 06 Sep 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/2017/09/06/hurricane-harvey-report/</guid>
+      <guid>http://timtrice.net/2017-09-06-hurricane-harvey-report/</guid>
       <description>Hurricane Harvey Barometric Pressure Wind Rain Tornadoes  Code Libraries Data  Previous Versions Session Info   On August 26, 2017, Hurricane Harvey made landfall along the central Texas gulf coast as a category four hurricane. The storm weakened but remained stationary in southeast Texas spawing dozens of tornadoes and dropping over 30 inches of rain in many locations with isolated amounts of over 50 inches.
 Harvey was the first major hurricane to strike the Texas coast since Hurricane Rita in 2005; the first category four hurricane to make landfall since Hurricane Bret in 1999.</description>
     </item>
     
     <item>
       <title>RStudio in Docker</title>
-      <link>http://timtrice.net/2017/05/17/rstudio-in-docker/</link>
+      <link>http://timtrice.net/2017-05-17-rstudio-in-docker/</link>
       <pubDate>Wed, 17 May 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://timtrice.net/2017/05/17/rstudio-in-docker/</guid>
+      <guid>http://timtrice.net/2017-05-17-rstudio-in-docker/</guid>
       <description>Brief Overview of Docker RStudio Server Pull rocker/rstudio from Docker Hub Pull rocker from GitHub Run r-base Build RStudio Image Run RStudio with R 3.4.0 Build and Run Rstudio with R 3.3.1 Commit Your Changes Conclusion   Docker is a container platform that helps replicate setups for testing and production from any system. It gives you the ability to set up a mini-operating system to meet specific criteria.</description>
     </item>
     
