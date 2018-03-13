@@ -1,0 +1,168 @@
+---
+title: Analysis of Beer Reviews
+summary: >
+  Test description
+author: 'Tim Trice'
+date: '2018-03-15'
+draft: TRUE
+categories:
+  - R
+  - tidyverse
+tags: 
+  - analysis
+output:
+  blogdown::html_page:
+    toc: true
+    fig_align: center
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, 
+                      error = TRUE)
+```
+
+### Introduction
+
+```{r libraries, message = FALSE}
+library(corrplot)
+library(glue)
+library(Hmisc)
+library(knitr)
+library(skimr)
+library(tidyverse)
+```
+
+[One-Size-Fits-All Interview Kit](https://www.linkedin.com/pulse/how-hire-test-data-skills-one-size-fits-all-interview-tanya-cashorali/)
+
+### Data Download
+
+Data courtesy of [Beer Advocate](http://www.beeradvocate.com/).
+
+```{r data-download}
+#' Path to download csv
+file_name <- "beer_reviews"
+#' Compress data file
+compress <- TRUE
+local_path <- glue("../../../static/data/{file_name}.RData")
+if (file.exists(local_path)) {
+  load(local_path)
+} else {
+  df <- readr::read_csv(glue("https://github.com/timtrice/datasets/", 
+                             "blob/master/beer_reviews/{file_name}.csv", 
+                             "?raw=true"))
+  save(df, file = local_path, compress = compress)
+}
+```
+
+### The Variables
+
+```{r skim-variables, warning = FALSE}
+skim(df) %>% 
+  kable(caption = "Summary of beer review variables")
+```
+
+```{r head-df}
+head(df) %>% 
+  kable(caption = "head(df)")
+```
+
+  * Categorical
+  
+    + `beer_name`
+    
+    + `beer_style`
+    
+    + `brewery_name`
+    
+    + `review_appearance`
+    
+    + `review_aroma`
+    
+    + `review_overall`
+    
+    + `review_profilename`
+    
+    + `review_palate`
+    
+    + `review_taste`
+    
+  * Continuous
+  
+    + `beer_abv`
+    
+    + `beer_beerid`
+
+    + `brewery_id`
+    
+    + `review_time`
+
+All `review*` vars are divisible by 0.5 with a range between zero and five. 
+
+```{r}
+df %>% 
+  select(starts_with("review"), -review_profilename, -review_time) %>% 
+  gather(key = "key", value = "value") %>% 
+  ggplot(aes(x = key, y = value)) + 
+  geom_point()
+```
+
+### Exploratory
+
+```{r}
+cc <- df[complete.cases(df),] %>% 
+  select(starts_with("review"), -review_time, -review_profilename, beer_abv)
+```
+
+```{r}
+cor(cc)
+```
+
+Most positive relationship seems to be between `review_overall` and `review_taste`. I want to take the mean `review_overall` and `review_taste` per `beer_beerid` and draw a scatterplot.
+
+```{r}
+df %>% 
+  group_by(beer_beerid) %>% 
+  summarise(mean_review_overall = mean(review_overall, na.rm = TRUE), 
+            mean_review_taste = mean(review_taste, na.rm = TRUE)) %>% 
+  ggplot(aes(x = mean_review_overall, y = mean_review_taste)) + 
+  geom_point() + 
+  geom_smooth()
+```
+
+Is this really surprising?
+
+Next to taste is `review_palate`; let's check that out.
+
+```{r}
+df %>% 
+  group_by(beer_beerid) %>% 
+  summarise(mean_review_overall = mean(review_overall, na.rm = TRUE), 
+            mean_review_aroma = mean(review_aroma, na.rm = TRUE)) %>% 
+  ggplot(aes(x = mean_review_overall, y = mean_review_aroma)) + 
+  geom_point() + 
+  geom_smooth()
+```
+
+I'm curious what type of 
+
+```{r}
+df %>% 
+  select(beer_beerid, review_overall, review_aroma, review_taste) %>% 
+  mutate(
+    review_class = case_when(
+      review_overall < 1 ~ "A", 
+      review_overall < 2 ~ "B", 
+      review_overall < 3 ~ "C", 
+      review_overall < 4 ~ "D", 
+      TRUE ~ "E")) %>% 
+  group_by(beer_beerid) %>% 
+  summarise(mean_review_aroma = mean(review_aroma, na.rm = TRUE)) %>% 
+  ggplot(aes(x = review_class, y = mean_review_aroma)) %>% 
+  geom_boxplot()
+```
+
+## R Session Info
+
+```{r r-session-info}
+pander::pander(sessionInfo())
+```

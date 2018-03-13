@@ -1,0 +1,275 @@
+---
+layout: post
+title: Unit Imputation of Barometric Pressure in HURDAT
+tags:
+- HURDAT
+---
+    
+<!-- START doctoc -->
+<!-- END doctoc -->
+
+We can demonstrate a negative linear relationship between barometric pressure and wind in the `HURDAT` dataset. However, there are thousands of missing `Pressure` values in the combined dataset. Here, I'll use linear modeling to impute those values.
+
+```{r, echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(fig.width = 10)
+```
+
+The `HURDAT` dataset can be accessed via `devtools::install_github("timtrice/HURDAT")`. 
+
+```{r, message = FALSE, warning = FALSE}
+library(HURDAT)
+library(ggplot2)
+library(lubridate)
+```
+
+## Data
+
+Of the nine datasets include in `HURDAT`, we only need the three containing the `Wind` and `Pressure` observations.
+
+```{r}
+data("AL_details")
+data("EP_details")
+data("CP_details")
+```
+
+I'll combine only the needed variables into one dataframe, `df`. There are some filters to note:
+
+* `!is.na(Wind) & !is.na(Pressure)`: Obviously I can't impute `Pressure` without knowing `Wind` and vice versa.
+
+* `Year >= 1970` In the `HURDAT`: codebook for the Atlantic dataset, it is stated: "some storms were missed and many intensities are too low in the pre-aircraft reconnaissance era (1944 for the western half of the basin) and in the pre-satellite era (late-1960s for the entire basin)".
+
+* `Status %in% c("TS", "HU")`: cyclones lower than tropical storm-force are not generally well-organized. And even weak tropical cyclones or hurricanes can be rather disorganized. This could lead to anomalies between our two values. However, it is beyond the scope of `HURDAT` to easily classify organized storms versus unorganized. So filtering on tropical storms at a minimum should suffice.
+
+* `Record != "L"`: I do not want cyclones over land as this may create anomalies not seen when the cyclone is over water. 
+
+I'll also keep every observation seperated by `Basin` as I want to run the model on each set individually followed by the complete set. Then, I can compare the values, find the best performing model and use that model to find the fitted values.
+
+Lastly, note that `Wind` is in knots (kts) and `Pressure` is in millibars (mb).
+
+```{r}
+# Filter each dataset by Year, Status, Record, !NA and combine into one dataframe
+df <- bind_rows(AL_details %>% 
+                    filter(!is.na(Wind), 
+                           !is.na(Pressure), 
+                           year(Datetime) >= 1970, 
+                           Status %in% c("TS", "HU"), 
+                           Record != "L") %>% 
+                    select(Wind, Pressure) %>% 
+                    mutate(Basin = "AL"),
+                EP_details %>% 
+                    filter(!is.na(Wind), 
+                           !is.na(Pressure), 
+                           year(Datetime) >= 1970, 
+                           Status %in% c("TS", "HU"), 
+                           Record != "L") %>% 
+                    select(Wind, Pressure) %>% 
+                    mutate(Basin = "EP"), 
+                CP_details %>% 
+                    filter(!is.na(Wind), 
+                           !is.na(Pressure), 
+                           year(Datetime) >= 1970, 
+                           Status %in% c("TS", "HU"), 
+                           Record != "L") %>% 
+                    select(Wind, Pressure) %>% 
+                    mutate(Basin = "CP"))
+```
+
+## Identifying the Linear Relationship
+
+```{r}
+# Plot linear relationship
+df %>% 
+    ggplot(aes(x = Pressure, y = Wind, colour = Basin)) + 
+    geom_point() + 
+    stat_smooth(method = "lm") + 
+    facet_grid(Basin ~ .) + 
+    ggtitle("Scatter Plot of Pressure ~ Wind")
+```
+
+Barometric pressure, or the differences of, creates wind (ironic in that tropical cyclones are classified by wind and not pressure). So finding such a relationship between the two variables isn't a suprise. I'll show soon this is not by chance.
+
+What should also stand out is the number of anomalies, particularly in the **AL** observations. As we'll see later the variance can be as much as $\pm{30}\text{mb}$. 
+
+## Atlantic Model
+
+```{r}
+lm_al <- lm(Pressure ~ Wind, data = df[df$Basin == "AL",])
+summary(lm_al)
+lm_al_pred <- predict(lm_al, df[df$Basin == "AL",])
+res_al <- residuals(lm_al)
+
+lm_al %>% 
+    ggplot(aes(.fitted, .resid)) + 
+    geom_point(colour = "red") + 
+    theme(legend.position = "none") + 
+    theme_bw() + 
+    ggtitle("lm_al Residuals")
+
+lm_al %>% 
+    ggplot(aes(sample = Pressure)) + 
+    geom_point(stat = "qq", colour = "red") + 
+    theme_bw() + 
+    ggtitle("Q-Q Plot for lm_al")
+
+rmse_al <- sqrt(mean(res_al ^ 2))
+rmse_al
+rsq_al <- 1 - sum(res_al ^ 2) / sum((df[df$Basin == "AL",]$Wind - mean(df[df$Basin == "AL",]$Wind)) ^ 2)
+rsq_al
+```
+
+The model `lm_al` gives us a regression line, 
+
+$$\hat{y} = 1034 - 0.7508\text{W}$$
+
+where $\text{W}$ is `Wind`. So, in theory a barometric pressure value of $\text{1034mb}$ would have no wind. A `Wind` value of $\text{150kts}$ would have a theoretical pressure of:
+
+$$y = 1034 - (0.7508)(150) = 921.38\text{mb}$$
+
+We notice the $\text{P-value}$ are less than $\text{2e-16}$ which is indredibly significant indicating it is highly unlikely the relationship between `Wind` and `Pressure` is random.
+
+The model also produces an $R^2$ value of $0.923$ and $\text{RMSE}$ of $6.696$. The residuals plot shows little pattern and the Q-Q plot is linear. 
+
+So, `lm_al` gives a good target to compare additional models. Now, I'll see how the other basins perform.
+
+## Central Pacific
+
+```{r}
+lm_cp <- lm(Pressure ~ Wind, data = df[df$Basin == "CP",])
+summary(lm_cp)
+lm_cp_pred <- predict(lm_cp, df[df$Basin == "CP",])
+res_cp <- residuals(lm_cp)
+
+lm_cp %>% 
+    ggplot(aes(.fitted, .resid)) + 
+    geom_point(colour = "blue") + 
+    theme(legend.position = "none") + 
+    theme_bw() + 
+    ggtitle("lm_cp Residuals")
+
+lm_cp %>% 
+    ggplot(aes(sample = Pressure)) + 
+    geom_point(stat = "qq", colour = "blue") + 
+    theme_bw() + 
+    ggtitle("Q-Q Plot for lm_cp")
+
+rmse_cp <- sqrt(mean(res_cp ^ 2))
+rmse_cp
+rsq_cp <- 1 - sum(res_cp ^ 2) / sum((df[df$Basin == "CP",]$Wind - mean(df[df$Basin == "CP",]$Wind)) ^ 2)
+rsq_cp
+```
+
+There aren't as many observations for the Central Pacific data as the Atlantic. One plus to this dataset that we do not have with the Atlantic is not only do we know it does not include cyclones over land, but it also includes cyclones that are unaffected by any large land mass. Only Hawaii would affect any of these cyclones but there just aren't that many cyclones that have come near Hawaii. 
+
+However, there are no hurricane reconnaissance flights into central Pacific storms. So, if a pressure reading isn't recorded by ship or buoy observations, it is estimated. 
+
+The residuals plot again shows little pattern though the Q-Q plot is not linear. The $\text{P-value}$ is identical (and will be for all our models). $R^2$ is slightly better than `lm_al`, $0.933$ but $\text{RMSE}$ is slightly higher than `lm_al` at $8.334$.
+
+In my opinion, `lm_cp` would have to be discarded in favor of `lm_al`.
+
+## East Pacific
+
+```{r}
+lm_ep <- lm(Pressure ~ Wind, data = df[df$Basin == "EP",])
+summary(lm_ep)
+lm_ep_pred <- predict(lm_ep, df[df$Basin == "EP",])
+res_ep <- residuals(lm_ep)
+
+lm_ep %>% 
+    ggplot(aes(.fitted, .resid)) + 
+    geom_point(colour = "green") + 
+    theme(legend.position = "none") + 
+    theme_bw() + 
+    ggtitle("lm_ep Residuals")
+
+lm_ep %>% 
+    ggplot(aes(sample = Pressure)) + 
+    geom_point(stat = "qq", colour = "green") + 
+    theme_bw() + 
+    ggtitle("Q-Q Plot for lm_ep")
+
+rmse_ep <- sqrt(mean(res_ep ^ 2))
+rmse_ep
+rsq_ep <- 1 - sum(res_ep ^ 2) / sum((df[df$Basin == "EP",]$Wind - mean(df[df$Basin == "EP",]$Wind)) ^ 2)
+rsq_ep
+```
+
+`lm_ep` produces a $\text{RMSE}$ of 3.859, much lower than the $6.696$ of `lm_al`. $R^2$ is also quite a bit higher at $0.977$. The residuals and Q-Q plot are similar. 
+
+While the eastern Pacific cyclones are more likely to be affected by land than the central Pacific, typically eastern Pacific cyclones move westward away from Mexico. So while the storms in this basin will have some effect by land, it's unlikely to be as dramatic as those in the Atlantic where cyclones may not be over land but can be near enough that the relationship between pressure and wind can be affected (i.e., cyclones traveling northward near the eastern United States).
+
+Regardless of the reasons, clearly `lm_ep` performs far better thhn `lm_al`. Now, I'll look to see if it gives an advantage over the entire dataset.
+
+## All Basins
+
+```{r}
+lm_all_basins <- lm(Pressure ~ Wind, data = df)
+summary(lm_all_basins)
+lm_all_basins_pred <- predict(lm_all_basins, df)
+res_all_basins <- residuals(lm_all_basins)
+
+lm_all_basins %>% 
+    ggplot(aes(.fitted, .resid)) + 
+    geom_point(colour = "black") + 
+    theme(legend.position = "none") + 
+    theme_bw() + 
+    ggtitle("lm_all_basins Residuals")
+
+lm_all_basins %>% 
+    ggplot(aes(sample = Pressure)) + 
+    geom_point(stat = "qq", colour = "black") + 
+    theme_bw() + 
+    ggtitle("Q-Q Plot for lm_all_basins")
+
+rmse_all_basins <- sqrt(mean(res_all_basins ^ 2))
+rmse_all_basins
+rsq_all_basins <- 1 - sum(res_all_basins ^ 2) / sum((df$Wind - mean(df$Wind)) ^ 2)
+rsq_all_basins
+```
+
+There isn't much of a difference between the plots for `lm_all_basins` and `lm_ep`. And though `lm_all_basins` has a better $R^2$ ($0.947$) and lower $\text{RMSE}$ ($5.716$) than `lm_al`, it does not perform better than `lm_ep`. 
+
+## Imputing Values
+
+I'll use `lm_ep` to impute `Pressure`. First, I need to extract all *NA* values of `Pressure` where we have *non-NA* values of `Wind`. I will not apply any of the other original filters.
+
+```{r}
+press_imp <- bind_rows(AL_details %>% 
+                    filter(!is.na(Wind), 
+                           is.na(Pressure)) %>%  
+                    select(Wind, Pressure), 
+                EP_details %>% 
+                    filter(!is.na(Wind), 
+                           is.na(Pressure)) %>% 
+                    select(Wind, Pressure), 
+                CP_details %>% 
+                    filter(!is.na(Wind), 
+                           is.na(Pressure)) %>% 
+                    select(Wind, Pressure))
+```
+
+I'll filter `press_imp` on unique values.
+
+```{r}
+press_imp <- unique(press_imp)
+```
+
+Run `predict()`.
+
+```{r}
+press_imp$Pressure <- round(predict(lm_ep, press_imp))
+```
+
+And, finally, a plot of our predictions.
+
+```{r}
+press_imp %>% 
+    ggplot(aes(x = Pressure, y = Wind)) + 
+    geom_point() + 
+    stat_smooth(method = "lm") + 
+    theme_bw() + 
+    ggtitle("Predicted Pressure v. Wind")
+```
+
+You can use any merge or join statement depending on your library of choice to carry these values into any of the datasets. 
+
+This R script can be found [on Github](https://github.com/timtrice/timtrice/blob/hurdat-predict-pressure/_R/unit-imputation-pressure.R)
