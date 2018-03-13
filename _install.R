@@ -63,6 +63,8 @@ devtools::install_github("r-dbi/RPostgres", ref = "v0.1-6",
 # https://github.com/r-dbi/RSQLite
 devtools::install_github("rstats-db/RSQLite")
 
+devtools::install_github("timtrice/NCDCStormEvents")
+
 devtools::install_github("ropensci/rrricanes", ref = "v0.2.0-6")
 
 # xfun is a dependency package for blogdown v0.5
