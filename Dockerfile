@@ -50,3 +50,6 @@ WORKDIR /home/rstudio
 
 RUN chown -R rstudio:rstudio .
 
+RUN git config --global user.email "tim.trice@gmail.com" \ 
+  git config --global user.name "Tim Trice"
+
