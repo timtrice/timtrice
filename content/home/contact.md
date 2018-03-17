@@ -11,7 +11,7 @@ subtitle = ""
 weight = 100
 
 # Automatically link email and phone?
-autolink = true
+autolink = false
 +++
 
 <form name="contact" method="POST" netlify>
