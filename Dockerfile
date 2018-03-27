@@ -20,33 +20,59 @@ RUN apt-get update \
     apt-transport-https \
     # This is for me.
     vim \
-    curl
-
-# For MS SQL Server, need to install ODBC 13 Driver (17 not avail as of now).
-RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \ 
+    curl \ 
+    # For MS SQL Server \ need to install ODBC 13 Driver (17 not avail as of now).
+  && curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \ 
   && curl https://packages.microsoft.com/config/debian/8/prod.list > /etc/apt/sources.list.d/mssql-release.list \ 
   && apt-get update \ 
-  && ACCEPT_EULA=Y apt-get install msodbcsql
+  && ACCEPT_EULA=Y apt-get install msodbcsql \ 
+  # Set java conf
+  && R CMD javareconf \ 
+  && install2.r -e \ 
+    blogdown \
+    corrplot \
+    ggrepel \
+    HURDAT \
+    miniUI \
+    packrat \
+    pander \
+    PKI \
+    RCurl \
+    RJSONIO \
+    rnaturalearthdata \
+    rsconnect \
+    skimr \
+    sweep \
+    tibbletime \
+    tidyquant \
+    timetk \ 
+  && install2.r -e -r https://timtrice.github.io/drat/ \ 
+    rrricanesdata \ 
+  && installGithub.r \ 
+    r-dbi/DBI@v0.7-12 \ 
+    r-dbi/odbc@v1.1.1 \ 
+    r-dbi/RMariaDB@v1.0-2 \ 
+    r-dbi/RPostgres@v0.1-6 \ 
+    ropensci/rrricanes@v0.2.0-6 \ 
+    timtrice/NCDCStormEvents \ 
+    yihui/xfun@v0.1 \ 
+  && echo '\n# set CRAN mirrors \
+    \nlocal({ \
+    \n\tr <- getOption("repos") \
+    \n\tr["rrricanesdata"] <- "https://timtrice.github.io/drat/" \
+    \noptions(repos = r) \
+    \n}) \
+    \n \
+    \noptions(warnPartialMatchArgs = TRUE,  \
+    \n\t\t\t\twarnPartialMatchDollar = TRUE, \
+    \n\t\t\t\twarnPartialMatchAttr = TRUE) \
+    \n \
+    \noptions(blogdown.hugo.dir = "/home/rstudio/bin/") \
+    \n' >> /usr/local/lib/R/etc/Rprofile.site \ 
+  && R -e "blogdown::install_hugo()" \ 
+  && mkdir -p /home/rstudio/.rstudio/monitored/user-settings \ 
+  && git config --global user.email "tim.trice@gmail.com" \ 
+  && git config --global user.name "Tim Trice"
 
-# Set java conf
-RUN R CMD javareconf
-
-WORKDIR /home/rstudio
-
-RUN wget https://raw.githubusercontent.com/timtrice/web/master/.Rprofile \ 
-  && wget https://raw.githubusercontent.com/timtrice/web/master/_install.R \ 
-  && Rscript "_install.R"
-
-RUN rm .Rprofile \ 
-  && rm _install.R
-
-RUN mkdir -p .rstudio/monitored/user-settings
-
-WORKDIR /home/rstudio/.rstudio/monitored/user-settings
-
-RUN wget https://gist.githubusercontent.com/timtrice/94a679b51388faf99ef7918c7bdaff8d/raw/9a52ffebd1e2e8587918a31ff8e962110b816936/user-settings
-
-WORKDIR /home/rstudio
-
+COPY user-settings /home/rstudio/.rstudio/monitored/user-settings/
 RUN chown -R rstudio:rstudio .
-
