@@ -75,4 +75,4 @@ RUN apt-get update \
   && git config --global user.name "Tim Trice"
 
 COPY user-settings /home/rstudio/.rstudio/monitored/user-settings/
-RUN chown -R rstudio:rstudio .
+RUN chown -R rstudio:rstudio /home/rstudio/.rstudio
