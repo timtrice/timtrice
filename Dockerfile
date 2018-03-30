@@ -56,14 +56,13 @@ RUN apt-get update \
     ropensci/rrricanes@v0.2.0-6 \ 
     timtrice/NCDCStormEvents \ 
     yihui/xfun@v0.1 \ 
-  && echo '\n# set CRAN mirrors \
-    \noptions(c(getOption('repos'), 'https://timtrice.github.io/drat/'), 
+  && echo "\n# set CRAN mirrors \
+    \noptions(c(getOption('repos'), 'https://timtrice.github.io/drat/'), \
+    \n\t\t\t\tblogdown.hugo.dir = '/home/rstudio/bin/', \
     \n\t\t\t\twarnPartialMatchArgs = TRUE,  \
     \n\t\t\t\twarnPartialMatchDollar = TRUE, \
     \n\t\t\t\twarnPartialMatchAttr = TRUE) \
-    \n \
-    \noptions(blogdown.hugo.dir = "/home/rstudio/bin/") \
-    \n' >> /usr/local/lib/R/etc/Rprofile.site \ 
+    \n" >> /usr/local/lib/R/etc/Rprofile.site \ 
   && R -e "blogdown::install_hugo()" \ 
   && mkdir -p /home/rstudio/.rstudio/monitored/user-settings \ 
   && git config --global user.email "tim.trice@gmail.com" \ 
