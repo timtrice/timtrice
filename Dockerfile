@@ -57,13 +57,8 @@ RUN apt-get update \
     timtrice/NCDCStormEvents \ 
     yihui/xfun@v0.1 \ 
   && echo '\n# set CRAN mirrors \
-    \nlocal({ \
-    \n\tr <- getOption("repos") \
-    \n\tr["rrricanesdata"] <- "https://timtrice.github.io/drat/" \
-    \noptions(repos = r) \
-    \n}) \
-    \n \
-    \noptions(warnPartialMatchArgs = TRUE,  \
+    \noptions(c(getOption('repos'), 'https://timtrice.github.io/drat/'), 
+    \n\t\t\t\twarnPartialMatchArgs = TRUE,  \
     \n\t\t\t\twarnPartialMatchDollar = TRUE, \
     \n\t\t\t\twarnPartialMatchAttr = TRUE) \
     \n \
