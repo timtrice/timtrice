@@ -1,10 +1,7 @@
 # set CRAN mirrors
-local({
-  r <- getOption("repos")
-  r["CRAN"] <- "https://mran.microsoft.com/snapshot/2018-01-01"
-  r["rrricanesdata"] <- "https://timtrice.github.io/drat/"
-  options(repos = r)
-})
+option("repos" = c(getOption("repos"),
+                   "https://timtrice.github.io/drat/"))
 
-options(warnPartialMatchArgs = TRUE, warnPartialMatchDollar = TRUE,
+options(warnPartialMatchArgs = TRUE,
+        warnPartialMatchDollar = TRUE,
         warnPartialMatchAttr = TRUE)
