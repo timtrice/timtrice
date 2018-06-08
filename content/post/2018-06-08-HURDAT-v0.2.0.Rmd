@@ -30,7 +30,7 @@ date: '2018-06-08'
 # Slug
 #   - Use title without conjunctions and determiners.
 #   - All lower-case.
-slug: hurdat-v0.2.0
+# slug: hurdat-v0.2.0
 
 # Categories
 #   - General classification of post.
