@@ -19,7 +19,7 @@ copyright = "&copy; 2018"
 theme = "hugo-academic"
 enableEmoji = true
 footnotereturnlinkcontents = "<sup>^</sup>"
-ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$", "Dockerfile", 
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$", "Dockerfile",
 	"docker-compose.yml", "user-settings"]
 preserveTaxonomyNames = true
 paginate = 10
@@ -80,6 +80,7 @@ titleCaseStyle = "Chicago"
 #  address = "Building 1 Room 1, Stanford University, California, 90210, USA"
 #  office_hours = "Monday 10:00 to 13:00 or email for appointment"
 #  telegram = ""
+  email = "tim.trice@gmail.com"
 
   # Enable Keybase in Contact widget by entering your keybase.io username.
 #  keybase = ""
