@@ -49,9 +49,7 @@ output:
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo        =    TRUE, 
-                      error       =    TRUE, 
-                      max.print   =    NA, 
-                      connection  =    "con")
+                      error       =    TRUE)
 ```
 
 ```{r, echo = FALSE, message = FALSE}
