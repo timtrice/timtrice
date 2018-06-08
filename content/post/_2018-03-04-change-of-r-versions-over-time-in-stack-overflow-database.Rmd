@@ -1,0 +1,150 @@
+---
+title: Change of R Versions Over Time in Stack Overflow Database
+author: 'Tim Trice'
+date: '2018-03-04'
+slug: change-of-r-versions-over-time-in-stack-overflow-database
+draft: TRUE
+categories:
+  - SQL
+  - R
+tags:
+  - SELECT
+  - subquery
+output:
+  blogdown::html_page:
+    toc: true
+    toc_depth: 6
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo        =    TRUE, 
+                      error       =    TRUE, 
+                      message     =    FALSE, 
+                      warning     =    FALSE)
+```
+
+### Should I continue to support R 3.3?
+
+Recently I was considering dropping support of R 3.3.x in my [rrricanes](https://github.com/ropensci/rrricanes) package in favor of 3.4.x. I was curious though how many have upgraded. 
+
+R 3.4.0 was released in April, 2017 - plenty of time for users to upgrade. But, I did not know how to find these stats (and was not inclined to spend much time looking). So, I went to Google Bigquery knowing they have the Stack Overflow database. The results would not be "live" (the dataset does not include 2018). But, I could at least get a decent idea.
+
+```{r libraries}
+library(knitr)
+library(tidyverse)
+```
+
+```{r dataset, cache = TRUE}
+# Processed dataset
+df <- read_csv(paste0("https://media.githubusercontent.com/media/",
+                      "timtrice/datasets/master/", 
+                      "stackoverflow/r-version-change-over-time.csv"), 
+               col_types = cols()) %>%
+  # Shorten r_version to major/minor release (exclude patch)
+  mutate(r_version = str_extract(r_version, "^\\d\\.\\d\\d*"))
+```
+
+```{r stats}
+df_stats <- df %>% 
+  filter(!is.na(r_version)) %>% 
+  count(year_month, r_version) %>% 
+  left_join(df %>% 
+              filter(is.na(r_version)) %>% 
+              count(year_month), 
+            by = "year_month") %>% 
+  rename(posts_w_r_vers = n.x, 
+         total_r_posts = n.y) %>% 
+  mutate(per = posts_w_r_vers/total_r_posts) %>% 
+  arrange(year_month, r_version)
+
+kable(df_stats, 
+      caption = "Summary of r-Tagged Posts in Stack Overflow, w/ R version", 
+      col.names = c("Date", "R Version", "Posts w/ R Version", "Total Posts", 
+                    "Percentage"))
+```
+
+```{r}
+df_stats %>% 
+  ggplot(aes(x = year_month, y = posts_w_r_vers, color = r_version)) + 
+  geom_point() + 
+  facet_wrap(~r_version) + 
+  theme(legend.position = "none") + 
+  labs(title = "R Posts with Version by Year/Month", 
+       x = "Date", 
+       y = "Count")
+```
+
+
+Not only is R 3.3 still in use (at least as of the end of 2017), but versions 3.1 and 3.2 are, as well. I would rather see direct numbers from CRAN. More importantly, these numbers just aren't a good representation of the overall post content in the dataset. None of the posts containing the R version make up more than `r sprintf("%1.3f", max(df_stats$per) * 100)`% of the total posts tagged with "r". 
+
+### Requirements
+
+  * What are the requirements for reproducing the contents of this post? 
+
+  * Include versions of all called packages, as well.
+
+  * Pretend you found this article via Google and need to know if it pertains 
+    to your issue.
+
+Example: 
+
+Python 3.6.1
+
+Text Editor (Vim was used for the examples)
+
+Operating System (Linux, MacOS, Windows) with version information (Ubuntu 16, MacOS 10.12, Windows 10 Professional)
+
+- OR - 
+
+```{sql db-version, tab.cap = "Server Info", eval = FALSE}
+SELECT @@version_comment AS `Version`, 
+  @@version_compile_machine AS `Version Compile Machine`, 
+  @@innodb_version AS `InnoDB Version`, 
+  @@version_compile_os AS `Version Compile OS`;
+```
+
+### Introduction
+
+  * What is it you will cover in your post? 
+
+  * Do not be technical in this piece
+
+Python has become the defacto glue language in software development. In it's newest version (3.6.1), the language has evolved into a powerful tool that is easy to pick up. Python is included as a default in most Linux distros, and in MacOS. Such widespread adoption means you will probably not need to install anything in order to run Python on your machine. Follow along as I explain how to use Python's F-Strings in a Linux environment.
+
+### Multiple step explanation
+
+  * Break everything down to the smallest step possible. 
+  
+  * Stay specific to the step
+  
+  * Provide visual clues where at all possible.
+  
+  * Readers will look for the deepest scope first, then work backwards.
+
+### Examples
+
+  * Provide examples that directly correlate to the explanations above. 
+  
+  * Range examples from very simple to rather complex. 
+
+### Tips #todo [Remove this section - this is for the author]
+
+  * When in doubt, explain (but carefully and organized). Use visual cues when possible. 
+  
+  * Keep it simple. 
+  
+  * Look at [Stripe](https://stripe.com/docs/connect/accounts) documentation for examples.
+  
+  * Run code within the article. 
+
+### Summary
+
+  * Add links to sources.
+  
+  * Thank those who helped contribute.
+  
+  * Close with direct contact info.
+
+```{r close-db, include = FALSE, eval = FALSE}
+dbDisconnect(con)
+```
