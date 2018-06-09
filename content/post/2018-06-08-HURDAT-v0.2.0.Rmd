@@ -54,8 +54,8 @@ output:
 ---
 
 ```{r setup, include = FALSE}
-knitr::opts_chunk$set(echo        =    TRUE, 
-                      error       =    TRUE)
+knitr::opts_chunk$set(echo = TRUE, 
+                      message = FALSE)
 ```
 
 ```{r, echo = FALSE, message = FALSE}
@@ -65,7 +65,33 @@ knitr::opts_chunk$set(fig.width = 10)
 ```{r libraries}
 library(HURDAT)
 library(lubridate)
+library(patchwork)
 library(tidyverse)
+```
+
+```{r, fig.height = 13}
+AL %>% 
+  group_by(Year = year(DateTime)) %>% 
+  summarise(Storms = n_distinct(Key)) %>% 
+  mutate(Decade = paste0(10 * floor(Year/10), "'s")) %>% 
+  ggplot(aes(x = Year, y = Storms, fill = Decade, color = Decade)) + 
+  geom_ribbon(alpha = 0.35, color = NA, aes(ymin = 0, ymax = Storms)) + 
+  geom_line(size = 0.25) + 
+  scale_x_continuous(limits = c(1851, 2017), 
+                     breaks = NULL, 
+                     minor_breaks = seq(1850, 2020, by = 20), 
+                     expand = c(0, 0)) + 
+  scale_y_continuous(limits = c(0, 35), 
+                     expand = c(0, 0)) + 
+  coord_flip() + 
+  theme_bw() + 
+  theme(legend.position = "none", 
+        axis.text.y = element_blank()) + 
+  labs(title = "Atlantic Basin", 
+       subtitle = "Tropical Cyclone Activity by Decade", 
+       caption = sprintf("@timtrice, HURDAT v%s", packageVersion("HURDAT")), 
+       x = element_blank(), 
+       y = element_blank())
 ```
 
 ## Atlantic Basin
