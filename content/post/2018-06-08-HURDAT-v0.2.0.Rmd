@@ -39,6 +39,12 @@ date: '2018-06-08'
 #     - Python
 categories:
   - R
+
+# Tags
+#   - Calls specific to category such as functions, or classes.
+#     - In SQL, "SELECT", "ORDER BY", "PARTITION", etc.
+#     - In R, "dplyr", "rattle", "vector", etc."
+tags:
   - HURDAT
 
 output:
