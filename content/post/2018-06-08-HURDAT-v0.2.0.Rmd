@@ -69,143 +69,32 @@ library(patchwork)
 library(tidyverse)
 ```
 
-```{r, fig.height = 13}
-AL %>% 
-  group_by(Year = year(DateTime)) %>% 
+```{r}
+df <- union(mutate(AL, Basin = "Atlantic"), 
+            mutate(EP, Basin = "East Pacific"))
+```
+
+```{r}
+df %>% 
+  group_by(Basin, 
+           Year = year(DateTime)) %>% 
   summarise(Storms = n_distinct(Key)) %>% 
   mutate(Decade = paste0(10 * floor(Year/10), "'s")) %>% 
   ggplot(aes(x = Year, y = Storms, fill = Decade, color = Decade)) + 
-  geom_ribbon(alpha = 0.35, color = NA, aes(ymin = 0, ymax = Storms)) + 
-  geom_line(size = 0.25) + 
-  scale_x_continuous(limits = c(1851, 2017), 
-                     breaks = NULL, 
-                     minor_breaks = seq(1850, 2020, by = 20), 
+  geom_ribbon(aes(ymin = 0, ymax = Storms), alpha = 0.35, color = NA) + 
+  geom_line(size = 0.5) + 
+  facet_wrap(~Basin, ncol = 1) + 
+  scale_x_continuous(limits = c(1851, 2018), 
+                     breaks = seq(1850, 2020, by = 20), 
+                     minor_breaks = seq(1850, 2020, by = 10), 
                      expand = c(0, 0)) + 
   scale_y_continuous(limits = c(0, 35), 
                      expand = c(0, 0)) + 
-  coord_flip() + 
   theme_bw() + 
   theme(legend.position = "none", 
-        axis.text.y = element_blank()) + 
-  labs(title = "Atlantic Basin", 
-       subtitle = "Tropical Cyclone Activity by Decade", 
-       caption = sprintf("@timtrice, HURDAT v%s", packageVersion("HURDAT")), 
-       x = element_blank(), 
-       y = element_blank())
+        strip.text = element_text(size = 10, color = "white", face = "bold", hjust = 1), 
+        strip.background = element_rect(fill = "#0090EA")) + 
+  labs(title = "Tropical cyclones by decade", 
+       subtitle = "Introduction of weather satellites in 1960's", 
+       caption = sprintf("@timtrice, HURDAT %s", packageVersion("HURDAT")))
 ```
-
-## Atlantic Basin
-
-```{r}
-AL %>% 
-  group_by(Key) %>% 
-  summarise(Month = month(first(DateTime))) %>% 
-  ggplot(aes(x = Month)) + 
-  geom_bar() + 
-  scale_x_discrete(labels = c(month.abb), 
-                   limits = c(1:12), 
-                   expand = c(0.05, 0.05)) + 
-  labs(title = "Atlantic Basin Tropical Cyclones", 
-       subtitle = sprintf("Cumulative, by month (%s - %s)", 
-                          year(first(AL$DateTime)), 
-                          year(last(AL$DateTime))), 
-       caption = "@timtrice source: HURDAT v0.2.0", 
-       y = "Total")
-```
-
-```{r}
-AL %>% 
-  group_by(Key, Year = year(DateTime)) %>% 
-  summarise(MaxWind = max(Wind, na.rm = TRUE)) %>% 
-  filter(!is.infinite(MaxWind)) %>% 
-  mutate(Class = case_when(
-    MaxWind <= 33 ~ "TD", 
-    MaxWind <= 64 ~ "TS", 
-    TRUE          ~ "HU"
-  )) %>% 
-  group_by(Year, Class) %>% 
-  summarise(Storms = n()) %>% 
-  spread(Class, Storms) %>% 
-  mutate(Total = sum(HU, TD, TS, na.rm = TRUE)) %>% 
-  ungroup() %>% 
-  top_n(10L, wt = Total) %>% 
-  arrange(desc(Total))
-```
-
-```{r}
-AL %>% 
-  group_by(Key, Year = year(DateTime)) %>% 
-  summarise(MaxWind = max(Wind, na.rm = TRUE)) %>% 
-  filter(!is.infinite(MaxWind)) %>% 
-  mutate(Class = case_when(
-    MaxWind <= 33 ~ "TD", 
-    MaxWind <= 64 ~ "TS", 
-    TRUE          ~ "HU"
-  )) %>% 
-  group_by(Year, Class) %>% 
-  summarise(Storms = n()) %>% 
-  ggplot(aes(x = Year, y = Storms, fill = Class)) + 
-  geom_histogram(stat = "identity") + 
-  scale_x_continuous(limits = c(1851, 2017), 
-                     breaks = seq(1850, 2020, by = 50), 
-                     minor_breaks = seq(1850, 2020, by = 10))
-```
-
-```{r}
-AL %>%
-  select(Wind, Pressure) %>% 
-  filter(!is.na(Pressure)) %>% 
-  sample_n(size = 1000L) %>% 
-  ggplot(aes(x = Wind, y = Pressure)) + 
-  geom_point() + 
-  geom_smooth(method = "loess")
-```
-
-## East Pacific Basin
-
-```{r}
-EP %>% 
-  group_by(Key) %>% 
-  summarise(Month = month(first(DateTime))) %>% 
-  ggplot(aes(x = Month)) + 
-  geom_bar() + 
-  scale_x_discrete(labels = c(month.abb), 
-                   limits = c(1:12), 
-                   expand = c(0.05, 0.05)) + 
-  labs(title = "East Pacific Basin Tropical Cyclones", 
-       subtitle = sprintf("Cumulative, by month (%s - %s)", 
-                          year(first(EP$DateTime)), 
-                          year(last(EP$DateTime))), 
-       caption = "@timtrice source: HURDAT v0.2.0", 
-       y = "Total")
-```
-
-```{r}
-EP %>% 
-  group_by(Key, Year = year(DateTime)) %>% 
-  summarise(MaxWind = max(Wind, na.rm = TRUE)) %>% 
-  filter(!is.infinite(MaxWind)) %>% 
-  mutate(Class = case_when(
-    MaxWind <= 33 ~ "TD", 
-    MaxWind <= 64 ~ "TS", 
-    TRUE          ~ "HU"
-  )) %>% 
-  group_by(Year, Class) %>% 
-  summarise(Storms = n()) %>% 
-  ggplot(aes(x = Year, y = Storms, fill = Class)) + 
-  geom_histogram(stat = "identity") + 
-  scale_x_continuous(limits = c(1949, 2017), 
-                     breaks = seq(1949, 2017, by = 10), 
-                     minor_breaks = seq(1949, 2017, by = 5))
-```
-
-```{r}
-EP %>%
-  select(Wind, Pressure) %>% 
-  filter(!is.na(Pressure)) %>% 
-  sample_n(size = 1000L) %>% 
-  ggplot(aes(x = Wind, y = Pressure)) + 
-  geom_point() + 
-  geom_smooth(method = "loess")
-```
-
