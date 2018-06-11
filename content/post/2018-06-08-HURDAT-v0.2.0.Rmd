@@ -130,3 +130,71 @@ df %>%
        y = "")
 ```
 
+## Average Speed of Tropical Cyclones over Time
+
+```{r}
+# @source: http://www.ridgesolutions.ie/index.php/2013/11/14/algorithm-to-calculate-speed-from-two-gps-latitude-and-longitude-points-and-time-difference/
+distance <- function(lat1, lon1, lat2, lon2) {
+
+	# Convert degrees to radians
+	lat1 = lat1 * pi / 180.0
+	lon1 = lon1 * pi / 180.0
+ 
+	lat2 = lat2 * pi / 180.0
+	lon2 = lon2 * pi / 180.0
+ 
+	# radius of earth in metres
+	r = 6378100;
+ 
+	# P
+	rho1 = r * cos(lat1)
+	z1 = r * sin(lat1)
+	x1 = rho1 * cos(lon1)
+	y1 = rho1 * sin(lon1)
+ 
+	# Q
+	rho2 = r * cos(lat2)
+	z2 = r * sin(lat2)
+	x2 = rho2 * cos(lon2)
+	y2 = rho2 * sin(lon2)
+ 
+	# Dot product
+	dot = (x1 * x2 + y1 * y2 + z1 * z2)
+	cos_theta = dot / (r * r)
+ 
+	theta = acos(cos_theta)
+ 
+	# Distance in Metres
+	return(r * theta)
+}
+
+# meters to miles
+m_to_miles <- function(x) {
+  return(x * 3.281 / 5280)
+}
+```
+
+```{r}
+df %>% 
+  arrange(Key, DateTime) %>% 
+  group_by(Key) %>% 
+  summarise(Span = (last(DateTime) - first(DateTime))) %>% 
+  filter(Span >= 1) %>% 
+  left_join(df, by = "Key") %>% 
+  group_by(Key, Year = year(DateTime)) %>% 
+  mutate(Distance = distance(Lat, Lon, lag(Lat), lag(Lon)), 
+         TimeDiff = as.integer(abs(DateTime - lag(DateTime))), 
+         MPH = m_to_miles(Distance/TimeDiff)) %>% 
+  summarise(AvgSpeed = mean(MPH, na.rm = TRUE)) %>% 
+  ggplot(aes(x = Year, y = AvgSpeed)) + 
+  geom_point() + 
+  theme_bw() + 
+  labs(title = "Average Forward Speed of Storms (MPH)", 
+       subtitle = "Storms that have survived a minimum of 24 hours.", 
+       caption = sprintf("@timtrice, HURDAT %s", packageVersion("HURDAT")))
+```
+
+```{r}
+
+```
+
