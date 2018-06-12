@@ -96,7 +96,8 @@ df %>%
   theme_bw() + 
   theme(legend.position = "none", 
         plot.subtitle = element_text(face = "italic", size = 10),
-        strip.text = element_text(size = 10, color = "black", face = "bold", hjust = 1), 
+        strip.text = element_text(size = 10, color = "black", face = "bold", 
+                                  hjust = 0.99), 
         strip.background = element_rect(fill = "#FFFFFF")) + 
   labs(title = "Tropical cyclones by decade", 
        subtitle = "Introduction of weather satellites in 1960's", 
@@ -121,7 +122,8 @@ df %>%
         plot.subtitle = element_text(face = "italic", size = 10),
         axis.text.x = element_text(hjust = -0.75), 
         axis.ticks.x = element_blank(), 
-        strip.text = element_text(size = 10, color = "black", face = "bold", hjust = 1), 
+        strip.text = element_text(size = 10, color = "black", face = "bold", 
+                                  hjust = 0.99), 
         strip.background = element_rect(fill = "#FFFFFF")) + 
   labs(title = "Wind Observations by Month", 
        subtitle = "No known cyclones for Central Pacific from April through June.", 
@@ -175,7 +177,7 @@ m_to_miles <- function(x) {
 ```
 
 ```{r}
-df %>% 
+tmp <- df %>% 
   arrange(Key, DateTime) %>% 
   group_by(Key) %>% 
   summarise(Span = (last(DateTime) - first(DateTime))) %>% 
@@ -186,15 +188,40 @@ df %>%
          TimeDiff = as.integer(abs(DateTime - lag(DateTime))), 
          MPH = m_to_miles(Distance/TimeDiff)) %>% 
   summarise(AvgSpeed = mean(MPH, na.rm = TRUE)) %>% 
+  mutate(Basin = case_when(
+    str_sub(Key, 0L, 2L) == "AL" ~ "Atlantic", 
+    str_sub(Key, 0L, 2L) == "CP" ~ "Central Pacific", 
+    str_sub(Key, 0L, 2L) == "EP" ~ "East Pacific"
+  ))
+
+tmp %>% 
   ggplot(aes(x = Year, y = AvgSpeed)) + 
   geom_point() + 
+  geom_smooth(method = "loess") +
   theme_bw() + 
-  labs(title = "Average Forward Speed of Storms (MPH)", 
-       subtitle = "Storms that have survived a minimum of 24 hours.", 
-       caption = sprintf("@timtrice, HURDAT %s", packageVersion("HURDAT")))
+  labs(title = "Average Forward Speed of Storms", 
+       subtitle = "Storms with at least 24 hours of data", 
+       caption = sprintf("@timtrice, HURDAT %s", packageVersion("HURDAT")), 
+       y = "Average Speed (MPH)")
 ```
 
 ```{r}
-
+tmp %>% 
+  group_by(Basin, Year) %>% 
+  summarise(AvgSpeed = mean(AvgSpeed, na.rm = TRUE)) %>% 
+  ggplot(aes(x = Year, y = AvgSpeed)) + 
+  geom_point() + 
+  geom_smooth(method = "loess") + 
+  facet_wrap(~Basin, ncol = 1) + 
+  scale_x_continuous(breaks = seq(1850, 2020, by = 20), 
+                     minor_breaks = seq(1850, 2020, by = 10)) + 
+  theme_bw() + 
+  theme(strip.text = element_text(size = 10, color = "black", face = "bold", 
+                                  hjust = 0.99), 
+        strip.background = element_rect(fill = "#FFFFFF")) + 
+  labs(title = "Average Forward Speed for All Storms by Year", 
+       subtitle = "Storms with at least 24 hours of data", 
+       caption = sprintf("@timtrice, HURDAT %s", packageVersion("HURDAT")), 
+       y = "Average Speed (MPH)")
 ```
 
