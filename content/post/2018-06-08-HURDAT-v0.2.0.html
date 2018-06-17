@@ -93,7 +93,7 @@ library(tidyverse)</code></pre>
   labs(title = &quot;Tropical cyclones by decade&quot;, 
        subtitle = &quot;Introduction of weather satellites in 1960&#39;s&quot;, 
        caption = sprintf(&quot;@timtrice, HURDAT %s&quot;, packageVersion(&quot;HURDAT&quot;)))</code></pre>
-<p><img src="/post/2018-06-08-HURDAT-v0.2.0_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="/post/2018-06-08-HURDAT-v0.2.0_files/figure-html/tropical-cyclones-by-decade-1.png" width="672" /></p>
 <pre class="r"><code>df %&gt;% 
   mutate(Month = factor(month(DateTime, label = TRUE))) %&gt;% 
   ggplot(aes(x = Wind, y = Month)) + 
@@ -121,7 +121,7 @@ library(tidyverse)</code></pre>
        y = &quot;&quot;)</code></pre>
 <pre><code>## Warning in seq.default(.limits[1], .limits[2], length = guide$nbin):
 ## partial argument match of &#39;length&#39; to &#39;length.out&#39;</code></pre>
-<p><img src="/post/2018-06-08-HURDAT-v0.2.0_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="/post/2018-06-08-HURDAT-v0.2.0_files/figure-html/wind-obs-by-month-1.png" width="672" /></p>
 <div id="average-speed-of-tropical-cyclones-over-time" class="section level2">
 <h2>Average Speed of Tropical Cyclones over Time</h2>
 <pre class="r"><code># @source: http://www.ridgesolutions.ie/index.php/2013/11/14/algorithm-to-calculate-speed-from-two-gps-latitude-and-longitude-points-and-time-difference/
@@ -229,8 +229,7 @@ m_to_miles &lt;- function(x) {
        subtitle = &quot;Storms with at least 24 hours of data&quot;, 
        caption = sprintf(&quot;@timtrice, HURDAT %s&quot;, packageVersion(&quot;HURDAT&quot;)), 
        y = &quot;Average Speed (MPH)&quot;)</code></pre>
-<pre><code>## Warning: Removed 1 rows containing non-finite values (stat_smooth).</code></pre>
-<p><img src="/post/2018-06-08-HURDAT-v0.2.0_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="/post/2018-06-08-HURDAT-v0.2.0_files/figure-html/avg-fwd-speed-storms-1.png" width="672" /></p>
 <pre class="r"><code>tmp %&gt;% 
   group_by(Basin, Year) %&gt;% 
   summarise(AvgSpeed = mean(AvgSpeed, na.rm = TRUE)) %&gt;% 
@@ -248,6 +247,5 @@ m_to_miles &lt;- function(x) {
        subtitle = &quot;Storms with at least 24 hours of data&quot;, 
        caption = sprintf(&quot;@timtrice, HURDAT %s&quot;, packageVersion(&quot;HURDAT&quot;)), 
        y = &quot;Average Speed (MPH)&quot;)</code></pre>
-<pre><code>## Warning: Removed 1 rows containing non-finite values (stat_smooth).</code></pre>
-<p><img src="/post/2018-06-08-HURDAT-v0.2.0_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="/post/2018-06-08-HURDAT-v0.2.0_files/figure-html/avg-fwd-speed-by-year-1.png" width="672" /></p>
 </div>
