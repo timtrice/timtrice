@@ -58,7 +58,7 @@ knitr::opts_chunk$set(echo = TRUE,
                       message = FALSE)
 ```
 
-```{r, echo = FALSE, message = FALSE}
+```{r knitr-opts, echo = FALSE, message = FALSE}
 knitr::opts_chunk$set()
 ```
 
@@ -69,7 +69,7 @@ library(lubridate)
 library(tidyverse)
 ```
 
-```{r}
+```{r union-datasets}
 df <- union(AL, EP) %>% 
   mutate(Basin = case_when(
     str_sub(Key, 0L, 2L) == "AL" ~ "Atlantic", 
@@ -77,7 +77,7 @@ df <- union(AL, EP) %>%
     str_sub(Key, 0L, 2L) == "CP" ~ "Central Pacific"))
 ```
 
-```{r}
+```{r tropical-cyclones-by-decade}
 df %>% 
   group_by(Basin, 
            Year = year(DateTime)) %>% 
@@ -104,7 +104,7 @@ df %>%
        caption = sprintf("@timtrice, HURDAT %s", packageVersion("HURDAT")))
 ```
 
-```{r}
+```{r wind-obs-by-month}
 df %>% 
   mutate(Month = factor(month(DateTime, label = TRUE))) %>% 
   ggplot(aes(x = Wind, y = Month)) + 
@@ -134,7 +134,7 @@ df %>%
 
 ## Average Speed of Tropical Cyclones over Time
 
-```{r}
+```{r func-distance}
 # @source: http://www.ridgesolutions.ie/index.php/2013/11/14/algorithm-to-calculate-speed-from-two-gps-latitude-and-longitude-points-and-time-difference/
 distance <- function(lat1, lon1, lat2, lon2) {
 
@@ -176,7 +176,7 @@ m_to_miles <- function(x) {
 }
 ```
 
-```{r}
+```{r avg-fwd-speed-storms}
 tmp <- df %>% 
   arrange(Key, DateTime) %>% 
   group_by(Key) %>% 
@@ -205,7 +205,7 @@ tmp %>%
        y = "Average Speed (MPH)")
 ```
 
-```{r}
+```{r avg-fwd-speed-by-year}
 tmp %>% 
   group_by(Basin, Year) %>% 
   summarise(AvgSpeed = mean(AvgSpeed, na.rm = TRUE)) %>% 
