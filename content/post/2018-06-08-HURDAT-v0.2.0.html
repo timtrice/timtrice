@@ -209,6 +209,12 @@ m_to_miles &lt;- function(x) {
 
 ## Warning in acos(cos_theta): NaNs produced
 
+## Warning in acos(cos_theta): NaNs produced
+
+## Warning in acos(cos_theta): NaNs produced
+
+## Warning in acos(cos_theta): NaNs produced
+
 ## Warning in acos(cos_theta): NaNs produced</code></pre>
 <pre class="r"><code>tmp %&gt;% 
   ggplot(aes(x = Year, y = AvgSpeed)) + 
@@ -238,4 +244,63 @@ m_to_miles &lt;- function(x) {
        caption = sprintf(&quot;@timtrice, HURDAT %s&quot;, packageVersion(&quot;HURDAT&quot;)), 
        y = &quot;Average Speed (MPH)&quot;)</code></pre>
 <p><img src="/post/2018-06-08-HURDAT-v0.2.0_files/figure-html/avg-fwd-speed-by-year-1.png" width="672" /></p>
+<p>First date of tropical storm or hurricane (or subtropical storm). Hurricane status is included for systems that did not officially go through a tropical storm phase, such as <strong>AL011851</strong>.</p>
+<pre class="r"><code>df %&gt;% 
+  filter(Status %in% c(&quot;TS&quot;, &quot;HU&quot;)) %&gt;% 
+  arrange(DateTime) %&gt;% 
+  group_by(Year = year(DateTime)) %&gt;% 
+  slice(1L) %&gt;%
+  mutate(Month = month(DateTime, label = TRUE)) %&gt;% 
+  select(Status, Year, Month) %&gt;% 
+  ggplot(aes(x = Month, fill = Status, color = Status)) + 
+  geom_bar() + 
+  theme_bw() + 
+  theme(legend.position = &quot;bottom&quot;) + 
+  labs(title = &quot;First Tropical Storm or Hurricane Observation, by Month&quot;, 
+       subtitle = &quot;Extratropical and subtropical cyclones excluded&quot;, 
+       caption = sprintf(&quot;@timtrice, HURDAT %s&quot;, packageVersion(&quot;HURDAT&quot;)), 
+       x = &quot;Month&quot;, 
+       y = &quot;Total&quot;)</code></pre>
+<p><img src="/post/2018-06-08-HURDAT-v0.2.0_files/figure-html/first-ts-ob-by-month-1.png" width="672" /></p>
+<pre class="r"><code>calendar &lt;- data.frame(Date = seq.Date(as.Date(&quot;2016-01-01&quot;),
+                                       as.Date(&quot;2016-12-31&quot;), by = 1)) %&gt;% 
+  mutate(DOY = strftime(Date, format = &quot;%j&quot;), 
+         Month = month(Date, label = TRUE)) %&gt;% 
+  group_by(Month) %&gt;% 
+  slice(c(1L, n())) %&gt;% 
+  select(DOY, Month) %&gt;% 
+  mutate(Breaks = case_when(
+    row_number() %% 2 != 0 ~ &quot;Start&quot;, 
+    TRUE                   ~ &quot;End&quot;
+  )) %&gt;% 
+  spread(Breaks, DOY) %&gt;% 
+  mutate_at(vars(Start, End), .funs = as.numeric)
+
+df %&gt;% 
+  filter(Status %in% c(&quot;TS&quot;, &quot;HU&quot;)) %&gt;% 
+  arrange(DateTime) %&gt;% 
+  group_by(Year = year(DateTime)) %&gt;% 
+  slice(1L) %&gt;% 
+  mutate(Month = month(DateTime), 
+         DOY = as.numeric(format(DateTime, format = &quot;%j&quot;))) %&gt;% 
+  ggplot() + 
+  geom_bar(aes(x = DOY)) + 
+  geom_rect(data = calendar, 
+            mapping = aes(xmin = Start, xmax = End, ymin = -Inf,
+                                 ymax = Inf, fill = Month), alpha = 0.25) + 
+  scale_x_continuous(expand = c(0, 0), 
+                     breaks = seq(1, 366, by = 366/12), 
+                     minor_breaks = NULL, 
+                     labels = month.abb) + 
+  scale_y_continuous(expand = c(0, 0)) + 
+  scale_fill_hue(h = c(0, 350), l = 50) + 
+  theme_bw() + 
+  theme(legend.position = &quot;none&quot;, 
+        axis.text.x = element_text(hjust = -0.90)) + 
+  labs(title = &quot;First Tropical Storm or Hurricane Observation, by Date&quot;, 
+       subtitle = &quot;Extratropical and subtropical cyclones excluded&quot;, 
+       caption = sprintf(&quot;@timtrice, HURDAT %s&quot;, packageVersion(&quot;HURDAT&quot;)), 
+       x = &quot;&quot;, 
+       y = &quot;Total&quot;)</code></pre>
+<p><img src="/post/2018-06-08-HURDAT-v0.2.0_files/figure-html/first-ts-ob-by-date-1.png" width="672" /></p>
 </div>

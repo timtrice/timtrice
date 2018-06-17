@@ -225,3 +225,67 @@ tmp %>%
        y = "Average Speed (MPH)")
 ```
 
+First date of tropical storm or hurricane (or subtropical storm). Hurricane status is included for systems that did not officially go through a tropical storm phase, such as **AL011851**. 
+
+```{r first-ts-ob-by-month}
+df %>% 
+  filter(Status %in% c("TS", "HU")) %>% 
+  arrange(DateTime) %>% 
+  group_by(Year = year(DateTime)) %>% 
+  slice(1L) %>%
+  mutate(Month = month(DateTime, label = TRUE)) %>% 
+  select(Status, Year, Month) %>% 
+  ggplot(aes(x = Month, fill = Status, color = Status)) + 
+  geom_bar() + 
+  theme_bw() + 
+  theme(legend.position = "bottom") + 
+  labs(title = "First Tropical Storm or Hurricane Observation, by Month", 
+       subtitle = "Extratropical and subtropical cyclones excluded", 
+       caption = sprintf("@timtrice, HURDAT %s", packageVersion("HURDAT")), 
+       x = "Month", 
+       y = "Total")
+```
+
+```{r first-ts-ob-by-date}
+calendar <- data.frame(Date = seq.Date(as.Date("2016-01-01"),
+                                       as.Date("2016-12-31"), by = 1)) %>% 
+  mutate(DOY = strftime(Date, format = "%j"), 
+         Month = month(Date, label = TRUE)) %>% 
+  group_by(Month) %>% 
+  slice(c(1L, n())) %>% 
+  select(DOY, Month) %>% 
+  mutate(Breaks = case_when(
+    row_number() %% 2 != 0 ~ "Start", 
+    TRUE                   ~ "End"
+  )) %>% 
+  spread(Breaks, DOY) %>% 
+  mutate_at(vars(Start, End), .funs = as.numeric)
+
+df %>% 
+  filter(Status %in% c("TS", "HU")) %>% 
+  arrange(DateTime) %>% 
+  group_by(Year = year(DateTime)) %>% 
+  slice(1L) %>% 
+  mutate(Month = month(DateTime), 
+         DOY = as.numeric(format(DateTime, format = "%j"))) %>% 
+  ggplot() + 
+  geom_bar(aes(x = DOY)) + 
+  geom_rect(data = calendar, 
+            mapping = aes(xmin = Start, xmax = End, ymin = -Inf,
+                                 ymax = Inf, fill = Month), alpha = 0.25) + 
+  scale_x_continuous(expand = c(0, 0), 
+                     breaks = seq(1, 366, by = 366/12), 
+                     minor_breaks = NULL, 
+                     labels = month.abb) + 
+  scale_y_continuous(expand = c(0, 0)) + 
+  scale_fill_hue(h = c(0, 350), l = 50) + 
+  theme_bw() + 
+  theme(legend.position = "none", 
+        axis.text.x = element_text(hjust = -0.90)) + 
+  labs(title = "First Tropical Storm or Hurricane Observation, by Date", 
+       subtitle = "Extratropical and subtropical cyclones excluded", 
+       caption = sprintf("@timtrice, HURDAT %s", packageVersion("HURDAT")), 
+       x = "", 
+       y = "Total")
+```
+
