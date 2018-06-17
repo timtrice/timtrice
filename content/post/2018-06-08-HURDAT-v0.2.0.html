@@ -1,0 +1,253 @@
+---
+# General format taken from <https://dev.to/yelluw/how-to-do-technical-blogging>
+
+# Title
+#   - Short title, start with verb, provide brief explanation what this is about.
+#   - Examples:
+#     - Writing a $technology $thing
+#     - Developing with $technology
+#     - Testing $techonology with $thing
+title: HURDAT v0.2.0
+
+# Summary
+#   - 2-3 sentences. 
+#   - Summarize what post is about.
+#   - Should be closely related to title
+#   - Should be smooth transition from title
+summary: > 
+  HURDAT v0.2.0 has recently been released in CRAN. The new release contains all 
+  tropical cyclones for the 2017 season, Atlantic and east Pacific basins. 
+
+# Description is not used at this time but may be implemented later.
+description: NULL
+
+# Abstract is not used at this time but may be implemented later.
+abstract: NULL
+
+author: Tim Trice
+date: '2018-06-08'
+
+# Slug
+#   - Use title without conjunctions and determiners.
+#   - All lower-case.
+# slug: hurdat-v0.2.0
+
+# Categories
+#   - General classification of post.
+#     - SQL
+#     - R
+#     - Python
+categories:
+  - R
+
+# Tags
+#   - Calls specific to category such as functions, or classes.
+#     - In SQL, "SELECT", "ORDER BY", "PARTITION", etc.
+#     - In R, "dplyr", "rattle", "vector", etc."
+tags:
+  - HURDAT
+
+output:
+    blogdown::html_page:
+        toc: true
+        toc_depth: 6
+---
+
+
+<div id="TOC">
+<ul>
+<li><a href="#average-speed-of-tropical-cyclones-over-time">Average Speed of Tropical Cyclones over Time</a></li>
+</ul>
+</div>
+
+<pre class="r"><code>library(ggridges)
+library(HURDAT)
+library(lubridate)
+library(tidyverse)</code></pre>
+<pre class="r"><code>df &lt;- union(AL, EP) %&gt;% 
+  mutate(Basin = case_when(
+    str_sub(Key, 0L, 2L) == &quot;AL&quot; ~ &quot;Atlantic&quot;, 
+    str_sub(Key, 0L, 2L) == &quot;EP&quot; ~ &quot;East Pacific&quot;, 
+    str_sub(Key, 0L, 2L) == &quot;CP&quot; ~ &quot;Central Pacific&quot;))</code></pre>
+<pre class="r"><code>df %&gt;% 
+  group_by(Basin, 
+           Year = year(DateTime)) %&gt;% 
+  summarise(Storms = n_distinct(Key)) %&gt;% 
+  mutate(Decade = paste0(10 * floor(Year/10), &quot;&#39;s&quot;)) %&gt;% 
+  ggplot(aes(x = Year, y = Storms, fill = Decade, color = Decade)) + 
+  geom_ribbon(aes(ymin = 0, ymax = Storms), alpha = 0.35, color = NA) + 
+  geom_line(size = 0.5) + 
+  facet_wrap(~Basin, ncol = 1) + 
+  scale_x_continuous(limits = c(1851, 2018), 
+                     breaks = seq(1850, 2020, by = 20), 
+                     minor_breaks = seq(1850, 2020, by = 10), 
+                     expand = c(0, 0)) + 
+  scale_y_continuous(limits = c(0, 35), 
+                     expand = c(0, 0)) + 
+  theme_bw() + 
+  theme(legend.position = &quot;none&quot;, 
+        plot.subtitle = element_text(face = &quot;italic&quot;, size = 10),
+        strip.text = element_text(size = 10, color = &quot;black&quot;, face = &quot;bold&quot;, 
+                                  hjust = 0.99), 
+        strip.background = element_rect(fill = &quot;#FFFFFF&quot;)) + 
+  labs(title = &quot;Tropical cyclones by decade&quot;, 
+       subtitle = &quot;Introduction of weather satellites in 1960&#39;s&quot;, 
+       caption = sprintf(&quot;@timtrice, HURDAT %s&quot;, packageVersion(&quot;HURDAT&quot;)))</code></pre>
+<p><img src="/post/2018-06-08-HURDAT-v0.2.0_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<pre class="r"><code>df %&gt;% 
+  mutate(Month = factor(month(DateTime, label = TRUE))) %&gt;% 
+  ggplot(aes(x = Wind, y = Month)) + 
+  geom_density_ridges_gradient(aes(fill = ..x..), 
+                               alpha = 0.85, 
+                               scale = 0.85, 
+                               rel_min_height = 0.01, 
+                               size = 0.1) + 
+  facet_wrap(~Basin, ncol = 1) + 
+  coord_flip() +
+  scale_y_discrete(expand = c(0, 0)) + 
+  scale_fill_gradientn(colors = terrain.colors(10), name = &quot;Wind Speed (kts)&quot;) + 
+  theme_bw() + 
+  theme(legend.position = &quot;bottom&quot;, 
+        plot.subtitle = element_text(face = &quot;italic&quot;, size = 10),
+        axis.text.x = element_text(hjust = -0.75), 
+        axis.ticks.x = element_blank(), 
+        strip.text = element_text(size = 10, color = &quot;black&quot;, face = &quot;bold&quot;, 
+                                  hjust = 0.99), 
+        strip.background = element_rect(fill = &quot;#FFFFFF&quot;)) + 
+  labs(title = &quot;Wind Observations by Month&quot;, 
+       subtitle = &quot;No known cyclones for Central Pacific from April through June.&quot;, 
+       caption = sprintf(&quot;@timtrice, HURDAT %s&quot;, packageVersion(&quot;HURDAT&quot;)), 
+       x = &quot;Wind (kts)&quot;, 
+       y = &quot;&quot;)</code></pre>
+<pre><code>## Warning in seq.default(.limits[1], .limits[2], length = guide$nbin):
+## partial argument match of &#39;length&#39; to &#39;length.out&#39;</code></pre>
+<p><img src="/post/2018-06-08-HURDAT-v0.2.0_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<div id="average-speed-of-tropical-cyclones-over-time" class="section level2">
+<h2>Average Speed of Tropical Cyclones over Time</h2>
+<pre class="r"><code># @source: http://www.ridgesolutions.ie/index.php/2013/11/14/algorithm-to-calculate-speed-from-two-gps-latitude-and-longitude-points-and-time-difference/
+distance &lt;- function(lat1, lon1, lat2, lon2) {
+
+    # Convert degrees to radians
+    lat1 = lat1 * pi / 180.0
+    lon1 = lon1 * pi / 180.0
+ 
+    lat2 = lat2 * pi / 180.0
+    lon2 = lon2 * pi / 180.0
+ 
+    # radius of earth in metres
+    r = 6378100;
+ 
+    # P
+    rho1 = r * cos(lat1)
+    z1 = r * sin(lat1)
+    x1 = rho1 * cos(lon1)
+    y1 = rho1 * sin(lon1)
+ 
+    # Q
+    rho2 = r * cos(lat2)
+    z2 = r * sin(lat2)
+    x2 = rho2 * cos(lon2)
+    y2 = rho2 * sin(lon2)
+ 
+    # Dot product
+    dot = (x1 * x2 + y1 * y2 + z1 * z2)
+    cos_theta = dot / (r * r)
+ 
+    theta = acos(cos_theta)
+ 
+    # Distance in Metres
+    return(r * theta)
+}
+
+# meters to miles
+m_to_miles &lt;- function(x) {
+  return(x * 3.281 / 5280)
+}</code></pre>
+<pre class="r"><code>tmp &lt;- df %&gt;% 
+  arrange(Key, DateTime) %&gt;% 
+  group_by(Key) %&gt;% 
+  summarise(Span = (last(DateTime) - first(DateTime))) %&gt;% 
+  filter(Span &gt;= 1) %&gt;% 
+  left_join(df, by = &quot;Key&quot;) %&gt;% 
+  group_by(Key, Year = year(DateTime)) %&gt;% 
+  mutate(Distance = distance(Lat, Lon, lag(Lat), lag(Lon)), 
+         TimeDiff = as.integer(abs(DateTime - lag(DateTime))), 
+         MPH = m_to_miles(Distance/TimeDiff)) %&gt;% 
+  summarise(AvgSpeed = mean(MPH, na.rm = TRUE)) %&gt;% 
+  mutate(Basin = case_when(
+    str_sub(Key, 0L, 2L) == &quot;AL&quot; ~ &quot;Atlantic&quot;, 
+    str_sub(Key, 0L, 2L) == &quot;CP&quot; ~ &quot;Central Pacific&quot;, 
+    str_sub(Key, 0L, 2L) == &quot;EP&quot; ~ &quot;East Pacific&quot;
+  ))</code></pre>
+<pre><code>## Warning in acos(cos_theta): NaNs produced
+
+## Warning in acos(cos_theta): NaNs produced
+
+## Warning in acos(cos_theta): NaNs produced
+
+## Warning in acos(cos_theta): NaNs produced
+
+## Warning in acos(cos_theta): NaNs produced
+
+## Warning in acos(cos_theta): NaNs produced
+
+## Warning in acos(cos_theta): NaNs produced
+
+## Warning in acos(cos_theta): NaNs produced
+
+## Warning in acos(cos_theta): NaNs produced
+
+## Warning in acos(cos_theta): NaNs produced
+
+## Warning in acos(cos_theta): NaNs produced
+
+## Warning in acos(cos_theta): NaNs produced
+
+## Warning in acos(cos_theta): NaNs produced
+
+## Warning in acos(cos_theta): NaNs produced
+
+## Warning in acos(cos_theta): NaNs produced
+
+## Warning in acos(cos_theta): NaNs produced
+
+## Warning in acos(cos_theta): NaNs produced
+
+## Warning in acos(cos_theta): NaNs produced
+
+## Warning in acos(cos_theta): NaNs produced
+
+## Warning in acos(cos_theta): NaNs produced
+
+## Warning in acos(cos_theta): NaNs produced</code></pre>
+<pre class="r"><code>tmp %&gt;% 
+  ggplot(aes(x = Year, y = AvgSpeed)) + 
+  geom_point() + 
+  geom_smooth(method = &quot;loess&quot;) +
+  theme_bw() + 
+  labs(title = &quot;Average Forward Speed of Storms&quot;, 
+       subtitle = &quot;Storms with at least 24 hours of data&quot;, 
+       caption = sprintf(&quot;@timtrice, HURDAT %s&quot;, packageVersion(&quot;HURDAT&quot;)), 
+       y = &quot;Average Speed (MPH)&quot;)</code></pre>
+<pre><code>## Warning: Removed 1 rows containing non-finite values (stat_smooth).</code></pre>
+<p><img src="/post/2018-06-08-HURDAT-v0.2.0_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<pre class="r"><code>tmp %&gt;% 
+  group_by(Basin, Year) %&gt;% 
+  summarise(AvgSpeed = mean(AvgSpeed, na.rm = TRUE)) %&gt;% 
+  ggplot(aes(x = Year, y = AvgSpeed)) + 
+  geom_point() + 
+  geom_smooth(method = &quot;loess&quot;) + 
+  facet_wrap(~Basin, ncol = 1) + 
+  scale_x_continuous(breaks = seq(1850, 2020, by = 20), 
+                     minor_breaks = seq(1850, 2020, by = 10)) + 
+  theme_bw() + 
+  theme(strip.text = element_text(size = 10, color = &quot;black&quot;, face = &quot;bold&quot;, 
+                                  hjust = 0.99), 
+        strip.background = element_rect(fill = &quot;#FFFFFF&quot;)) + 
+  labs(title = &quot;Average Forward Speed for All Storms by Year&quot;, 
+       subtitle = &quot;Storms with at least 24 hours of data&quot;, 
+       caption = sprintf(&quot;@timtrice, HURDAT %s&quot;, packageVersion(&quot;HURDAT&quot;)), 
+       y = &quot;Average Speed (MPH)&quot;)</code></pre>
+<pre><code>## Warning: Removed 1 rows containing non-finite values (stat_smooth).</code></pre>
+<p><img src="/post/2018-06-08-HURDAT-v0.2.0_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
