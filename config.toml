@@ -3,7 +3,7 @@
 
 # The URL of your website.
 # End your URL with a `/` trailing slash, e.g. `https://example.com/`.
-baseurl = "http://timtrice.net/"
+baseurl = "/"
 
 # Title of your site
 title = "Tim Trice"
@@ -19,8 +19,8 @@ copyright = "&copy; 2018"
 theme = "hugo-academic"
 enableEmoji = true
 footnotereturnlinkcontents = "<sup>^</sup>"
-ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$", "Dockerfile",
-	"docker-compose.yml", "user-settings"]
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "\\.R$", "_files$", "_cache$",
+  "Dockerfile", "docker-compose.yml", "user-settings"]
 preserveTaxonomyNames = true
 paginate = 10
 publishDir = "public"
@@ -283,10 +283,10 @@ titleCaseStyle = "Chicago"
   url = "#testimonials"
   weight = 80
 
-[[menu.main]]
-  name = "Contact"
-  url = "#contact"
-  weight = 100
+#[[menu.main]]
+#  name = "Contact"
+#  url = "#contact"
+#  weight = 100
 
 # Taxonomies.
 [taxonomies]

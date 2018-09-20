@@ -45,10 +45,11 @@ categories:
 #     - In R, "dplyr", "rattle", "vector", etc."
 tags:
   - SELECT
+
 output:
-    blogdown::html_page:
-        toc: true
-        toc_depth: 6
+  blogdown::html_page:
+    toc: true
+    toc_depth: 6
 ---
 
 ```{r setup, include = FALSE}
