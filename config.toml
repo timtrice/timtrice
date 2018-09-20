@@ -283,10 +283,10 @@ titleCaseStyle = "Chicago"
   url = "#testimonials"
   weight = 80
 
-[[menu.main]]
-  name = "Contact"
-  url = "#contact"
-  weight = 100
+#[[menu.main]]
+#  name = "Contact"
+#  url = "#contact"
+#  weight = 100
 
 # Taxonomies.
 [taxonomies]
