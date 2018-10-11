@@ -1,0 +1,124 @@
+---
+title: NCDC Storm Events - Importing Data
+author: Tim Trice
+date: "`r Sys.Date()`"
+slug: ncdc-storm-events-importing-data
+categories:
+  - R
+tags:
+  - curl
+  - glue
+  - purrr
+  - readr
+header:
+  caption: ''
+  image: ''
+params:
+  script: "https://raw.githubusercontent.com/timtrice/datasets/3d6b1c39a74bda72b21e7c23550d1109a439923f/ncdc_storm_events/01_import_data.R"
+---
+
+```{r setup, echo = FALSE, message = FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE
+)
+```
+
+The [NCDC Storm Events database](https://www.ncdc.noaa.gov/stormevents/) is a collection of three datasets of weather events for areas monitored by the National Weather Service. The dataset timeperiod begins in January, 1950 and ends, currently, June, 2018. 
+
+There are three tables included in the database (the terms "database" and "tables" are used loosely here; they're csv.gz files on a FTP server). 
+
+* details - A 51 x *n* dataset
+
+* fatalities - A 11 x *n* dataset
+
+* locations - A 11 x *n* dataset
+
+A mostly complete [codebook](ftp://ftp.ncdc.noaa.gov/pub/data/swdi/stormevents/csvfiles/Storm-Data-Export-Format.docx) is available on the [FTP server](ftp://ftp.ncdc.noaa.gov/pub/data/swdi/stormevents/csvfiles/). I have [modified this document](https://github.com/timtrice/datasets/tree/master/ncdc_storm_events) to a format more readable for me.
+
+Each table is split by month into a gzipped CSV file and available for download. The naming format is as such, 
+
+StormEvents_{TABLE}-ftp_v1.0_d{YEAR}_c{YMD}.csv.gz
+
+where TABLE is one of "details", "fatalities", or "locations", YEAR is the four-digit year, and "YMD" is the year, two-digit month, and two-digit date the zip file was last modified. There are no delimeters any of the fields.
+
+```{r gh-url, echo = FALSE, cache = FALSE}
+knitr::read_chunk(params$script)
+```
+
+For this phase of the project, I will be using four R libraries:
+
+* curl - Used to retrieve FTP listings
+
+* glue - Insert variables within expressions
+
+* purrr - Map lists and dataframes
+
+* readr - read and write CSVs
+
+```{r libraries, message = FALSE}
+```
+
+I also want to go ahead and declare some variable I will use later. The first is `ftp` which is the URL to the FTP server. The second, `tables`, stores the name of each of the three tables.
+
+And, last, when reading in the CSVs I found I needed to take more control rather than allowing `readr::read_csv` to guess; this would produce errors I'll get to in a moment.
+
+So, rather than typing "c" repeatedly as the col_type parameter, I just created a list ot hold the values. I use `glue_collapse` to paste the values together.
+
+(I thought you could use one character that `read_csv` would repeat itself; I'm sure this was once a feature. But, unless I messed up, simply using `col_types = "c"` did not work.)
+
+```{r settings}
+```
+
+```{r connection}
+```
+
+Take a look at the `tbl` object.
+
+```{r}
+head(tbl)
+```
+
+This is basically a representation of the FTP site in a dataframe format. All that I am concerned with is `tbl$V9` which are the file names. I can glue this to `ftp` within a recursive function using pattern matching to extract only the files I want.
+
+The pattern matching portion is easy; every file name starts with "StormEvents_" followed by one of "details", "fatalities", or "locations". 
+
+I'll use `purrr::map` to build a list of length three for each table, then assign each element of the list the name of it's respective table.
+
+```{r by_table}
+```
+
+```{r}
+str(by_table)
+```
+
+I now have a nice, clean listing of all my files for each table. 
+
+It's time to read in the CSVs. Again, I fall back to `purrr` but I want to use `map_df` this time; I want one dataframe for each `table`. I'll describe my parameters.
+
+* `.x` - I use `glue` again to effectively take all of the values in `by_table$details` and append the `ftp` variable. 
+
+* `.f` - As I'll be reading in CSV files, I use `read_csv` from the `readr` package.
+
+* `col_types` - Originally I left this parameter to it's default. However, this would prove to be an issue. `read_csv` guesses a column type for each column in a CSV; this is controlled by the `guess_max` parameter which defaults to the smaller value of 1000 or the `n_max` parameter. Some values would be guessed to be numeric. But, on importing the datasets it might find a character that would generate a warning. To deal with this during cleanup, I decided to make them all characters.
+
+I then save the datasets to a [Git LFS](https://git-lfs.github.com/) repo.
+
+```{r load_details, eval = FALSE}
+```
+
+```{r load_fatalities, eval = FALSE}
+```
+
+```{r load_locations, eval = FALSE}
+```
+
+Next, I'll start performing some cleanup. And, whoo boy, is there some cleaning to do.
+
+[Script](`r params$script`)
+
+## Session Info
+
+```{r session-info, eval = TRUE}
+pander::pander(sessionInfo())
+```
+
