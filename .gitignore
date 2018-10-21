@@ -1,3 +1,4 @@
+.Renviron
 .Rproj.user
 .Rhistory
 .RData
@@ -5,3 +6,4 @@
 docs
 web.code-workspace
 public
+.httr-oauth
