@@ -13,7 +13,7 @@ summary = "`HURDAT` is a dataset from the Hurricane Re-Analysis project. It cont
 tags = ["r"]
 
 # Optional external URL for project (replaces project detail page).
-external_link = "https://github.com/timtrice/HURDAT"
+external_link = "https://hurdat.timtrice.net"
 
 # Does the project detail page use math formatting?
 math = false
