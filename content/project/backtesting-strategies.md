@@ -13,7 +13,7 @@ summary = "Book on backtesting strategies in R using blotter, quantstrat, Financ
 tags = ["r"]
 
 # Optional external URL for project (replaces project detail page).
-external_link = "https://github.com/timtrice/backtesting-strategies"
+external_link = "http://timtrice.github.io/backtesting-strategies/"
 
 # Does the project detail page use math formatting?
 math = false
