@@ -1,6 +1,7 @@
 +++
 # Date this page was created.
 date = "2015-01-01"
+weight = 5
 
 # Project title.
 title = "Backtesting Strategies"

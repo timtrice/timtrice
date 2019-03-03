@@ -1,6 +1,7 @@
 +++
 # Date this page was created.
 date = "2017-01-01"
+weight = 3
 
 # Project title.
 title = "HURDAT"
