@@ -1,19 +1,20 @@
 +++
 # Date this page was created.
-date = "2015-01-01"
+date = "2019-03-03"
+weight = 3
 
 # Project title.
-title = "sandbox"
+title = "Hurricane Harvey Preliminary Reports"
 
 # Project summary to display on homepage.
-summary = "My coding playground. Python, R, SQL and bash scripts for code challenges and just general \"what does this do?\""
+summary = "A data extraction project analyzing rainfall, pressure, wind and tornadic activity reports during the landfall of Hurricane Harvey, 2017"
 
 # Tags: can be used for filtering projects.
 # Example: `tags = ["machine-learning", "deep-learning"]`
-tags = ["r", "python", "sql", "bash"]
+tags = ["r"]
 
 # Optional external URL for project (replaces project detail page).
-external_link = "https://github.com/timtrice/sandbox"
+external_link = "https://hurricane-harvey-prelims.timtrice.net"
 
 # Does the project detail page use math formatting?
 math = false

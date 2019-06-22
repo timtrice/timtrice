@@ -1,6 +1,7 @@
 +++
 # Date this page was created.
 date = "2017-06-01"
+weight = 1
 
 # Project title.
 title = "rrricanes"
@@ -13,7 +14,7 @@ summary = "`rrricanes` is a more comprehensive dataset of Atlantic and Pacific c
 tags = ["r"]
 
 # Optional external URL for project (replaces project detail page).
-external_link = "https://github.com/ropensci/rrricanes"
+external_link = "https://ropensci.github.io/rrricanes/"
 
 # Does the project detail page use math formatting?
 math = false

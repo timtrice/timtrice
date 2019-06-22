@@ -1,20 +1,20 @@
 +++
 # Date this page was created.
-date = "2017-01-01"
-weight = 2
+date = "2019-03-03"
+weight = 6
 
 # Project title.
-title = "HURDAT"
+title = "Connors RSI"
 
 # Project summary to display on homepage.
-summary = "`HURDAT` is a dataset from the Hurricane Re-Analysis project. It contains storm data for hundreds of cyclones for storms that have developed in the northwestern hemisphere (Atlantic and Pacific) since 1851."
+summary = "Exploratory Analysis for the Connors RSI trading strategy. The backtest trades tickers IWM, QQQ, SPY and TLT and compares the results versus a buy-and-hold strategy for the same symbols, as well as against a benchmark symbol (SPY)."
 
 # Tags: can be used for filtering projects.
 # Example: `tags = ["machine-learning", "deep-learning"]`
 tags = ["r"]
 
 # Optional external URL for project (replaces project detail page).
-external_link = "https://hurdat.timtrice.net"
+external_link = "http://connors-rsi.timtrice.net"
 
 # Does the project detail page use math formatting?
 math = false
