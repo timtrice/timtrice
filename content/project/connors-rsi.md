@@ -1,7 +1,7 @@
 +++
 # Date this page was created.
 date = "2019-03-03"
-weight = 6
+weight = 5
 
 # Project title.
 title = "Connors RSI"
