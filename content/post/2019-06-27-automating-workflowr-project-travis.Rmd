@@ -1,0 +1,234 @@
+---
+# General format taken from <https://dev.to/yelluw/how-to-do-technical-blogging>
+
+# Title
+#   - Short title, start with verb, provide brief explanation what this is about.
+#   - Examples:
+#     - Writing a $technology $thing
+#     - Developing with $technology
+#     - Testing $techonology with $thing
+title: Automating a Workflowr Project with Travis
+
+# Summary
+#   - 2-3 sentences. 
+#   - Summarize what post is about.
+#   - Should be closely related to title
+#   - Should be smooth transition from title
+summary: > 
+  Use this template for SQL technical posts. 
+
+# Description is not used at this time but may be implemented later.
+description: Does descriptionw ork?
+
+# Abstract is not used at this time but may be implemented later.
+abstract: Does abstract yet work?
+
+author: Tim Trice
+date: '2019-06-27'
+
+# Slug
+#   - Use title without conjunctions and determiners.
+#   - All lower-case.
+slug: automating-workflowr-project-travis
+
+# Categories
+#   - General classification of post.
+#     - SQL
+#     - R
+#     - Python
+categories:
+  - R
+
+# Tags
+#   - Calls specific to category such as functions, or classes.
+#     - In SQL, "SELECT", "ORDER BY", "PARTITION", etc.
+#     - In R, "dplyr", "rattle", "vector", etc."
+tags:
+  - workflowr
+  - travis
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE, 
+  error = TRUE
+)
+```
+
+```{r libraries, include = FALSE}
+```
+
+### Requirements
+
+  * What are the requirements for reproducing the contents of this post? 
+  
+    + workflowr
+    
+    + travis
+    
+    + GH-Pages or Netlify
+
+  * Include versions of all called packages, as well.
+  
+    + Versions irrelevant
+
+  * Pretend you found this article via Google and need to know if it pertains 
+    to your issue.
+
+Example: 
+
+Python 3.6.1
+
+Text Editor (Vim was used for the examples)
+
+Operating System (Linux, MacOS, Windows) with version information (Ubuntu 16, MacOS 10.12, Windows 10 Professional)
+
+### Introduction
+
+  * What is it you will cover in your post? 
+  
+    + Run analysis locally but treat the project as a versioning system.
+    
+      1. Store draft content seperately.
+      
+    + Ensure online is consistent
+    
+    + Deployment is instantaneous
+
+  * Do not be technical in this piece
+  
+  * Does not apply to blogdown or pkgdown 
+
+Python has become the defacto glue language in software development. In it's newest version (3.6.1), the language has evolved into a powerful tool that is easy to pick up. Python is included as a default in most Linux distros, and in MacOS. Such widespread adoption means you will probably not need to install anything in order to run Python on your machine. Follow along as I explain how to use Python's F-Strings in a Linux environment.
+
+### Multiple step explanation
+
+  * Break everything down to the smallest step possible. 
+  
+  * Stay specific to the step
+  
+  * Provide visual clues where at all possible.
+  
+  * Readers will look for the deepest scope first, then work backwards.
+
+===
+
+Assuming an empty workflowr project, 
+
+  1. Create empty gh-pages (any name is fine) branch
+
+```
+git checkout --orphan gh-pages
+git rm -rf .
+git commit --allow-empty -m 'Initial gh-pages commit'
+git push origin gh-pages
+git checkout master
+```
+
+  2. Add DESCRIPTION to root directory (`usethis::use_description`)
+  
+    + Package
+    
+    + Title
+    
+    + Version
+    
+    + Authors
+    
+    + Description
+    
+    + License
+    
+    + Encoding
+    
+    + LazyData
+    
+    + Depends (added)
+    
+    + Imports (added)
+    
+    + URL (added)
+    
+    + BugReports (added)
+    
+  3. Add .travis.yml file (`usethis::use_travis`)
+
+    + language: r
+    
+    + cache: packages
+    
+    + script:
+      
+      - bash code/deploy.sh
+    
+    + on:
+      
+      - branch: master
+
+  4. Create deploy script
+
+```
+GH_REPO="@github.com/$TRAVIS_REPO_SLUG.git"
+FULL_REPO="https://$GH_TOKEN$GH_REPO"
+git config --global user.name "Travis CI"
+git config --global user.email "tim.trice@gmail.com"
+git clone https://github.com/timtrice/twitter_api.git
+cd twitter_api
+Rscript --verbose code/02_retrieve.R
+Rscript -e 'workflowr::wflow_build(verbose = TRUE, view = FALSE);'
+cd docs
+git init
+git add .
+git commit -m 'Rebuild docs'
+git push --force $FULL_REPO master:gh-pages
+```
+
+  5. Set GH_REPO environment variable in Travis
+  
+    + [GitLab](https://gitlab.com/profile/personal_access_tokens)
+    
+    + [GitHub](https://github.com/settings/tokens)
+  
+  6. (optional) Add docs to .gitignore
+  
+  7. Set up site on Netlify
+  
+  8. Commit changes and push to repo
+
+### Examples
+
+  * Provide examples that directly correlate to the explanations above. 
+  
+  * Range examples from very simple to rather complex. 
+
+### Tips #todo [Remove this section - this is for the author]
+
+  * When in doubt, explain (but carefully and organized). Use visual cues when possible. 
+  
+  * Keep it simple. 
+  
+  * Look at [Stripe](https://stripe.com/docs/connect/accounts) documentation for examples.
+  
+  * Run code within the article. 
+
+### Summary
+
+  * Add links to sources.
+  
+    + https://docs.travis-ci.com/user/deployment
+  
+    + pkgdown (https://pkgdown.r-lib.org/reference/deploy_site_github.html)
+  
+    + RConsortium (https://github.com/RConsortium/isc-proposal)
+  
+  * Thank those who helped contribute.
+
+    + JD Long (@CMastication)
+  
+    + John Blischak (@jdblischak)
+  
+    + Maelle Salmon (@ma_salmon)
+  
+    + Jim Hester (@jimhester_)  
+  
+  * Close with direct contact info.
