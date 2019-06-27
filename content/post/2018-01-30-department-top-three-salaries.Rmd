@@ -9,38 +9,31 @@ date: '2018-01-30'
 slug: department-top-three-salaries
 categories:
   - SQL
-  - MariaDB
 tags:
   - SELECT
   - LEFT JOIN
   - DISTINCT
   - ORDER BY
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include = FALSE}
-knitr::opts_chunk$set(echo = TRUE, 
-                      error = TRUE, 
-                      max.print = NA, 
-                      connection = "mariadb_con")
+knitr::opts_chunk$set(
+  echo = TRUE, 
+  error = TRUE, 
+  max.print = NA, 
+  connection = "con"
+)
 ```
 
-```{r libraries, include = FALSE}
+```{r libraries}
 library(DBI)
 library(knitr)
-library(RMariaDB)
 ```
 
-```{r db-con_params, include = FALSE}
-mariadb.host <- Sys.getenv("mariadb.host")
-mariadb.user <- Sys.getenv("mariadb.user")
-mariadb.password <- Sys.getenv("mariadb.password")
-```
-
-```{r db-con, include = FALSE}
-mariadb_con <- dbConnect(RMariaDB::MariaDB(), 
-                 host = mariadb.host,
-                 user = mariadb.user, 
-                 password = mariadb.password)
+```{r db-con_params}
+con <- dbConnect(RSQLite::SQLite(), dbname = ":memory:")
 ```
 
 ### Problem
@@ -88,7 +81,7 @@ Write a SQL query to find employees who earn the top three salaries in each of t
 ### Setup
 
 ```{sql create-employee}
-CREATE TEMPORARY TABLE IF NOT EXISTS `LeetCode`.`Employee` (
+CREATE TABLE `Employee` (
   `Id` INT,
   `Name` VARCHAR(255),
   `Salary` INT,
@@ -97,22 +90,14 @@ CREATE TEMPORARY TABLE IF NOT EXISTS `LeetCode`.`Employee` (
 ```
 
 ```{sql create-department}
-CREATE TEMPORARY TABLE IF NOT EXISTS `LeetCode`.`Department` (
+CREATE TABLE `Department` (
   `Id` INT,
   `Name` VARCHAR(255)
 );
 ```
 
-```{sql truncate-table-employee}
-TRUNCATE TABLE `LeetCode`.`Employee`;
-```
-
-```{sql truncate-table-department}
-TRUNCATE TABLE `LeetCode`.`Department`;
-```
-
 ```{sql insert-employee}
-INSERT INTO `LeetCode`.`Employee` 
+INSERT INTO `Employee` 
   (`Id`, `Name`, `Salary`, `DepartmentId`) 
 VALUES 
   (1, "Joe", 70000, 1), 
@@ -124,7 +109,7 @@ VALUES
 ```
 
 ```{sql insert-department}
-INSERT INTO `LeetCode`.`Department` 
+INSERT INTO `Department` 
   (`Id`, `Name`) 
 VALUES 
   (1, "IT"), 
@@ -133,12 +118,12 @@ VALUES
 
 ```{sql select-employee}
 SELECT * 
-FROM `LeetCode`.`Employee`;
+FROM `Employee`;
 ```
 
 ```{sql select-department}
 SELECT * 
-FROM `LeetCode`.`Department`;
+FROM `Department`;
 ```
 
 ### Failed Attempt #1
@@ -149,32 +134,43 @@ SELECT
   `Department`.`Name` AS `Department`,
   `Employee`.`Name` AS `Employee`,
   `Employee`.`Salary`
-FROM `LeetCode`.`Employee` AS `Employee`
-LEFT JOIN `LeetCode`.`Department` AS `Department`
-ON `Employee`.`DepartmentId` = `Department`.`Id`
+FROM 
+  `Employee`
+LEFT JOIN 
+  `Department`
+ON 
+  `Employee`.`DepartmentId` = `Department`.`Id`
 WHERE (
-  SELECT COUNT(*)
-  FROM `LeetCode`.`Employee` AS `t1`
-  WHERE `t1`.`DepartmentId` = `Employee`.`DepartmentId`
-  AND `t1`.`Salary` >= `Employee`.`Salary`) <= 3
-ORDER BY `Employee`.`DepartmentId`, `Employee`.`Salary` DESC;
+  SELECT 
+    COUNT(*)
+  FROM 
+    `Employee` AS `t1`
+  WHERE 
+    `t1`.`DepartmentId` = `Employee`.`DepartmentId`
+  AND 
+    `t1`.`Salary` >= `Employee`.`Salary`
+  ) <= 3
+ORDER BY 
+  `Employee`.`DepartmentId`, 
+  `Employee`.`Salary`
+DESC;
 ```
 
 The solution above brings the expected result set. However, this query fails if `Department` is empty. 
 
 ```{sql}
-TRUNCATE TABLE `LeetCode`.`Employee`;
+DELETE FROM `Employee`;
 ```
 
 ```{sql}
-TRUNCATE TABLE `LeetCode`.`Department`;
+DELETE FROM `Department`;
 ```
 
 ```{sql}
-INSERT INTO `LeetCode`.`Employee`
-  (`Id`, `Name`, `Salary`, `DepartmentId`)
+INSERT INTO `Employee`
+(`Id`, `Name`, `Salary`, `DepartmentId`)
 VALUES
-  (1, "Joe", 10000, 1);
+(1, "Joe", 10000, 1);
 
 -- Department intentionally left empty.
 
@@ -186,57 +182,79 @@ SELECT
   `Department`.`Name` AS `Department`,
   `Employee`.`Name` AS `Employee`,
   `Employee`.`Salary`
-FROM `LeetCode`.`Employee` AS `Employee`
-LEFT JOIN `LeetCode`.`Department` AS `Department`
-ON `Employee`.`DepartmentId` = `Department`.`Id`
+FROM 
+  `Employee` AS `Employee`
+LEFT JOIN 
+  `Department` AS `Department`
+ON 
+  `Employee`.`DepartmentId` = `Department`.`Id`
 WHERE (
-  SELECT COUNT(*)
-  FROM `LeetCode`.`Employee` AS `t1`
-  WHERE `t1`.`DepartmentId` = `Employee`.`DepartmentId`
-  AND `t1`.`Salary` >= `Employee`.`Salary`) <= 3
-ORDER BY `Employee`.`DepartmentId`, `Employee`.`Salary` DESC;
+  SELECT 
+    COUNT(*)
+  FROM 
+    `Employee` AS `t1`
+  WHERE 
+    `t1`.`DepartmentId` = `Employee`.`DepartmentId`
+  AND 
+    `t1`.`Salary` >= `Employee`.`Salary`
+  ) <= 3
+ORDER BY 
+  `Employee`.`DepartmentId`, 
+  `Employee`.`Salary` 
+DESC;
 ```
 
-The original problem does not state how to handle NULL results, which is what we have here. However, the answer set shown on failure is empty. The query has to be modified to accomodate no `Department`s. 
+The original problem does not state how to handle NULL results, which is what we have here. However, the answer set shown on failure is empty. The query has to be modified to accomodate no `Department`. 
 
 ### Failed Attempt #2
 
-```{sql solution-2}
+```{sql solution-2, class.source = c("numberLines")}
 -- Query #2
 SELECT
   `Department`.`Name` AS `Department`,
   `Employee`.`Name` AS `Employee`,
   `Employee`.`Salary`
-FROM `LeetCode`.`Employee` AS `Employee`
-LEFT JOIN `LeetCode`.`Department` AS `Department`
-ON `Employee`.`DepartmentId` = `Department`.`Id`
+FROM 
+  `Employee` AS `Employee`
+LEFT JOIN 
+  `Department` AS `Department`
+ON 
+  `Employee`.`DepartmentId` = `Department`.`Id`
 WHERE (
-  SELECT COUNT(*)
-  FROM `LeetCode`.`Employee` AS `t1`
-  WHERE `t1`.`DepartmentId` = `Employee`.`DepartmentId`
-  AND `t1`.`Salary` >= `Employee`.`Salary`) <= 3 
+  SELECT 
+    COUNT(*)
+  FROM 
+    `Employee` AS `t1`
+  WHERE 
+    `t1`.`DepartmentId` = `Employee`.`DepartmentId`
+  AND 
+    `t1`.`Salary` >= `Employee`.`Salary`
+) <= 3 
 -- Check for NULL
-AND `Department`.`Name` IS NOT NULL
-ORDER BY `Employee`.`DepartmentId`, `Employee`.`Salary` DESC;
+AND 
+  `Department`.`Name` IS NOT NULL
+ORDER BY 
+  `Employee`.`DepartmentId`, `Employee`.`Salary` 
+DESC;
 ```
 
 Adding the line below to the query above passes the test case.
 
-```{r ref.label = "solution-2", echo = c(14, 15), eval = FALSE}
+```{sql ref.label = "solution-2", echo = c(22:24), eval = FALSE, attr.source = c(".numberLines", "startFrom='22'")}
 ```
 
 The last failure came with ties; no mention of how to handle ties. 
 
 ```{sql}
-TRUNCATE TABLE `LeetCode`.`Employee`;
+DELETE FROM `Employee`;
 ```
 
 ```{sql}
-TRUNCATE TABLE `LeetCode`.`Department`;
+DELETE FROM `Department`;
 ```
 
 ```{sql}
-INSERT INTO `LeetCode`.`Employee`
+INSERT INTO `Employee`
   (`Id`, `Name`, `Salary`, `DepartmentId`)
 VALUES
   (1, "Joe", 60000, 1),
@@ -248,7 +266,7 @@ VALUES
 Notice the tie between Joel and Joe; recognize that because of this Ralph is to be included, not excluded.
 
 ```{sql}
-INSERT INTO `LeetCode`.`Department`
+INSERT INTO `Department`
   (`Id`, `Name`)
 VALUES
   (1, "IT");
@@ -260,58 +278,70 @@ SELECT
   `Department`.`Name` AS `Department`,
   `Employee`.`Name` AS `Employee`,
   `Employee`.`Salary`
-FROM `LeetCode`.`Employee` AS `Employee`
-LEFT JOIN `LeetCode`.`Department` AS `Department`
-ON `Employee`.`DepartmentId` = `Department`.`Id`
+FROM 
+  `Employee` AS `Employee`
+LEFT JOIN 
+  `Department` AS `Department`
+ON 
+  `Employee`.`DepartmentId` = `Department`.`Id`
 WHERE (
-  SELECT COUNT(*)
-  FROM `LeetCode`.`Employee` AS `t1`
-  WHERE `t1`.`DepartmentId` = `Employee`.`DepartmentId`
-  AND `t1`.`Salary` >= `Employee`.`Salary`) <= 3 
-AND `Department`.`Name` IS NOT NULL 
-ORDER BY `Employee`.`DepartmentId`, `Employee`.`Salary` DESC;
+  SELECT 
+    COUNT(*)
+  FROM 
+    `Employee` AS `t1`
+  WHERE 
+    `t1`.`DepartmentId` = `Employee`.`DepartmentId`
+  AND 
+    `t1`.`Salary` >= `Employee`.`Salary`
+) <= 3 
+AND 
+  `Department`.`Name` IS NOT NULL 
+ORDER BY 
+  `Employee`.`DepartmentId`, `Employee`.`Salary` 
+DESC;
 ```
 
 I have to modify the query again in order to get Ralph into the result set. I do this by modifying the **COUNT** call. Instead of counting all rows, I only count **DISTINCT `Salary`**.
 
 ### Solution
 
-```{sql solution-3}
+```{sql solution-3, class.source = c("numberLines")}
 -- Query #3
 SELECT
   `Department`.`Name` AS `Department`,
   `Employee`.`Name` AS `Employee`,
   `Employee`.`Salary`
-FROM `LeetCode`.`Employee` AS `Employee`
-LEFT JOIN `LeetCode`.`Department` AS `Department`
-ON `Employee`.`DepartmentId` = `Department`.`Id`
+FROM 
+  `Employee` AS `Employee`
+LEFT JOIN 
+  `Department` AS `Department`
+ON 
+  `Employee`.`DepartmentId` = `Department`.`Id`
 WHERE (
-  SELECT COUNT(DISTINCT `Salary`)
-  FROM `LeetCode`.`Employee` AS `t1`
-  WHERE `t1`.`DepartmentId` = `Employee`.`DepartmentId`
-  AND `t1`.`Salary` >= `Employee`.`Salary`) <= 3
-AND `Department`.`Name` IS NOT NULL
-ORDER BY `Employee`.`DepartmentId`, `Employee`.`Salary` DESC;
+  SELECT 
+    COUNT(DISTINCT `Salary`)
+  FROM 
+    `Employee` AS `t1`
+  WHERE 
+    `t1`.`DepartmentId` = `Employee`.`DepartmentId`
+  AND 
+    `t1`.`Salary` >= `Employee`.`Salary`
+  ) <= 3
+AND 
+  `Department`.`Name` IS NOT NULL
+ORDER BY 
+  `Employee`.`DepartmentId`, `Employee`.`Salary` 
+DESC;
 ```
 
-```{r ref.label = "solution-2", echo = 10, eval = FALSE}
+```{r ref.label = "solution-2", echo = c(13:14), eval = FALSE, attr.source = c(".numberLines", "startFrom='13'")}
 ```
 
-```{r ref.label = "solution-3", echo = 10, eval = FALSE}
+```{r ref.label = "solution-3", echo = c(13:14), eval = FALSE, attr.source = c(".numberLines", "startFrom='13'")}
 ```
 
 This query passes all test cases and beats out about 89% of all submittals in runtime. 
 
-### MariaDB Server Info
-
-```{sql mariadb-version, connection = mariadb_con, tab.cap = "MariaDB Server Info"}
-SELECT @@version_comment AS `Version`, 
-  @@version_compile_machine AS `Version Compile Machine`, 
-  @@innodb_version AS `InnoDB Version`, 
-  @@version_compile_os AS `Version Compile OS`;
-```
-
-```{r close-mariadb, include = FALSE}
-# Disconnect MariaDB
-dbDisconnect(mariadb_con)
+```{r close-connection, include = FALSE}
+dbDisconnect(con)
 ```
