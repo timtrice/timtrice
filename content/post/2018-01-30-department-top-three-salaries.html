@@ -9,16 +9,20 @@ date: '2018-01-30'
 slug: department-top-three-salaries
 categories:
   - SQL
-  - MariaDB
 tags:
   - SELECT
   - LEFT JOIN
   - DISTINCT
   - ORDER BY
+editor_options: 
+  chunk_output_type: console
 ---
 
 
 
+<pre class="r"><code>library(DBI)
+library(knitr)</code></pre>
+<pre class="r"><code>con &lt;- dbConnect(RSQLite::SQLite(), dbname = &quot;:memory:&quot;)</code></pre>
 <div id="problem" class="section level3">
 <h3>Problem</h3>
 <p>The <code>Employee</code> table holds all employees. Every employee has an Id, and there is also a column for the department Id.</p>
@@ -52,19 +56,17 @@ tags:
 </div>
 <div id="setup" class="section level3">
 <h3>Setup</h3>
-<pre class="sql"><code>CREATE TEMPORARY TABLE IF NOT EXISTS `LeetCode`.`Employee` (
+<pre class="sql"><code>CREATE TABLE `Employee` (
   `Id` INT,
   `Name` VARCHAR(255),
   `Salary` INT,
   `DepartmentId` INT
 );</code></pre>
-<pre class="sql"><code>CREATE TEMPORARY TABLE IF NOT EXISTS `LeetCode`.`Department` (
+<pre class="sql"><code>CREATE TABLE `Department` (
   `Id` INT,
   `Name` VARCHAR(255)
 );</code></pre>
-<pre class="sql"><code>TRUNCATE TABLE `LeetCode`.`Employee`;</code></pre>
-<pre class="sql"><code>TRUNCATE TABLE `LeetCode`.`Department`;</code></pre>
-<pre class="sql"><code>INSERT INTO `LeetCode`.`Employee` 
+<pre class="sql"><code>INSERT INTO `Employee` 
   (`Id`, `Name`, `Salary`, `DepartmentId`) 
 VALUES 
   (1, &quot;Joe&quot;, 70000, 1), 
@@ -73,13 +75,13 @@ VALUES
   (4, &quot;Max&quot;, 90000, 1), 
   (5, &quot;Janet&quot;, 69000, 1), 
   (6, &quot;Randy&quot;, 85000, 1);</code></pre>
-<pre class="sql"><code>INSERT INTO `LeetCode`.`Department` 
+<pre class="sql"><code>INSERT INTO `Department` 
   (`Id`, `Name`) 
 VALUES 
   (1, &quot;IT&quot;), 
   (2, &quot;Sales&quot;);</code></pre>
 <pre class="sql"><code>SELECT * 
-FROM `LeetCode`.`Employee`;</code></pre>
+FROM `Employee`;</code></pre>
 <div class="knitsql-table">
 <table>
 <caption><span id="tab:select-employee">Table 1: </span>6 records</caption>
@@ -132,7 +134,7 @@ FROM `LeetCode`.`Employee`;</code></pre>
 </table>
 </div>
 <pre class="sql"><code>SELECT * 
-FROM `LeetCode`.`Department`;</code></pre>
+FROM `Department`;</code></pre>
 <div class="knitsql-table">
 <table>
 <caption><span id="tab:select-department">Table 2: </span>2 records</caption>
@@ -162,15 +164,26 @@ SELECT
   `Department`.`Name` AS `Department`,
   `Employee`.`Name` AS `Employee`,
   `Employee`.`Salary`
-FROM `LeetCode`.`Employee` AS `Employee`
-LEFT JOIN `LeetCode`.`Department` AS `Department`
-ON `Employee`.`DepartmentId` = `Department`.`Id`
+FROM 
+  `Employee`
+LEFT JOIN 
+  `Department`
+ON 
+  `Employee`.`DepartmentId` = `Department`.`Id`
 WHERE (
-  SELECT COUNT(*)
-  FROM `LeetCode`.`Employee` AS `t1`
-  WHERE `t1`.`DepartmentId` = `Employee`.`DepartmentId`
-  AND `t1`.`Salary` &gt;= `Employee`.`Salary`) &lt;= 3
-ORDER BY `Employee`.`DepartmentId`, `Employee`.`Salary` DESC;</code></pre>
+  SELECT 
+    COUNT(*)
+  FROM 
+    `Employee` AS `t1`
+  WHERE 
+    `t1`.`DepartmentId` = `Employee`.`DepartmentId`
+  AND 
+    `t1`.`Salary` &gt;= `Employee`.`Salary`
+  ) &lt;= 3
+ORDER BY 
+  `Employee`.`DepartmentId`, 
+  `Employee`.`Salary`
+DESC;</code></pre>
 <div class="knitsql-table">
 <table>
 <caption><span id="tab:solution-1">Table 3: </span>5 records</caption>
@@ -211,12 +224,12 @@ ORDER BY `Employee`.`DepartmentId`, `Employee`.`Salary` DESC;</code></pre>
 </table>
 </div>
 <p>The solution above brings the expected result set. However, this query fails if <code>Department</code> is empty.</p>
-<pre class="sql"><code>TRUNCATE TABLE `LeetCode`.`Employee`;</code></pre>
-<pre class="sql"><code>TRUNCATE TABLE `LeetCode`.`Department`;</code></pre>
-<pre class="sql"><code>INSERT INTO `LeetCode`.`Employee`
-  (`Id`, `Name`, `Salary`, `DepartmentId`)
+<pre class="sql"><code>DELETE FROM `Employee`;</code></pre>
+<pre class="sql"><code>DELETE FROM `Department`;</code></pre>
+<pre class="sql"><code>INSERT INTO `Employee`
+(`Id`, `Name`, `Salary`, `DepartmentId`)
 VALUES
-  (1, &quot;Joe&quot;, 10000, 1);
+(1, &quot;Joe&quot;, 10000, 1);
 
 -- Department intentionally left empty.
 </code></pre>
@@ -225,15 +238,26 @@ SELECT
   `Department`.`Name` AS `Department`,
   `Employee`.`Name` AS `Employee`,
   `Employee`.`Salary`
-FROM `LeetCode`.`Employee` AS `Employee`
-LEFT JOIN `LeetCode`.`Department` AS `Department`
-ON `Employee`.`DepartmentId` = `Department`.`Id`
+FROM 
+  `Employee` AS `Employee`
+LEFT JOIN 
+  `Department` AS `Department`
+ON 
+  `Employee`.`DepartmentId` = `Department`.`Id`
 WHERE (
-  SELECT COUNT(*)
-  FROM `LeetCode`.`Employee` AS `t1`
-  WHERE `t1`.`DepartmentId` = `Employee`.`DepartmentId`
-  AND `t1`.`Salary` &gt;= `Employee`.`Salary`) &lt;= 3
-ORDER BY `Employee`.`DepartmentId`, `Employee`.`Salary` DESC;</code></pre>
+  SELECT 
+    COUNT(*)
+  FROM 
+    `Employee` AS `t1`
+  WHERE 
+    `t1`.`DepartmentId` = `Employee`.`DepartmentId`
+  AND 
+    `t1`.`Salary` &gt;= `Employee`.`Salary`
+  ) &lt;= 3
+ORDER BY 
+  `Employee`.`DepartmentId`, 
+  `Employee`.`Salary` 
+DESC;</code></pre>
 <div class="knitsql-table">
 <table>
 <caption><span id="tab:unnamed-chunk-4">Table 4: </span>1 records</caption>
@@ -253,37 +277,50 @@ ORDER BY `Employee`.`DepartmentId`, `Employee`.`Salary` DESC;</code></pre>
 </tbody>
 </table>
 </div>
-<p>The original problem does not state how to handle NULL results, which is what we have here. However, the answer set shown on failure is empty. The query has to be modified to accomodate no <code>Department</code>s.</p>
+<p>The original problem does not state how to handle NULL results, which is what we have here. However, the answer set shown on failure is empty. The query has to be modified to accomodate no <code>Department</code>.</p>
 </div>
 <div id="failed-attempt-2" class="section level3">
 <h3>Failed Attempt #2</h3>
-<pre class="sql"><code>-- Query #2
+<pre class="sql numberLines"><code>-- Query #2
 SELECT
   `Department`.`Name` AS `Department`,
   `Employee`.`Name` AS `Employee`,
   `Employee`.`Salary`
-FROM `LeetCode`.`Employee` AS `Employee`
-LEFT JOIN `LeetCode`.`Department` AS `Department`
-ON `Employee`.`DepartmentId` = `Department`.`Id`
+FROM 
+  `Employee` AS `Employee`
+LEFT JOIN 
+  `Department` AS `Department`
+ON 
+  `Employee`.`DepartmentId` = `Department`.`Id`
 WHERE (
-  SELECT COUNT(*)
-  FROM `LeetCode`.`Employee` AS `t1`
-  WHERE `t1`.`DepartmentId` = `Employee`.`DepartmentId`
-  AND `t1`.`Salary` &gt;= `Employee`.`Salary`) &lt;= 3 
+  SELECT 
+    COUNT(*)
+  FROM 
+    `Employee` AS `t1`
+  WHERE 
+    `t1`.`DepartmentId` = `Employee`.`DepartmentId`
+  AND 
+    `t1`.`Salary` &gt;= `Employee`.`Salary`
+) &lt;= 3 
 -- Check for NULL
-AND `Department`.`Name` IS NOT NULL
-ORDER BY `Employee`.`DepartmentId`, `Employee`.`Salary` DESC;</code></pre>
+AND 
+  `Department`.`Name` IS NOT NULL
+ORDER BY 
+  `Employee`.`DepartmentId`, `Employee`.`Salary` 
+DESC;</code></pre>
 <div class="knitsql-table">
 <p>Table: (#tab:solution-2)0 records</p>
-<p>Department Employee Salary ———– ——— ——-</p>
+<p>Department Employee Salary
+———– ——— ——-</p>
 </div>
 <p>Adding the line below to the query above passes the test case.</p>
-<pre class="r"><code>-- Check for NULL
-AND `Department`.`Name` IS NOT NULL</code></pre>
+<pre class="sql"><code>-- Check for NULL
+AND 
+  `Department`.`Name` IS NOT NULL</code></pre>
 <p>The last failure came with ties; no mention of how to handle ties.</p>
-<pre class="sql"><code>TRUNCATE TABLE `LeetCode`.`Employee`;</code></pre>
-<pre class="sql"><code>TRUNCATE TABLE `LeetCode`.`Department`;</code></pre>
-<pre class="sql"><code>INSERT INTO `LeetCode`.`Employee`
+<pre class="sql"><code>DELETE FROM `Employee`;</code></pre>
+<pre class="sql"><code>DELETE FROM `Department`;</code></pre>
+<pre class="sql"><code>INSERT INTO `Employee`
   (`Id`, `Name`, `Salary`, `DepartmentId`)
 VALUES
   (1, &quot;Joe&quot;, 60000, 1),
@@ -291,7 +328,7 @@ VALUES
   (3, &quot;Joel&quot;, 60000, 1),
   (4, &quot;Tracy&quot;, 75000, 1);</code></pre>
 <p>Notice the tie between Joel and Joe; recognize that because of this Ralph is to be included, not excluded.</p>
-<pre class="sql"><code>INSERT INTO `LeetCode`.`Department`
+<pre class="sql"><code>INSERT INTO `Department`
   (`Id`, `Name`)
 VALUES
   (1, &quot;IT&quot;);</code></pre>
@@ -300,16 +337,27 @@ SELECT
   `Department`.`Name` AS `Department`,
   `Employee`.`Name` AS `Employee`,
   `Employee`.`Salary`
-FROM `LeetCode`.`Employee` AS `Employee`
-LEFT JOIN `LeetCode`.`Department` AS `Department`
-ON `Employee`.`DepartmentId` = `Department`.`Id`
+FROM 
+  `Employee` AS `Employee`
+LEFT JOIN 
+  `Department` AS `Department`
+ON 
+  `Employee`.`DepartmentId` = `Department`.`Id`
 WHERE (
-  SELECT COUNT(*)
-  FROM `LeetCode`.`Employee` AS `t1`
-  WHERE `t1`.`DepartmentId` = `Employee`.`DepartmentId`
-  AND `t1`.`Salary` &gt;= `Employee`.`Salary`) &lt;= 3 
-AND `Department`.`Name` IS NOT NULL 
-ORDER BY `Employee`.`DepartmentId`, `Employee`.`Salary` DESC;</code></pre>
+  SELECT 
+    COUNT(*)
+  FROM 
+    `Employee` AS `t1`
+  WHERE 
+    `t1`.`DepartmentId` = `Employee`.`DepartmentId`
+  AND 
+    `t1`.`Salary` &gt;= `Employee`.`Salary`
+) &lt;= 3 
+AND 
+  `Department`.`Name` IS NOT NULL 
+ORDER BY 
+  `Employee`.`DepartmentId`, `Employee`.`Salary` 
+DESC;</code></pre>
 <div class="knitsql-table">
 <table>
 <caption><span id="tab:unnamed-chunk-10">Table 6: </span>3 records</caption>
@@ -343,21 +391,32 @@ ORDER BY `Employee`.`DepartmentId`, `Employee`.`Salary` DESC;</code></pre>
 </div>
 <div id="solution" class="section level3">
 <h3>Solution</h3>
-<pre class="sql"><code>-- Query #3
+<pre class="sql numberLines"><code>-- Query #3
 SELECT
   `Department`.`Name` AS `Department`,
   `Employee`.`Name` AS `Employee`,
   `Employee`.`Salary`
-FROM `LeetCode`.`Employee` AS `Employee`
-LEFT JOIN `LeetCode`.`Department` AS `Department`
-ON `Employee`.`DepartmentId` = `Department`.`Id`
+FROM 
+  `Employee` AS `Employee`
+LEFT JOIN 
+  `Department` AS `Department`
+ON 
+  `Employee`.`DepartmentId` = `Department`.`Id`
 WHERE (
-  SELECT COUNT(DISTINCT `Salary`)
-  FROM `LeetCode`.`Employee` AS `t1`
-  WHERE `t1`.`DepartmentId` = `Employee`.`DepartmentId`
-  AND `t1`.`Salary` &gt;= `Employee`.`Salary`) &lt;= 3
-AND `Department`.`Name` IS NOT NULL
-ORDER BY `Employee`.`DepartmentId`, `Employee`.`Salary` DESC;</code></pre>
+  SELECT 
+    COUNT(DISTINCT `Salary`)
+  FROM 
+    `Employee` AS `t1`
+  WHERE 
+    `t1`.`DepartmentId` = `Employee`.`DepartmentId`
+  AND 
+    `t1`.`Salary` &gt;= `Employee`.`Salary`
+  ) &lt;= 3
+AND 
+  `Department`.`Name` IS NOT NULL
+ORDER BY 
+  `Employee`.`DepartmentId`, `Employee`.`Salary` 
+DESC;</code></pre>
 <div class="knitsql-table">
 <table>
 <caption><span id="tab:solution-3">Table 7: </span>4 records</caption>
@@ -392,35 +451,9 @@ ORDER BY `Employee`.`DepartmentId`, `Employee`.`Salary` DESC;</code></pre>
 </tbody>
 </table>
 </div>
-<pre class="r"><code>  SELECT COUNT(*)</code></pre>
-<pre class="r"><code>  SELECT COUNT(DISTINCT `Salary`)</code></pre>
+<pre class="r"><code>  SELECT 
+    COUNT(*)</code></pre>
+<pre class="r"><code>  SELECT 
+    COUNT(DISTINCT `Salary`)</code></pre>
 <p>This query passes all test cases and beats out about 89% of all submittals in runtime.</p>
-</div>
-<div id="mariadb-server-info" class="section level3">
-<h3>MariaDB Server Info</h3>
-<pre class="sql"><code>SELECT @@version_comment AS `Version`, 
-  @@version_compile_machine AS `Version Compile Machine`, 
-  @@innodb_version AS `InnoDB Version`, 
-  @@version_compile_os AS `Version Compile OS`;</code></pre>
-<div class="knitsql-table">
-<table>
-<caption><span id="tab:mariadb-version">Table 8: </span>MariaDB Server Info</caption>
-<thead>
-<tr class="header">
-<th align="left">Version</th>
-<th align="left">Version Compile Machine</th>
-<th align="left">InnoDB Version</th>
-<th align="left">Version Compile OS</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">mariadb.org binary distribution</td>
-<td align="left">x86_64</td>
-<td align="left">5.7.19</td>
-<td align="left">debian-linux-gnu</td>
-</tr>
-</tbody>
-</table>
-</div>
 </div>
