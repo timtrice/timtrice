@@ -73,6 +73,23 @@ email: "tim.trice@gmail.com"
 # - Visitors
 ---
 
-Tim Trice is an information manager, data analyst and data engineer with over ten years experience in the energy industry. In that time, he has worked on upstream and downstream projects for companies such as Wood Group Mustang, Chevron Corp, BP US and Shell Petroleum.
+I am an information management professional with an extensive technical background honed by experience as a
+document control specialist and data analyst. As I am highly skilled in transforming data into readable reports to
+facilitate enterprise planning and reporting, decision-making, and growth, I have ensured the highest data quality for
+numerous large capital projects ($10B+) for clients like Chevron, BP, Shell, ExxonMobil, and more.
 
-When he is not wrangling data, he is practicing guitar, building models, flying drones, running with his two pit bulls, or embarassing his son in Madden NFL. Only one of the previous statements is untrue.
+Key strengths include:
+ * 15+ years of programming experience (HTML, PHP, SQL, Excel/Access, Python, and R).
+ * The ability to develop, establish, and manage efficient project workflows to reduce errors, maximize resources,
+and minimize costs.
+ * Team awareness, leadership, and collaboration.
+ * Exemplary capacity to gather, understand, and drive project resolutions from a cross-functional team.
+ * High intellectual and emotional intelligence with excellent analytical, strategic, business judgement, and
+problem-solving abilities.
+ * Communication, prioritization, organization, and time management skills.
+
+Throughout my career, I have conducted data analytics to monitor, analyze, and synthesize countless reports, timelines,
+trends, and interdependencies to influence short and long-term planning. An employee who leads by example, I possess
+the agility and flexibility to thrive in fast-paced, deadline driven environments. Not only do I change and generate
+processes for greater effectiveness and efficiency, I leverage a team-oriented mindset to align my vision, mission, and
+strategy with a company’s overarching objectives.
