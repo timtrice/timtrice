@@ -1,10 +1,4 @@
-.Renviron
 .Rproj.user
 .Rhistory
 .RData
 .Ruserdata
-docs
-web.code-workspace
-public
-.httr-oauth
-themes
