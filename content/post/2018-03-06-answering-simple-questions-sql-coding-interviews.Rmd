@@ -1,0 +1,348 @@
+---
+# General format taken from <https://dev.to/yelluw/how-to-do-technical-blogging>
+
+# Title
+#   - Short title, start with verb, provide brief explanation what this is about.
+#   - Examples:
+#     - Writing a $technology $thing
+#     - Developing with $technology
+#     - Testing $techonology with $thing
+title: Answering Simple Questions in SQL Coding Interviews
+
+# Summary
+#   - 2-3 sentences. 
+#   - Summarize what post is about.
+#   - Should be closely related to title
+#   - Should be smooth transition from title
+summary: > 
+  An interviewer recently commented about 50% of initial coding interviews 
+  failing what seemed to be very simple questions. I take a look at the 
+  questions and demonstrate the best way to answer them.
+
+# Description is not used at this time but may be implemented later.
+description: NULL
+
+# Abstract is not used at this time but may be implemented later.
+abstract: NULL
+
+author: Tim Trice
+date: '`r Sys.Date()`'
+
+# Slug
+#   - Use title without conjunctions and determiners.
+#   - All lower-case.
+slug: answering-simple-questions-sql-coding-interviews
+
+# Categories
+#   - General classification of post.
+#     - SQL
+#     - R
+#     - Python
+categories:
+  - SQL
+
+# Tags
+#   - Calls specific to category such as functions, or classes.
+#     - In SQL, "SELECT", "ORDER BY", "PARTITION", etc.
+#     - In R, "dplyr", "rattle", "vector", etc."
+tags:
+  - SELECT
+  - LEFT JOIN
+  - MAX
+  - SUM
+  - GROUP BY
+output:
+    blogdown::html_page:
+        toc: true
+        toc_depth: 6
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo        =    TRUE, 
+                      error       =    TRUE, 
+                      max.print   =    NA, 
+                      connection  =    "con")
+```
+
+```{r libraries, include = FALSE}
+library(RMySQL)                                #todo [Use correct db library]
+```
+
+```{r db-con-params, include = FALSE}
+host     <-   Sys.getenv("mysql.host")         #todo [Confirm host]
+user     <-   Sys.getenv("mysql.user")         #todo [Confirm user]
+password <-   Sys.getenv("mysql.password")     #todo [Confirm password]
+driver   <-   MySQL()                          #todo [Confirm driver]
+```
+
+```{r db-con, include = FALSE}
+con <- dbConnect(driver, 
+                 host = host,
+                 user = user, 
+                 password = password)
+```
+
+```{r echo = FALSE}
+blogdown::shortcode("youtube", "hFP2pxqz4wM")
+```
+
+### Requirements
+
+Any database server will do. For this instance, MySQL is used.
+
+```{sql db-version, tab.cap = "Server Info"}
+SELECT @@version_comment AS `Version`, 
+  @@version_compile_machine AS `Version Compile Machine`, 
+  @@innodb_version AS `InnoDB Version`, 
+  @@version_compile_os AS `Version Compile OS`;
+```
+
+### Introduction
+
+In [Interviewing 'SQL Developers' (and failling!)](https://www.reddit.com/r/SQL/comments/7xbzph/ms_sql_interviewing_sql_developers_and_failing/), author [pankswork](https://www.reddit.com/user/pankswork) frustratingly writes about having interviewers fail what seems to be very simple SQL questions at a rate of about 50%. "Is my test too hard," they wonder.
+
+When I read this post I immeidately wondered if they were trick questions I wasn't picking up on. They all seemed very easy to answer. They were a little tricky, but certainly not unreasonably complicated. Indeed, most commenters to the Reddit post agreed. 
+
+I wanted to use the opportunity to demonstrate how to go about solving the interview problems, which are:
+
+  1. Select all data from both tables.
+  
+  2. What team has the most wins?
+  
+  3. What is the combined salary for each team?
+  
+  4. What player does not belong to a team?
+
+I slightly reworded some questions to avoid confusion but the results will still be the same, along with the methods of obtaining them.
+
+### Database Setup
+
+First, I'll create the database and build the `Players` and `Teams` tables.
+
+```{sql drop-playersteams}
+DROP DATABASE IF EXISTS `PlayersTeams`;
+```
+
+```{sql create-playersteams}
+CREATE DATABASE `PlayersTeams`;
+```
+
+```{sql use-playersteams}
+USE `PlayersTeams`;
+```
+
+```{sql create-players}
+CREATE TABLE `Players` (
+  `PlayerID` TINYINT(1)  UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+  `Salary`   SMALLINT(4) UNSIGNED NOT NULL, 
+  `TeamID`   TINYINT(1)  UNSIGNED NOT NULL
+  );
+```
+
+```{sql insert-players}
+INSERT INTO `Players`
+  (`Salary`, `TeamID`)
+VALUES
+  (1500, 1), 
+  (1359, 1),
+  (1070, 1), 
+  (1165, 3), 
+  (1474, 2), 
+  (1411, 1), 
+  (1211, 2), 
+  (1334, 1), 
+  (1486, 4), 
+  (1223, 2);
+```
+
+```{sql create-teams}
+CREATE TABLE `Teams` (
+  `TeamID`   TINYINT(1)  UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+  `TeamName` VARCHAR(10)          NOT NULL, 
+  `Wins`     TINYINT(2)  UNSIGNED NOT NULL, 
+  `Losses`   TINYINT(2)  UNSIGNED NOT NULL
+);
+```
+
+```{sql insert-teams}
+INSERT INTO `Teams`
+  (`TeamName`, `Wins`, `Losses`)
+VALUES
+  ("Jets",   10,  4), 
+  ("Giants",  4, 10), 
+  ("Eagles",  7,  7);
+```
+
+### Select all data from both tables
+
+What we are being asked to do here is effectly do a `SELECT *` from both tables which we join on some type of `JOIN` statement; but, which one? The dataset is small enough for us to easily see we should have 10 rows in final result set. 
+
+If we use a `LEFT JOIN` with `Players` as the left table, `Teams` as the right table and `TeamID` as the foreign key, then every record within `Players` will be returned along with associated `Teams`. If we have an instance of a player that does not have an associated team then that record will be NULL.
+
+```{sql query-1}
+SELECT 
+  * 
+FROM 
+  `Players`
+LEFT JOIN 
+  `Teams`
+ON 
+  `Teams`.`TeamID` = `Players`.`TeamID`
+ORDER BY 
+  `Players`.`PlayerID`;
+```
+
+If we were to use a `RIGHT JOIN` then our server would instead take all `Teams`.`TeamID` and find corresponding `Players` per id. However, we have a `Player`.`TeamID` value of 4 which does not exist in `Teams`.`TeamID`. Therefore, our result set would only contain nine records.
+
+```{sql query-2}
+SELECT 
+  * 
+FROM 
+  `Players`
+RIGHT JOIN 
+  `Teams`
+ON 
+  `Teams`.`TeamID` = `Players`.`TeamID`
+ORDER BY 
+  `Players`.`PlayerID`;
+```
+
+However, if we used  `RIGHT JOIN` **and** reversed the order of our tables (make `Teams` our primary table, joining `Players`) then we would get the correct results.
+
+```{sql query-3}
+SELECT 
+  * 
+FROM 
+  `Teams`
+RIGHT JOIN
+  `Players`
+ON 
+  `Players`.`TeamID` = `Teams`.`TeamID`
+ORDER BY
+  `Players`.`PlayerID`;
+```
+
+Notice also how the column order of our result set changes. In the [previous RIGHT JOIN](#tab:query-2), the associated columns from `Teams` were on the right side. Now, they are on the left. This is our visual cue of the query we created.
+
+I suspect what's happening here is those doing the interview get twisted up on the differences not recognizing they're missing some data.
+
+### What team has the most wins?
+
+This question does not require us to do fancy joins. All of the data we need is contained within the `Teams` table. One way some may be going about this problem is simply using `MAX()`.
+
+```{sql query-4}
+SELECT
+  MAX(`Wins`)
+FROM
+  `Teams`;
+```
+
+Notice though our question asked "What team", not "what is the maximum number of Wins". We need to return the `TeamName` (or `TeamID`). But, you cannot just add this column into the `SELECT` statement without issue.
+
+```{sql, eval = FALSE}
+SELECT
+  `TeamName`, 
+  MAX(`Wins`)
+FROM
+  `Teams`;
+```
+
+This query will generate an error on most all newer database servers. In this case, what MySQL is telling us is that we either must remove `TeamName` from the query or move it to a `GROUP BY` statement. See [MySQL Handling of GROUP BY](https://dev.mysql.com/doc/refman/5.7/en/group-by-handling.html) for more info. 
+
+For our question, all of this is unnecessary anyway. We want to find the maximum `Wins` and return the corresponding `TeamName`. Just sort the dataset by `Wins`, largest to smallest, and return the first record.
+
+```{sql query-5}
+SELECT
+  `TeamName`
+FROM
+  `Teams`
+ORDER BY 
+  `Wins` DESC
+LIMIT
+  1;
+```
+
+### What is the combined salary for each team?
+
+In the original post, this question was phrased as "How much does each team make?" The author acknowledged this was intended to be a trick question; the teams do not have a "profit" or "revenue"-type column.
+
+However, every player does have a `Salary` and it is reasonable to assume the question is most likely looking to find the total salary of all players per team. 
+
+We can do the first part of this query very simply by summing `Salary` with a grouping on `TeamID`.
+
+```{sql query-6}
+SELECT
+  SUM(`Salary`), 
+  `TeamID`
+FROM 
+  `Players`
+GROUP BY
+  `TeamID`;
+```
+
+Realize we would have recevied the group-by-handling error again had I not used the `GROUP BY` statement; this applies for `SUM` as well.
+
+At this point I now have the total `Salary` per team. And, yes, I can probably just leave it at that - question answered. But, what fun is that?
+
+Let's get the `TeamName`. To do this I `LEFT JOIN` `Teams` again by `TeamID`. I also modify my original `SELECT` statement to return `TeamName` rather than `TeamID`. Finally, I modify the `GROUP BY` clause to append the table name. Without this last correction my query will return an Error 1052 that `TeamID` is ambiguous. 
+
+```{sql query-7}
+SELECT
+  SUM(`Salary`), 
+  `Teams`.`TeamName`
+FROM 
+  `Players`
+LEFT JOIN
+  `Teams`
+ON 
+  `Teams`.`TeamID` = `Players`.`TeamID`
+GROUP BY
+  `Players`.`TeamID`;
+```
+
+### What player does not belong to a team?
+
+This question, I think, is the easiest of all. Actually, we already answered it when solving our first question (\@ref(tab:query-1)). Recall we had one record of NULL values; this was for a player in our `Players` table that did not have a corresponding team in the `Teams` table. 
+
+This was our query for those results:
+
+```{r ref.label = "query-1", eval = FALSE}
+```
+
+What I need to do here is return only the records where `Teams`.`TeamID` IS NULL. And, since the question is asking for "player" and not any additional information, we should only return `Players`.`PlayerID`. Our final query is as follows:
+
+```{sql query-8}
+SELECT 
+  `Players`.`PlayerID`
+FROM 
+  `Players`
+LEFT JOIN 
+  `Teams`
+ON 
+  `Teams`.`TeamID` = `Players`.`TeamID`
+WHERE
+  `Teams`.`TeamID` IS NULL
+ORDER BY 
+  `Players`.`PlayerID`;
+```
+
+### Summary
+
+I think if 50% of people are failing this first step then they have seriously manipulated their resume or perhaps other screening methods need to be improved. I could understand if occasionally someone tripped up on one of these questions. But, not half of an interview class.
+
+Most importantly for those doing code interviews, in my opinion, is to not just study code and how to perform certain tasks but also understand the errors generated and how to resolve them. When working on this article I made an error and it took me 30 minutes to figure out what it was; I had written "UNISIGNED", rather than "UNSIGNED". 
+
+People will make mistakes and there's nothing wrong with that. The best we can do on these job interviews is to just try to prepare the best we can. 
+
+  * [Interviewing 'SQL Developers' (and failling!)](https://www.reddit.com/r/SQL/comments/7xbzph/ms_sql_interviewing_sql_developers_and_failing/)
+  
+  * [MySQL Handling of GROUP BY](https://dev.mysql.com/doc/refman/5.7/en/group-by-handling.html)
+
+```{sql, include = FALSE}
+-- Clean up database
+DROP DATABASE `PlayersTeams`;
+```
+
+```{r close-db, include = FALSE}
+dbDisconnect(con)
+```

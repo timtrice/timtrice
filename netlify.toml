@@ -1,4 +1,5 @@
 [build]
+<<<<<<< HEAD
 command = 'hugo'
 publish = 'public'
 
