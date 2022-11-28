@@ -1,0 +1,8 @@
+build-last-errors="[]"
+build-last-errors-base-dir=""
+build-last-outputs="[]"
+compile_pdf_state="{\"tab_visible\":false,\"running\":false,\"target_file\":\"\",\"output\":\"\",\"errors\":[]}"
+files.monitored-path=""
+find-in-files-state="{\"handle\":\"2cc56a4c95054e0b8cd82d4a2804504d\",\"input\":\"281\",\"path\":\"C:/Users/timtr/Projects/timtrice\",\"regex\":false,\"ignoreCase\":true,\"results\":{\"file\":[\"C:/Users/timtr/Projects/timtrice/config/_default/params.toml\"],\"line\":[92],\"lineValue\":[\"phone = \\\"281-832-0207\\\"\"],\"matchOn\":[[9]],\"matchOff\":[[12]],\"replaceMatchOn\":[[]],\"replaceMatchOff\":[[]]},\"running\":false,\"replace\":false,\"preview\":false,\"gitFlag\":true,\"replacePattern\":\"\"}"
+imageDirtyState="1"
+saveActionState="0"
