@@ -18,4 +18,6 @@ external_link = "https://twitterapi.timtrice.net/"
 
 # Does the project detail page use math formatting?
 math = false
+
+active = false
 +++

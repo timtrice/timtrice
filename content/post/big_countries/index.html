@@ -1,0 +1,73 @@
+
+<div id="TOC">
+<ul>
+<li><a href="#schema" id="toc-schema">SChema</a></li>
+<li><a href="#intuition" id="toc-intuition">Intuition</a></li>
+<li><a href="#approach" id="toc-approach">Approach</a></li>
+<li><a href="#complexity" id="toc-complexity">Complexity</a></li>
+<li><a href="#code" id="toc-code">Code</a></li>
+</ul>
+</div>
+
+<p><a href="https://leetcode.com/problems/big-countries/description/">LeetCode #595. Big Countries</a></p>
+<div id="schema" class="section level2">
+<h2>SChema</h2>
+<pre class="sql"><code>Create table If Not Exists World 
+  (name varchar(255), continent varchar(255), area int, population int, gdp int)</code></pre>
+<pre class="sql"><code>insert into World (name, continent, area, population, gdp) values (&#39;Afghanistan&#39;, &#39;Asia&#39;, &#39;652230&#39;, &#39;25500100&#39;, &#39;20343000000&#39;)</code></pre>
+<pre class="sql"><code>insert into World (name, continent, area, population, gdp) values (&#39;Albania&#39;, &#39;Europe&#39;, &#39;28748&#39;, &#39;2831741&#39;, &#39;12960000000&#39;)</code></pre>
+<pre class="sql"><code>insert into World (name, continent, area, population, gdp) values (&#39;Algeria&#39;, &#39;Africa&#39;, &#39;2381741&#39;, &#39;37100000&#39;, &#39;188681000000&#39;)</code></pre>
+<pre class="sql"><code>insert into World (name, continent, area, population, gdp) values (&#39;Andorra&#39;, &#39;Europe&#39;, &#39;468&#39;, &#39;78115&#39;, &#39;3712000000&#39;)</code></pre>
+<pre class="sql"><code>insert into World (name, continent, area, population, gdp) values (&#39;Angola&#39;, &#39;Africa&#39;, &#39;1246700&#39;, &#39;20609294&#39;, &#39;100990000000&#39;)</code></pre>
+</div>
+<div id="intuition" class="section level2">
+<h2>Intuition</h2>
+<!-- Describe your first thoughts on how to solve this problem. -->
+</div>
+<div id="approach" class="section level2">
+<h2>Approach</h2>
+<!-- Describe your approach to solving the problem. -->
+</div>
+<div id="complexity" class="section level2">
+<h2>Complexity</h2>
+<ul>
+<li><p>Time complexity:
+<!-- Add your time complexity here, e.g. $$O(n)$$ --></p></li>
+<li><p>Space complexity:
+<!-- Add your space complexity here, e.g. $$O(n)$$ --></p></li>
+</ul>
+</div>
+<div id="code" class="section level2">
+<h2>Code</h2>
+<pre class="sql"><code>SELECT
+  `name`,
+  `population`,
+  `area`
+FROM `World`
+WHERE `area` &gt; 3e6
+  OR `population` &gt; 25e6;</code></pre>
+<div class="knitsql-table">
+<table>
+<caption><span id="tab:unnamed-chunk-8">Table 1: </span>2 records</caption>
+<thead>
+<tr class="header">
+<th align="left">name</th>
+<th align="right">population</th>
+<th align="right">area</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Afghanistan</td>
+<td align="right">25500100</td>
+<td align="right">652230</td>
+</tr>
+<tr class="even">
+<td align="left">Algeria</td>
+<td align="right">37100000</td>
+<td align="right">2381741</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
